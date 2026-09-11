@@ -38,6 +38,7 @@
             justify-content: center;
             gap: 30px;
             flex-wrap: wrap;
+            align-items: center;
         }
 
         nav a {
@@ -71,6 +72,26 @@
         nav a:hover {
             background: #f5f5f5;
             border-radius: 5px;
+        }
+
+        /* BOTÓN DE EXTRAS */
+        .extras-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white !important;
+            padding: 8px 20px !important;
+            border-radius: 20px;
+            cursor: pointer;
+            border: none;
+            font-size: 0.85em !important;
+            font-weight: 600 !important;
+            letter-spacing: 1px !important;
+            text-transform: uppercase !important;
+            transition: all 0.3s ease;
+        }
+
+        .extras-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
         }
 
         .hero {
@@ -395,6 +416,138 @@
             margin-bottom: 15px;
         }
 
+        /* ESTILOS DEL MODAL DE EXTRAS */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            z-index: 10001;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 1000px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            position: relative;
+            border: 1px solid #eaeaea;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: #111;
+            font-size: 2em;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: #f0f0f0;
+        }
+
+        .modal h2 {
+            color: #111;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .modal > .modal-content > p {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .clans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .clan-card {
+            background: white;
+            border: 2px solid #eaeaea;
+            border-radius: 15px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .clan-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            border-color: #667eea;
+        }
+
+        .clan-card.special {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+        }
+
+        .clan-card.special h4,
+        .clan-card.special p {
+            color: white;
+        }
+
+        .clan-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        .clan-card h4 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: #111;
+        }
+
+        .clan-card p {
+            color: #666;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+
+        .clan-tag {
+            display: inline-block;
+            background: #f0f0f0;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            margin-top: 15px;
+            font-weight: 600;
+        }
+
+        .clan-card.special .clan-tag {
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+
         footer {
             text-align: center;
             padding: 80px 20px;
@@ -424,6 +577,7 @@
             }
             nav ul { gap: 15px; font-size: 0.75em; }
             .character-showcase { grid-template-columns: repeat(2, 1fr); }
+            .clans-grid { grid-template-columns: repeat(2, 1fr); }
         }
 
         @media (max-width: 480px) {
@@ -431,6 +585,7 @@
             .year-title { font-size: 2em; }
             .story-card { padding: 30px 20px; }
             .character-showcase { grid-template-columns: 1fr; }
+            .clans-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -444,8 +599,56 @@
             <li><a href="#2024">2024</a></li>
             <li><a href="#2025">2025</a></li>
             <li><a href="#2026">2026</a></li>
+            <li><button class="extras-btn" onclick="openExtras()">📚 Extras</button></li>
         </ul>
     </nav>
+
+    <!-- MODAL DE EXTRAS -->
+    <div class="modal" id="extrasModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeExtras()">×</button>
+            <h2>📚 Otros Clanes</h2>
+            <p>Clanes y facciones que formaron parte de la historia de The Chosen One</p>
+            
+            <div class="clans-grid">
+                <div class="clan-card special">
+                    <div class="clan-icon">👑</div>
+                    <h4>Admin Community</h4>
+                    <p>Alta tecnología en scripts manejada por <strong>Pealz</strong> y <strong>2areyoumental</strong>. Los verdaderos guardianes del orden en TCO con herramientas que nadie más tenía.</p>
+                    <span class="clan-tag">Tecnología Avanzada</span>
+                </div>
+
+                <div class="clan-card">
+                    <div class="clan-icon">⚔️</div>
+                    <h4>Clan MG</h4>
+                    <p>Clan formado por <strong>Damian (i11rl)</strong> y <strong>Napoleon</strong>. Duró aproximadamente 5 meses antes de disolverse.</p>
+                    <span class="clan-tag">5 Meses de Historia</span>
+                </div>
+
+                <div class="clan-card">
+                    <div class="clan-icon">💀</div>
+                    <h4>Clan SDZ</h4>
+                    <p>Clan de abusadores y griefers. <strong>Fueron derrotados por nuestro clan</strong>. Conocidos por sus tácticas sucias y abuso de poder en los servidores.</p>
+                    <span class="clan-tag" style="background: #ef4444; color: white;">DERROTADOS</span>
+                </div>
+
+                <div class="clan-card" style="background: linear-gradient(135deg, #fff3cd 0%, #ffe69c 100%); border: 2px solid #ffc107;">
+                    <div class="clan-icon">🔮</div>
+                    <h4>Spoiler 2025-2026</h4>
+                    <p><strong>2025:</strong> Se crea el Clan IJC.<br>
+                       <strong>2026:</strong> El Clan IJC cambia su nombre oficialmente a <strong>Clan ZK</strong>.</p>
+                    <span class="clan-tag" style="background: #ffc107; color: #111;">Futuro</span>
+                </div>
+            </div>
+
+            <div style="margin-top: 40px; padding: 30px; background: #f8f9fa; border-radius: 15px; text-align: center;">
+                <p style="color: #666; font-style: italic;">
+                    ⚠️ <strong>¿Conocés más clanes o detalles?</strong><br>
+                    Pasame la info y los agregamos al archivo histórico.
+                </p>
+            </div>
+        </div>
+    </div>
 
     <section class="hero" id="inicio">
         <img src="images/tco.png" 
@@ -732,6 +935,32 @@
             }
             
             lastScroll = currentScroll;
+        });
+
+        // FUNCIONES DEL MODAL DE EXTRAS
+        function openExtras() {
+            document.getElementById('extrasModal').classList.add('active');
+            document.body.style.overflow = 'hidden'; // Evita scroll de fondo
+        }
+
+        function closeExtras() {
+            document.getElementById('extrasModal').classList.remove('active');
+            document.body.style.overflow = 'auto'; // Restaura scroll
+        }
+
+        // Cerrar modal al hacer click fuera del contenido
+        window.onclick = function(event) {
+            const modal = document.getElementById('extrasModal');
+            if (event.target === modal) {
+                closeExtras();
+            }
+        }
+
+        // Cerrar modal con la tecla ESC
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeExtras();
+            }
         });
     </script>
 

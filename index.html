@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>La historia del Clan ZK (Anteriormente IJC)</title>
+    <meta name="description" content="Archivo histórico del Clan ZK - The Chosen One">
     <style>
         * {
             margin: 0;
@@ -24,30 +25,52 @@
             top: 0;
             width: 100%;
             background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
             padding: 20px 0;
             z-index: 1000;
             border-bottom: 1px solid #eaeaea;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
 
         nav ul {
             list-style: none;
             display: flex;
             justify-content: center;
-            gap: 40px;
+            gap: 30px;
+            flex-wrap: wrap;
         }
 
         nav a {
             color: #111;
             text-decoration: none;
-            font-size: 0.95em;
-            font-weight: 500;
+            font-size: 0.85em;
+            font-weight: 600;
             letter-spacing: 1px;
             text-transform: uppercase;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 10px;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background-color: #111;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        nav a:hover::after {
+            width: 80%;
         }
 
         nav a:hover {
-            color: #666;
+            background: #f5f5f5;
+            border-radius: 5px;
         }
 
         .hero {
@@ -58,66 +81,99 @@
             align-items: center;
             text-align: center;
             padding: 120px 20px 60px;
+            background: linear-gradient(135deg, #fafafa 0%, #ffffff 100%);
         }
 
         .game-icon {
-            width: 120px;
-            height: 120px;
-            border-radius: 24px;
-            margin-bottom: 30px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            background: #f5f5f5;
+            width: 150px;
+            height: 150px;
+            border-radius: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.12);
+            transition: transform 0.3s ease;
+            background: #f0f0f0;
+            object-fit: cover;
+        }
+
+        .game-icon:hover {
+            transform: translateY(-10px) scale(1.05);
         }
 
         .hero h1 {
-            font-size: 3.5em;
-            font-weight: 700;
-            letter-spacing: -1px;
+            font-size: 4em;
+            font-weight: 800;
+            letter-spacing: -2px;
             margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .hero h1 span {
+            font-size: 0.4em;
+            color: #666;
+            font-weight: 400;
+            display: block;
+            margin-top: 10px;
+            letter-spacing: 0;
         }
 
         .hero p {
-            font-size: 1.2em;
+            font-size: 1.3em;
             color: #666;
-            max-width: 600px;
+            max-width: 700px;
+            line-height: 1.6;
         }
 
         .year-section {
             min-height: 100vh;
-            padding: 120px 20px;
+            padding: 140px 20px 100px;
             display: flex;
             flex-direction: column;
             align-items: center;
             border-top: 1px solid #f0f0f0;
+            position: relative;
+        }
+
+        .year-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1px;
+            height: 60px;
+            background: linear-gradient(to bottom, #eaeaea, transparent);
         }
 
         .year-label {
-            font-size: 0.9em;
+            font-size: 0.85em;
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 4px;
             color: #999;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            font-weight: 600;
         }
 
         .year-title {
-            font-size: 3em;
-            font-weight: 700;
+            font-size: 3.5em;
+            font-weight: 800;
             margin-bottom: 15px;
             text-align: center;
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            letter-spacing: -1px;
         }
 
         .year-subtitle {
-            font-size: 1.3em;
-            color: #555;
-            margin-bottom: 60px;
+            font-size: 1.4em;
+            color: #666;
+            margin-bottom: 70px;
             text-align: center;
             font-style: italic;
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease 0.1s;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
+            font-weight: 300;
         }
 
         .year-title.visible, .year-subtitle.visible {
@@ -126,18 +182,19 @@
         }
 
         .story-card {
-            max-width: 900px;
+            max-width: 1000px;
             width: 100%;
             display: flex;
-            gap: 50px;
+            gap: 60px;
             align-items: flex-start;
             opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s ease 0.2s;
+            transform: translateY(60px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
             background: #fafafa;
-            padding: 50px;
-            border-radius: 20px;
+            padding: 60px;
+            border-radius: 24px;
             border: 1px solid #f0f0f0;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
         }
 
         .story-card.visible {
@@ -147,65 +204,233 @@
 
         .avatar-container {
             flex-shrink: 0;
+            position: relative;
         }
 
         .player-avatar {
-            width: 180px;
-            height: 180px;
+            width: 200px;
+            height: 200px;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid #eaeaea;
-            background: #f5f5f5;
+            border: 4px solid #ffffff;
+            background: #f0f0f0;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .player-avatar:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+        }
+
+        .avatar-placeholder {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3em;
+            color: white;
+            font-weight: bold;
+            border: 4px solid #ffffff;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
         }
 
         .story-content h3 {
-            font-size: 1.8em;
-            margin-bottom: 25px;
-            font-weight: 600;
+            font-size: 2em;
+            margin-bottom: 30px;
+            font-weight: 700;
+            color: #111;
         }
 
         .story-content p {
             font-size: 1.15em;
             color: #444;
             line-height: 1.9;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         .highlight {
             color: #111;
-            font-weight: 600;
+            font-weight: 700;
             border-bottom: 2px solid #111;
+            padding-bottom: 2px;
         }
 
         .warning-box {
-            background: #fff5f5;
-            border-left: 4px solid #ff4444;
-            padding: 20px;
-            margin: 25px 0;
-            border-radius: 5px;
+            background: linear-gradient(135deg, #fff5f5 0%, #ffe5e5 100%);
+            border-left: 5px solid #ff4444;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(255,68,68,0.1);
         }
 
         .warning-box p {
             margin: 0;
-            color: #666;
+            color: #555;
             font-style: italic;
+        }
+
+        .info-box {
+            background: #f8f9ff;
+            border-left: 5px solid #667eea;
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 12px;
+        }
+
+        .info-box p {
+            margin: 0;
+            color: #555;
+        }
+
+        .character-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+            width: 100%;
+        }
+
+        .character-card {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            border: 2px solid #f0f0f0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .character-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .character-card img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 3px solid #eaeaea;
+        }
+
+        .character-card h4 {
+            font-size: 1.2em;
+            margin-bottom: 5px;
+            color: #111;
+        }
+
+        .character-card p {
+            font-size: 0.9em;
+            color: #666;
+            margin: 0;
+        }
+
+        .role-ally {
+            color: #22c55e;
+            font-weight: 600;
+            font-size: 0.85em;
+        }
+
+        .role-enemy {
+            color: #ef4444;
+            font-weight: 600;
+            font-size: 0.85em;
+        }
+
+        .timeline-dates {
+            display: flex;
+            gap: 20px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .date-badge {
+            background: #111;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .battle-section {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .battle-section h3 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .battle-section p {
+            color: #e0e0e0;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .victory-box {
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+            border: 3px solid #28a745;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .victory-box h3 {
+            color: #155724;
+            font-size: 1.8em;
+            margin-bottom: 15px;
         }
 
         footer {
             text-align: center;
-            padding: 60px 20px;
+            padding: 80px 20px;
             background: #fafafa;
             border-top: 1px solid #eaeaea;
             color: #888;
             font-size: 0.9em;
         }
 
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.5em; }
-            .year-title { font-size: 2.2em; }
-            .story-card { flex-direction: column; align-items: center; text-align: center; padding: 30px; }
-            .player-avatar { width: 150px; height: 150px; }
-            nav ul { gap: 20px; font-size: 0.85em; }
+        footer p {
+            margin: 5px 0;
+        }
+
+        @media (max-width: 968px) {
+            .hero h1 { font-size: 3em; }
+            .year-title { font-size: 2.5em; }
+            .story-card { 
+                flex-direction: column; 
+                align-items: center; 
+                text-align: center; 
+                padding: 40px 30px;
+                gap: 40px;
+            }
+            .player-avatar, .avatar-placeholder { 
+                width: 180px; 
+                height: 180px; 
+            }
+            nav ul { gap: 15px; font-size: 0.75em; }
+            .character-showcase { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 2.2em; }
+            .year-title { font-size: 2em; }
+            .story-card { padding: 30px 20px; }
+            .character-showcase { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -223,22 +448,27 @@
     </nav>
 
     <section class="hero" id="inicio">
-        <img src="https://tr.rbxcdn.com/180DAY-PLACE-11137575513/256/256/Image/Png" 
-             alt="The Chosen One" class="game-icon" onerror="this.style.display='none'">
-        <h1>La historia del Clan ZK<br><span style="font-size: 0.5em; color: #666; font-weight: 400;">(Anteriormente IJC)</span></h1>
-        <p>Un archivo histórico dedicado a los momentos, jugadores y leyendas que forjaron el legado de The Chosen One.</p>
+        <img src="images/tco.jpg" 
+             alt="The Chosen One" 
+             class="game-icon"
+             onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22150%22 height=%22150%22%3E%3Crect fill=%22%23667eea%22 width=%22150%22 height=%22150%22 rx=%2230%22/%3E%3Ctext fill=%22white%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2240%22%3ETCO%3C/text%3E%3C/svg%3E'">
+        
+        <h1>La historia del Clan ZK<span>(Anteriormente IJC)</span></h1>
+        <p>Un archivo histórico dedicado a los momentos, jugadores y leyendas que forjaron el legado de The Chosen One en Roblox.</p>
     </section>
 
     <!-- AÑO 2022 -->
     <section class="year-section" id="2022">
-        <div class="year-label">Capítulo I</div>
+        <div class="year-label">Capítulo I - El Comienzo</div>
         <h2 class="year-title">Los Orígenes</h2>
         <p class="year-subtitle">La historia de Nam (elfrancho14)</p>
         
         <div class="story-card">
             <div class="avatar-container">
-                <img src="https://www.roblox.com/headshot-thumbnail/image?userId=607353710&width=180&height=180" 
-                     alt="Avatar de Nam" class="player-avatar" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22180%22 height=%22180%22%3E%3Crect fill=%22%23ddd%22 width=%22180%22 height=%22180%22/%3E%3Ctext fill=%22%23666%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22%3ENam%3C/text%3E%3C/svg%3E'">
+                <img src="images/nam.jpg" 
+                     alt="Avatar de Nam" 
+                     class="player-avatar"
+                     onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'avatar-placeholder\'>Nam</div>'">
             </div>
             <div class="story-content">
                 <h3>El primer paso</h3>
@@ -248,6 +478,9 @@
                 <p>
                     A simple vista, era solo un jugador más en el mapa, una estadística más en un año que ya tocaba su fin. No había grandes torneos ni hazañas sonadas, solo la curiosidad de aprender las mecánicas de un juego que estaba a punto de explotar en popularidad. 
                 </p>
+                <div class="info-box">
+                    <p><strong>Dato importante:</strong> User ID de Roblox: <span class="highlight">607353710</span> - El número que marcaría el inicio de una leyenda.</p>
+                </div>
                 <p>
                     Pero lo que nadie sabía era que ese simple clic no era el final de una partida, sino <span class="highlight">el primer latido de una leyenda</span>. El escenario estaba listo, el destino estaba escrito, y la historia del Clan ZK apenas comenzaba a forjarse en las sombras...
                 </p>
@@ -255,24 +488,26 @@
         </div>
     </section>
 
-    <!-- AÑO 2023 - NUEVO CONTENIDO ÉPICO -->
+    <!-- AÑO 2023 -->
     <section class="year-section" id="2023">
-        <div class="year-label">Capítulo II</div>
+        <div class="year-label">Capítulo II - El Caos</div>
         <h2 class="year-title">La Expansión</h2>
         <p class="year-subtitle">El caos que forjó leyendas</p>
         
         <div class="story-card">
             <div class="avatar-container">
-                <img src="https://www.roblox.com/headshot-thumbnail/image?userId=607353710&width=180&height=180" 
-                     alt="Avatar de Nam" class="player-avatar" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22180%22 height=%22180%22%3E%3Crect fill=%22%23ddd%22 width=%22180%22 height=%22180%22/%3E%3Ctext fill=%22%23666%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22%3ENam%3C/text%3E%3C/svg%3E'">
+                <img src="images/nam.jpg" 
+                     alt="Avatar de Nam" 
+                     class="player-avatar"
+                     onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'avatar-placeholder\'>Nam</div>'">
             </div>
             <div class="story-content">
                 <h3>La era de la anarquía digital</h3>
                 <p>
-                    <span class="highlight">2023</span> marcó el año en que <em>The Chosen One</em> dejó de ser un juego para convertirse en un <strong>campo de batalla digital sin reglas</strong>. La popularidad del juego se disparó, y con ella, llegaron aquellos que buscaban romper sus límites.
+                    <span class="highlight">2023</span> marcó el año en que <em>The Chosen One</em> dejó de ser un juego para convertirse en un <strong>campo de batalla digital sin reglas</strong>. La popularidad del juego se disparó exponencialmente, y con ella, llegaron aquellos que buscaban romper sus límites.
                 </p>
                 <p>
-                    Los scripts comenzaron a circular como fuego en pólvora. El legendario <span class="highlight">";bkit others"</span> se convirtió en el arma definitiva: un comando que crasheaba a todos los jugadores a tu alrededor, sembrando el caos absoluto en cada servidor. Era la ley del más fuerte... o del que tenía el mejor script.
+                    Los scripts comenzaron a circular como fuego en pólvora por los servidores. El legendario <span class="highlight">";bkit others"</span> se convirtió en el arma definitiva: un comando que crasheaba a todos los jugadores a tu alrededor, sembrando el caos absoluto en cada sesión. Era la ley del más fuerte... o del que tenía el mejor script.
                 </p>
                 
                 <div class="warning-box">
@@ -280,7 +515,7 @@
                 </div>
 
                 <p>
-                    Pero en medio del caos, surgieron rituales únicos. Los admins organizaban <span class="highlight">"Simón Dice"</span> épicos, batallas de construcciones imposibles y votaciones que decidían el destino de servidores enteros. Cada sesión era una montaña rusa de emociones donde la única constante era la incertidumbre.
+                    Pero en medio del caos, surgieron rituales únicos que definieron la cultura del servidor. Los admins organizaban eventos épicos: <em>"Simón Dice"</em>, batallas de construcciones imposibles y votaciones que decidían el destino de servidores enteros.
                 </p>
                 <p>
                     <em>The Chosen One</em> era un juego brillante, sí, pero sus <strong>inseguridades</strong> lo convertían en un territorio salvaje donde solo los más astutos sobrevivían. Nam observaba, aprendía y se preparaba. Porque sabía que después del caos... vendría la verdadera guerra.
@@ -289,52 +524,172 @@
         </div>
     </section>
 
-    <!-- AÑO 2024 - PREPARADO PARA TU HISTORIA -->
+    <!-- AÑO 2024 - HISTORIA ÉPICA COMPLETA -->
     <section class="year-section" id="2024">
-        <div class="year-label">Capítulo III</div>
+        <div class="year-label">Capítulo III - La Gran Guerra</div>
         <h2 class="year-title">2024</h2>
-        <p class="year-subtitle">[Título por definir - La Guerra y la Liberación]</p>
+        <p class="year-subtitle">La Liberación de TCO Español</p>
         
         <div class="story-card">
-            <div class="story-content" style="width: 100%; text-align: center;">
-                <p style="color: #999; font-style: italic; margin-bottom: 30px;">
-                    Aquí va la historia épica de:<br>
-                    <strong>La guerra y la liberación de TCO Español</strong><br>
-                    que fue manipulado por alguien...
+            <div class="avatar-container">
+                <img src="images/nam.jpg" 
+                     alt="Avatar de Nam" 
+                     class="player-avatar"
+                     onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'avatar-placeholder\'>Nam</div>'">
+            </div>
+            <div class="story-content">
+                <h3>De la amistad a la traición</h3>
+                <p>
+                    <span class="highlight">Enero a Junio 2024</span> fueron meses de paz aparente. Todo funcionaba a la perfección en los servidores latinos de <em>The Chosen One</em>. Pero el destino tenía preparados capítulos oscuros que cambiarían todo para siempre.
                 </p>
-                <p style="color: #666;">
-                    [ Pasame los detalles y lo hacemos tan épico como el 2023 ]
+                <p>
+                    Todo comenzó cuando Nam se unió a un servidor común y corriente. El admin era <strong>i11rl (Damian)</strong>. En un gesto de buena voluntad, Nam le construyó un <span class="highlight">trono épico</span> y le pidió bkit. Como recompensa, Damian le otorgó <span class="highlight">ENLIGHTEN</span>! 😊 Parecía el inicio de una gran amistad.
+                </p>
+
+                <div class="warning-box">
+                    <p><strong>La Traición:</strong> "Estaba construyendo una especie de máquina con ladrillos. Solo me acerqué... y de la nada me hizo BLIND, me hizo GLITCH. Me enfurecí. Empezamos a pelear por chat. Me banearon por unas horas. Y desde ahí... empezó TODO."</p>
+                </div>
+
+                <p>
+                    El rencor se instaló en el corazón de Nam. Cada vez se cruzaban más seguido, la bronca crecía. Damian (i11rl) empezó a hacerse conocido —probablemente por sus conexiones con ingleses famosos— y poco a poco, <span class="highlight">tomó el control de todos los servidores latinos</span>.
+                </p>
+                <p>
+                    Su modus operandi era claro: difamación, mentiras, culpar a otros sin razón. Se comportaba como un niño de 8 años, aunque afirmaba tener 17. En un giro inesperado, <strong>pidió perdón y se hicieron amigos</strong> (alrededor de noviembre). Pero era una ilusión: <span class="highlight">Damian manipulaba a Nam</span>, quien lo ayudaba para que "le crean", sin saber que era parte del juego.
+                </p>
+
+                <div class="info-box" style="background: linear-gradient(135deg, #fff3cd 0%, #ffe69c 100%); border-left-color: #ffc107;">
+                    <p><strong>👥 Personajes Clave de esta Historia:</strong></p>
+                </div>
+
+                <div class="character-showcase">
+                    <div class="character-card">
+                        <img src="images/nam.jpg" alt="Nam" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Crect fill=%22%23667eea%22 width=%22120%22 height=%22120%22 rx=%2260%22/%3E%3Ctext fill=%22white%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2230%22%3EN%3C/text%3E%3C/svg%3E'">
+                        <h4>Nam</h4>
+                        <p class="role-ally">Protagonista</p>
+                        <p style="font-size: 0.85em; margin-top: 5px;">elfrancho14<br>User ID: 607353710</p>
+                    </div>
+                    
+                    <div class="character-card">
+                        <img src="images/enzo.jpg" alt="Enzo" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Crect fill=%22%2322c55e%22 width=%22120%22 height=%22120%22 rx=%2260%22/%3E%3Ctext fill=%22white%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2230%22%3EE%3C/text%3E%3C/svg%3E'">
+                        <h4>Enzo (Diego)</h4>
+                        <p class="role-ally">Mejor Amigo</p>
+                        <p style="font-size: 0.85em; margin-top: 5px;">Clan TQ<br>🥹 El que abrió los ojos</p>
+                    </div>
+                    
+                    <div class="character-card">
+                        <img src="images/tco.jpg" alt="i11rl" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Crect fill=%22%23ef4444%22 width=%22120%22 height=%22120%22 rx=%2260%22/%3E%3Ctext fill=%22white%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2230%22%3ED%3C/text%3E%3C/svg%3E'">
+                        <h4>i11rl (Damian)</h4>
+                        <p class="role-enemy">Antagonista</p>
+                        <p style="font-size: 0.85em; margin-top: 5px;">El Manipulador<br>Control total de servidores</p>
+                    </div>
+                    
+                    <div class="character-card">
+                        <img src="images/snoopy.jpg" alt="Snoopy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Crect fill=%22%23ef4444%22 width=%22120%22 height=%22120%22 rx=%2260%22/%3E%3Ctext fill=%22white%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2230%22%3ES%3C/text%3E%3C/svg%3E'">
+                        <h4>Snoopy</h4>
+                        <p class="role-enemy">Aliado de Damian</p>
+                        <p style="font-size: 0.85em; margin-top: 5px;">Nuevo amigo de i11rl<br>Parte del enemigo</p>
+                    </div>
+                    
+                    <div class="character-card">
+                        <img src="images/napoleon.jpg" alt="Napoleon" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Crect fill=%22%23ef4444%22 width=%22120%22 height=%22120%22 rx=%2260%22/%3E%3Ctext fill=%22white%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2230%22%3EN%3C/text%3E%3C/svg%3E'">
+                        <h4>Napoleon</h4>
+                        <p class="role-enemy">Aliado de Damian</p>
+                        <p style="font-size: 0.85em; margin-top: 5px;">Amigo de i11rl<br>Posteriormente liberado</p>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 50px; font-size: 1.8em; color: #111;">El Despertar</h3>
+                <p>
+                    Un día, llegó alguien que cambiaría el curso de la historia: <span class="highlight">Enzo 🥹</span> (también conocido como Diego), miembro del clan <strong>TQ</strong>. Enzo le contó a Nam sobre su propia batalla con Damian. Ese día, <strong>Nam abrió los ojos</strong>. Pensó en todo lo sucedido, en la manipulación, en las mentiras... y <span class="highlight">decidió luchar</span>.
+                </p>
+                <p>
+                    Para entonces, Damian ya tenía el control absoluto de los servidores latinos de <em>The Chosen One</em>. Pero no estaba solo: había conseguido dos nuevos aliados —<strong>Snoopy</strong> y <strong>Napoleon</strong>— y gracias a Damian, Enzo conoció a <strong>RaR</strong> (quien jugaría un papel importante más tarde).
+                </p>
+
+                <div class="battle-section">
+                    <h3>⚔️ LA BATALLA FINAL ⚔️</h3>
+                    <p style="font-size: 1.2em; margin-bottom: 20px;"><strong>Objetivo: LIBERAR TCO ESPAÑOL</strong></p>
+                    <p>
+                        Nam y Diego ejecutaron un plan maestro. Mientras ellos lanzaban <span style="color: #ffd700; font-weight: bold;">ataques de scripts</span>, el trío enemigo (i11rl, Snoopy y Napoleon) respondía con difamación, mentiras y culpas infundadas. Damian usaba scripts maliciosos e intentaba que Nam volviera a su lado... pero eso ya no pasaría.
+                    </p>
+                    <p style="margin-top: 20px; font-size: 1.3em;">
+                        <strong>⏱️ Duración: Más de 1 hora de batalla épica</strong><br>
+                        <strong> Resultado: El enemigo hizo RQ (se rindió)</strong>
+                    </p>
+                </div>
+
+                <div class="victory-box">
+                    <h3> ¡VICTORIA! 🎉</h3>
+                    <p style="font-size: 1.1em; margin-bottom: 15px;">
+                        <strong>¡GANAMOS LA BATALLA!</strong> 🥳<br>
+                        Liberamos medio TCO Español
+                    </p>
+                    <p style="color: #555;">
+                        Gracias a RaR, liberamos a Napoleon, aunque él decidió tomar otro camino. Pero al cabo, <span style="font-weight: bold; color: #155724;">para nosotros éramos los héroes</span>.
+                    </p>
+                </div>
+
+                <p>
+                    Todo volvió a la normalidad. Los servidores recuperaron sus <span class="highlight">reglas</span>, surgieron <span class="highlight">ciudades</span>, se crearon <span class="highlight">juegos</span>... al fin, <em>The Chosen One</em> era el buen juego que siempre debió ser.
+                </p>
+
+                <div class="info-box" style="background: linear-gradient(135deg, #e7f3ff 0%, #cce5ff 100%); border-left-color: #0066cc;">
+                    <p><strong>🎮 Legado de 2024:</strong> Después de meses de manipulación y caos, la valentía de Nam y Enzo restauró el orden en TCO Español. Los servidores latinos volvieron a ser un lugar donde se podía jugar sin abusos, con reglas justas y una comunidad renovada.</p>
+                </div>
+
+                <div class="timeline-dates">
+                    <span class="date-badge">📅 Enero-Junio: Paz</span>
+                    <span class="date-badge"> Traición de Damian</span>
+                    <span class="date-badge">🥹 Enzo abre los ojos</span>
+                    <span class="date-badge">⚔️ Batalla 1+ hora</span>
+                    <span class="date-badge">🏆 Victoria Total</span>
+                </div>
+
+                <p style="font-size: 1.2em; color: #666; font-style: italic; text-align: center; margin-top: 40px; padding: 30px; background: #f8f9fa; border-radius: 15px;">
+                    <strong>Pero esto no terminó acá...</strong><br>
+                    <span style="color: #999;">(Spoiler 2025)</span>
                 </p>
             </div>
         </div>
     </section>
 
-    <!-- AÑOS 2025-2026 -->
+    <!-- AÑO 2025 - SPOILER -->
     <section class="year-section" id="2025">
-        <div class="year-label">Capítulo IV</div>
+        <div class="year-label">Capítulo IV - El Futuro</div>
         <h2 class="year-title">2025</h2>
-        <p class="year-subtitle">La consolidación</p>
+        <p class="year-subtitle">Las sombras del pasado regresan</p>
         <div class="story-card">
-            <div class="story-content" style="width: 100%; text-align: center;">
-                <p style="color: #999;">[ Próximamente... ]</p>
+            <div class="story-content" style="width: 100%;">
+                <div class="warning-box" style="text-align: center;">
+                    <p style="font-size: 1.2em;"><strong>📖 Próximamente...</strong></p>
+                    <p style="margin-top: 20px;">
+                        Enzo estaba en Alts para hacerse el inactivo.<br>
+                        Damian y Napoleon estaban con sus amigos del clan TQ.<br>
+                        Y vio los abusos de parte de Napoleon y Damian...<br>
+                        <span style="color: #666; font-size: 0.9em;">[Continuará]</span>
+                    </p>
+                </div>
             </div>
         </div>
     </section>
 
+    <!-- AÑO 2026 -->
     <section class="year-section" id="2026">
-        <div class="year-label">Capítulo V</div>
+        <div class="year-label">Capítulo V - El Presente</div>
         <h2 class="year-title">2026</h2>
         <p class="year-subtitle">El legado continúa</p>
         <div class="story-card">
             <div class="story-content" style="width: 100%; text-align: center;">
-                <p style="color: #999;">[ Próximamente... ]</p>
+                <p style="color: #999; font-size: 1.2em;">[ Próximamente... ]</p>
             </div>
         </div>
     </section>
 
     <footer>
-        <p>Archivo Histórico del Clan ZK</p>
-        <p style="margin-top: 10px; font-size: 0.8em;">The Chosen One © TomazDev | Creado por la comunidad</p>
+        <p><strong>Archivo Histórico del Clan ZK</strong></p>
+        <p>Documentando la historia de The Chosen One</p>
+        <p style="margin-top: 20px; font-size: 0.85em;">The Chosen One © TomazDev | Creado por la comunidad</p>
+        <p style="font-size: 0.8em; margin-top: 10px;">User ID: 607353710 | Game ID: 11137575513</p>
     </footer>
 
     <script>
@@ -363,6 +718,20 @@
                     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
+        });
+
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                nav.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+            } else {
+                nav.style.boxShadow = '0 2px 10px rgba(0,0,0,0.05)';
+            }
+            
+            lastScroll = currentScroll;
         });
     </script>
 

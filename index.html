@@ -74,7 +74,6 @@
             border-radius: 5px;
         }
 
-        /* BOTÓN DE EXTRAS */
         .extras-btn {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white !important;
@@ -363,6 +362,12 @@
             font-size: 0.85em;
         }
 
+        .role-neutral {
+            color: #f59e0b;
+            font-weight: 600;
+            font-size: 0.85em;
+        }
+
         .timeline-dates {
             display: flex;
             gap: 20px;
@@ -416,7 +421,6 @@
             margin-bottom: 15px;
         }
 
-        /* ESTILOS DEL MODAL DE EXTRAS */
         .modal {
             display: none;
             position: fixed;
@@ -607,7 +611,7 @@
     <div class="modal" id="extrasModal">
         <div class="modal-content">
             <button class="modal-close" onclick="closeExtras()">×</button>
-            <h2>📚 Otros Clanes</h2>
+            <h2> Otros Clanes</h2>
             <p>Clanes y facciones que formaron parte de la historia de The Chosen One</p>
             
             <div class="clans-grid">
@@ -619,7 +623,7 @@
                 </div>
 
                 <div class="clan-card">
-                    <div class="clan-icon">⚔️</div>
+                    <div class="clan-icon">️</div>
                     <h4>Clan MG</h4>
                     <p>Clan formado por <strong>Damian (i11rl)</strong> y <strong>Napoleon</strong>. Duró aproximadamente 5 meses antes de disolverse.</p>
                     <span class="clan-tag">5 Meses de Historia</span>
@@ -727,7 +731,7 @@
         </div>
     </section>
 
-    <!-- AÑO 2024 - HISTORIA ÉPICA COMPLETA -->
+    <!-- AÑO 2024 - REORGANIZADO -->
     <section class="year-section" id="2024">
         <div class="year-label">Capítulo III - La Gran Guerra</div>
         <h2 class="year-title">2024</h2>
@@ -745,22 +749,28 @@
                 <p>
                     <span class="highlight">Enero a Junio 2024</span> fueron meses de paz aparente. Todo funcionaba a la perfección en los servidores latinos de <em>The Chosen One</em>. Pero el destino tenía preparados capítulos oscuros que cambiarían todo para siempre.
                 </p>
+
+                <!-- NUEVA SECCIÓN: SAM (al principio) -->
+                <h3 style="margin-top: 40px; font-size: 1.6em; color: #111;">El encuentro con Sam</h3>
                 <p>
-                    Todo comenzó cuando Nam se unió a un servidor común y corriente. El admin era <strong>i11rl (Damian)</strong>. En un gesto de buena voluntad, Nam le construyó un <span class="highlight">trono épico</span> y le pidió bkit. Como recompensa, Damian le otorgó <span class="highlight">ENLIGHTEN</span>! 😊 Parecía el inicio de una gran amistad.
+                    Un día, Nam entró a <em>The Chosen One</em> como todos lo haríamos: con la esperanza de encontrar un servidor activo. Pero lo que encontró fue algo distinto: <strong>un server completamente solo</strong>. Solo había un jugador más: el admin, llamado <span class="highlight">Sam</span>.
+                </p>
+                <p>
+                    Sam era un jugador <strong>sin Robux</strong>, pero con algo mucho más valioso: <em>imaginación</em>. Le contó a Nam que era <strong>arquitecto</strong> en la vida real, y juntos comenzaron a construir. Lo que empezó como una simple ciudad se convirtió en un proyecto épico: calles, edificios, plazas... una civilización entera nacida de la nada.
+                </p>
+                <p>
+                    Se hicieron amigos. Pasaban horas construyendo, hablando, planeando el futuro del servidor. Era una de esas amistades que nacen en los lugares más inesperados.
+                </p>
+                <p>
+                    Pero como todas las historias, esta también tuvo su final. <strong>Un día, simplemente dejaron de hablar</strong>. Sin peleas, sin dramas... solo el silencio. La vida los llevó por caminos distintos.
                 </p>
 
-                <div class="warning-box">
-                    <p><strong>La Traición:</strong> "Estaba construyendo una especie de máquina con ladrillos. Solo me acerqué... y de la nada me hizo BLIND, me hizo GLITCH. Me enfurecí. Empezamos a pelear por chat. Me banearon por unas horas. Y desde ahí... empezó TODO."</p>
+                <div class="warning-box" style="background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); border-left-color: #f59e0b;">
+                    <p>⚠️ <strong>El giro del destino:</strong> Con el tiempo, Sam se hizo amigo de <strong>Damian (i11rl)</strong>. Aunque <strong>Sam nunca estuvo involucrado directamente en la pelea</strong>, su conexión con el antagonista principal no fue casualidad. <em>¿Qué papel jugará en 2025?</em> Eso... es otra historia. 🔮</p>
                 </div>
 
-                <p>
-                    El rencor se instaló en el corazón de Nam. Cada vez se cruzaban más seguido, la bronca crecía. Damian (i11rl) empezó a hacerse conocido —probablemente por sus conexiones con ingleses famosos— y poco a poco, <span class="highlight">tomó el control de todos los servidores latinos</span>.
-                </p>
-                <p>
-                    Su modus operandi era claro: difamación, mentiras, culpar a otros sin razón. Se comportaba como un niño de 8 años, aunque afirmaba tener 17. En un giro inesperado, <strong>pidió perdón y se hicieron amigos</strong> (alrededor de noviembre). Pero era una ilusión: <span class="highlight">Damian manipulaba a Nam</span>, quien lo ayudaba para que "le crean", sin saber que era parte del juego.
-                </p>
-
-                <div class="info-box" style="background: linear-gradient(135deg, #fff3cd 0%, #ffe69c 100%); border-left-color: #ffc107;">
+                <!-- PERSONAJES CLAVES MOVIDOS AL PRINCIPIO -->
+                <div class="info-box" style="background: linear-gradient(135deg, #fff3cd 0%, #ffe69c 100%); border-left-color: #ffc107; margin-top: 40px;">
                     <p><strong>👥 Personajes Clave de esta Historia:</strong></p>
                 </div>
 
@@ -776,7 +786,14 @@
                         <img src="images/enzo.png" alt="Enzo" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Crect fill=%22%2322c55e%22 width=%22120%22 height=%22120%22 rx=%2260%22/%3E%3Ctext fill=%22white%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2230%22%3EE%3C/text%3E%3C/svg%3E'">
                         <h4>Enzo (Diego)</h4>
                         <p class="role-ally">Mejor Amigo</p>
-                        <p style="font-size: 0.85em; margin-top: 5px;">Clan TQ<br>🥹 El que abrió los ojos</p>
+                        <p style="font-size: 0.85em; margin-top: 5px;">Clan TQ<br>🥹 El que le abrió los ojos a Nam</p>
+                    </div>
+
+                    <div class="character-card">
+                        <img src="images/sam.png" alt="Sam" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Crect fill=%22%23f59e0b%22 width=%22120%22 height=%22120%22 rx=%2260%22/%3E%3Ctext fill=%22white%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2230%22%3ES%3C/text%3E%3C/svg%3E'">
+                        <h4>Sam</h4>
+                        <p class="role-neutral">El Arquitecto</p>
+                        <p style="font-size: 0.85em; margin-top: 5px;">Primer amigo en TCO<br> Clave en 2025</p>
                     </div>
                     
                     <div class="character-card">
@@ -801,6 +818,24 @@
                     </div>
                 </div>
 
+                <!-- HISTORIA DE DAMIAN -->
+                <h3 style="margin-top: 50px; font-size: 1.8em; color: #111;">La traición de Damian</h3>
+                <p>
+                    Todo comenzó cuando Nam se unió a un servidor común y corriente. El admin era <strong>i11rl (Damian)</strong>. En un gesto de buena voluntad, Nam le construyó un <span class="highlight">trono épico</span> y le pidió bkit. Como recompensa, Damian le otorgó <span class="highlight">ENLIGHTEN</span>! 😊 Parecía el inicio de una gran amistad.
+                </p>
+
+                <div class="warning-box">
+                    <p><strong>La Traición:</strong> "Estaba construyendo una especie de máquina con ladrillos. Solo me acerqué... y de la nada me hizo BLIND, me hizo GLITCH. Me enfurecí. Empezamos a pelear por chat. Me banearon por unas horas. Y desde ahí... empezó TODO."</p>
+                </div>
+
+                <p>
+                    El rencor se instaló en el corazón de Nam. Cada vez se cruzaban más seguido, la bronca crecía. Damian (i11rl) empezó a hacerse conocido —probablemente por sus conexiones con ingleses famosos— y poco a poco, <span class="highlight">tomó el control de todos los servidores latinos</span>.
+                </p>
+                <p>
+                    Su modus operandi era claro: difamación, mentiras, culpar a otros sin razón. Se comportaba como un niño de 8 años, aunque afirmaba tener 17. En un giro inesperado, <strong>pidió perdón y se hicieron amigos</strong> (alrededor de noviembre). Pero era una ilusión: <span class="highlight">Damian manipulaba a Nam</span>, quien lo ayudaba para que "le crean", sin saber que era parte del juego.
+                </p>
+
+                <!-- EL DESPERTAR (CORREGIDO) -->
                 <h3 style="margin-top: 50px; font-size: 1.8em; color: #111;">El Despertar</h3>
                 <p>
                     Un día, llegó alguien que cambiaría el curso de la historia: <span class="highlight">Enzo 🥹</span> (también conocido como Diego), miembro del clan <strong>TQ</strong>. Enzo le contó a Nam sobre su propia batalla con Damian. Ese día, <strong>Nam abrió los ojos</strong>. Pensó en todo lo sucedido, en la manipulación, en las mentiras... y <span class="highlight">decidió luchar</span>.
@@ -816,13 +851,13 @@
                         Nam y Diego ejecutaron un plan maestro. Mientras ellos lanzaban <span style="color: #ffd700; font-weight: bold;">ataques de scripts</span>, el trío enemigo (i11rl, Snoopy y Napoleon) respondía con difamación, mentiras y culpas infundadas. Damian usaba scripts maliciosos e intentaba que Nam volviera a su lado... pero eso ya no pasaría.
                     </p>
                     <p style="margin-top: 20px; font-size: 1.3em;">
-                        <strong>⏱️ Duración: Más de 1 hora de batalla épica</strong><br>
-                        <strong> Resultado: El enemigo hizo RQ (se rindió)</strong>
+                        <strong>️ Duración: Más de 1 hora de batalla épica</strong><br>
+                        <strong>🏳️ Resultado: El enemigo hizo RQ (se rindió)</strong>
                     </p>
                 </div>
 
                 <div class="victory-box">
-                    <h3> ¡VICTORIA! 🎉</h3>
+                    <h3> ¡VICTORIA! </h3>
                     <p style="font-size: 1.1em; margin-bottom: 15px;">
                         <strong>¡GANAMOS LA BATALLA!</strong> 🥳<br>
                         Liberamos medio TCO Español
@@ -842,8 +877,9 @@
 
                 <div class="timeline-dates">
                     <span class="date-badge">📅 Enero-Junio: Paz</span>
-                    <span class="date-badge"> Traición de Damian</span>
-                    <span class="date-badge">🥹 Enzo abre los ojos</span>
+                    <span class="date-badge">️ Sam el Arquitecto</span>
+                    <span class="date-badge">️ Traición de Damian</span>
+                    <span class="date-badge"> Nam abre los ojos</span>
                     <span class="date-badge">⚔️ Batalla 1+ hora</span>
                     <span class="date-badge">🏆 Victoria Total</span>
                 </div>
@@ -940,15 +976,14 @@
         // FUNCIONES DEL MODAL DE EXTRAS
         function openExtras() {
             document.getElementById('extrasModal').classList.add('active');
-            document.body.style.overflow = 'hidden'; // Evita scroll de fondo
+            document.body.style.overflow = 'hidden';
         }
 
         function closeExtras() {
             document.getElementById('extrasModal').classList.remove('active');
-            document.body.style.overflow = 'auto'; // Restaura scroll
+            document.body.style.overflow = 'auto';
         }
 
-        // Cerrar modal al hacer click fuera del contenido
         window.onclick = function(event) {
             const modal = document.getElementById('extrasModal');
             if (event.target === modal) {
@@ -956,7 +991,6 @@
             }
         }
 
-        // Cerrar modal con la tecla ESC
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Escape') {
                 closeExtras();

@@ -717,7 +717,7 @@ let me=null, booted=false;
 function loadLocalProfile(){ try{ return JSON.parse(localStorage.getItem(LS_KEY)); }catch(e){ return null; } }
 function saveLocalProfile(p){ localStorage.setItem(LS_KEY, JSON.stringify(p)); }
 function isAdminUser(){ return me && ADMIN_NICKS.includes(me.nicknameLower); }
-function escapeHtml(t){ const d=document.createElement('div'); d.textContent=(t==null?'':String(t)); return div.innerHTML; }
+function escapeHtml(t){ const d=document.createElement('div'); d.textContent=(t==null?'':String(t)); return d.innerHTML; }
 function timeSince(ms){
 const s=Math.floor((Date.now()-ms)/1000);
 let i=s/31536000; if(i>1)return Math.floor(i)+' años';

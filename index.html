@@ -10,7 +10,7 @@
 <!-- FIREBASE -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
-import { getFirestore, collection, addDoc, getDocs, query, where, orderBy, serverTimestamp, onSnapshot } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc, getDocs, query, where, orderBy, serverTimestamp, onSnapshot, doc, deleteDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 const firebaseConfig = {
 apiKey: "AIzaSyAVudNUtJVqmctaYrkdFoBaRfS5EQscxn0",
 authDomain: "the-chosen-one-roblox.firebaseapp.com",
@@ -23,7 +23,7 @@ measurementId: "G-ME50QF8K1Y"
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 window.firebaseDb = db;
-window.firebaseFunctions = { collection, addDoc, getDocs, query, where, orderBy, serverTimestamp, onSnapshot };
+window.firebaseFunctions = { collection, addDoc, getDocs, query, where, orderBy, serverTimestamp, onSnapshot, doc, deleteDoc };
 window.firebaseReady = true;
 window.dispatchEvent(new Event('firebaseReady'));
 </script>
@@ -1080,8 +1080,11 @@ box.appendChild(div);
 async function deleteComment(id,context){
 const F=window.firebaseFunctions; if(!F) return;
 if(!confirm('¿Borrar este comentario?')) return;
-try{ await F.deleteDoc(F.doc(window.firebaseDb,'comments',id)); loadComments(context); beep(440,0.05); }
-catch(e){ alert('Error: '+e.message); }
+try{ 
+await F.deleteDoc(F.doc(window.firebaseDb,'comments',id)); 
+loadComments(context); 
+beep(440,0.05); 
+}catch(e){ alert('Error: '+e.message); }
 }
 async function loadLeaderboard(){
 const F=window.firebaseFunctions;

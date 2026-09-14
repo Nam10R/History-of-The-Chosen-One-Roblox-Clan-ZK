@@ -273,8 +273,33 @@ footer strong{color:var(--gold);font-family:'Bebas Neue';letter-spacing:1px;font
   .search-box input{width:90px}
   .nav-links{order:3;width:100%;justify-content:center}
 }
+  /* ===== AUTH SCREEN OBLIGATORIO ===== */
+.auth-screen{position:fixed;inset:0;background:var(--bg);z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px}
+.auth-screen.hidden{display:none}
 </style>
 </head>
+  <!-- AUTH SCREEN (OBLIGATORIO) -->
+<div class="auth-screen" id="authScreen">
+  <div class="auth-box">
+    <h2>BIENVENIDO AL <em>ARCHIVO DE TCO</em></h2>
+    <p>Debés iniciar sesión o registrarte para acceder al contenido</p>
+    <div class="auth-error" id="authScreenError"></div>
+<div id="loginScreenForm">
+  <input type="email" class="auth-input" id="screenLoginEmail" placeholder="Email">
+  <input type="password" class="auth-input" id="screenLoginPassword" placeholder="Contraseña">
+  <button class="auth-btn" onclick="screenLogin()">INICIAR SESIÓN</button>
+  <button class="auth-btn secondary" onclick="resendVerificationEmail()">📧 Reenviar email de verificación</button>
+  <button class="auth-btn secondary" onclick="showScreenRegister()">¿No tenés cuenta? Registrate</button>
+</div>
+    <div id="registerScreenForm" style="display:none">
+      <input type="email" class="auth-input" id="screenRegEmail" placeholder="Email">
+      <input type="password" class="auth-input" id="screenRegPassword" placeholder="Contraseña (mínimo 6 caracteres)">
+      <input type="password" class="auth-input" id="screenRegPassword2" placeholder="Confirmar contraseña">
+      <button class="auth-btn" onclick="screenRegister()">REGISTRARSE</button>
+      <button class="auth-btn secondary" onclick="showScreenLogin()">¿Ya tenés cuenta? Iniciá sesión</button>
+    </div>
+  </div>
+</div>
 <body>
 
 <!-- LOADER -->
@@ -1061,6 +1086,8 @@ async function registerUser(){
 }
 async function logoutUser(){
   await window.firebaseFunctions.signOut(window.firebaseAuth);
+  document.getElementById('authScreen').classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
   beep(440,0.08);
 }
 
@@ -1127,6 +1154,93 @@ async function loadStories(){
   }
 }
 window.addEventListener('load',loadStories);
+/* ===== AUTH SCREEN OBLIGATORIO ===== */
+function showScreenRegister(){
+  document.getElementById('loginScreenForm').style.display='none';
+  document.getElementById('registerScreenForm').style.display='block';
+  document.getElementById('authScreenError').classList.remove('show');
+}
+function showScreenLogin(){
+  document.getElementById('loginScreenForm').style.display='block';
+  document.getElementById('registerScreenForm').style.display='none';
+  document.getElementById('authScreenError').classList.remove('show');
+}
+function showScreenAuthError(msg){
+  const el=document.getElementById('authScreenError');
+  el.textContent=msg;
+  el.classList.add('show');
+}
+async function screenLogin(){
+  const email=document.getElementById('screenLoginEmail').value.trim();
+  const pass=document.getElementById('screenLoginPassword').value;
+  if(!email||!pass){showScreenAuthError('Completá todos los campos');return;}
+  try{
+    await window.firebaseFunctions.signInWithEmailAndPassword(window.firebaseAuth,email,pass);
+    document.getElementById('authScreen').classList.add('hidden');
+    beep(880,0.1);
+  }catch(e){
+    showScreenAuthError(e.message.includes('invalid')?'Email o contraseña incorrectos':e.message);
+  }
+}
+async function screenRegister(){
+  const email=document.getElementById('screenRegEmail').value.trim();
+  const pass=document.getElementById('screenRegPassword').value;
+  const pass2=document.getElementById('screenRegPassword2').value;
+  if(!email||!pass||!pass2){showScreenAuthError('Completá todos los campos');return;}
+  if(pass.length<6){showScreenAuthError('La contraseña debe tener al menos 6 caracteres');return;}
+  if(pass!==pass2){showScreenAuthError('Las contraseñas no coinciden');return;}
+  try{
+    const userCredential = await window.firebaseFunctions.createUserWithEmailAndPassword(window.firebaseAuth,email,pass);
+    // Enviar email de verificación
+    await window.firebaseFunctions.sendEmailVerification(userCredential.user);
+    showScreenAuthError('¡Registro exitoso! Revisá tu correo y hacé click en el link de verificación. Si no lo ves, revisá la carpeta de spam.');
+    // NO ocultar la pantalla todavía, esperar a que verifique
+    beep(880,0.1);
+  }catch(e){
+    showScreenAuthError(e.message.includes('email-already')?'Este email ya está registrado':e.message);
+  }
+}
+  async function resendVerificationEmail(){
+  const email=document.getElementById('screenLoginEmail').value.trim();
+  const pass=document.getElementById('screenLoginPassword').value;
+  if(!email||!pass){showScreenAuthError('Ingresá tu email y contraseña para reenviar el link de verificación');return;}
+  try{
+    const userCredential = await window.firebaseFunctions.signInWithEmailAndPassword(window.firebaseAuth,email,pass);
+    await window.firebaseFunctions.sendEmailVerification(userCredential.user);
+    await window.firebaseFunctions.signOut(window.firebaseAuth);
+    showScreenAuthError('✅ Email de verificación reenviado. Revisá tu correo (y la carpeta de spam).');
+    beep(880,0.1);
+  }catch(e){
+    showScreenAuthError('Error al reenviar: '+e.message);
+  }
+}
+
+// Verificar auth state al cargar
+window.firebaseFunctions.onAuthStateChanged(window.firebaseAuth, async (user) => {
+  const authScreen = document.getElementById('authScreen');
+  if (user) {
+    // Recargar el usuario para obtener el estado actualizado de verificación
+    await user.reload();
+    const freshUser = window.firebaseAuth.currentUser;
+    
+    if (freshUser && freshUser.emailVerified) {
+      // Usuario logueado Y verificado: permitir acceso
+      authScreen.classList.add('hidden');
+      document.body.style.overflow = '';
+    } else {
+      // Usuario logueado pero NO verificado: mostrar mensaje
+      authScreen.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      showScreenAuthError('⚠️ Tu email no está verificado. Revisá tu correo y hacé click en el link de verificación. Si no lo ves, revisá la carpeta de spam.');
+      // Cerrar sesión automáticamente
+      await window.firebaseFunctions.signOut(window.firebaseAuth);
+    }
+  } else {
+    // Usuario NO logueado: mostrar pantalla de auth y bloquear todo
+    authScreen.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  }
+});
 </script>
 </body>
 </html>

@@ -8,7 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
-import { getFirestore, collection, addDoc, getDocs, query, where, orderBy, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc, getDocs, query, where, orderBy, serverTimestamp, onSnapshot } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 const firebaseConfig = {
 apiKey: "AIzaSyAVudNUtJVqmctaYrkdFoBaRfS5EQscxn0",
 authDomain: "the-chosen-one-roblox.firebaseapp.com",
@@ -21,7 +21,7 @@ measurementId: "G-ME50QF8K1Y"
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 window.firebaseDb = db;
-window.firebaseFunctions = { collection, addDoc, getDocs, query, where, orderBy, doc, updateDoc, deleteDoc };
+window.firebaseFunctions = {  collection, addDoc, getDocs, query, where, orderBy, serverTimestamp, onSnapshot, ref, uploadBytes, getDownloadURL };
 </script>
 <style>
 :root{--bg:#0a0a0c;--bg2:#111114;--card:#16161a;--line:#26262c;--gold:#d4af37;--gold2:#f5d76e;--red:#e23b3b;--green:#3ddc84;--txt:#ececec;--mut:#8a8a93}
@@ -1044,25 +1044,41 @@ await F.addDoc(F.collection(window.firebaseDb,'comments'),{ context:context, use
 input.value=''; loadComments(context); beep(720,0.05);
 }catch(e){ alert('Error: '+e.message); }
 }
-async function loadComments(context){
-const F=window.firebaseFunctions;
-const box=document.getElementById('comments-'+context); if(!box||!F||!window.firebaseDb) return;
-try{
-const q=F.query(F.collection(window.firebaseDb,'comments'),F.where('context','==',context),F.orderBy('createdAt','asc'));
-const snap=await F.getDocs(q);
+const commentUnsubs = {};
+function loadComments(context){
+const box = document.getElementById('comments-'+context);
+if(!box) return;
+const F = window.firebaseFunctions;
+if(!F || !window.firebaseDb) return;
+if(commentUnsubs[context]){ try{ commentUnsubs[context](); }catch(e){} }
+const q = F.query(F.collection(window.firebaseDb,'comments'), F.where('context','==',context));
+commentUnsubs[context] = F.onSnapshot(q, (snap)=>{
+const items = snap.docs.map(d=>Object.assign({id:d.id}, d.data()));
+items.sort((a,b)=>{
+const ta = typeof a.createdAt === 'number' ? a.createdAt : (a.createdAt && a.createdAt.toDate ? a.createdAt.toDate().getTime() : 0);
+const tb = typeof b.createdAt === 'number' ? b.createdAt : (b.createdAt && b.createdAt.toDate ? b.createdAt.toDate().getTime() : 0);
+return ta - tb;
+});
 box.innerHTML='';
-if(snap.empty){ box.innerHTML='<p style="color:var(--mut);font-size:.85em;font-style:italic">Sé el primero en comentar</p>'; return; }
-snap.forEach(d=>{
-const c=d.data(); const admin=ADMIN_NICKS.includes((c.userNick||'').toLowerCase());
+if(!items.length){
+box.innerHTML='<p style="color:var(--mut);font-size:.85em;font-style:italic">Sé el primero en comentar</p>';
+return;
+}
+items.forEach(c=>{
+const admin = ADMIN_NICKS.includes((c.userNick||'').toLowerCase());
 const div=document.createElement('div'); div.className='comment';
-div.innerHTML='<div class="comment-avatar" '+(c.userAvatar?'style="background-image:url('+c.userAvatar+')"':'')+'>'+escapeHtml((c.userNick||'?')[0].toUpperCase())+'</div>'+
-'<div class="comment-body"><div class="comment-header"><span class="comment-user">'+escapeHtml(c.userNick)+(admin?'<span class="admin-badge">ADMIN</span>':'')+'</span><span class="comment-time">'+timeSince(c.createdAt)+'</span></div>'+
+const timeAgo = typeof c.createdAt === 'number' ? timeSince(c.createdAt) : 'recién';
+div.innerHTML=
+'<div class="comment-avatar" '+(c.userAvatar?'style="background-image:url('+c.userAvatar+')"':'')+'>'+escapeHtml((c.userNick||'?')[0].toUpperCase())+'</div>'+
+'<div class="comment-body"><div class="comment-header">'+
+'<span class="comment-user">'+escapeHtml(c.userNick)+(admin?'<span class="admin-badge">ADMIN</span>':'')+'</span>'+
+'<span class="comment-time">'+timeAgo+'</span></div>'+
 '<div class="comment-text">'+escapeHtml(c.text)+'</div>'+
-((isAdminUser())?'<button class="comment-admin-btn" onclick="deleteComment(\''+d.id+'\',\''+context+'\')">🗑️ Borrar</button>':'')+
+(isAdminUser()?'<button class="comment-admin-btn" onclick="deleteComment(\''+c.id+'\',\''+context+'\')">🗑️ Borrar</button>':'')+
 '</div>';
 box.appendChild(div);
 });
-}catch(e){ box.innerHTML='<p style="color:var(--red);font-size:.85em">Error al cargar comentarios</p>'; }
+}, (err)=>{ console.error(err); box.innerHTML='<p style="color:var(--red);font-size:.85em">Error al cargar comentarios</p>'; });
 }
 async function deleteComment(id,context){
 const F=window.firebaseFunctions; if(!F) return;
@@ -1140,9 +1156,17 @@ function initData(){
 loadUserCount();
 loadStories();
 loadLeaderboard();
-['chapter-2022','chapter-2023','chapter-2024','chapter-2025','chapter-2026'].forEach(loadComments);
+['chapter-2022','chapter-2023','chapter-2024','chapter-2025','chapter-2026'].forEach(c=>loadComments(c));
 updateChapterModes();
 reveal(); runCounters();
+
+const F = window.firebaseFunctions;
+if(F && window.firebaseDb){
+// Historias en tiempo real
+F.onSnapshot(F.collection(window.firebaseDb,'stories'), ()=>{ loadStories(); loadLeaderboard(); });
+// Likes en tiempo real
+F.onSnapshot(F.collection(window.firebaseDb,'likes'), ()=>{ loadStories(); loadLeaderboard(); });
+}
 }
 function boot(){
 if(booted) return; booted=true;

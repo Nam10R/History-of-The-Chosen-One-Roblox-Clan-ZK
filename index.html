@@ -276,12 +276,30 @@ footer strong{color:var(--gold);font-family:'Bebas Neue';letter-spacing:1px;font
   /* ===== AUTH SCREEN OBLIGATORIO ===== */
 .auth-screen{position:fixed;inset:0;background:var(--bg);z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px}
 .auth-screen.hidden{display:none}
+  /* ===== LIKES ===== */
+.story-actions{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap;align-items:center}
+.like-btn{background:var(--bg2);border:1px solid var(--line);color:var(--mut);padding:6px 12px;border-radius:20px;cursor:pointer;font-size:.85em;transition:.2s;display:inline-flex;align-items:center;gap:4px}
+.like-btn:hover{border-color:var(--gold);color:var(--gold)}
+.like-btn.active{background:var(--gold);color:#000;border-color:var(--gold)}
+.share-btn{background:none;border:1px solid var(--line);color:var(--mut);padding:6px 12px;border-radius:20px;cursor:pointer;font-size:.85em;transition:.2s}
+.share-btn:hover{border-color:var(--gold);color:var(--gold)}
+.edit-btn,.delete-btn{background:none;border:1px solid var(--line);color:var(--mut);padding:6px 12px;border-radius:20px;cursor:pointer;font-size:.85em;transition:.2s}
+.edit-btn:hover{border-color:var(--gold);color:var(--gold)}
+.delete-btn:hover{border-color:var(--red);color:var(--red)}
+
+/* ===== WIKI ===== */
+.wiki-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;max-width:1100px;margin:30px auto 0}
+.wiki-term{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:10px;padding:18px 20px;transition:.3s}
+.wiki-term:hover{transform:translateX(4px);border-left-color:var(--gold2)}
+.wiki-term h4{color:var(--gold);font-family:'Bebas Neue';font-size:1.2em;letter-spacing:.5px;margin-bottom:6px}
+.wiki-term p{color:var(--mut);font-size:.9em;line-height:1.5}
 </style>
 </head>
   <!-- AUTH SCREEN (OBLIGATORIO) -->
 <div class="auth-screen" id="authScreen">
   <div class="auth-box">
     <h2>BIENVENIDO AL <em>ARCHIVO DE TCO</em></h2>
+    <div style="text-align:center;color:var(--gold);font-size:.85em;margin-bottom:14px;font-weight:600" id="userCountDisplay">Cargando comunidad...</div>
     <p>Debés iniciar sesión o registrarte para acceder al contenido</p>
     <div class="auth-error" id="authScreenError"></div>
 <div id="loginScreenForm">
@@ -291,13 +309,14 @@ footer strong{color:var(--gold);font-family:'Bebas Neue';letter-spacing:1px;font
   <button class="auth-btn secondary" onclick="resendVerificationEmail()">📧 Reenviar email de verificación</button>
   <button class="auth-btn secondary" onclick="showScreenRegister()">¿No tenés cuenta? Registrate</button>
 </div>
-    <div id="registerScreenForm" style="display:none">
-      <input type="email" class="auth-input" id="screenRegEmail" placeholder="Email">
-      <input type="password" class="auth-input" id="screenRegPassword" placeholder="Contraseña (mínimo 6 caracteres)">
-      <input type="password" class="auth-input" id="screenRegPassword2" placeholder="Confirmar contraseña">
-      <button class="auth-btn" onclick="screenRegister()">REGISTRARSE</button>
-      <button class="auth-btn secondary" onclick="showScreenLogin()">¿Ya tenés cuenta? Iniciá sesión</button>
-    </div>
+<div id="registerScreenForm" style="display:none">
+  <input type="email" class="auth-input" id="screenRegEmail" placeholder="Email">
+  <input type="password" class="auth-input" id="screenRegPassword" placeholder="Contraseña (mínimo 6 caracteres)">
+  <input type="password" class="auth-input" id="screenRegPassword2" placeholder="Confirmar contraseña">
+  <input type="text" class="auth-input" id="screenRegNickname" placeholder="¿Cómo quieres que te llamemos? (apodo)" maxlength="20">
+  <button class="auth-btn" onclick="screenRegister()">REGISTRARSE</button>
+  <button class="auth-btn secondary" onclick="showScreenLogin()">¿Ya tenés cuenta? Iniciá sesión</button>
+</div>
   </div>
 </div>
 <body>
@@ -330,11 +349,11 @@ footer strong{color:var(--gold);font-family:'Bebas Neue';letter-spacing:1px;font
     <input type="text" id="searchInput" data-i18n-ph="searchPh" placeholder="Buscar personaje..." oninput="doSearch(this.value)">
   </div>
   <button class="icon-btn" id="loginBtn" onclick="openModal('authModal')" title="Iniciar sesión">👤</button>
-  <div class="user-info" id="userInfo">
-    <div class="avatar" id="userAvatar">U</div>
-    <span id="userEmail"></span>
-    <button class="logout-btn" onclick="logoutUser()">Salir</button>
-  </div>
+<div class="user-info" id="userInfo">
+  <div class="avatar" id="userAvatar" onclick="openModal('profileModal')" style="cursor:pointer">U</div>
+  <span id="userNickname" onclick="openModal('profileModal')" style="cursor:pointer">Usuario</span>
+  <button class="logout-btn" onclick="logoutUser()">Salir</button>
+</div>
   <button class="icon-btn" onclick="openModal('extrasModal')" title="Extras">📚</button>
   <button class="icon-btn" onclick="openModal('settingsModal')" title="Ajustes">⚙️</button>
   <button class="icon-btn" onclick="toggleMenu()" title="Menú">☰</button>
@@ -596,22 +615,6 @@ footer strong{color:var(--gold);font-family:'Bebas Neue';letter-spacing:1px;font
 
 <!-- MAPA -->
 <section class="special" id="map" style="background:linear-gradient(180deg,transparent,rgba(226,59,59,.04),transparent)">
-  <!-- COMMUNITY STORIES -->
-<section class="stories-section" id="stories">
-  <div class="special-inner">
-    <h2 class="sec-title" data-i18n="storiesT">HISTORIAS DE LA <em>COMUNIDAD</em></h2>
-    <p class="sec-sub" data-i18n="storiesS">Las experiencias de otros jugadores en The Chosen One</p>
-    <div style="text-align:center;margin:30px 0">
-      <button class="create-story-btn" onclick="openStoryCreator()">
-        <span style="font-size:1.3em">+</span>
-        <span data-i18n="createStory">Crear tu historia</span>
-      </button>
-    </div>
-    <div class="stories-grid" id="storiesGrid">
-      <div class="no-stories" data-i18n="noStories">Cargando historias de la comunidad...</div>
-    </div>
-  </div>
-</section>
   <div class="special-inner">
     <h2 class="sec-title" data-i18n="mapT">MAPA DE <em>ALIANZAS</em></h2>
     <p class="sec-sub" data-i18n="mapS">Quién era quién en el campo de batalla</p>
@@ -702,7 +705,29 @@ footer strong{color:var(--gold);font-family:'Bebas Neue';letter-spacing:1px;font
       <div class="hub"><div class="ic">🛡️</div><h4 data-i18n="ex4t">Clan TQ</h4><p data-i18n="ex4d">El clan de Enzo, liderado por Exotic. Victoriosos en la Segunda Guerra Mundial de TCO.</p><span class="tag" data-i18n="ex4g">VICTORIOSOS</span></div>
       <div class="hub feat"><div class="ic">🏴</div><h4 data-i18n="ex5t">Clan IJC → ZK</h4><p data-i18n="ex5d">Feb 2026: Nam y Enzo fundan el IJC (Investigación de Justicia y Corrupción). Fines de 2026: renace como Clan ZK.</p><span class="tag" data-i18n="ex5g">NUESTRO CLAN</span></div>
     </div>
-    <div class="teaser" data-i18n="exNote">⚠️ <strong>¿Conocés más clanes?</strong> Pasame la info y los sumamos al archivo.</div>
+   <h3 style="font-family:'Bebas Neue';font-size:1.6em;letter-spacing:.5px;margin:30px 0 14px;color:var(--gold)" data-i18n="storiesT">HISTORIAS DE LA <em>COMUNIDAD</em></h3>
+<p style="color:var(--mut);font-size:.9em;margin-bottom:20px" data-i18n="storiesS">Las experiencias de otros jugadores en The Chosen One</p>
+<div style="text-align:center;margin:20px 0">
+  <button class="create-story-btn" onclick="closeModal('extrasModal');openStoryCreator()">
+    <span style="font-size:1.3em">+</span>
+    <span data-i18n="createStory">Crear tu historia</span>
+  </button>
+</div>
+<div class="stories-grid" id="storiesGrid" style="max-width:100%;margin:20px 0">
+  <div class="no-stories" data-i18n="noStories">Cargando historias...</div>
+</div>
+
+<h3 style="font-family:'Bebas Neue';font-size:1.6em;letter-spacing:.5px;margin:30px 0 14px;color:var(--gold)">📚 WIKI DE <em>TÉRMINOS</em></h3>
+<div class="wiki-grid">
+  <div class="wiki-term"><h4>;bkit others</h4><p>Script de 2023 que crasheaba a todos los jugadores cercanos. El arma definitiva de la era del caos.</p></div>
+  <div class="wiki-term"><h4>ENLIGHTEN</h4><p>Nivel máximo de admin en TCO. Otorgarlo era un riesgo: el receptor podía tomar control total del server.</p></div>
+  <div class="wiki-term"><h4>Crash Machine</h4><p>Estructura de bloques que lageaba a cualquiera que la mirara. Usada por Nam para defender su territorio.</p></div>
+  <div class="wiki-term"><h4>2b2t</h4><p>Referencia al server de Minecraft más anárquico. Cuando TCO se volvió "un 2b2t", significaba anarquía total.</p></div>
+  <div class="wiki-term"><h4>Toxicify + Anchor</h4><p>Método de raid de 2026: bloques raideados con material tóxico y anclados que no podían eliminarse.</p></div>
+  <div class="wiki-term"><h4>Hub / Script</h4><p>Programas que modifican el juego (Autobuild, Paint, Raid tools). Los hubs como NamHUB centralizan muchos scripts.</p></div>
+  <div class="wiki-term"><h4>Raid</h4><p>Ataque organizado a un server: destruir construcciones, spammear, donar tiempo, crashear. La forma de guerra en TCO.</p></div>
+  <div class="wiki-term"><h4>Blacklist</h4><p>Lista negra de usuarios bloqueados de usar un script o entrar a un server. Romazdev la usó tras el leak de su hub.</p></div>
+</div>
   </div>
 </div>
   <!-- AUTH MODAL -->
@@ -741,6 +766,24 @@ footer strong{color:var(--gold);font-family:'Bebas Neue';letter-spacing:1px;font
       <input type="file" id="storyImage" accept="image/*">
       <button class="auth-btn" onclick="submitStory()" data-i18n="storySubmit">PUBLICAR HISTORIA</button>
     </div>
+  </div>
+</div>
+  <!-- PROFILE MODAL -->
+<div class="modal" id="profileModal">
+  <div class="modal-c">
+    <button class="modal-x" onclick="closeModal('profileModal')">×</button>
+    <h2 data-i18n="profileT">MI <em>PERFIL</em></h2>
+    <p data-i18n="profileS">Configurá tu identidad en el archivo</p>
+    <div class="auth-error" id="profileError"></div>
+    <div style="text-align:center;margin:20px 0">
+      <img id="profileAvatarPreview" src="" alt="" style="width:120px;height:120px;border-radius:50%;object-fit:cover;border:3px solid var(--gold)">
+    </div>
+    <input type="file" id="profileAvatarInput" accept="image/*" style="width:100%;background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:12px;color:var(--mut);font-size:.88em;margin-bottom:14px">
+    <input type="text" class="auth-input" id="profileNickname" placeholder="Apodo" maxlength="20">
+    <div id="nicknameCooldown" style="color:var(--mut);font-size:.8em;margin-top:-10px;margin-bottom:14px;display:none"></div>
+    <textarea class="auth-input" id="profileBio" placeholder="Biografía (opcional, máx 200 caracteres)" maxlength="200" style="min-height:80px;resize:vertical"></textarea>
+    <button class="auth-btn" onclick="saveProfile()">GUARDAR CAMBIOS</button>
+    <button class="auth-btn secondary" onclick="closeModal('profileModal')">Cancelar</button>
   </div>
 </div>
 
@@ -1241,6 +1284,301 @@ window.firebaseFunctions.onAuthStateChanged(window.firebaseAuth, async (user) =>
     document.body.style.overflow = 'hidden';
   }
 });
+  /* ===== FILTRO DE INSULTOS ===== */
+const BAD_WORDS = ['puta','puto','perra','mierda','carajo','concha','boludo','pelotudo','forro','hijo de puta','hdp','zorra','gil','mogolico','down','negro de mierda','sudaca','indio','trolo','trava','maricon','maricón','pajero','pija','choto','orto','culiao','weon','conchetumadre','ctm'];
+function containsBadWords(text){
+  const lower = text.toLowerCase();
+  return BAD_WORDS.some(w => lower.includes(w));
+}
+
+/* ===== MODIFICAR screenRegister ===== */
+const originalScreenRegister = window.screenRegister;
+window.screenRegister = async function(){
+  const email = document.getElementById('screenRegEmail').value.trim();
+  const pass = document.getElementById('screenRegPassword').value;
+  const pass2 = document.getElementById('screenRegPassword2').value;
+  const nickname = document.getElementById('screenRegNickname').value.trim();
+  
+  if(!email||!pass||!pass2||!nickname){showScreenAuthError('Completá todos los campos');return;}
+  if(pass.length<6){showScreenAuthError('La contraseña debe tener al menos 6 caracteres');return;}
+  if(pass!==pass2){showScreenAuthError('Las contraseñas no coinciden');return;}
+  if(nickname.length<3||nickname.length>20){showScreenAuthError('El apodo debe tener entre 3 y 20 caracteres');return;}
+  if(containsBadWords(nickname)){showScreenAuthError('⚠️ El apodo contiene palabras inapropiadas. Elegí otro.');return;}
+  
+  try{
+    const userCredential = await window.firebaseFunctions.createUserWithEmailAndPassword(window.firebaseAuth,email,pass);
+    // Guardar perfil en Firestore
+    await window.firebaseFunctions.addDoc(window.firebaseFunctions.collection(window.firebaseDb,'users'),{
+      userId: userCredential.user.uid,
+      email: email,
+      nickname: nickname,
+      bio: '',
+      avatarUrl: '',
+      nicknameChangedAt: 0,
+      createdAt: window.firebaseFunctions.serverTimestamp()
+    });
+    await window.firebaseFunctions.sendEmailVerification(userCredential.user);
+    showScreenAuthError('¡Registro exitoso, '+nickname+'! Revisá tu correo y hacé click en el link de verificación.');
+    beep(880,0.1);
+  }catch(e){
+    showScreenAuthError(e.message.includes('email-already')?'Este email ya está registrado':e.message);
+  }
+};
+
+/* ===== CARGAR PERFIL DE USUARIO ===== */
+let currentUserProfile = null;
+async function loadUserProfile(userId){
+  try{
+    const q = window.firebaseFunctions.query(
+      window.firebaseFunctions.collection(window.firebaseDb,'users'),
+      window.firebaseFunctions.where('userId','==',userId)
+    );
+    const snap = await window.firebaseFunctions.getDocs(q);
+    if(!snap.empty){
+      currentUserProfile = {...snap.docs[0].data(), docId: snap.docs[0].id};
+      // Actualizar UI
+      document.getElementById('userNickname').textContent = currentUserProfile.nickname;
+      document.getElementById('userAvatar').textContent = currentUserProfile.nickname[0].toUpperCase();
+      document.getElementById('userAvatar').style.background = 'var(--gold)';
+      document.getElementById('userAvatar').style.color = '#000';
+      if(currentUserProfile.avatarUrl){
+        document.getElementById('userAvatar').style.backgroundImage = `url(${currentUserProfile.avatarUrl})`;
+        document.getElementById('userAvatar').style.backgroundSize = 'cover';
+        document.getElementById('userAvatar').textContent = '';
+      }
+    }
+  }catch(e){console.error('Error loading profile:',e);}
+}
+
+/* ===== CONTADOR DE USUARIOS ===== */
+async function loadUserCount(){
+  try{
+    const snap = await window.firebaseFunctions.getDocs(window.firebaseFunctions.collection(window.firebaseDb,'users'));
+    const count = snap.size;
+    const el = document.getElementById('userCountDisplay');
+    if(el) el.innerHTML = `👥 Ya somos <strong>${count}</strong> miembros del archivo`;
+  }catch(e){console.error(e);}
+}
+loadUserCount();
+
+/* ===== ABRIR MODAL DE PERFIL ===== */
+window.openProfileModal = async function(){
+  if(!window.currentUser){openModal('authModal');return;}
+  if(!currentUserProfile) await loadUserProfile(window.currentUser.uid);
+  if(currentUserProfile){
+    document.getElementById('profileNickname').value = currentUserProfile.nickname;
+    document.getElementById('profileBio').value = currentUserProfile.bio || '';
+    const preview = document.getElementById('profileAvatarPreview');
+    preview.src = currentUserProfile.avatarUrl || 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Crect fill=%22%23d4af37%22 width=%22120%22 height=%22120%22 rx=%2260%22/%3E%3Ctext fill=%22%23000%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2240%22%3E'+currentUserProfile.nickname[0].toUpperCase()+'%3C/text%3E%3C/svg%3E';
+    // Cooldown de apodo (7 días)
+    const cooldown = document.getElementById('nicknameCooldown');
+    if(currentUserProfile.nicknameChangedAt){
+      const daysSince = (Date.now() - currentUserProfile.nicknameChangedAt) / (1000*60*60*24);
+      if(daysSince < 7){
+        const daysLeft = Math.ceil(7 - daysSince);
+        cooldown.style.display = 'block';
+        cooldown.textContent = `⏱️ Podés cambiar tu apodo en ${daysLeft} día${daysLeft!==1?'s':''}`;
+        document.getElementById('profileNickname').disabled = true;
+      }else{
+        cooldown.style.display = 'none';
+        document.getElementById('profileNickname').disabled = false;
+      }
+    }
+  }
+  openModal('profileModal');
+};
+
+/* ===== GUARDAR PERFIL ===== */
+window.saveProfile = async function(){
+  if(!window.currentUser||!currentUserProfile) return;
+  const newNickname = document.getElementById('profileNickname').value.trim();
+  const newBio = document.getElementById('profileBio').value.trim();
+  const newAvatarFile = document.getElementById('profileAvatarInput').files[0];
+  const errEl = document.getElementById('profileError');
+  errEl.classList.remove('show');
+  
+  if(newNickname.length<3||newNickname.length>20){errEl.textContent='El apodo debe tener entre 3 y 20 caracteres';errEl.classList.add('show');return;}
+  if(containsBadWords(newNickname)){errEl.textContent='⚠️ El apodo contiene palabras inapropiadas';errEl.classList.add('show');return;}
+  
+  const nicknameChanged = newNickname !== currentUserProfile.nickname;
+  if(nicknameChanged && currentUserProfile.nicknameChangedAt){
+    const daysSince = (Date.now() - currentUserProfile.nicknameChangedAt) / (1000*60*60*24);
+    if(daysSince < 7){errEl.textContent='⏱️ Debés esperar 7 días entre cambios de apodo';errEl.classList.add('show');return;}
+  }
+  
+  try{
+    let avatarUrl = currentUserProfile.avatarUrl || '';
+    if(newAvatarFile){
+      const imgRef = window.firebaseFunctions.ref(window.firebaseStorage,'avatars/'+window.currentUser.uid+'_'+Date.now());
+      await window.firebaseFunctions.uploadBytes(imgRef,newAvatarFile);
+      avatarUrl = await window.firebaseFunctions.getDownloadURL(imgRef);
+    }
+    
+    const updates = {
+      nickname: newNickname,
+      bio: newBio,
+      avatarUrl: avatarUrl
+    };
+    if(nicknameChanged) updates.nicknameChangedAt = Date.now();
+    
+    const { doc, updateDoc } = await import('https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js');
+    const docRef = doc(window.firebaseDb,'users',currentUserProfile.docId);
+    await updateDoc(docRef, updates);
+    
+    currentUserProfile = {...currentUserProfile, ...updates};
+    document.getElementById('userNickname').textContent = newNickname;
+    document.getElementById('userAvatar').textContent = newNickname[0].toUpperCase();
+    if(avatarUrl){
+      document.getElementById('userAvatar').style.backgroundImage = `url(${avatarUrl})`;
+      document.getElementById('userAvatar').style.backgroundSize = 'cover';
+      document.getElementById('userAvatar').textContent = '';
+    }
+    
+    closeModal('profileModal');
+    beep(880,0.1);
+    alert('✅ Perfil actualizado!');
+  }catch(e){
+    errEl.textContent = 'Error: '+e.message;
+    errEl.classList.add('show');
+  }
+};
+
+/* ===== LIKES EN HISTORIAS ===== */
+window.toggleLike = async function(storyId, emoji, btn){
+  if(!window.currentUser){openModal('authModal');return;}
+  try{
+    const q = window.firebaseFunctions.query(
+      window.firebaseFunctions.collection(window.firebaseDb,'likes'),
+      window.firebaseFunctions.where('storyId','==',storyId),
+      window.firebaseFunctions.where('userId','==',window.currentUser.uid),
+      window.firebaseFunctions.where('emoji','==',emoji)
+    );
+    const snap = await window.firebaseFunctions.getDocs(q);
+    if(!snap.empty){
+      // Ya likeó: borrar
+      const { doc, deleteDoc } = await import('https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js');
+      await deleteDoc(doc(window.firebaseDb,'likes',snap.docs[0].id));
+      btn.classList.remove('active');
+      const countEl = btn.querySelector('.like-count');
+      countEl.textContent = Math.max(0, parseInt(countEl.textContent)-1);
+    }else{
+      // Likear
+      await window.firebaseFunctions.addDoc(window.firebaseFunctions.collection(window.firebaseDb,'likes'),{
+        storyId: storyId,
+        userId: window.currentUser.uid,
+        emoji: emoji,
+        createdAt: window.firebaseFunctions.serverTimestamp()
+      });
+      btn.classList.add('active');
+      const countEl = btn.querySelector('.like-count');
+      countEl.textContent = parseInt(countEl.textContent)+1;
+      beep(720,0.04);
+    }
+  }catch(e){console.error(e);}
+};
+
+/* ===== COMPARTIR HISTORIA ===== */
+window.shareStory = async function(storyId, nickname, platform){
+  const url = window.location.href;
+  const text = `Mirá la historia de ${nickname} en el Archivo del Clan ZK!`;
+  let shareUrl = '';
+  if(platform==='twitter') shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+  else if(platform==='discord') shareUrl = `https://discord.com/channels/@me`;
+  if(navigator.clipboard){
+    try{
+      await navigator.clipboard.writeText(`${text} ${url}`);
+      alert('✅ Link copiado al portapapeles! Pegalo donde quieras.');
+    }catch(e){window.open(shareUrl,'_blank');}
+  }else{
+    window.open(shareUrl,'_blank');
+  }
+};
+
+/* ===== ELIMINAR HISTORIA PROPIA ===== */
+window.deleteMyStory = async function(docId){
+  if(!confirm('¿Seguro que querés borrar tu historia? Esta acción no se puede deshacer.')) return;
+  try{
+    const { doc, deleteDoc } = await import('https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js');
+    await deleteDoc(doc(window.firebaseDb,'stories',docId));
+    loadStories();
+    beep(440,0.08);
+  }catch(e){alert('Error: '+e.message);}
+};
+
+/* ===== SOBREESCRIBIR updateAuthUI para cargar perfil ===== */
+const originalUpdateAuthUI = window.updateAuthUI;
+window.updateAuthUI = function(loggedIn){
+  originalUpdateAuthUI(loggedIn);
+  if(loggedIn && window.currentUser){
+    loadUserProfile(window.currentUser.uid);
+  }else{
+    currentUserProfile = null;
+  }
+};
+
+/* ===== SOBREESCRIBIR loadStories para incluir likes y acciones ===== */
+window.loadStories = async function(){
+  const grid = document.getElementById('storiesGrid');
+  if(!grid) return;
+  try{
+    const q = window.firebaseFunctions.query(
+      window.firebaseFunctions.collection(window.firebaseDb,'stories'),
+      window.firebaseFunctions.orderBy('createdAt','desc')
+    );
+    const snap = await window.firebaseFunctions.getDocs(q);
+    if(snap.empty){
+      grid.innerHTML='<div class="no-stories">Aún no hay historias. ¡Sé el primero en compartir la tuya!</div>';
+      return;
+    }
+    grid.innerHTML='';
+    for(const docSnap of snap.docs){
+      const s = docSnap.data();
+      const storyId = docSnap.id;
+      // Contar likes
+      const likesQ = window.firebaseFunctions.query(
+        window.firebaseFunctions.collection(window.firebaseDb,'likes'),
+        window.firebaseFunctions.where('storyId','==',storyId)
+      );
+      const likesSnap = await window.firebaseFunctions.getDocs(likesQ);
+      const likeCounts = {fire:0,heart:0,laugh:0,skull:0};
+      const userLikes = {};
+      if(window.currentUser){
+        likesSnap.docs.forEach(l=>{
+          const data = l.data();
+          likeCounts[data.emoji] = (likeCounts[data.emoji]||0)+1;
+          if(data.userId===window.currentUser.uid) userLikes[data.emoji]=true;
+        });
+      }else{
+        likesSnap.docs.forEach(l=>{
+          const data = l.data();
+          likeCounts[data.emoji] = (likeCounts[data.emoji]||0)+1;
+        });
+      }
+      
+      const isOwner = window.currentUser && s.userId === window.currentUser.uid;
+      
+      const card = document.createElement('div');
+      card.className = 'story-card-custom';
+      card.innerHTML = `
+        ${s.imageUrl?`<img src="${s.imageUrl}" alt="${s.name}">`:`<div style="width:80px;height:80px;border-radius:50%;background:var(--gold);color:#000;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue';font-size:2em;margin-bottom:16px">${s.name[0].toUpperCase()}</div>`}
+        <h4>${s.name}</h4>
+        <div class="bio">${s.bio}</div>
+        <div class="story-text">${s.text}</div>
+        <div class="story-actions">
+          <button class="like-btn ${userLikes.fire?'active':''}" onclick="toggleLike('${storyId}','fire',this)">🔥 <span class="like-count">${likeCounts.fire||0}</span></button>
+          <button class="like-btn ${userLikes.heart?'active':''}" onclick="toggleLike('${storyId}','heart',this)">❤️ <span class="like-count">${likeCounts.heart||0}</span></button>
+          <button class="like-btn ${userLikes.laugh?'active':''}" onclick="toggleLike('${storyId}','laugh',this)">😂 <span class="like-count">${likeCounts.laugh||0}</span></button>
+          <button class="like-btn ${userLikes.skull?'active':''}" onclick="toggleLike('${storyId}','skull',this)">💀 <span class="like-count">${likeCounts.skull||0}</span></button>
+          <button class="share-btn" onclick="shareStory('${storyId}','${s.name}','twitter')">🐦 Compartir</button>
+          ${isOwner?`<button class="delete-btn" onclick="deleteMyStory('${storyId}')">🗑️ Borrar</button>`:''}
+        </div>
+      `;
+      grid.appendChild(card);
+    }
+  }catch(e){
+    grid.innerHTML='<div class="no-stories">Error al cargar historias: '+e.message+'</div>';
+  }
+};
 </script>
 </body>
 </html>

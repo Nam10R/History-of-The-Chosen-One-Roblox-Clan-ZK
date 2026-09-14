@@ -6,9 +6,8 @@
 <title>Clan ZK — Archivo Histórico | The Chosen One</title>
 <meta name="description" content="Archivo histórico del Clan ZK (antes IJC) - The Chosen One">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-</style>
 
-<!-- FIREBASE - DEBE ESTAR ACÁ -->
+<!-- FIREBASE -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 import { getFirestore, collection, addDoc, getDocs, query, where, orderBy, serverTimestamp, onSnapshot } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
@@ -25,11 +24,10 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 window.firebaseDb = db;
 window.firebaseFunctions = { collection, addDoc, getDocs, query, where, orderBy, serverTimestamp, onSnapshot };
-window.firebaseReady = true; // 🔥 FLAG IMPORTANTE
+window.firebaseReady = true;
 window.dispatchEvent(new Event('firebaseReady'));
 </script>
 
-</head>
 <style>
 :root{--bg:#0a0a0c;--bg2:#111114;--card:#16161a;--line:#26262c;--gold:#d4af37;--gold2:#f5d76e;--red:#e23b3b;--green:#3ddc84;--txt:#ececec;--mut:#8a8a93}
 *{margin:0;padding:0;box-sizing:border-box}
@@ -281,7 +279,7 @@ body.battle-mode .battle{box-shadow:0 0 40px rgba(226,59,59,.2),inset 0 0 30px r
 </style>
 </head>
 <body>
-<!-- ONBOARDING (apodo + imagen, una sola vez) -->
+<!-- ONBOARDING -->
 <div class="onboard" id="onboardScreen">
 <div class="onboard-box">
 <h2>BIENVENIDO AL <em>ARCHIVO</em></h2>
@@ -712,14 +710,14 @@ body.battle-mode .battle{box-shadow:0 0 40px rgba(226,59,59,.2),inset 0 0 30px r
 <div class="music-indicator" id="musicIndicator"><span class="note">🎵</span><span id="musicChapterName"></span></div>
 <button class="top-btn" id="topBtn" onclick="go('#hero')">↑</button>
 <script>
-/* ===== IDENTIDAD (sin login: apodo + imagen, guardado local) ===== */
+/* ===== IDENTIDAD ===== */
 const LS_KEY='zk_profile';
-const ADMIN_NICKS=['nam','enzo']; // 👈 apodos de admin (en minúscula)
+const ADMIN_NICKS=['nam','enzo'];
 let me=null, booted=false;
 function loadLocalProfile(){ try{ return JSON.parse(localStorage.getItem(LS_KEY)); }catch(e){ return null; } }
 function saveLocalProfile(p){ localStorage.setItem(LS_KEY, JSON.stringify(p)); }
 function isAdminUser(){ return me && ADMIN_NICKS.includes(me.nicknameLower); }
-function escapeHtml(t){ const d=document.createElement('div'); d.textContent=(t==null?'':String(t)); return d.innerHTML; }
+function escapeHtml(t){ const d=document.createElement('div'); d.textContent=(t==null?'':String(t)); return div.innerHTML; }
 function timeSince(ms){
 const s=Math.floor((Date.now()-ms)/1000);
 let i=s/31536000; if(i>1)return Math.floor(i)+' años';
@@ -758,7 +756,6 @@ const av=document.getElementById('userAvatar');
 if(me.avatar){ av.style.backgroundImage='url('+me.avatar+')'; av.textContent=''; }
 else { av.style.backgroundImage=''; av.textContent=me.nickname[0].toUpperCase(); }
 }
-/* ===== ONBOARDING ===== */
 document.getElementById('onboardImg').addEventListener('change',async e=>{
 const f=e.target.files[0]; if(!f) return;
 document.getElementById('onboardPreview').src=await fileToDataUrl(f,110);
@@ -792,7 +789,6 @@ if(!confirm('¿Cambiar de perfil en este dispositivo? Se borrará tu apodo guard
 localStorage.removeItem(LS_KEY);
 location.reload();
 }
-/* ===== PERFIL ===== */
 async function openProfileModal(){
 if(!me) return;
 document.getElementById('profileNick').value=me.nickname;
@@ -836,7 +832,6 @@ try{ await F.updateDoc(F.doc(window.firebaseDb,'users',me.docId),{ nickname:me.n
 closeModal('profileModal');
 beep(880,0.1);
 }
-/* ===== SONIDO / CINE ===== */
 let SOUND=true, audioCtx=null, cinemaAudio=null;
 function ctx(){ if(!audioCtx) audioCtx=new (window.AudioContext||window.webkitAudioContext)(); return audioCtx; }
 function beep(freq=660,dur=0.06,type='sine',vol=0.04){
@@ -866,7 +861,6 @@ lfo.connect(lg); lg.connect(cinemaAudio.nodes[1]); lfo.start(); cinemaAudio.node
 }catch(e){}
 }
 function stopCinemaMusic(){ if(cinemaAudio){ cinemaAudio.nodes.forEach(n=>{try{if(n.stop)n.stop();}catch(e){} try{n.disconnect();}catch(e){}}); cinemaAudio=null; } }
-/* ===== SCROLL / RAIL ===== */
 function reveal(){
 document.querySelectorAll('.card').forEach(el=>{ if(el.getBoundingClientRect().top<window.innerHeight-60) el.classList.add('visible'); });
 let cur='hero';
@@ -878,7 +872,6 @@ const fill=document.getElementById('railFill'); if(fill&&dots.length) fill.style
 document.getElementById('topBtn').classList.toggle('show',window.pageYOffset>500);
 }
 window.addEventListener('scroll',reveal);
-/* ===== COUNTERS ===== */
 let counted=false;
 function runCounters(){
 if(counted) return; const first=document.querySelector('.stat'); if(!first) return;
@@ -889,7 +882,6 @@ const t=setInterval(()=>{ n+=step; if(n>=target){n=target;clearInterval(t);} el.
 });
 }
 window.addEventListener('scroll',runCounters);
-/* ===== SEARCH ===== */
 function doSearch(q){
 q=q.trim().toLowerCase();
 if(!q){ document.querySelectorAll('.char').forEach(c=>c.style.display=''); removeNoResult(); return; }
@@ -899,7 +891,6 @@ toggleNoResult(!any,q);
 }
 function toggleNoResult(show,q){ removeNoResult(); if(show){ const d=document.createElement('div'); d.className='no-result'; d.textContent='No se encontraron personajes para "'+q+'"'; const h=document.querySelector('#hof'); if(h)h.before(d); } }
 function removeNoResult(){ document.querySelectorAll('.no-result').forEach(n=>{ if(n.textContent.startsWith('No se encontraron')) n.remove(); }); }
-/* ===== CHAR MODAL ===== */
 const CHARS={
 nam:{name:"Nam",role:"Protagonista · Líder IJC",color:"#d4af37",img:"images/nam.png",desc:"elfrancho14 (ID 607353710). El corazón de la historia. De jugador +1 a fundador del Clan IJC y creador de NamHUB."},
 enzo:{name:"Enzo (Diego)",role:"Co-Líder · El Espía",color:"#3ddc84",img:"images/enzo.png",desc:"enzors19209. Abrió los ojos a Nam en 2024, lideró el espionaje y la Operación Guardia Nocturna en 2025."},
@@ -929,7 +920,6 @@ const r=document.getElementById('cmRole'); r.textContent=c.role; r.style.color=c
 document.getElementById('cmDesc').textContent=c.desc;
 openModal('charModal'); beep(720,0.07);
 }
-/* ===== MODALES / NAV ===== */
 function openModal(id){ document.getElementById(id).classList.add('active'); beep(); }
 function closeModal(id){ document.getElementById(id).classList.remove('active'); }
 window.onclick=e=>{ if(e.target.classList.contains('modal')) e.target.classList.remove('active'); };
@@ -940,7 +930,6 @@ const d=document.getElementById('drawer'), o=document.getElementById('drawerOver
 const open=d.classList.toggle('open'); o.classList.toggle('show',open);
 beep(open?620:440,0.05);
 }
-/* ===== LOADER ===== */
 const LOADER_MSGS=['CONECTANDO CON TCO...','CARGANDO EXPEDIENTES 2022-2026...','DESCRIPTANDO PERSONAJES...','ARCHIVO LISTO.'];
 let lmi=0;
 const lmsgInt=setInterval(()=>{ const t=document.getElementById('loaderTxt'); if(t){ lmi=(lmi+1)%LOADER_MSGS.length; t.textContent=LOADER_MSGS[lmi]; } },800);
@@ -949,7 +938,6 @@ clearInterval(lmsgInt);
 const l=document.getElementById('loader'); if(!l) return;
 l.classList.add('done'); setTimeout(()=>l.remove(),700);
 }
-/* ===== STORIES ===== */
 function openStoryCreator(){
 if(!me){ alert('Primero elegí tu apodo para poder publicar.'); return; }
 if(me.nickname) document.getElementById('storyName').value=me.nickname;
@@ -1038,10 +1026,8 @@ if(!confirm('¿Seguro que querés borrar esta historia? No se puede deshacer.'))
 try{ await F.deleteDoc(F.doc(window.firebaseDb,'stories',docId)); loadStories(); loadLeaderboard(); beep(440,0.08); }
 catch(e){ alert('Error: '+e.message); }
 }
-/* ===== COMENTARIOS (CON ESPERA DE FIREBASE) ===== */
 async function postComment(context,inputId){
 if(!me){ alert('Primero elegí tu apodo.'); return; }
-// Esperar Firebase
 if(!window.firebaseReady){ alert('⏳ Firebase todavía está cargando, esperá 2 segundos y probá de nuevo'); return; }
 const F = window.firebaseFunctions;
 if(!F || !window.firebaseDb){ alert('❌ Error: Firebase no está disponible'); return; }
@@ -1097,7 +1083,6 @@ if(!confirm('¿Borrar este comentario?')) return;
 try{ await F.deleteDoc(F.doc(window.firebaseDb,'comments',id)); loadComments(context); beep(440,0.05); }
 catch(e){ alert('Error: '+e.message); }
 }
-/* ===== LEADERBOARD ===== */
 async function loadLeaderboard(){
 const F=window.firebaseFunctions;
 const list=document.getElementById('leaderboardList'); if(!list) return;
@@ -1130,7 +1115,6 @@ async function loadUserCount(){
 const F=window.firebaseFunctions; if(!F||!window.firebaseDb) return;
 try{ const s=await F.getDocs(F.collection(window.firebaseDb,'users')); console.log('Miembros registrados:',s.size); }catch(e){}
 }
-/* ===== MODOS + MÚSICA POR CAPÍTULO ===== */
 let currentChapterAudio=null, currentChapterId=null;
 const CHAPTER_MUSIC={
 'c2022':{freq:[220,330],type:'sine',gain:0.008,name:'2022 · Orígenes'},
@@ -1162,9 +1146,9 @@ document.body.classList.toggle('battle-mode',['c2024','c2025','c2026'].includes(
 updateChapterMusic(cur);
 }
 window.addEventListener('scroll',updateChapterModes);
-/* ===== INIT (ESPERA A FIREBASE) ===== */
+
+/* ===== INIT ===== */
 function initData(){
-// Si Firebase todavía no cargó, esperar
 if(!window.firebaseReady){
 window.addEventListener('firebaseReady', initData, { once: true });
 return;
@@ -1182,14 +1166,6 @@ F.onSnapshot(F.collection(window.firebaseDb,'likes'), ()=>{ loadStories(); loadL
 }
 }
 
-const F = window.firebaseFunctions;
-if(F && window.firebaseDb){
-// Historias en tiempo real
-F.onSnapshot(F.collection(window.firebaseDb,'stories'), ()=>{ loadStories(); loadLeaderboard(); });
-// Likes en tiempo real
-F.onSnapshot(F.collection(window.firebaseDb,'likes'), ()=>{ loadStories(); loadLeaderboard(); });
-}
-}
 function boot(){
 if(booted) return; booted=true;
 hideLoader();

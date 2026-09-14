@@ -12,6 +12,10 @@
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23f5d76e'/%3E%3Cstop offset='1' stop-color='%23a8842c'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M32 2 58 12v20c0 16-11 26-26 30C17 58 6 48 6 32V12Z' fill='%230a0a0c' stroke='url(%23g)' stroke-width='4'/%3E%3Ctext x='32' y='42' font-family='Arial Black,Arial' font-size='24' font-weight='900' fill='url(%23g)' text-anchor='middle'%3EZK%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
@@ -498,6 +502,66 @@ footer .foot-links a:hover{color:var(--gold)}
   .card{padding:32px 22px}
   .stats{grid-template-columns:repeat(2,1fr)}
 }
+
+/* ============ RETRATOS INLINE EN EL TEXTO ============ */
+.ip{float:right;width:168px;margin:4px 0 16px 26px;text-align:center;animation:cardIn .8s var(--ease)}
+.ip.left{float:left;margin:4px 26px 16px 0}
+.ip img{width:120px;height:120px;border-radius:50%;object-fit:cover;border:3px solid var(--gold);box-shadow:0 12px 30px rgba(0,0,0,.55);transition:.3s}
+.ip:hover img{transform:scale(1.06) rotate(2deg)}
+.ip figcaption{font-size:.7em;color:var(--mut);margin-top:8px;letter-spacing:.5px;text-transform:uppercase;font-weight:700}
+@media(max-width:860px){.ip,.ip.left{float:none;margin:18px auto;width:fit-content}}
+
+/* ============ LOGROS ============ */
+.ach-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:10px;margin:12px 0 6px}
+.ach{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:12px 6px;text-align:center;font-size:.66em;color:var(--mut);transition:.3s;font-weight:700}
+.ach .aic{font-size:1.9em;display:block;margin-bottom:4px;filter:grayscale(1);opacity:.4}
+.ach.on{border-color:var(--gold);color:var(--txt);background:rgba(var(--gold-rgb),.08)}
+.ach.on .aic{filter:none;opacity:1}
+.ach:hover{transform:translateY(-3px)}
+
+/* ============ CLAN PRÓXIMAMENTE ============ */
+.hub{cursor:pointer}
+.soon-badge{display:inline-block;margin:14px auto 6px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000;font-weight:800;letter-spacing:3px;padding:9px 28px;border-radius:30px;animation:soonPulse 1.6s infinite}
+@keyframes soonPulse{0%,100%{box-shadow:0 0 0 0 rgba(var(--gold-rgb),.5)}50%{box-shadow:0 0 0 12px rgba(var(--gold-rgb),0)}}
+.constr{font-size:2.8em;display:inline-block;animation:constrSwing 1.4s ease-in-out infinite}
+@keyframes constrSwing{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(8deg)}}
+
+/* ============ ENCUESTAS ============ */
+.poll{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;margin-bottom:18px;animation:cardIn .5s var(--ease)}
+.poll h4{font-family:'Bebas Neue';font-size:1.3em;letter-spacing:.5px;color:var(--gold);margin-bottom:14px}
+.poll-opt{margin-bottom:11px;cursor:pointer;transition:.2s}
+.poll-opt:hover{transform:translateX(3px)}
+.poll-opt .po-top{display:flex;justify-content:space-between;font-size:.88em;margin-bottom:5px;gap:10px}
+.poll-bar{height:10px;background:var(--bg2);border-radius:6px;overflow:hidden;border:1px solid var(--line)}
+.poll-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:6px;transition:width .8s var(--ease)}
+.poll-opt.mine .po-top{color:var(--gold);font-weight:800}
+.poll-meta{font-size:.74em;color:var(--mut);margin-top:10px}
+
+/* ============ QUIZ ============ */
+.quiz-box{max-width:640px;margin:0 auto;padding:10px 0 40px}
+.quiz-card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:32px;text-align:center;animation:subIn .4s var(--ease)}
+.quiz-prog{height:6px;background:var(--bg2);border-radius:4px;overflow:hidden;margin:14px 0 22px}
+.quiz-prog i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));transition:width .4s}
+.quiz-q{font-size:1.15em;font-weight:700;margin-bottom:20px}
+.quiz-opts{display:grid;gap:10px}
+.quiz-opts button{background:var(--bg2);border:1px solid var(--line);color:var(--txt);padding:13px 16px;border-radius:12px;cursor:pointer;font-size:.95em;transition:.2s;text-align:left}
+.quiz-opts button:hover{border-color:var(--gold);transform:translateX(4px)}
+.quiz-opts button.ok{border-color:var(--green);background:rgba(61,220,132,.12);color:var(--green)}
+.quiz-opts button.bad{border-color:var(--red);background:rgba(226,59,59,.12);color:var(--red)}
+.quiz-score{font-family:'Bebas Neue';font-size:3.4em;color:var(--gold)}
+
+/* ============ CHANGELOG ============ */
+.cl-entry{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:14px;padding:22px 26px;margin-bottom:16px;animation:cardIn .5s var(--ease)}
+.cl-entry.old{border-left-color:var(--line);opacity:.85}
+.cl-ver{font-family:'Bebas Neue';font-size:1.5em;color:var(--gold);letter-spacing:1px}
+.cl-date{font-size:.74em;color:var(--mut);letter-spacing:1px;text-transform:uppercase}
+.cl-entry ul{margin:10px 0 0 18px;color:#c4c4cc;font-size:.92em}
+.cl-entry li{margin-bottom:5px}
+
+/* ============ PANEL ADMIN ============ */
+.adm-row{display:flex;gap:10px;align-items:center;background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-bottom:8px;font-size:.85em}
+.adm-row .adm-txt{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#c4c4cc}
+.adm-h{font-family:'Bebas Neue';font-size:1.25em;letter-spacing:.5px;color:var(--gold);margin:20px 0 10px}
 </style>
 </head>
 <body>
@@ -598,15 +662,15 @@ footer .foot-links a:hover{color:var(--gold)}
 <div class="stat"><div class="num" data-count="30" data-suffix="+">0</div><div class="lbl">Miembros IJC</div></div>
 <div class="stat"><div class="num" data-count="18" data-suffix="">0</div><div class="lbl">Personajes</div></div>
 <div class="stat"><div class="num" data-count="5" data-suffix="">0</div><div class="lbl">Años</div></div>
-<div class="stat"><div class="num" id="liveMembers" data-suffix="">…</div><div class="lbl">Miembros online registrados</div></div>
+<div class="stat"><div class="num" id="liveMembers" data-suffix="">…</div><div class="lbl">Miembros registrados</div></div>
 </div>
 <div class="quick-grid">
-<div class="quick" data-action="goto-chapter" data-sub="2022"><div class="qy">2022</div><div class="qt">Los Orígenes · Nam da el primer paso</div><div class="qarrow">→</div></div>
-<div class="quick" data-action="goto-chapter" data-sub="2023"><div class="qy">2023</div><div class="qt">La Expansión · caos y scripts</div><div class="qarrow">→</div></div>
-<div class="quick" data-action="goto-chapter" data-sub="2024"><div class="qy">2024</div><div class="qt">La Gran Guerra · liberación de TCO</div><div class="qarrow">→</div></div>
-<div class="quick" data-action="goto-chapter" data-sub="2025"><div class="qy">2025</div><div class="qt">La Segunda Guerra · espionaje TQ</div><div class="qarrow">→</div></div>
-<div class="quick" data-action="goto-chapter" data-sub="2026"><div class="qy">2026</div><div class="qt">El Regreso · nace IJC / ZK</div><div class="qarrow">→</div></div>
-<div class="quick" data-action="sub" data-tab="archivo" data-sub="hall"><div class="qy">🏆 HALL</div><div class="qt">Medallas y logros de la leyenda</div><div class="qarrow">→</div></div>
+<div class="quick" data-action="goto-chapter" data-sub="2022"><div class="qy">2022</div><div class="qt">Los Orígenes · un clic que encendió todo</div><div class="qarrow">→</div></div>
+<div class="quick" data-action="goto-chapter" data-sub="2023"><div class="qy">2023</div><div class="qt">La Expansión · caos, scripts y anarquía</div><div class="qarrow">→</div></div>
+<div class="quick" data-action="goto-chapter" data-sub="2024"><div class="qy">2024</div><div class="qt">La Gran Guerra · traición y liberación</div><div class="qarrow">→</div></div>
+<div class="quick" data-action="goto-chapter" data-sub="2025"><div class="qy">2025</div><div class="qt">La Segunda Guerra · espías y guerra total</div><div class="qarrow">→</div></div>
+<div class="quick" data-action="goto-chapter" data-sub="2026"><div class="qy">2026</div><div class="qt">El Regreso · ruinas y el nacimiento del IJC</div><div class="qarrow">→</div></div>
+<div class="quick" data-action="sub" data-tab="comunidad" data-sub="quiz"><div class="qy">🧩 QUIZ</div><div class="qt">¿Cuánto sabés del lore? 12 preguntas</div><div class="qarrow">→</div></div>
 </div>
 </div>
 </section>
@@ -624,13 +688,14 @@ footer .foot-links a:hover{color:var(--gold)}
 <!-- 2022 -->
 <div class="subpanel active" data-sub="2022">
 <section class="chapter">
-<div class="ch-head"><div class="ch-num">Capítulo I · El Comienzo</div><h2 class="ch-title">Los Orígenes</h2><p class="ch-sub">La historia de Nam (elfrancho14)</p></div>
+<div class="ch-head"><div class="ch-num">Capítulo I · El Comienzo</div><h2 class="ch-title">Los Orígenes</h2><p class="ch-sub">Donde un solo clic encendió una llama que nadie podría apagar</p></div>
 <div class="card">
 <h3>El primer paso</h3>
-<p>Todo gran imperio tiene un inicio humilde. El <span class="hl">12 de noviembre de 2022</span>, Nam (conocido como <em>elfrancho14</em>) dio sus primeros pasos en The Chosen One.</p>
-<p>A simple vista era solo un jugador más, una estadística en un año que terminaba. Solo la curiosidad de aprender las mecánicas de un juego a punto de explotar.</p>
-<div class="box blue"><p><strong>Dato importante:</strong> User ID de Roblox: <span class="hl">607353710</span> — el número que marcaría el inicio de una leyenda.</p></div>
-<p>Pero ese simple clic no era el final de una partida, sino <span class="hl">el primer latido de una leyenda</span>. El escenario estaba listo y la historia del Clan ZK comenzaba a forjarse en las sombras...</p>
+<figure class="ip"><img data-ava="nam" alt="Nam" loading="lazy" onerror="avaFail(this)"><figcaption>Nam · elfrancho14</figcaption></figure>
+<p>Hay noches que parecen iguales a todas. Pero la del <span class="hl">12 de noviembre de 2022</span> no lo fue: mientras el mundo dormía, un pibe llamado Nam —<em>elfrancho14</em> para el destino— apoyó el dedo sobre el mouse y cambió su historia para siempre.</p>
+<p>Nadie lo vio entrar. Ni fanfarrias, ni anuncios, ni testigos. Solo un chico con hambre de aprender frente a un juego que estaba a punto de estallar. Porque así nacen los imperios más grandes: <strong>en silencio, con un clic</strong>.</p>
+<div class="box blue"><p><strong>Dato importante:</strong> User ID de Roblox: <span class="hl">607353710</span> — grabado en este archivo como lo que es: la partida de nacimiento de una leyenda.</p></div>
+<p>Porque ese clic no fue el inicio de una partida. Fue <span class="hl">el primer latido de un clan entero</span>. El escenario estaba listo. Las sombras, atentas. La historia del Clan ZK acababa de encenderse… <strong>y el fuego no se apaga solo</strong>.</p>
 <div class="chars-chips">
 <button class="chip-char" data-action="char" data-char="nam"><img alt="Nam" data-ava="nam"><span>Nam</span><span class="dot" style="background:var(--green)"></span></button>
 </div>
@@ -646,14 +711,15 @@ footer .foot-links a:hover{color:var(--gold)}
 <!-- 2023 -->
 <div class="subpanel" data-sub="2023">
 <section class="chapter">
-<div class="ch-head"><div class="ch-num">Capítulo II · El Caos</div><h2 class="ch-title">La Expansión</h2><p class="ch-sub">El caos que forjó leyendas</p></div>
+<div class="ch-head"><div class="ch-num">Capítulo II · El Caos</div><h2 class="ch-title">La Expansión</h2><p class="ch-sub">El año en que el juego se volvió un campo de batalla y nadie estaba a salvo</p></div>
 <div class="card">
 <h3>La era de la anarquía digital</h3>
-<p><span class="hl">2023</span> marcó el año en que The Chosen One dejó de ser un juego para convertirse en un <strong>campo de batalla digital sin reglas</strong>. La popularidad se disparó y con ella llegaron quienes buscaban romper sus límites.</p>
-<p>Los scripts circularon como pólvora. El legendario <span class="hl">";bkit others"</span> se volvió el arma definitiva: crasheaba a todos alrededor, sembrando caos absoluto. Era la ley del más fuerte... o del mejor script.</p>
+<p><span class="hl">2023</span>. The Chosen One dejó de ser un juego: se transformó en una <strong>tormenta</strong>. La popularidad explotó, los servidores hirvieron y con el brillo llegaron los buitres: los que no querían jugar… <strong>querían romper</strong>.</p>
+<figure class="ip left"><img data-ava="nam" alt="Nam" loading="lazy" onerror="avaFail(this)"><figcaption>Nam observaba y aprendía</figcaption></figure>
+<p>Los scripts volaban como balas. Y entre todos, uno tenía nombre y apellido: <span class="hl">";bkit others"</span>. Un comando… y el mundo se caía a pedazos alrededor. Crasheaba a todos. <strong>TODOS</strong>. Era la ley del más fuerte… o del que tuviera el mejor script.</p>
 <div class="box red warn"><p>⚠️ <em>"Dar Enlighten a un jugador no era solo poder: era estar dispuesto a perderlo todo. Un riesgo que separaba a los verdaderos líderes de los meros espectadores."</em></p></div>
-<p>En medio del caos surgieron rituales únicos: <em>"Simón Dice"</em>, batallas de construcciones imposibles y votaciones que decidían el destino de servidores enteros.</p>
-<p>The Chosen One era brillante, sí, pero sus <strong>inseguridades</strong> lo volvían un territorio salvaje. Nam observaba, aprendía y se preparaba. Porque después del caos... vendría la verdadera guerra.</p>
+<p>Pero hasta en el caos más sucio nacen rituales que nadie olvida: <em>"Simón Dice"</em> a medianoche, construcciones imposibles levantadas bajo fuego, votaciones que decidían el destino de servidores enteros <strong>como si fueran reinos</strong>.</p>
+<p>TCO brillaba como nunca y sangraba como nunca. Nam miraba. Nam aprendía. Nam guardaba cada cicatriz como quien afila un arma en la oscuridad. Porque el caos era solo el prólogo… <span class="hl">y la verdadera guerra ya estaba en camino</span>.</p>
 <div class="chars-chips">
 <button class="chip-char" data-action="char" data-char="nam"><img alt="Nam" data-ava="nam"><span>Nam</span><span class="dot" style="background:var(--green)"></span></button>
 </div>
@@ -669,32 +735,34 @@ footer .foot-links a:hover{color:var(--gold)}
 <!-- 2024 -->
 <div class="subpanel" data-sub="2024">
 <section class="chapter">
-<div class="ch-head"><div class="ch-num">Capítulo III · La Gran Guerra</div><h2 class="ch-title">2024</h2><p class="ch-sub">La Liberación de TCO Español</p></div>
+<div class="ch-head"><div class="ch-num">Capítulo III · La Gran Guerra</div><h2 class="ch-title">2024</h2><p class="ch-sub">Amistad, traición y una batalla que liberó medio TCO Español</p></div>
 <div class="card">
 <h3>De la amistad a la traición</h3>
-<p><span class="hl">Enero a Junio 2024</span> fueron meses de paz aparente en los servidores latinos. Pero el destino tenía capítulos oscuros preparados.</p>
+<p><span class="hl">Enero a junio de 2024</span>: los servers latinos respiraban en paz. Una paz mentira. Una calma de esas que aparecen <strong>justo antes de que el cielo se parta al medio</strong>.</p>
 <h3>El encuentro con Sam</h3>
-<p>Un día Nam entró a TCO y encontró <strong>un server completamente solo</strong>. Solo había un jugador más: el admin, <span class="hl">Sam</span>.</p>
-<p>Sam era un jugador <strong>sin Robux</strong>, pero arquitecto en la vida real. Juntos construyeron una ciudad entera, calles, edificios, plazas... una civilización nacida de la nada. Se hicieron amigos.</p>
-<p>Pero un día simplemente dejaron de hablar. Sin peleas, sin dramas... solo silencio.</p>
-<div class="box gold warn"><p>⚠️ <strong>El giro del destino:</strong> Sam se hizo amigo de Damian (i11rl). Aunque nunca estuvo involucrado en la pelea, su conexión con el antagonista no fue casualidad. ¿Qué papel jugará en 2025? 🔮</p></div>
+<figure class="ip"><img data-ava="sam" alt="Sam" loading="lazy" onerror="avaFail(this)"><figcaption>Sam · el arquitecto</figcaption></figure>
+<p>Un día Nam entró a TCO y encontró un <strong>server fantasma</strong>: un solo jugador en el mapa entero. Era <span class="hl">Sam</span>, el admin. Un arquitecto sin Robux pero con manos de gigante. Juntos levantaron lo imposible: calles, edificios, plazas… <strong>una civilización entera nacida de la nada</strong>. Se hicieron hermanos.</p>
+<p>Y luego, sin pelea, sin drama… <strong>silencio</strong>. El peor de los finales.</p>
+<div class="box gold warn"><p>⚠️ <strong>El giro del destino:</strong> Sam se acercó a Damian (i11rl). Nunca peleó, pero su conexión con el antagonista no fue casualidad. ¿Qué papel jugará en 2025? 🔮</p></div>
 <h3>La traición de Damian</h3>
-<p>Nam se unió a un server común. El admin era <strong>i11rl (Damian)</strong>. Nam le construyó un <span class="hl">trono épico</span> y pidió bkit. Damian le otorgó <span class="hl">ENLIGHTEN</span>! 😊 Parecía el inicio de una gran amistad.</p>
+<figure class="ip left"><img data-ava="damian" alt="Damian" loading="lazy" onerror="avaFail(this)"><figcaption>i11rl · la sonrisa del lobo</figcaption></figure>
+<p>Y entonces apareció él. <strong>i11rl. Damian.</strong> El admin del server común al que Nam llegó con las manos llenas de regalos: le construyó un <span class="hl">trono épico</span>, pidió bkit… y Damian lo coronó con <span class="hl">ENLIGHTEN</span>. Parecía amistad. Parecía gloria. <strong>Era una trampa.</strong></p>
 <div class="box red warn"><p><strong>La Traición:</strong> "Estaba construyendo una máquina con ladrillos. Me acerqué... y de la nada me hizo BLIND, me hizo GLITCH. Empezamos a pelear. Me banearon horas. Y desde ahí... empezó TODO."</p></div>
-<p>El rencor se instaló. Damian se hizo conocido y poco a poco <span class="hl">tomó el control de todos los servidores latinos</span>. Su método: difamación, mentiras, culpar sin razón.</p>
-<p>Pidió perdón y se hicieron amigos (noviembre). Pero era ilusión: <span class="hl">Damian manipulaba a Nam</span>, quien lo ayudaba para que "le crean", sin saber que era parte del juego.</p>
+<p>De la nada: BLIND. GLITCH. Baneo por horas. Nam construyendo con ladrillos y Damian clavándole el puñal por la espalda. Esa noche algo se rompió para siempre… y algo más nació: <span class="hl">el rencor que iba a mover una guerra</span>.</p>
+<p>Damian creció como una plaga: difamación, mentiras, <strong>control total de los servers latinos</strong>. En noviembre pidió perdón con sonrisa de santo. Nam le creyó. Error: <em>el lobo no se disculpa… se relame</em>. Damian lo manipulaba mientras movía los hilos desde las sombras.</p>
 <h3>El Despertar</h3>
-<p>Llegó <span class="hl">Enzo 🥹</span> (Diego), del clan <strong>TQ</strong>. Le contó a Nam su propia batalla con Damian. Ese día <strong>Nam abrió los ojos</strong> y <span class="hl">decidió luchar</span>.</p>
-<p>Damian tenía control absoluto, pero ahora con dos aliados —<strong>Snoopy</strong> y <strong>Napoleon</strong>— y gracias a él, Enzo conoció a <strong>RaR</strong>.</p>
+<figure class="ip"><img data-ava="enzo" alt="Enzo" loading="lazy" onerror="avaFail(this)"><figcaption>Enzo · el que abrió los ojos</figcaption></figure>
+<p>Hasta que llegó <span class="hl">Enzo 🥹</span> (Diego), del clan <strong>TQ</strong>, con su propia guerra a cuestas. Le contó a Nam lo que nadie se animaba a decir, y ese día <strong>Nam abrió los ojos de golpe</strong>. No más vendas. No más mentiras. Esa noche nació la alianza que iba a cambiarlo todo.</p>
+<p>Damian tenía control absoluto y dos aliados —<strong>Snoopy</strong> y <strong>Napoleon</strong>—. Pero del otro lado, por primera vez, había <strong>dos corazones latiendo al mismo ritmo</strong>. Y gracias a él, Enzo conoció a <strong>RaR</strong>.</p>
 <div class="battle">
 <div class="swords">⚔️</div>
 <h3>LA BATALLA FINAL</h3><p style="font-size:1.15em;margin-bottom:14px"><strong>Objetivo: LIBERAR TCO ESPAÑOL</strong></p>
-<p>Nam y Diego lanzaron ataques de scripts mientras el trío enemigo respondía con difamación y mentiras. Damian usaba scripts maliciosos e intentaba que Nam volviera... pero eso ya no pasaría.</p>
-<p style="margin-top:16px;font-size:1.2em"><strong>⏱️ +1 hora de batalla · 🏳️ El enemigo hizo RQ</strong></p>
+<p>Nam y Diego lanzaron ataques de scripts sin respirar, mientras el trío enemigo escupía difamación y mentiras. Damian usaba scripts maliciosos y rogaba que Nam volviera… <strong>pero eso ya no pasaría. Nunca más.</strong></p>
+<p style="margin-top:16px;font-size:1.2em"><strong>⏱️ +1 hora de batalla sin tregua · 🏳️ El enemigo hizo RQ</strong></p>
 </div>
-<div class="victory" data-action="confetti"><h3>🎉 ¡VICTORIA! 🎉</h3><p><strong>¡GANAMOS LA BATALLA!</strong> 🥳 Liberamos medio TCO Español. Gracias a RaR liberamos a Napoleon, aunque tomó otro camino. Para nosotros, éramos los héroes.</p></div>
-<p>Todo volvió a la normalidad: <span class="hl">reglas</span>, <span class="hl">ciudades</span>, <span class="hl">juegos</span>... al fin TCO era el buen juego que debió ser.</p>
-<div class="box blue"><p><strong>🎮 Legado 2024:</strong> Tras meses de manipulación, la valentía de Nam y Enzo restauró el orden. Los servidores latinos volvieron a ser un lugar justo y renovado.</p></div>
+<div class="victory" data-action="confetti"><h3>🎉 ¡VICTORIA! 🎉</h3><p><strong>¡GANAMOS LA BATALLA!</strong> 🥳 Medio TCO Español, LIBRE. Gracias a RaR liberamos a Napoleon, aunque tomó otro camino. Ese día, miráramos quien miráramos el espejo… <strong>éramos los héroes</strong>.</p></div>
+<p>Cuando el humo se disipó, TCO volvió a respirar: <span class="hl">reglas</span>, <span class="hl">ciudades</span>, <span class="hl">juegos</span>, risas. Medio TCO Español era libre. <strong>Libre de verdad.</strong></p>
+<div class="box blue"><p><strong>🎮 Legado 2024:</strong> Tras meses de manipulación, la valentía de Nam y Enzo restauró el orden. Los servidores latinos volvieron a ser un lugar justo y renovado. Y sus nombres quedaron escritos con oro en la primera página de esta leyenda.</p></div>
 <div class="chars-chips">
 <button class="chip-char" data-action="char" data-char="nam"><img alt="Nam" data-ava="nam"><span>Nam</span><span class="dot" style="background:var(--green)"></span></button>
 <button class="chip-char" data-action="char" data-char="enzo"><img alt="Enzo" data-ava="enzo"><span>Enzo</span><span class="dot" style="background:var(--green)"></span></button>
@@ -717,38 +785,41 @@ footer .foot-links a:hover{color:var(--gold)}
 <!-- 2025 -->
 <div class="subpanel" data-sub="2025">
 <section class="chapter">
-<div class="ch-head"><div class="ch-num">Capítulo IV · La Segunda Guerra</div><h2 class="ch-title">2025</h2><p class="ch-sub">La perspectiva de Enzo: espionaje, traición y guerra total</p></div>
+<div class="ch-head"><div class="ch-num">Capítulo IV · La Segunda Guerra</div><h2 class="ch-title">2025</h2><p class="ch-sub">Espías, bots y guerra total: el año que se jugó en las sombras</p></div>
 <div class="card">
 <h3>El espía en las sombras</h3>
-<p>Mientras <strong>Nam se alejaba</strong> a fines de 2024, <span class="hl">Enzo no abandonó el juego</span>. Inició una misión secreta: crear <strong>alts</strong> para infiltrarse y observar. Lo que descubriría cambiaría todo...</p>
+<figure class="ip"><img data-ava="enzo" alt="Enzo" loading="lazy" onerror="avaFail(this)"><figcaption>Enzo · el fantasma digital</figcaption></figure>
+<p>Mientras Nam se alejaba del ruido a fines de 2024, Enzo hizo lo contrario de rendirse: <strong>se quedó</strong>. Y no se quedó mirando… se convirtió en <strong>fantasma</strong>. Alts, identidades falsas, silencios perfectos: una misión secreta para ver lo que nadie debía ver. Lo que descubriría <span class="hl">lo cambiaría todo</span>.</p>
 <h3>🕵️ ESPIONAJE · Antes de Dic 2024</h3>
-<p>Enzo se convirtió en <span class="hl">espía digital</span> con sus alts. Observó a Damián y Napoleón. Descubrió que estaban con el <strong>Clan TQ</strong> (donde Enzo tenía amigos en su cuenta <em>enzors19209</em>, hoy su Discord).</p>
-<div class="box blue"><p><strong>🔍 El incidente con Fonsi:</strong> Se unió Fonsi (amigo de Tq_EX0T1C, líder de TQ) usando una alt @elchiquitin38. Estaba raideando a Damián por abusar de su admin y torturar el server latino con ciudades y un puente absurdo. Enzo se retiró antes de levantar sospechas.</p></div>
+<p>Desde las sombras, Enzo vio lo que le heló la sangre: Damián y Napoleón moviéndose entre clanes como dueños del tablero. Y entre ellos, un nombre que brillaba: <strong>Clan TQ</strong> (donde Enzo tenía hermanos de guerra en su cuenta <em>enzors19209</em>, hoy su Discord).</p>
+<div class="box blue"><p><strong>🔍 El incidente con Fonsi:</strong> Se unió Fonsi (amigo de Tq_EX0T1C, líder de TQ) con la alt @elchiquitin38. Estaba raideando a Damián por abusar de su admin y torturar el server latino con ciudades y un puente absurdo. Enzo se retiró en puntas de pie, antes de levantar la más mínima sospecha.</p></div>
 <h3>📅 FINES DE DIC 2024 · La confrontación</h3>
-<p>En su cuenta original, Enzo estaba con <strong>Exotic, Little</strong> y otros. Apareció <strong>Napoleón</strong> reclamando por qué no le escribía en Discord. Chatearon y <span class="hl">sacaron evidencias cruciales</span>: Napoleón admitió <em>"Manipulé a Gonza"</em>. Esto llevó a Napoleón a <strong>crashear el server</strong>.</p>
-<p>Enzo, enfurecido, decidió <span class="hl">unirse al clan TQ para frenar todo de una vez</span>. Exotic lo aceptó y le pasó el link del Discord.</p>
-<div class="box red warn"><p><strong>💥 El ataque:</strong> NO DURÓ. Napoleón entró al Discord de TQ con un bot "Pedro Invasoes" y lo raideó todo. Tuvieron que recrear el servidor para recuperarse del clan MG.</p></div>
+<p>Fines de diciembre de 2024. La máscara cayó: <strong>Napoleón</strong> apareció reclamando mensajes que nunca llegaron. Chatearon. Y ahí, en frío, la confesión que lo cambió todo: <em>"Manipulé a Gonza"</em>. Acto seguido: <strong>crash. Server abajo. Sin aviso.</strong></p>
+<p>Enzo no dudó ni un segundo: entró al clan TQ con una sola misión —<span class="hl">frenar todo de una vez</span>—. Exotic le abrió la puerta y le pasó el link del Discord.</p>
+<div class="box red warn"><p><strong>💥 El ataque:</strong> NO DURÓ NADA. Napoleón entró al Discord de TQ con el bot "Pedro Invasoes" y lo raideó hasta los cimientos. Tuvieron que reconstruir el servidor desde cero, ladrillo por ladrillo, para recuperarse del clan MG.</p></div>
 <h3>🌅 INICIOS 2025 · Nuevas alianzas</h3>
-<p>En TQ, Enzo conoció a <strong>Tq_Pan</strong>. Se hicieron amigos y les mostró las <span class="hl">evidencias contra el clan MG</span>. Se conocieron el <strong>18 de Enero 2025</strong>.</p>
+<figure class="ip left"><img data-ava="pan" alt="Pan" loading="lazy" onerror="avaFail(this)"><figcaption>Tq_Pan · 18/01/2025</figcaption></figure>
+<p><span class="hl">18 de enero de 2025</span>: en medio de la tormenta aparece una luz: <strong>Tq_Pan</strong>. Amistad nueva, confianza nueva. Enzo le muestra las <span class="hl">evidencias contra el clan MG</span>… y la guerra deja de ser cosa de uno solo.</p>
 <h3>🤝 ALIANZA TEMPORAL TQ + MG</h3>
-<p>Por un tiempo TQ se alió con MG. Pero <strong>Hallow</strong> llamó <em>"traidor"</em> a <strong>Gonza</strong> (miembro de TQ). Gonza se distanció odiando a Hallow. Enzo, en cambio, estaba bien con ambos.</p>
-<div class="box red warn"><p><strong>⚠️ Ruptura definitiva:</strong> Napoleón y Damián enviaron insultos, racismo y contenido +18 al Discord de TQ. Se rompió la paz. TQ declaró oficialmente la GUERRA al clan MG.</p></div>
+<p>La alianza TQ+MG duró lo que dura un fósforo encendido bajo la lluvia. <strong>Hallow</strong> llamó <em>"traidor"</em> a <strong>Gonza</strong> (miembro de TQ) y el tablero se partió: Gonza se distanció odiándolo. Enzo, en cambio, caminaba entre los dos frentes sin quemarse.</p>
+<div class="box red warn"><p><strong>⚠️ Ruptura definitiva:</strong> Napoleón y Damián mandaron insultos, racismo y contenido +18 al Discord de TQ. Se acabó. TQ declaró oficialmente la GUERRA al clan MG. <strong>Total. Sin vuelta atrás.</strong></p></div>
 <h3>🌙 OPERACIÓN: GUARDIA NOCTURNA · Fines Ene 2025</h3>
-<p>Una de las misiones más épicas. Enzo y <strong>Tq_Facu</strong> se infiltraron en MG con <span class="hl">multicuentas de Discord</span>. Napoleón les mandaba links; ellos mostraban evidencias por MD a los miembros de MG para que se fueran antes de que llegaran a 100 miembros.</p>
+<figure class="ip"><img data-ava="facu" alt="Facu" loading="lazy" onerror="avaFail(this)"><figcaption>Tq_Facu · agente doble</figcaption></figure>
+<p><strong>Operación Guardia Nocturna.</strong> Enzo y <span class="hl">Tq_Facu</span> se meten en el corazón de MG con <span class="hl">multicuentas de Discord</span>, como espías de película. Napoleón les mandaba links; ellos respondían con evidencias por MD, vaciando al enemigo desde adentro, mensaje por mensaje, antes de que llegara a los 100 miembros. <strong>Silenciosos. Letales. Imparables.</strong></p>
 <div class="battle">
 <div class="swords">⚔️</div>
 <h3>SEGUNDA GUERRA MUNDIAL DE TCO</h3><p style="font-size:1.1em;margin-bottom:14px"><strong>Fines Ene - Inicios Feb 2025</strong></p>
-<p>Se declaró oficialmente la GUERRA TQ vs MG. Difamaban a TQ de usar Exploits, cuando solo eran defensa personal. Los llamaban raiders y griefers.</p>
-<p style="margin-top:14px"><strong>TQ se defendió:</strong> evidencias en ID para todo el server. Cada texto de MG, TQ le sacaba pruebas. Enzo y Facu siguieron hasta parar.</p>
+<p>TQ vs MG, guerra declarada. Los difamaban de usar Exploits cuando solo era defensa personal. Los llamaban raiders y griefers.</p>
+<p style="margin-top:14px"><strong>TQ respondió con la verdad en la mano:</strong> evidencias en ID para todo el server. Cada texto de MG, TQ lo destrozaba con pruebas. Enzo y Facu no pararon. <strong>No pararon nunca.</strong></p>
 </div>
 <h3>💥 FEB 2025 · El intento de crash</h3>
-<p><strong>Napoleón presionó a un admin</strong> para crashear el server. <span class="hl">Fracasó</span>: el admin hizo <em>delcubes all</em> y Enzo lo soportó, atrayendo a TQ para defenderse con evidencias y, a veces, Exploits defensivos.</p>
+<p>Febrero de 2025: Napoleón aprieta a un admin para crashear el server. Y falla. <strong>FALLA.</strong> El admin ejecuta <em>delcubes all</em> y Enzo aguanta de pie entre las ruinas, <span class="hl">sosteniendo solo la bandera</span> hasta que TQ llegó a defender con evidencias y, a veces, Exploits defensivos.</p>
 <h3>🏆 FINES FEB - MAR 2025 · La victoria</h3>
-<p>Por la guerra (la <strong>Segunda Guerra Mundial de TCO</strong>), MG cayó poco a poco. El <span class="hl">clan TQ ganó oficialmente</span>: más miembros, beneficios, canales, mejores líderes.</p>
+<p>Y cuando marzo asomó, el veredicto ya estaba escrito: MG cayó pieza por pieza. El <span class="hl">clan TQ ganó oficialmente</span>: más miembros, más beneficios, más canales, mejores líderes. <strong>Gloria total.</strong></p>
 <div class="victory" data-action="confetti"><h3>🎉 ¡VICTORIA TOTAL DE TQ! 🎉</h3><p><strong>¡El clan MG fue derrotado!</strong> 🥳 La Segunda Guerra Mundial de TCO terminó. TQ emergió como la facción más fuerte de la comunidad latina.</p></div>
 <h3>📉 MAR 2025 · El declive</h3>
-<p>TQ se volvió una comunidad de <em>Dead Rails</em>. Como quien controlaba el Discord principal de <strong>Tq_Facu</strong> (parece su primo) lo destruyó poco a poco, el clan decayó.</p>
-<div class="box blue"><p><strong>📊 CONSECUENCIAS:</strong> Hubo quienes odiaban a TQ y otros a MG, pero TQ fue más conocido. Algunos odiaban a TQ por conflictos con Gonza, que apoyó a MG un tiempo. Enzo se unía a servers distintos explicando con evidencias, y el odio fue desapareciendo.</p></div>
+<p>Pero los gigantes también se apagan: TQ se volvió una comunidad de <em>Dead Rails</em>. Quien controlaba el Discord principal de <strong>Tq_Facu</strong> (parece su primo) lo fue rompiendo por dentro, poco a poco. El declive silencioso de un campeón.</p>
+<div class="box blue"><p><strong>📊 CONSECUENCIAS:</strong> Hubo quienes odiaban a TQ y otros a MG, pero TQ fue más conocido. Algunos lo odiaban por los conflictos con Gonza, que apoyó a MG un tiempo. Enzo se unía a servers distintos explicando con evidencias, y el odio fue desapareciendo como niebla al sol.</p></div>
 <div class="chars-chips">
 <button class="chip-char" data-action="char" data-char="enzo"><img alt="Enzo" data-ava="enzo"><span>Enzo</span><span class="dot" style="background:var(--green)"></span></button>
 <button class="chip-char" data-action="char" data-char="exotic"><img alt="Exotic" data-ava="exotic"><span>Tq_EX0T1C</span><span class="dot" style="background:var(--green)"></span></button>
@@ -772,47 +843,45 @@ footer .foot-links a:hover{color:var(--gold)}
 <!-- 2026 -->
 <div class="subpanel" data-sub="2026">
 <section class="chapter">
-<div class="ch-head"><div class="ch-num">Capítulo V · El Regreso</div><h2 class="ch-title">2026</h2><p class="ch-sub">El regreso de una leyenda: Nam vuelve a un mundo en ruinas</p></div>
+<div class="ch-head"><div class="ch-num">Capítulo V · El Regreso</div><h2 class="ch-title">2026</h2><p class="ch-sub">Ruinas, raids y el nacimiento de un clan que se negó a morir</p></div>
 <div class="card">
 <h3>El regreso de una leyenda</h3>
-<p><span class="hl">Enero 2026</span>. Tras la Segunda Guerra, <strong>Nam decidió volver</strong>. La leyenda regresaba... pero no al mundo que recordaba.</p>
-<p>Al contactar a <strong>Enzo</strong>, la respuesta fue escalofriante: <em>"todo es un caos"</em>. Nam entró a un server para comprobarlo... y lo que vio fue <span class="hl">inexplicable</span>.</p>
+<figure class="ip"><img data-ava="nam" alt="Nam" loading="lazy" onerror="avaFail(this)"><figcaption>Nam · el regreso</figcaption></figure>
+<p><span class="hl">Enero de 2026</span>. Nam vuelve. Y lo que encuentra no es un juego: <strong>es un cementerio</strong>. <em>"Todo es un caos"</em>, le dijo Enzo. Y se quedó corto.</p>
 <h3>🧱 El mundo raideado</h3>
-<p><strong>¡LOS BLOQUES ESTABAN RAIDEADOS!</strong> Pusieras, eliminaras o movieras un bloque: <span class="hl">TODO estaba raideado</span>. Material <em>toxicify</em> + <em>anchor</em> + un link de Discord. El mapa entero, intocable.</p>
+<p><strong>¡LOS BLOQUES ESTABAN RAIDEADOS!</strong> Bloques raideados hasta el hueso: material <em>toxicify</em> + <em>anchor</em> + un link de Discord tatuado en el mapa. Pusieras, eliminaras o movieras un bloque: <span class="hl">TODO estaba raideado</span>. El mapa entero, intocable, burlándose.</p>
 <div class="box blue"><p><strong>🧱 ¿Server raideado?</strong> Bloques con toxicify + anchor + link de Discord. Hicieras lo que hicieras, el raid permanecía. Como borrar una cicatriz del mapa.</p></div>
-<p>Y también la <span class="hl">CRASH MACHINE</span>: un bloque junto a otro y quien la mirara lageaba hasta morir. Y métodos peores... como <strong>crashear un server entero</strong>.</p>
-<div class="box red warn"><p>⚠️ <em>"Nam no lo puedo creer. Quiso investigar cómo funcionaba. Pero los raids estaban en TODOS lados y los scripters eran cada vez peores. Era pelear contra un fantasma."</em></p></div>
-<p><strong>Pealz</strong> y <strong>Areyoumental</strong> (Admin Community) crearon <em>The Chosen One OG</em>... pero duró poco: <strong>Roblox lo eliminó</strong> por copia.</p>
+<p>Y en cada rincón, la <span class="hl">CRASH MACHINE</span>: dos bloques inocentes que te lageaban hasta morir. Y métodos peores... como <strong>crashear un server entero</strong> de un pestañeo.</p>
+<div class="box red warn"><p>⚠️ <em>"Nam no lo podía creer. Quiso investigar cómo funcionaba. Pero los raids estaban en TODOS lados y los scripters eran cada vez peores. Era pelear contra un fantasma."</em></p></div>
+<p><strong>Pealz</strong> y <strong>Areyoumental</strong> (Admin Community) intentaron salvarlo con <em>The Chosen One OG</em>... y duró poco: <strong>Roblox lo eliminó</strong> por copia. De un plumazo.</p>
 <p>Con esto, <span class="hl">TCO ya era un 2b2t</span>: anarquía total, sin reglas, sin dueños, sin esperanza. Solo ruinas y scripters.</p>
-<p>Nam pasó <span class="hl">más de 20 días</span> intentando descifrarlo... y no lo logró. Pero ese fracaso sembraría algo más grande.</p>
+<p>Nam pasó <span class="hl">más de 20 días</span> peleando contra fantasmas, intentando descifrar lo indescifrable... y no lo logró. Pero esa derrota fue <strong>la semilla de algo enorme</strong>.</p>
 <h3>🏴 FEB 2026 · Nace el Clan IJC</h3>
-<p>Nam tomó la decisión más importante: <span class="hl">fundar un clan</span>. <strong>IJC — Investigación de Justicia y Corrupción</strong>. ¿El objetivo? Detener el caos.</p>
-<p>Lo fundó con <strong>Enzo</strong> como <span class="hl">Co-Líder</span>. ¿Y qué creen? <strong>¡FUNCIONÓ!</strong></p>
+<p>Febrero de 2026: Nam se planta y firma el acta que lo cambia todo: <span class="hl">fundar un clan</span>. <strong>IJC — Investigación de Justicia y Corrupción</strong>. ¿El objetivo? Detener el caos. Con <strong>Enzo</strong> de <span class="hl">Co-Líder</span>. ¿Y qué creen? <strong>¡FUNCIONÓ!</strong></p>
 <div class="box green" style="text-align:center"><p style="font-size:1.4em;font-weight:700;color:var(--green)">📈 2 → 5 → 10 → 20 → +30 MIEMBROS</p><p style="margin-top:8px">El clan IJC creció como una llama en la oscuridad de TCO.</p></div>
 <h3>La prueba de fuego: Radical, Adan y Stumblero</h3>
-<p>Nam construía una zona de juegos solo. Aparecieron <strong>Radical</strong>, <strong>Stumblero</strong> y <strong>Adan</strong> e intentaron ganarle una raid. No pudieron: Nam activó la <span class="hl">crash machine</span> y a todos les lagueó... <strong>menos a Radical</strong>.</p>
-<p>Los demás se rindieron, menos Radical. Al final pidió perdón y <span class="hl">se hicieron amigos</span>. <strong>Adan y Radical</strong> se unieron al clan. <strong>Stumblero</strong> tomó otro camino y <span class="hl">desapareció de TCO</span>.</p>
+<figure class="ip left"><img data-ava="radical" alt="Radical" loading="lazy" onerror="avaFail(this)"><figcaption>Radical · ojos de acero</figcaption></figure>
+<p>La prueba de fuego llegó rápido: Nam construía una zona de juegos solo cuando aparecieron <strong>Radical</strong>, <strong>Stumblero</strong> y <strong>Adan</strong> para robarle la raid. Nam activa la <span class="hl">crash machine</span>... y todos caen de rodillas laggeando. <strong>Todos menos uno: Radical.</strong> Ni un frame de miedo. Terminaron abrazados: Radical y Adan se unieron al clan. Stumblero tomó otro camino y <span class="hl">desapareció de TCO</span> para siempre.</p>
 <p style="font-style:italic;color:var(--mut)">Pero no todo lo que brilla es oro...</p>
 <h3>🧪 MAR 2026 · La guerra de los Hubs</h3>
-<p>IJC investigaba a full. Hasta que apareció <span class="hl">RomazHUB</span>, por <strong>299 Robux</strong>. Perfecto: hasta tenía el bloque de raid. <em>ERA PERFECTO.</em> Pero no tenían Robux.</p>
-<p>Nam conoció a <strong>Romantco (Roman)</strong>. En un server de Nam construyeron juntos una <span class="hl">ciudad de Roma</span> con reglas. Roman usaba scripts para el bien, con cuenta secundaria (la principal baneada).</p>
-<p>Un día Roman le contó en secreto: <span class="hl">¡SE FILTRÓ ROMAZHUB!</span> Solo lo tenían los compradores, Roman... y Nam. <strong>SERVIRÍA MUCHÍSIMO.</strong> Tenía <strong>Autobuild</strong> — ¡un bot que construye por ti! LO MEJOR.</p>
-<div class="box red warn"><p>💥 <strong>El derrumbe:</strong> Horas después, romazdev notó el leak y puso blacklist a quien no lo tuviera comprado. Todo se derrumbó.</p></div>
-<p>Pero Nam no se rindió. Creó <span class="hl">NamHUB</span>. Juró que sería mejor que RomazHUB. <strong>Lo prometió.</strong> Salió con errores, los arregló uno por uno... y <strong>FUNCIONÓ</strong>. Por un momento superó a Romaz. Lo lanzó <span class="hl">GRATIS</span>, con Autobuild, Paint Configuration y más.</p>
-<p>Todo gracias a <strong>System (@igot_KJ8)</strong>, que semanas antes fundó <strong>LS (Legacy Service)</strong>, un hub igual de OP. Nam le pidió el Autobuild y el Paint... y System se los pasó. Sin preguntas.</p>
-<div class="box gold"><p><strong>💻 Los Hubs de la época:</strong></p></div>
+<figure class="ip"><img data-ava="roman" alt="Roman" loading="lazy" onerror="avaFail(this)"><figcaption>Romantco · el aliado del leak</figcaption></figure>
+<p>Marzo de 2026: aparece <span class="hl">RomazHUB</span>, por <strong>299 Robux</strong>. Perfecto: hasta tenía el bloque de raid. <em>ERA PERFECTO.</em> Pero no tenían Robux. Entonces Nam conoció a <strong>Romantco (Roman)</strong>: construyeron juntos una <span class="hl">ciudad de Roma</span> con reglas, y un día Roman le susurró el secreto mejor guardado del año: <span class="hl">¡SE FILTRÓ ROMAZHUB!</span> Solo lo tenían los compradores, Roman... y Nam. Tenía <strong>Autobuild</strong> — ¡un bot que construye por ti! <strong>El santo grial.</strong></p>
+<div class="box red warn"><p>💥 <strong>El derrumbe:</strong> Horas después, romazdev olió el leak y clavó blacklist a quien no lo tuviera comprado. Todo se derrumbó en horas.</p></div>
+<p>¿Rendirse? <strong>Nam no conoce esa palabra.</strong> Agarró los pedazos y fundó <span class="hl">NamHUB</span>: juró que sería mejor que RomazHUB. Salió con errores, los cazó uno por uno... y <strong>FUNCIONÓ</strong>. Por un momento glorioso superó al mismísimo Romaz. Lo lanzó <span class="hl">GRATIS</span>, con Autobuild, Paint Configuration y más.</p>
+<p>Y esa magia tuvo un cómplice: <strong>System (@igot_KJ8)</strong>, que semanas antes fundó <strong>LS (Legacy Service)</strong>, un hub igual de OP. Nam le pidió el Autobuild y el Paint... y System se los pasó. <strong>Sin preguntas. Sin pedir nada.</strong> Así se ve un aliado de verdad.</p>
+<div class="box gold"><p><strong>💻 Los Hubs de la época:</strong> (tocá cada uno para ver su ficha)</p></div>
 <div class="hubs">
-<div class="hub"><div class="ic">💰</div><h4>RomazHUB</h4><p>El hub pago (299 Robux). Perfecto... hasta el leak. romazdev aplicó blacklist a quien no lo compró.</p><span class="tag">299 ROBUX</span></div>
-<div class="hub feat"><div class="ic">🧪</div><h4>NamHUB</h4><p>Creado por Nam. Gratis, con Autobuild, Paint Config y más. Por un momento superó a RomazHUB.</p><span class="tag">GRATIS</span></div>
-<div class="hub"><div class="ic">⚙️</div><h4>LS Legacy</h4><p>El hub de System (@igot_KJ8). Muy OP. De ahí salieron Autobuild y Paint que potenciaron NamHUB.</p><span class="tag">ALIADO</span></div>
+<div class="hub" data-action="clan" data-clan="romaz"><div class="ic">💰</div><h4>RomazHUB</h4><p>El hub pago (299 Robux). Perfecto... hasta el leak. romazdev aplicó blacklist a quien no lo compró.</p><span class="tag">299 ROBUX</span></div>
+<div class="hub feat" data-action="clan" data-clan="namhub"><div class="ic">🧪</div><h4>NamHUB</h4><p>Creado por Nam. Gratis, con Autobuild, Paint Config y más. Por un momento superó a RomazHUB.</p><span class="tag">GRATIS</span></div>
+<div class="hub" data-action="clan" data-clan="ls"><div class="ic">⚙️</div><h4>LS Legacy</h4><p>El hub de System (@igot_KJ8). Muy OP. De ahí salieron Autobuild y Paint que potenciaron NamHUB.</p><span class="tag">ALIADO</span></div>
 </div>
-<p><strong>Napoleon</strong> se enteró del IJC y spameó en Discord: basura, insultos. Nam no le dio importancia: <em>solo un niño queriendo atención</em>.</p>
-<p>Luego todo iba bien. Perfecto. Soleado. Divertido.</p>
+<p><strong>Napoleon</strong> se enteró del IJC y hizo lo único que sabe: spamear basura e insultos en Discord. Nam ni miró la pantalla: <em>solo un niño queriendo atención</em>. Y siguió construyendo.</p>
+<p>Luego todo iba bien. Perfecto. Soleado. Divertido. <strong>Demasiado tranquilo.</strong></p>
 <h3>⚔️ El raid de SDZ · La copia fantasma</h3>
-<p>En un server tranquilo de IJC... se unieron varios con apodo <strong>SDZ</strong>. <em>"¿Quién carajos son esos?"</em>.</p>
-<p>SDZ empezó a <span class="hl">raidear</span>, donando tiempo a <strong>Zeen (DARKTHEWHITE2)</strong>, líder de SDZ. Nam llamó a todo el IJC. Hora de defender lo construido.</p>
-<div class="battle"><div class="swords">⚔️</div><h3>DEFENSA DEL SERVER IJC</h3><p style="font-size:1.1em;margin-bottom:14px"><strong>Raid de SDZ vs Clan IJC</strong></p><p>SDZ raideaba y donaba tiempo a Zeen (DARKTHEWHITE2). El IJC entero defendió su casa.</p><p style="margin-top:14px;font-size:1.2em"><strong>⏱️ ~30 min · 🏳️ SDZ se salió. IJC ganó.</strong></p></div>
-<p>Investigaron al supuesto "SDZ"... y descubrieron algo impactante: <span class="hl">era una copia del Clan MG</span>. Los fantasmas del pasado, reciclados. La historia se repetía... pero el IJC estaba listo.</p>
+<figure class="ip left"><img data-ava="zeen" alt="Zeen" loading="lazy" onerror="avaFail(this)"><figcaption>Zeen · líder de SDZ</figcaption></figure>
+<p>Hasta que un día, en un server tranquilo del IJC... entraron varios con el mismo apodo: <strong>SDZ</strong>. <em>"¿Quién carajos son esos?"</em>. Y empezó el raid: donaciones de tiempo a <strong>Zeen (DARKTHEWHITE2)</strong>, bloques volando, caos servido. Nam llamó a todo el clan. <strong>Hora de defender la casa.</strong></p>
+<div class="battle"><div class="swords">⚔️</div><h3>DEFENSA DEL SERVER IJC</h3><p style="font-size:1.1em;margin-bottom:14px"><strong>Raid de SDZ vs Clan IJC</strong></p><p>Treinta minutos de defensa épica, casa por casa, bloque por bloque. El IJC entero sosteniendo lo construido con las uñas.</p><p style="margin-top:14px;font-size:1.2em"><strong>⏱️ ~30 min · 🏳️ SDZ se salió con el culo entre las manos. IJC ganó.</strong></p></div>
+<p>Investigaron al supuesto "SDZ"... y descubrieron algo impactante: <span class="hl">era una copia del Clan MG</span>. Los fantasmas del pasado, reciclados. La historia se repetía... <strong>pero esta vez el IJC estaba listo</strong>.</p>
 <div class="chars-chips">
 <button class="chip-char" data-action="char" data-char="nam"><img alt="Nam" data-ava="nam"><span>Nam</span><span class="dot" style="background:var(--green)"></span></button>
 <button class="chip-char" data-action="char" data-char="enzo"><img alt="Enzo" data-ava="enzo"><span>Enzo</span><span class="dot" style="background:var(--green)"></span></button>
@@ -857,10 +926,11 @@ footer .foot-links a:hover{color:var(--gold)}
 <section class="panel" id="panel-archivo">
 <div class="subtabs" data-tabbar="archivo">
 <button data-action="sub" data-tab="archivo" data-sub="cronologia" class="active">📅 Cronología</button>
-<button data-action="sub" data-tab="archivo" data-sub="hall">🏆 Hall de la Fama</button>
-<button data-action="sub" data-tab="archivo" data-sub="mapa">🗺️ Mapa de Alianzas</button>
-<button data-action="sub" data-tab="archivo" data-sub="clanes">🏴 Clanes y Hubs</button>
+<button data-action="sub" data-tab="archivo" data-sub="hall">🏆 Hall</button>
+<button data-action="sub" data-tab="archivo" data-sub="mapa">🗺️ Mapa</button>
+<button data-action="sub" data-tab="archivo" data-sub="clanes">🏴 Clanes</button>
 <button data-action="sub" data-tab="archivo" data-sub="wiki">📚 Wiki</button>
+<button data-action="sub" data-tab="archivo" data-sub="novedades">📰 Novedades</button>
 </div>
 
 <div class="subpanel active" data-sub="cronologia">
@@ -907,20 +977,20 @@ footer .foot-links a:hover{color:var(--gold)}
 <div class="subpanel" data-sub="clanes">
 <section class="special">
 <div class="special-inner">
-<h2 class="sec-title">CLANES Y <em>HUBS</em></h2>
-<p class="sec-sub">Facciones y herramientas que formaron parte de la historia</p>
+<h2 class="sec-title">CLANES Y <em>SU HISTORIA</em></h2>
+<p class="sec-sub">Cada facción tendrá su propia crónica completa · tocá un clan para ver su estado</p>
 <div class="hubs">
-<div class="hub feat"><div class="ic">👑</div><h4>Admin Community</h4><p>Alta tecnología en scripts manejada por Pealz y 2areyoumental. Los guardianes del orden en TCO.</p><span class="tag">GUARDIANES</span></div>
-<div class="hub"><div class="ic">⚔️</div><h4>Clan MG</h4><p>Formado por Damian (i11rl) y Napoleon. Duró ~5 meses hasta caer en la Segunda Guerra.</p><span class="tag">5 MESES</span></div>
-<div class="hub"><div class="ic">💀</div><h4>Clan SDZ</h4><p>Abusadores y griefers. Derrotados por el clan de Nam en 2024... y en 2026 como copia de MG. Líder: Zeen.</p><span class="tag" style="background:var(--red);color:#fff">DERROTADOS ×2</span></div>
-<div class="hub"><div class="ic">🛡️</div><h4>Clan TQ</h4><p>El clan de Enzo, liderado por Exotic. Victoriosos en la Segunda Guerra Mundial de TCO.</p><span class="tag">VICTORIOSOS</span></div>
-<div class="hub feat"><div class="ic">🏴</div><h4>Clan IJC → ZK</h4><p>Feb 2026: Nam y Enzo fundan el IJC (Investigación de Justicia y Corrupción). Fines de 2026: renace como Clan ZK.</p><span class="tag">NUESTRO CLAN</span></div>
+<div class="hub feat" data-action="clan" data-clan="admin"><div class="ic">👑</div><h4>Admin Community</h4><p>Alta tecnología en scripts manejada por Pealz y 2areyoumental. Los guardianes del orden en TCO.</p><span class="tag">GUARDIANES</span></div>
+<div class="hub" data-action="clan" data-clan="mg"><div class="ic">⚔️</div><h4>Clan MG</h4><p>Formado por Damian (i11rl) y Napoleon. Duró ~5 meses hasta caer en la Segunda Guerra.</p><span class="tag">5 MESES</span></div>
+<div class="hub" data-action="clan" data-clan="sdz"><div class="ic">💀</div><h4>Clan SDZ</h4><p>Abusadores y griefers. Derrotados por el clan de Nam en 2024... y en 2026 como copia de MG. Líder: Zeen.</p><span class="tag" style="background:var(--red);color:#fff">DERROTADOS ×2</span></div>
+<div class="hub" data-action="clan" data-clan="tq"><div class="ic">🛡️</div><h4>Clan TQ</h4><p>El clan de Enzo, liderado por Exotic. Victoriosos en la Segunda Guerra Mundial de TCO.</p><span class="tag">VICTORIOSOS</span></div>
+<div class="hub feat" data-action="clan" data-clan="ijc"><div class="ic">🏴</div><h4>Clan IJC → ZK</h4><p>Feb 2026: Nam y Enzo fundan el IJC (Investigación de Justicia y Corrupción). Fines de 2026: renace como Clan ZK.</p><span class="tag">NUESTRO CLAN</span></div>
 </div>
 <h3 style="font-family:'Bebas Neue';font-size:1.6em;letter-spacing:.5px;margin:34px 0 6px;color:var(--gold)">💻 LOS HUBS DE <em>SCRIPTS</em></h3>
 <div class="hubs">
-<div class="hub"><div class="ic">💰</div><h4>RomazHUB</h4><p>299 Robux. El hub "perfecto" hasta el leak y la blacklist de romazdev.</p><span class="tag">PAGO</span></div>
-<div class="hub feat"><div class="ic">🧪</div><h4>NamHUB</h4><p>La respuesta de Nam: gratis, Autobuild, Paint Config y más.</p><span class="tag">GRATIS</span></div>
-<div class="hub"><div class="ic">⚙️</div><h4>LS Legacy Service</h4><p>El hub de System (@igot_KJ8). Cuna del Autobuild y el Paint.</p><span class="tag">ALIADO</span></div>
+<div class="hub" data-action="clan" data-clan="romaz"><div class="ic">💰</div><h4>RomazHUB</h4><p>299 Robux. El hub "perfecto" hasta el leak y la blacklist de romazdev.</p><span class="tag">PAGO</span></div>
+<div class="hub feat" data-action="clan" data-clan="namhub"><div class="ic">🧪</div><h4>NamHUB</h4><p>La respuesta de Nam: gratis, Autobuild, Paint Config y más.</p><span class="tag">GRATIS</span></div>
+<div class="hub" data-action="clan" data-clan="ls"><div class="ic">⚙️</div><h4>LS Legacy Service</h4><p>El hub de System (@igot_KJ8). Cuna del Autobuild y el Paint.</p><span class="tag">ALIADO</span></div>
 </div>
 </div>
 </section>
@@ -946,6 +1016,44 @@ footer .foot-links a:hover{color:var(--gold)}
 </div>
 </section>
 </div>
+
+<div class="subpanel" data-sub="novedades">
+<section class="special">
+<div class="special-inner" style="max-width:860px">
+<h2 class="sec-title">NOVEDADES DEL <em>ARCHIVO</em></h2>
+<p class="sec-sub">Changelog público: cada era de esta página</p>
+<div class="cl-entry">
+<div class="cl-ver">v2.1 · "LA ERA DORADA"</div><div class="cl-date">15 de septiembre de 2026</div>
+<ul>
+<li>🖼️ Imágenes reales de los jugadores y del clan (clanzk.png, tco.png) con fallback automático.</li>
+<li>📖 Capítulos reescritos con narrativa épica + retratos inline entre los párrafos.</li>
+<li>🏴 Fichas de clanes y hubs: crónica completa de cada clan, PRÓXIMAMENTE.</li>
+<li>🧩 Quiz del Lore: 12 preguntas sin piedad, con rangos y confeti.</li>
+<li>🏅 Sistema de logros: 10 insignias desbloqueables en tu perfil.</li>
+<li>🗳️ Encuestas del clan con resultados en vivo (Firestore).</li>
+<li>📦 Modo PWA: instalable como app y con caché offline (manifest + service worker).</li>
+<li>🛡️ Panel de administración para Nam y Enzo: moderación en un clic.</li>
+<li>📰 Este changelog público.</li>
+<li>🎬 Modo cine eliminado por decisión del líder.</li>
+</ul>
+</div>
+<div class="cl-entry old">
+<div class="cl-ver">v2.0 · "LA RECONSTRUCCIÓN"</div><div class="cl-date">14 de septiembre de 2026</div>
+<ul>
+<li>🗂️ Reorganización total: tabs, subtabs, códice de personajes, cronología y mapa de alianzas interactivo.</li>
+<li>⌨️ Paleta de comandos Ctrl+K, temas de color, confeti, toasts y notificaciones inteligentes.</li>
+<li>🐛 Fixes: 404 de imágenes, AudioContext, favicon, SyntaxError y updateDoc faltante en Firebase.</li>
+</ul>
+</div>
+<div class="cl-entry old">
+<div class="cl-ver">v1.0 · "EL PRIMER ARCHIVO"</div><div class="cl-date">11 de septiembre de 2026</div>
+<ul>
+<li>🌱 Primera versión: scroll vertical, perfiles, historias, comentarios y leaderboard con Firebase.</li>
+</ul>
+</div>
+</div>
+</section>
+</div>
 </section>
 
 <!-- ============ TAB: COMUNIDAD ============ -->
@@ -953,7 +1061,9 @@ footer .foot-links a:hover{color:var(--gold)}
 <div class="subtabs" data-tabbar="comunidad">
 <button data-action="sub" data-tab="comunidad" data-sub="historias" class="active">📖 Historias</button>
 <button data-action="sub" data-tab="comunidad" data-sub="ranking">🏆 Ranking</button>
-<button data-action="sub" data-tab="comunidad" data-sub="muro">🧱 Muro del Clan</button>
+<button data-action="sub" data-tab="comunidad" data-sub="muro">🧱 Muro</button>
+<button data-action="sub" data-tab="comunidad" data-sub="quiz">🧩 Quiz</button>
+<button data-action="sub" data-tab="comunidad" data-sub="encuestas">🗳️ Encuestas</button>
 </div>
 
 <div class="subpanel active" data-sub="historias">
@@ -981,6 +1091,26 @@ footer .foot-links a:hover{color:var(--gold)}
 <div class="comment-form"><input type="text" id="comment-input-muro" placeholder="Escribí en el muro..." maxlength="500"><button data-action="post-comment" data-context="muro" data-input="comment-input-muro">Publicar</button></div>
 </div>
 </div>
+
+<div class="subpanel" data-sub="quiz">
+<section class="special">
+<div class="special-inner">
+<h2 class="sec-title">QUIZ DEL <em>LORE</em></h2>
+<p class="sec-sub">12 preguntas sobre la saga · sin piedad · tu mejor puntaje queda en este dispositivo</p>
+<div class="quiz-box" id="quizBox"></div>
+</div>
+</section>
+</div>
+
+<div class="subpanel" data-sub="encuestas">
+<section class="special">
+<div class="special-inner" style="max-width:760px">
+<h2 class="sec-title">ENCUESTAS DEL <em>CLAN</em></h2>
+<p class="sec-sub">Un voto por miembro y encuesta · resultados en vivo</p>
+<div id="pollsBox"><div class="no-stories">Cargando encuestas...</div></div>
+</div>
+</section>
+</div>
 </section>
 </main>
 
@@ -991,11 +1121,13 @@ footer .foot-links a:hover{color:var(--gold)}
 <a data-action="tab" data-tab="historia">Crónicas</a>
 <a data-action="tab" data-tab="personajes">Personajes</a>
 <a data-action="sub" data-tab="archivo" data-sub="mapa">Mapa</a>
+<a data-action="sub" data-tab="comunidad" data-sub="quiz">Quiz</a>
 <a data-action="sub" data-tab="comunidad" data-sub="muro">Muro</a>
+<a data-action="sub" data-tab="archivo" data-sub="novedades">Novedades</a>
 <a data-action="modal" data-modal="settingsModal">Ajustes</a>
 </div>
 <p style="margin-top:16px;font-size:.8em">The Chosen One © TomazDev · User ID 607353710 · Game ID 11137575513</p>
-<p style="margin-top:6px;font-size:.72em;opacity:.7">v2.0 · Reconstruido con ❤️ y oro fundido</p>
+<p style="margin-top:6px;font-size:.72em;opacity:.7">v2.1 · La Era Dorada · reconstruido con ❤️ y oro fundido</p>
 </footer>
 
 <!-- SETTINGS -->
@@ -1030,6 +1162,32 @@ footer .foot-links a:hover{color:var(--gold)}
 </div>
 </div>
 
+<!-- CLAN MODAL -->
+<div class="modal" id="clanModal">
+<div class="modal-c big">
+<button class="modal-x" data-action="close-modal" data-modal="clanModal">×</button>
+<div class="constr" id="clanIc">🏴</div>
+<h2 id="clanName">CLAN</h2>
+<p id="clanTeaser" style="color:var(--mut)"></p>
+<div class="soon-badge">PRÓXIMAMENTE</div>
+<p style="color:var(--mut);font-size:.85em;margin-top:10px">Estamos escribiendo la crónica completa de este clan: batallas, integrantes y secretos. Muy pronto en el archivo.</p>
+<button class="cta-btn ghost" data-action="clan-notify" style="margin-top:14px">🔔 Avisarme cuando salga</button>
+</div>
+</div>
+
+<!-- ADMIN MODAL -->
+<div class="modal" id="adminModal">
+<div class="modal-c">
+<button class="modal-x" data-action="close-modal" data-modal="adminModal">×</button>
+<h2>PANEL <em>ADMIN</em></h2>
+<p>Moderación rápida del archivo · exclusivo de Nam y Enzo</p>
+<div class="adm-h">💬 Últimos comentarios</div>
+<div id="admComments"><div class="no-stories">Cargando...</div></div>
+<div class="adm-h">📖 Últimas historias</div>
+<div id="admStories"><div class="no-stories">Cargando...</div></div>
+</div>
+</div>
+
 <!-- PROFILE MODAL -->
 <div class="modal" id="profileModal">
 <div class="modal-c big">
@@ -1041,7 +1199,12 @@ footer .foot-links a:hover{color:var(--gold)}
 <input type="file" class="onboard-file" id="profileImg" accept="image/*">
 <input type="text" class="auth-input" id="profileNick" placeholder="Apodo" maxlength="20">
 <div id="nicknameCooldown" style="color:var(--mut);font-size:.8em;margin-top:-10px;margin-bottom:12px;display:none"></div>
+<div style="text-align:left;margin:4px 0 14px">
+<h4 style="font-family:'Bebas Neue';letter-spacing:.5px;color:var(--gold);font-size:1.15em">🏅 MIS LOGROS <span id="achCount" style="color:var(--mut);font-size:.65em"></span></h4>
+<div class="ach-grid" id="achGrid"></div>
+</div>
 <button class="auth-btn" data-action="save-profile">GUARDAR CAMBIOS</button>
+<button class="share-btn" id="adminProfileBtn" style="display:none;margin-top:12px" data-action="admin-open">🛡️ Abrir panel admin</button>
 </div>
 </div>
 
@@ -1089,16 +1252,20 @@ footer .foot-links a:hover{color:var(--gold)}
 <a class="drawer-link" data-action="sub" data-tab="archivo" data-sub="cronologia">Cronología completa<small>Todos los eventos en orden</small></a>
 <a class="drawer-link" data-action="sub" data-tab="archivo" data-sub="hall">Hall de la Fama<small>Medallas y logros</small></a>
 <a class="drawer-link" data-action="sub" data-tab="archivo" data-sub="mapa">Mapa de Alianzas<small>Red interactiva de relaciones</small></a>
-<a class="drawer-link" data-action="sub" data-tab="archivo" data-sub="clanes">Clanes y Hubs<small>MG, SDZ, TQ, IJC, NamHUB...</small></a>
+<a class="drawer-link" data-action="sub" data-tab="archivo" data-sub="clanes">Clanes y su historia<small>MG, SDZ, TQ, IJC, NamHUB...</small></a>
 <a class="drawer-link" data-action="sub" data-tab="archivo" data-sub="wiki">Wiki de Términos<small>El diccionario de TCO</small></a>
+<a class="drawer-link" data-action="sub" data-tab="archivo" data-sub="novedades">Novedades del archivo<small>Changelog público</small></a>
 <div class="drawer-sec">💬 Comunidad</div>
 <a class="drawer-link" data-action="sub" data-tab="comunidad" data-sub="historias">Historias<small>Experiencias de la comunidad</small></a>
 <a class="drawer-link" data-action="sub" data-tab="comunidad" data-sub="ranking">Leaderboard<small>Ranking de miembros</small></a>
 <a class="drawer-link" data-action="sub" data-tab="comunidad" data-sub="muro">Muro del Clan<small>Tablón público</small></a>
+<a class="drawer-link" data-action="sub" data-tab="comunidad" data-sub="quiz">Quiz del Lore<small>12 preguntas sin piedad</small></a>
+<a class="drawer-link" data-action="sub" data-tab="comunidad" data-sub="encuestas">Encuestas<small>Votá y mirá resultados en vivo</small></a>
 <div class="drawer-sec">👤 Mi cuenta</div>
-<a class="drawer-link" data-action="profile">Mi Perfil<small>Apodo e imagen</small></a>
+<a class="drawer-link" data-action="profile">Mi Perfil<small>Apodo, imagen y logros</small></a>
+<a class="drawer-link" id="adminDrawerLink" style="display:none" data-action="admin-open">🛡️ Panel Admin<small>Moderación rápida</small></a>
 <div class="drawer-sec">⚙️ Página</div>
-<a class="drawer-link" data-action="modal" data-modal="settingsModal">Ajustes<small>Temas, cine, sonidos</small></a>
+<a class="drawer-link" data-action="modal" data-modal="settingsModal">Ajustes<small>Temas, sonidos, movimiento</small></a>
 <a class="drawer-link" data-action="tab" data-tab="home">Volver arriba<small>Regresar a la portada</small></a>
 </div>
 <div class="drawer-foot">User ID 607353710 · Game ID 11137575513</div>
@@ -1456,6 +1623,9 @@ function setSub(tab,sub){
   state.subs[tab]=sub; setSubVisual(tab,sub);
   updateModes();
   if(tab==='archivo'&&sub==='cronologia') setTimeout(tlReveal,60);
+  if(tab==='comunidad'&&sub==='encuestas') renderPolls();
+  if(tab==='comunidad'&&sub==='quiz') renderQuiz();
+  if(tab==='historia') visitChapter(sub);
   try{ localStorage.setItem(LS_TAB, JSON.stringify(state)); }catch(e){}
   beep(600,0.04);
 }
@@ -1547,7 +1717,9 @@ function buildPalette(){
   T.forEach(t=>paletteIndex.push({ic:t[1],label:t[2],group:'Sección',run:()=>setTab(t[0])}));
   ['2022','2023','2024','2025','2026'].forEach(y=>paletteIndex.push({ic:'📖',label:'Capítulo '+y,group:'Capítulo',run:()=>goChapter(y)}));
   [['cronologia','📅 Cronología'],['hall','🏆 Hall de la Fama'],['mapa','🗺️ Mapa de Alianzas'],['clanes','🏴 Clanes y Hubs'],['wiki','📚 Wiki']].forEach(s=>paletteIndex.push({ic:s[0]==='mapa'?'🗺️':'🗄️',label:s[1],group:'Archivo',run:()=>{setTab('archivo',true);setSub('archivo',s[0]);}}));
-  [['historias','📖 Historias de la comunidad'],['ranking','🏆 Leaderboard'],['muro','🧱 Muro del Clan']].forEach(s=>paletteIndex.push({ic:'💬',label:s[1],group:'Comunidad',run:()=>{setTab('comunidad',true);setSub('comunidad',s[0]);}}));
+  [['historias','📖 Historias de la comunidad'],['ranking','🏆 Leaderboard'],['muro','🧱 Muro del Clan'],['quiz','🧩 Quiz del Lore'],['encuestas','🗳️ Encuestas del clan']].forEach(s=>paletteIndex.push({ic:'💬',label:s[1],group:'Comunidad',run:()=>{setTab('comunidad',true);setSub('comunidad',s[0]);}}));
+  paletteIndex.push({ic:'📰',label:'Novedades del archivo',group:'Archivo',run:()=>{setTab('archivo',true);setSub('archivo','novedades');}});
+  if(isAdminUser()) paletteIndex.push({ic:'🛡️',label:'Panel de administración',group:'Acción',run:()=>openAdminPanel()});
   Object.keys(CHARS).forEach(id=>paletteIndex.push({ic:'👤',label:'Expediente: '+CHARS[id].name,group:'Personaje',run:()=>charModal(id)}));
   paletteIndex.push({ic:'✍️',label:'Crear mi historia',group:'Acción',run:()=>openStoryCreator()});
   paletteIndex.push({ic:'⚙️',label:'Abrir ajustes',group:'Acción',run:()=>openModal('settingsModal')});
@@ -1613,6 +1785,8 @@ function applyMe(){
   const av=$('#userAvatar');
   if(me.avatar){ av.style.backgroundImage='url('+me.avatar+')'; av.textContent=''; }
   else { av.style.backgroundImage=''; av.textContent=me.nickname[0].toUpperCase(); }
+  const adl=$('#adminDrawerLink'); if(adl) adl.style.display=isAdminUser()?'block':'none';
+  const apb=$('#adminProfileBtn'); if(apb) apb.style.display=isAdminUser()?'inline-block':'none';
 }
 async function completeOnboarding(){
   const err=$('#onboardError'); err.classList.remove('show');
@@ -1637,6 +1811,7 @@ async function completeOnboarding(){
   document.body.style.overflow='';
   initData();
   toast('Bienvenido al archivo, '+nick,'👋');
+  unlockAch('paso');
   beep(880,0.12);
 }
 function resetDeviceProfile(){
@@ -1655,6 +1830,7 @@ async function openProfileModal(){
     if(days<7){ const left=Math.ceil(7-days); cd.style.display='block'; cd.textContent='⏱️ Podés cambiar tu apodo en '+left+' día'+(left!==1?'s':''); inp.disabled=true; }
     else { cd.style.display='none'; inp.disabled=false; }
   }else{ cd.style.display='none'; inp.disabled=false; }
+  renderAch();
   openModal('profileModal');
 }
 async function saveProfile(){
@@ -1710,6 +1886,7 @@ async function submitStory(){
     $('#bioCount').textContent='0'; $('#textCount').textContent='0';
     loadStories(); loadLeaderboard();
     toast('¡Historia publicada!','📖');
+    unlockAch('cronista');
     fireConfetti();
   }catch(e){ toast('Error al publicar: '+e.message,'❌'); console.error(e); }
 }
@@ -1759,7 +1936,7 @@ async function toggleLike(storyId,emoji,btn){
     const snap=await F.getDocs(q);
     const cEl=btn.querySelector('.like-count');
     if(!snap.empty){ await F.deleteDoc(F.doc(window.firebaseDb,'likes',snap.docs[0].id)); btn.classList.remove('active'); cEl.textContent=Math.max(0,parseInt(cEl.textContent)-1); }
-    else{ await F.addDoc(F.collection(window.firebaseDb,'likes'),{ storyId:storyId, userId:me.id, emoji:emoji, createdAt:Date.now() }); btn.classList.add('active'); btn.classList.add('pop'); setTimeout(()=>btn.classList.remove('pop'),400); cEl.textContent=parseInt(cEl.textContent)+1; beep(720,0.04); }
+    else{ await F.addDoc(F.collection(window.firebaseDb,'likes'),{ storyId:storyId, userId:me.id, emoji:emoji, createdAt:Date.now() }); btn.classList.add('active'); btn.classList.add('pop'); setTimeout(()=>btn.classList.remove('pop'),400); cEl.textContent=parseInt(cEl.textContent)+1; beep(720,0.04); bumpLikes(); }
   }catch(e){ console.error(e); }
 }
 async function shareStory(sid){
@@ -1839,6 +2016,7 @@ async function postComment(context,inputId){
   try{
     await F.addDoc(F.collection(window.firebaseDb,'comments'),{ context:context, userId:me.id, userNick:me.nickname, userAvatar:me.avatar, text:text, createdAt:Date.now() });
     input.value=''; loadComments(context); beep(720,0.05);
+    unlockAch(context==='muro'?'muro':'voz');
   }catch(e){ toast('Error: '+e.message,'❌'); }
 }
 async function editMyComment(id){
@@ -1954,6 +2132,12 @@ document.addEventListener('click',e=>{
     case 'goto-chapter': goChapter(el.dataset.sub); break;
     case 'char': charModal(el.dataset.char); break;
     case 'char-see-story': goChapter(el.dataset.sub||'2022'); closeModal('charModal'); break;
+    case 'clan': openClanModal(el.dataset.clan); break;
+    case 'clan-notify': closeModal('clanModal'); toast('Te avisaremos cuando la crónica esté lista','🔔'); break;
+    case 'admin-open': openAdminPanel(); break;
+    case 'vote': castVote(el.dataset.poll,el.dataset.opt,el); break;
+    case 'quiz-opt': quizAnswer(+el.dataset.opt,el); break;
+    case 'quiz-retry': quizState={i:0,score:0,done:false,lock:false}; renderQuiz(); beep(600,0.05); break;
     case 'modal': openModal(el.dataset.modal); break;
     case 'close-modal': closeModal(el.dataset.modal); break;
     case 'drawer': toggleMenu(); break;
@@ -1980,7 +2164,7 @@ document.addEventListener('click',e=>{
       else if(s==='motion'){ settings.motion=!settings.motion; saveSettings(); applySettings(); toast(settings.motion?'Movimiento reducido':'Animaciones activadas',settings.motion?'🐢':'✨'); }
       break;
     }
-    case 'theme': settings.theme=el.dataset.theme; saveSettings(); applySettings(); toast('Tema aplicado','🎨'); beep(660,0.06); break;
+    case 'theme': settings.theme=el.dataset.theme; saveSettings(); applySettings(); toast('Tema aplicado','🎨'); unlockAch('estilista'); beep(660,0.06); break;
   }
 });
 
@@ -2121,6 +2305,213 @@ window.addEventListener('load',()=>{
   const pi=setInterval(()=>{ p+=Math.random()*22+10; if(p>=100){ p=100; clearInterval(pi); setTimeout(boot,350); } if(fill) fill.style.width=p+'%'; },140);
 });
 setTimeout(boot,5000);
+/* ================================================================
+   v2.1 · LOGROS / CLANES / QUIZ / ENCUESTAS / ADMIN / PWA
+   ================================================================ */
+/* ---------- logros ---------- */
+const ACH=[
+{id:'paso',ic:'🌱',n:'Primer Paso',d:'Entrar al archivo'},
+{id:'cap5',ic:'📖',n:'Historiador',d:'Leer los 5 capítulos'},
+{id:'voz',ic:'💬',n:'Primera Voz',d:'Publicar un comentario'},
+{id:'muro',ic:'🧱',n:'Muralista',d:'Escribir en el muro'},
+{id:'colec',ic:'❤️',n:'Coleccionista',d:'Dar 5 likes'},
+{id:'cronista',ic:'✍️',n:'Cronista',d:'Publicar una historia'},
+{id:'erudito',ic:'🧩',n:'Erudito',d:'Completar el quiz'},
+{id:'leyenda',ic:'👑',n:'Leyenda del Lore',d:'Quiz perfecto 12/12'},
+{id:'ciudadano',ic:'🗳️',n:'Ciudadano',d:'Votar en una encuesta'},
+{id:'estilista',ic:'🎨',n:'Estilista',d:'Cambiar el tema'}
+];
+function achData(){ try{ return JSON.parse(localStorage.getItem('zk_ach')||'{}'); }catch(e){ return {}; } }
+function unlockAch(id){
+  const a=achData(); if(a[id]) return;
+  a[id]=Date.now();
+  try{ localStorage.setItem('zk_ach',JSON.stringify(a)); }catch(e){}
+  const def=ACH.find(x=>x.id===id); if(!def) return;
+  toast('Logro desbloqueado: '+def.n,def.ic);
+  beep(980,0.09); setTimeout(()=>beep(1320,0.1),100);
+  renderAch();
+}
+function visitChapter(y){
+  try{
+    const v=JSON.parse(localStorage.getItem('zk_visits')||'[]');
+    if(!v.includes(y)){ v.push(y); localStorage.setItem('zk_visits',JSON.stringify(v)); }
+    if(['2022','2023','2024','2025','2026'].every(c=>v.includes(c))) unlockAch('cap5');
+  }catch(e){}
+}
+function bumpLikes(){
+  try{ const n=(+localStorage.getItem('zk_likes')||0)+1; localStorage.setItem('zk_likes',String(n)); if(n>=5) unlockAch('colec'); }catch(e){}
+}
+function renderAch(){
+  const g=$('#achGrid'); if(!g) return;
+  const a=achData();
+  g.innerHTML=ACH.map(x=>'<div class="ach'+(a[x.id]?' on':'')+'" title="'+escAttr(x.d)+'"><span class="aic">'+x.ic+'</span>'+escapeHtml(x.n)+'</div>').join('');
+  const c=$('#achCount'); if(c) c.textContent=Object.keys(a).length+'/'+ACH.length;
+}
+
+/* ---------- clanes: próximamente ---------- */
+const CLAN_INFO={
+admin:{ic:'👑',n:'Admin Community',t:'Pealz y Areyoumental: los guardianes con la tecnología más avanzada de todo TCO.'},
+mg:{ic:'⚔️',n:'Clan MG',t:'El imperio del terror de Damian y Napoleon: 5 meses hasta su caída en la Segunda Guerra.'},
+sdz:{ic:'💀',n:'Clan SDZ',t:'La copia fantasma de MG. Derrotados dos veces por el clan de Nam.'},
+tq:{ic:'🛡️',n:'Clan TQ',t:'El clan de Exotic y Enzo: vencedores de la Segunda Guerra Mundial de TCO.'},
+ijc:{ic:'🏴',n:'Clan IJC → ZK',t:'Nuestro clan: de 2 miembros a una leyenda de +30 almas.'},
+romaz:{ic:'💰',n:'RomazHUB',t:'El hub perfecto de 299 Robux... hasta el leak y la blacklist.'},
+namhub:{ic:'🧪',n:'NamHUB',t:'La respuesta gratis de Nam que llegó a superar al gigante.'},
+ls:{ic:'⚙️',n:'LS Legacy Service',t:'El laboratorio de System: cuna del Autobuild y el Paint.'}
+};
+function openClanModal(id){
+  const c=CLAN_INFO[id]; if(!c) return;
+  $('#clanIc').textContent=c.ic;
+  $('#clanName').textContent=c.n;
+  $('#clanTeaser').textContent=c.t;
+  openModal('clanModal'); beep(700,0.06);
+}
+
+/* ---------- quiz del lore ---------- */
+const QUIZ=[
+{q:'¿Qué día exacto entró Nam a The Chosen One?',o:['12 de noviembre de 2022','1 de enero de 2023','12 de octubre de 2022','5 de marzo de 2023'],a:0},
+{q:'¿Cuál es el User ID de Roblox de Nam?',o:['607353710','11137575513','607353711','299000110'],a:0},
+{q:'¿El script que crasheaba a todos en 2023?',o:[';bkit others',';crash all',';boom server',';raid mode'],a:0},
+{q:'¿El admin sin Robux con el que Nam construyó una ciudad?',o:['Sam','Damian','Pealz','System'],a:0},
+{q:'¿Qué le otorgó Damian a Nam antes de traicionarlo?',o:['ENLIGHTEN','BLIND','GLITCH','BKIT'],a:0},
+{q:'¿Quién le abrió los ojos a Nam en 2024?',o:['Enzo','Radical','Sam','Fonsi'],a:0},
+{q:'¿El bot que raideó el Discord de TQ?',o:['Pedro Invasoes','Bot Raid MX','Crash Pedro','Invasor 3000'],a:0},
+{q:'¿Fecha en que Enzo conoció a Tq_Pan?',o:['18 de enero de 2025','12 de febrero de 2025','1 de enero de 2024','3 de marzo de 2026'],a:0},
+{q:'¿El dúo de la Operación Guardia Nocturna?',o:['Enzo y Tq_Facu','Nam y Enzo','Radical y Adan','Exotic y Fonsi'],a:0},
+{q:'¿Cuánto costaba RomazHUB?',o:['299 Robux','199 Robux','499 Robux','Era gratis'],a:0},
+{q:'¿Quién sobrevivió la crash machine sin laggear?',o:['Radical','Adan','Stumblero','Zeen'],a:0},
+{q:'¿El clan SDZ resultó ser copia de...?',o:['Clan MG','Clan TQ','Admin Community','Clan LS'],a:0}
+];
+let quizState={i:0,score:0,done:false,lock:false};
+function renderQuiz(){
+  const box=$('#quizBox'); if(!box) return;
+  let best=0; try{ best=+localStorage.getItem('zk_quiz_best')||0; }catch(e){}
+  if(quizState.done){
+    const s=quizState.score, t=QUIZ.length;
+    const rank=s===t?'👑 LEYENDA DEL LORE':s>=9?'⚔️ VETERANO DE GUERRA':s>=6?'🛡️ SOLDADO DEL ARCHIVO':'🌱 RECLUTA CURIOSO';
+    box.innerHTML='<div class="quiz-card"><div class="quiz-score">'+s+'/'+t+'</div>'+
+      '<p style="font-size:1.2em;font-weight:800;color:var(--gold);margin:6px 0">'+rank+'</p>'+
+      '<p style="color:var(--mut);font-size:.9em">Mejor puntaje en este dispositivo: '+Math.max(best,s)+'/'+t+'</p>'+
+      '<div style="margin-top:18px;display:flex;gap:10px;justify-content:center"><button class="cta-btn" data-action="quiz-retry">🔄 REINTENTAR</button></div></div>';
+    return;
+  }
+  const qz=QUIZ[quizState.i];
+  box.innerHTML='<div class="quiz-card">'+
+    '<div style="font-size:.78em;color:var(--mut);letter-spacing:2px">PREGUNTA '+(quizState.i+1)+' / '+QUIZ.length+' · PUNTOS: '+quizState.score+'</div>'+
+    '<div class="quiz-prog"><i style="width:'+(quizState.i/QUIZ.length*100)+'%"></i></div>'+
+    '<div class="quiz-q">'+escapeHtml(qz.q)+'</div>'+
+    '<div class="quiz-opts">'+qz.o.map((o,i)=>'<button data-action="quiz-opt" data-opt="'+i+'">'+escapeHtml(o)+'</button>').join('')+'</div></div>';
+}
+function quizAnswer(i,btn){
+  if(quizState.lock||quizState.done) return;
+  quizState.lock=true;
+  const qz=QUIZ[quizState.i];
+  const opts=btn.parentNode.querySelectorAll('button');
+  opts.forEach((b,k)=>{ if(k===qz.a) b.classList.add('ok'); else if(k===i) b.classList.add('bad'); b.style.pointerEvents='none'; });
+  if(i===qz.a){ quizState.score++; beep(880,0.08); } else beep(220,0.12,'sawtooth',0.05);
+  setTimeout(()=>{
+    quizState.i++; quizState.lock=false;
+    if(quizState.i>=QUIZ.length){
+      quizState.done=true;
+      try{ const best=+localStorage.getItem('zk_quiz_best')||0; if(quizState.score>best) localStorage.setItem('zk_quiz_best',String(quizState.score)); }catch(e){}
+      unlockAch('erudito');
+      if(quizState.score===QUIZ.length){ unlockAch('leyenda'); fireConfetti(); }
+      else if(quizState.score>=9) fireConfetti();
+    }
+    renderQuiz();
+  },900);
+}
+
+/* ---------- encuestas ---------- */
+const POLLS=[
+{id:'villano',q:'¿Mejor villano de la saga?',o:['Damian (i11rl)','Napoleon','Hallow','Zeen']},
+{id:'hub',q:'¿Mejor hub de la historia?',o:['RomazHUB','NamHUB','LS Legacy']},
+{id:'momento',q:'¿Momento más épico?',o:['Batalla Final 2024','Guardia Nocturna','Fundación del IJC','Defensa vs SDZ']}
+];
+let pollCache={results:null,mine:{},online:false};
+async function renderPolls(){
+  const box=$('#pollsBox'); if(!box) return;
+  box.innerHTML='<div class="no-stories">Cargando encuestas...</div>';
+  const F=window.firebaseFunctions;
+  if(F&&window.firebaseDb&&me){
+    try{
+      const results={}, mine={};
+      for(const p of POLLS){
+        const snap=await F.getDocs(F.query(F.collection(window.firebaseDb,'pollvotes'),F.where('pollId','==',p.id)));
+        const counts=new Array(p.o.length).fill(0);
+        snap.forEach(d=>{ const v=d.data(); counts[v.opt]=(counts[v.opt]||0)+1; if(v.userId===me.id) mine[p.id]=v.opt; });
+        results[p.id]=counts;
+      }
+      pollCache={results:results,mine:mine,online:true};
+    }catch(e){ pollCache={results:null,mine:{},online:false}; }
+  }else{ pollCache={results:null,mine:{},online:false}; }
+  drawPolls();
+}
+function drawPolls(){
+  const box=$('#pollsBox'); if(!box) return;
+  const results=pollCache.results, mine=pollCache.mine, online=pollCache.online;
+  box.innerHTML=POLLS.map(p=>{
+    const counts=results?results[p.id]:null;
+    const total=counts?counts.reduce((a,b)=>a+b,0):0;
+    const myVote=mine[p.id];
+    return '<div class="poll"><h4>🗳️ '+escapeHtml(p.q)+'</h4>'+p.o.map((o,i)=>{
+      const c=counts?counts[i]:0; const pct=total?Math.round(c/total*100):0;
+      return '<div class="poll-opt'+(myVote===i?' mine':'')+'" data-action="vote" data-poll="'+p.id+'" data-opt="'+i+'">'+
+        '<div class="po-top"><span>'+escapeHtml(o)+(myVote===i?' ✔':'')+'</span><span>'+(counts?pct+'% · '+c+' voto'+(c!==1?'s':''):'—')+'</span></div>'+
+        '<div class="poll-bar"><i style="width:'+(counts?pct:0)+'%"></i></div></div>';
+    }).join('')+
+    '<div class="poll-meta">'+(online?'Votos en vivo desde la base del clan':'⚠️ Modo local: sin conexión a la base de datos')+((myVote!==undefined)?' · ya votaste':'')+'</div></div>';
+  }).join('');
+  requestAnimationFrame(()=>{ box.querySelectorAll('.poll-bar i').forEach(i=>{ const w=i.style.width; i.style.width='0'; requestAnimationFrame(()=>{ i.style.width=w; }); }); });
+}
+async function castVote(pollId,opt){
+  if(!me){ toast('Primero elegí tu apodo','👤'); return; }
+  const p=POLLS.find(x=>x.id===pollId); if(!p) return;
+  if(pollCache.mine&&pollCache.mine[pollId]!==undefined){ toast('Ya votaste en esta encuesta','🗳️'); return; }
+  opt=+opt;
+  const F=window.firebaseFunctions;
+  if(pollCache.online&&F&&window.firebaseDb){
+    try{ await F.addDoc(F.collection(window.firebaseDb,'pollvotes'),{ pollId:pollId, opt:opt, userId:me.id, userNick:me.nickname, createdAt:Date.now() }); }
+    catch(e){ toast('No se pudo votar online','⚠️'); return; }
+  }else{ toast('Voto guardado en modo local','⚠️'); }
+  pollCache.mine=pollCache.mine||{}; pollCache.mine[pollId]=opt;
+  if(pollCache.results){ pollCache.results[pollId][opt]=(pollCache.results[pollId][opt]||0)+1; }
+  unlockAch('ciudadano'); beep(760,0.06); drawPolls(); toast('Voto registrado','🗳️');
+}
+
+/* ---------- panel admin ---------- */
+async function openAdminPanel(){
+  if(!isAdminUser()){ toast('Solo admins del clan','🛡️'); return; }
+  openModal('adminModal');
+  const F=window.firebaseFunctions;
+  const cw=$('#admComments'), sw=$('#admStories');
+  cw.innerHTML='<div class="no-stories">Cargando...</div>'; sw.innerHTML='<div class="no-stories">Cargando...</div>';
+  if(!F||!window.firebaseDb){ cw.innerHTML='<div class="no-stories">Sin conexión</div>'; sw.innerHTML=''; return; }
+  try{
+    const cs=await F.getDocs(F.query(F.collection(window.firebaseDb,'comments'),F.orderBy('createdAt','desc'),F.limit(25)));
+    let html='', n=0;
+    cs.forEach(d=>{ const c=d.data(); n++;
+      const ic=((c.context||'')==='muro')?'🧱':((c.context||'').startsWith('story')?'📖':'💬');
+      html+='<div class="adm-row"><span>'+ic+'</span><span class="adm-txt"><strong>'+escapeHtml(c.userNick||'?')+'</strong>: '+escapeHtml((c.text||'').slice(0,70))+'</span><button class="delete-btn" data-action="del-comment" data-id="'+d.id+'">🗑️</button></div>';
+    });
+    cw.innerHTML=n?html:'<div class="no-stories">Sin comentarios</div>';
+    const ss=await F.getDocs(F.query(F.collection(window.firebaseDb,'stories'),F.orderBy('createdAt','desc'),F.limit(15)));
+    let html2='', m=0;
+    ss.forEach(d=>{ const s=d.data(); m++;
+      html2+='<div class="adm-row"><span>📖</span><span class="adm-txt"><strong>'+escapeHtml(s.name||'')+'</strong> por '+escapeHtml(s.userNick||'?')+'</span><button class="delete-btn" data-action="del-story" data-id="'+d.id+'">🗑️</button></div>';
+    });
+    sw.innerHTML=m?html2:'<div class="no-stories">Sin historias</div>';
+  }catch(e){
+    cw.innerHTML='<div class="no-stories">Error: '+escapeHtml(e.message)+' (¿permisos o índice?)</div>'; sw.innerHTML='';
+  }
+}
+
+/* ---------- PWA: service worker ---------- */
+if('serviceWorker' in navigator){
+  window.addEventListener('load',()=>{ try{ navigator.serviceWorker.register('sw.js').catch(()=>{}); }catch(e){} });
+}
+
 </script>
 </body>
 </html>
+

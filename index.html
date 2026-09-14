@@ -18,6 +18,12 @@
             font-family: 'Helvetica Neue', Arial, sans-serif;
             line-height: 1.6;
             overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        body.dark-mode {
+            background-color: #0a0a0a;
+            color: #e0e0e0;
         }
 
         nav {
@@ -30,6 +36,12 @@
             z-index: 1000;
             border-bottom: 1px solid #eaeaea;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode nav {
+            background: rgba(20, 20, 20, 0.98);
+            border-bottom-color: #333;
         }
 
         nav ul {
@@ -53,6 +65,10 @@
             padding: 5px 10px;
         }
 
+        body.dark-mode nav a {
+            color: #e0e0e0;
+        }
+
         nav a::after {
             content: '';
             position: absolute;
@@ -65,6 +81,10 @@
             transform: translateX(-50%);
         }
 
+        body.dark-mode nav a::after {
+            background-color: #667eea;
+        }
+
         nav a:hover::after {
             width: 80%;
         }
@@ -74,7 +94,11 @@
             border-radius: 5px;
         }
 
-        .extras-btn {
+        body.dark-mode nav a:hover {
+            background: #1a1a1a;
+        }
+
+        .extras-btn, .settings-btn {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white !important;
             padding: 8px 20px !important;
@@ -88,9 +112,13 @@
             transition: all 0.3s ease;
         }
 
-        .extras-btn:hover {
+        .extras-btn:hover, .settings-btn:hover {
             transform: scale(1.05);
             box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .settings-btn {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
         }
 
         .hero {
@@ -102,6 +130,11 @@
             text-align: center;
             padding: 120px 20px 60px;
             background: linear-gradient(135deg, #fafafa 0%, #ffffff 100%);
+            transition: background 0.3s ease;
+        }
+
+        body.dark-mode .hero {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
         }
 
         .game-icon {
@@ -136,6 +169,10 @@
             letter-spacing: 0;
         }
 
+        body.dark-mode .hero h1 span {
+            color: #999;
+        }
+
         .hero p {
             font-size: 1.3em;
             color: #666;
@@ -151,6 +188,11 @@
             align-items: center;
             border-top: 1px solid #f0f0f0;
             position: relative;
+            transition: border-color 0.3s ease;
+        }
+
+        body.dark-mode .year-section {
+            border-top-color: #222;
         }
 
         .year-section::before {
@@ -162,6 +204,10 @@
             width: 1px;
             height: 60px;
             background: linear-gradient(to bottom, #eaeaea, transparent);
+        }
+
+        body.dark-mode .year-section::before {
+            background: linear-gradient(to bottom, #333, transparent);
         }
 
         .year-label {
@@ -196,13 +242,17 @@
             font-weight: 300;
         }
 
+        body.dark-mode .year-subtitle {
+            color: #999;
+        }
+
         .year-title.visible, .year-subtitle.visible {
             opacity: 1;
             transform: translateY(0);
         }
 
         .story-card {
-            max-width: 1000px;
+            max-width: 1100px;
             width: 100%;
             display: flex;
             gap: 60px;
@@ -215,6 +265,11 @@
             border-radius: 24px;
             border: 1px solid #f0f0f0;
             box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+        }
+
+        body.dark-mode .story-card {
+            background: #1a1a1a;
+            border-color: #333;
         }
 
         .story-card.visible {
@@ -236,6 +291,10 @@
             background: #f0f0f0;
             box-shadow: 0 15px 40px rgba(0,0,0,0.15);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        body.dark-mode .player-avatar {
+            border-color: #333;
         }
 
         .player-avatar:hover {
@@ -265,6 +324,10 @@
             color: #111;
         }
 
+        body.dark-mode .story-content h3 {
+            color: #e0e0e0;
+        }
+
         .story-content p {
             font-size: 1.15em;
             color: #444;
@@ -272,11 +335,20 @@
             margin-bottom: 25px;
         }
 
+        body.dark-mode .story-content p {
+            color: #ccc;
+        }
+
         .highlight {
             color: #111;
             font-weight: 700;
             border-bottom: 2px solid #111;
             padding-bottom: 2px;
+        }
+
+        body.dark-mode .highlight {
+            color: #667eea;
+            border-bottom-color: #667eea;
         }
 
         .warning-box {
@@ -288,10 +360,18 @@
             box-shadow: 0 5px 15px rgba(255,68,68,0.1);
         }
 
+        body.dark-mode .warning-box {
+            background: linear-gradient(135deg, #2a1a1a 0%, #1a0f0f 100%);
+        }
+
         .warning-box p {
             margin: 0;
             color: #555;
             font-style: italic;
+        }
+
+        body.dark-mode .warning-box p {
+            color: #ccc;
         }
 
         .info-box {
@@ -302,9 +382,17 @@
             border-radius: 12px;
         }
 
+        body.dark-mode .info-box {
+            background: #1a1a2e;
+        }
+
         .info-box p {
             margin: 0;
             color: #555;
+        }
+
+        body.dark-mode .info-box p {
+            color: #ccc;
         }
 
         .character-showcase {
@@ -324,6 +412,11 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
+        body.dark-mode .character-card {
+            background: #1a1a1a;
+            border-color: #333;
+        }
+
         .character-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 30px rgba(0,0,0,0.1);
@@ -338,16 +431,28 @@
             border: 3px solid #eaeaea;
         }
 
+        body.dark-mode .character-card img {
+            border-color: #333;
+        }
+
         .character-card h4 {
             font-size: 1.2em;
             margin-bottom: 5px;
             color: #111;
         }
 
+        body.dark-mode .character-card h4 {
+            color: #e0e0e0;
+        }
+
         .character-card p {
             font-size: 0.9em;
             color: #666;
             margin: 0;
+        }
+
+        body.dark-mode .character-card p {
+            color: #999;
         }
 
         .role-ally {
@@ -385,6 +490,10 @@
             letter-spacing: 0.5px;
         }
 
+        body.dark-mode .date-badge {
+            background: #667eea;
+        }
+
         .battle-section {
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
             color: white;
@@ -415,10 +524,18 @@
             text-align: center;
         }
 
+        body.dark-mode .victory-box {
+            background: linear-gradient(135deg, #1a2f1a 0%, #163e16 100%);
+        }
+
         .victory-box h3 {
             color: #155724;
             font-size: 1.8em;
             margin-bottom: 15px;
+        }
+
+        body.dark-mode .victory-box h3 {
+            color: #22c55e;
         }
 
         .modal {
@@ -453,6 +570,11 @@
             box-shadow: 0 25px 50px rgba(0,0,0,0.25);
         }
 
+        body.dark-mode .modal-content {
+            background: #1a1a1a;
+            border-color: #333;
+        }
+
         .modal-close {
             position: absolute;
             top: 20px;
@@ -471,8 +593,16 @@
             transition: all 0.3s ease;
         }
 
+        body.dark-mode .modal-close {
+            color: #e0e0e0;
+        }
+
         .modal-close:hover {
             background: #f0f0f0;
+        }
+
+        body.dark-mode .modal-close:hover {
+            background: #333;
         }
 
         .modal h2 {
@@ -481,10 +611,18 @@
             margin-bottom: 10px;
         }
 
+        body.dark-mode .modal h2 {
+            color: #e0e0e0;
+        }
+
         .modal > .modal-content > p {
             color: #666;
             margin-bottom: 30px;
             font-size: 1.1em;
+        }
+
+        body.dark-mode .modal > .modal-content > p {
+            color: #999;
         }
 
         .clans-grid {
@@ -501,6 +639,11 @@
             padding: 30px;
             transition: all 0.3s ease;
             text-align: center;
+        }
+
+        body.dark-mode .clan-card {
+            background: #1a1a1a;
+            border-color: #333;
         }
 
         .clan-card:hover {
@@ -531,10 +674,18 @@
             color: #111;
         }
 
+        body.dark-mode .clan-card h4 {
+            color: #e0e0e0;
+        }
+
         .clan-card p {
             color: #666;
             font-size: 0.95em;
             line-height: 1.6;
+        }
+
+        body.dark-mode .clan-card p {
+            color: #999;
         }
 
         .clan-tag {
@@ -547,9 +698,79 @@
             font-weight: 600;
         }
 
+        body.dark-mode .clan-tag {
+            background: #333;
+        }
+
         .clan-card.special .clan-tag {
             background: rgba(255,255,255,0.2);
             color: white;
+        }
+
+        /* BOTÓN VOLVER ARRIBA */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            z-index: 999;
+            font-size: 1.5em;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .back-to-top.visible {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .back-to-top:hover {
+            transform: scale(1.1);
+        }
+
+        /* BARRA DE PROGRESO DE LECTURA */
+        .reading-progress {
+            position: fixed;
+            top: 80px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: #f0f0f0;
+            z-index: 999;
+        }
+
+        body.dark-mode .reading-progress {
+            background: #1a1a1a;
+        }
+
+        .reading-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            width: 0%;
+            transition: width 0.1s ease;
+        }
+
+        /* CONTADOR DE PERSONAJES */
+        .character-counter {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 0.9em;
+            font-weight: 600;
+            box-shadow: 0 10px 30px rgba(34, 197, 94, 0.4);
+            z-index: 999;
         }
 
         footer {
@@ -559,10 +780,76 @@
             border-top: 1px solid #eaeaea;
             color: #888;
             font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode footer {
+            background: #0a0a0a;
+            border-top-color: #222;
         }
 
         footer p {
             margin: 5px 0;
+        }
+
+        /* SETTINGS PANEL */
+        .settings-panel {
+            background: white;
+            border: 2px solid #eaeaea;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+        }
+
+        body.dark-mode .settings-panel {
+            background: #1a1a1a;
+            border-color: #333;
+        }
+
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        body.dark-mode .setting-item {
+            border-bottom-color: #333;
+        }
+
+        .setting-item:last-child {
+            border-bottom: none;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: #ddd;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-switch.active {
+            background: #667eea;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 24px;
+            height: 24px;
+            background: white;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .toggle-switch.active .toggle-slider {
+            left: 33px;
         }
 
         @media (max-width: 968px) {
@@ -595,6 +882,19 @@
 </head>
 <body>
 
+    <!-- BARRA DE PROGRESO DE LECTURA -->
+    <div class="reading-progress">
+        <div class="reading-progress-bar" id="readingProgress"></div>
+    </div>
+
+    <!-- CONTADOR DE PERSONAJES -->
+    <div class="character-counter" id="characterCounter">
+        👥 Personajes: 10
+    </div>
+
+    <!-- BOTÓN VOLVER ARRIBA -->
+    <button class="back-to-top" id="backToTop" onclick="scrollToTop()">↑</button>
+
     <nav>
         <ul>
             <li><a href="#inicio">Inicio</a></li>
@@ -603,15 +903,63 @@
             <li><a href="#2024">2024</a></li>
             <li><a href="#2025">2025</a></li>
             <li><a href="#2026">2026</a></li>
+            <li><button class="settings-btn" onclick="openSettings()">⚙️</button></li>
             <li><button class="extras-btn" onclick="openExtras()">📚 Extras</button></li>
         </ul>
     </nav>
+
+    <!-- MODAL DE AJUSTES -->
+    <div class="modal" id="settingsModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeSettings()">×</button>
+            <h2>⚙️ Ajustes</h2>
+            <p>Personalizá tu experiencia de lectura</p>
+            
+            <div class="settings-panel">
+                <div class="setting-item">
+                    <div>
+                        <h4 style="margin-bottom: 5px;">🌙 Modo Oscuro</h4>
+                        <p style="font-size: 0.9em; color: #666;">Cambia el tema de la página</p>
+                    </div>
+                    <div class="toggle-switch" id="darkModeToggle" onclick="toggleDarkMode()">
+                        <div class="toggle-slider"></div>
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <div>
+                        <h4 style="margin-bottom: 5px;">📊 Barra de Progreso</h4>
+                        <p style="font-size: 0.9em; color: #666;">Muestra el progreso de lectura</p>
+                    </div>
+                    <div class="toggle-switch active" id="progressToggle" onclick="toggleProgress()">
+                        <div class="toggle-slider"></div>
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <div>
+                        <h4 style="margin-bottom: 5px;">👥 Contador de Personajes</h4>
+                        <p style="font-size: 0.9em; color: #666;">Muestra el contador flotante</p>
+                    </div>
+                    <div class="toggle-switch active" id="counterToggle" onclick="toggleCounter()">
+                        <div class="toggle-slider"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 30px; padding: 20px; background: #f8f9fa; border-radius: 10px;">
+                <p style="color: #666; font-size: 0.9em;">
+                    💡 <strong>Tip:</strong> Todos los ajustes se guardan automáticamente en tu navegador.
+                </p>
+            </div>
+        </div>
+    </div>
 
     <!-- MODAL DE EXTRAS -->
     <div class="modal" id="extrasModal">
         <div class="modal-content">
             <button class="modal-close" onclick="closeExtras()">×</button>
-            <h2> Otros Clanes</h2>
+            <h2>📚 Otros Clanes</h2>
             <p>Clanes y facciones que formaron parte de la historia de The Chosen One</p>
             
             <div class="clans-grid">
@@ -623,9 +971,9 @@
                 </div>
 
                 <div class="clan-card">
-                    <div class="clan-icon">️</div>
+                    <div class="clan-icon">⚔️</div>
                     <h4>Clan MG</h4>
-                    <p>Clan formado por <strong>Damian (i11rl)</strong> y <strong>Napoleon</strong>. Duró aproximadamente 5 meses antes de disolverse.</p>
+                    <p>Clan formado por <strong>Damian (i11rl)</strong> y <strong>Napoleon</strong>. Duró aproximadamente 5 meses antes de disolverse tras la Segunda Guerra Mundial.</p>
                     <span class="clan-tag">5 Meses de Historia</span>
                 </div>
 
@@ -731,7 +1079,7 @@
         </div>
     </section>
 
-    <!-- AÑO 2024 - REORGANIZADO -->
+    <!-- AÑO 2024 -->
     <section class="year-section" id="2024">
         <div class="year-label">Capítulo III - La Gran Guerra</div>
         <h2 class="year-title">2024</h2>
@@ -750,7 +1098,6 @@
                     <span class="highlight">Enero a Junio 2024</span> fueron meses de paz aparente. Todo funcionaba a la perfección en los servidores latinos de <em>The Chosen One</em>. Pero el destino tenía preparados capítulos oscuros que cambiarían todo para siempre.
                 </p>
 
-                <!-- NUEVA SECCIÓN: SAM (al principio) -->
                 <h3 style="margin-top: 40px; font-size: 1.6em; color: #111;">El encuentro con Sam</h3>
                 <p>
                     Un día, Nam entró a <em>The Chosen One</em> como todos lo haríamos: con la esperanza de encontrar un servidor activo. Pero lo que encontró fue algo distinto: <strong>un server completamente solo</strong>. Solo había un jugador más: el admin, llamado <span class="highlight">Sam</span>.
@@ -769,7 +1116,6 @@
                     <p>⚠️ <strong>El giro del destino:</strong> Con el tiempo, Sam se hizo amigo de <strong>Damian (i11rl)</strong>. Aunque <strong>Sam nunca estuvo involucrado directamente en la pelea</strong>, su conexión con el antagonista principal no fue casualidad. <em>¿Qué papel jugará en 2025?</em> Eso... es otra historia. 🔮</p>
                 </div>
 
-                <!-- PERSONAJES CLAVES MOVIDOS AL PRINCIPIO -->
                 <div class="info-box" style="background: linear-gradient(135deg, #fff3cd 0%, #ffe69c 100%); border-left-color: #ffc107; margin-top: 40px;">
                     <p><strong>👥 Personajes Clave de esta Historia:</strong></p>
                 </div>
@@ -793,7 +1139,7 @@
                         <img src="images/sam.png" alt="Sam" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Crect fill=%22%23f59e0b%22 width=%22120%22 height=%22120%22 rx=%2260%22/%3E%3Ctext fill=%22white%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2230%22%3ES%3C/text%3E%3C/svg%3E'">
                         <h4>Sam</h4>
                         <p class="role-neutral">El Arquitecto</p>
-                        <p style="font-size: 0.85em; margin-top: 5px;">Primer amigo en TCO<br> Clave en 2025</p>
+                        <p style="font-size: 0.85em; margin-top: 5px;">Primer amigo en TCO<br>🔮 Clave en 2025</p>
                     </div>
                     
                     <div class="character-card">
@@ -818,7 +1164,6 @@
                     </div>
                 </div>
 
-                <!-- HISTORIA DE DAMIAN -->
                 <h3 style="margin-top: 50px; font-size: 1.8em; color: #111;">La traición de Damian</h3>
                 <p>
                     Todo comenzó cuando Nam se unió a un servidor común y corriente. El admin era <strong>i11rl (Damian)</strong>. En un gesto de buena voluntad, Nam le construyó un <span class="highlight">trono épico</span> y le pidió bkit. Como recompensa, Damian le otorgó <span class="highlight">ENLIGHTEN</span>! 😊 Parecía el inicio de una gran amistad.
@@ -835,7 +1180,6 @@
                     Su modus operandi era claro: difamación, mentiras, culpar a otros sin razón. Se comportaba como un niño de 8 años, aunque afirmaba tener 17. En un giro inesperado, <strong>pidió perdón y se hicieron amigos</strong> (alrededor de noviembre). Pero era una ilusión: <span class="highlight">Damian manipulaba a Nam</span>, quien lo ayudaba para que "le crean", sin saber que era parte del juego.
                 </p>
 
-                <!-- EL DESPERTAR (CORREGIDO) -->
                 <h3 style="margin-top: 50px; font-size: 1.8em; color: #111;">El Despertar</h3>
                 <p>
                     Un día, llegó alguien que cambiaría el curso de la historia: <span class="highlight">Enzo 🥹</span> (también conocido como Diego), miembro del clan <strong>TQ</strong>. Enzo le contó a Nam sobre su propia batalla con Damian. Ese día, <strong>Nam abrió los ojos</strong>. Pensó en todo lo sucedido, en la manipulación, en las mentiras... y <span class="highlight">decidió luchar</span>.
@@ -851,13 +1195,13 @@
                         Nam y Diego ejecutaron un plan maestro. Mientras ellos lanzaban <span style="color: #ffd700; font-weight: bold;">ataques de scripts</span>, el trío enemigo (i11rl, Snoopy y Napoleon) respondía con difamación, mentiras y culpas infundadas. Damian usaba scripts maliciosos e intentaba que Nam volviera a su lado... pero eso ya no pasaría.
                     </p>
                     <p style="margin-top: 20px; font-size: 1.3em;">
-                        <strong>️ Duración: Más de 1 hora de batalla épica</strong><br>
+                        <strong>⏱️ Duración: Más de 1 hora de batalla épica</strong><br>
                         <strong>🏳️ Resultado: El enemigo hizo RQ (se rindió)</strong>
                     </p>
                 </div>
 
                 <div class="victory-box">
-                    <h3> ¡VICTORIA! </h3>
+                    <h3>🎉 ¡VICTORIA! 🎉</h3>
                     <p style="font-size: 1.1em; margin-bottom: 15px;">
                         <strong>¡GANAMOS LA BATALLA!</strong> 🥳<br>
                         Liberamos medio TCO Español
@@ -877,9 +1221,9 @@
 
                 <div class="timeline-dates">
                     <span class="date-badge">📅 Enero-Junio: Paz</span>
-                    <span class="date-badge">️ Sam el Arquitecto</span>
-                    <span class="date-badge">️ Traición de Damian</span>
-                    <span class="date-badge"> Nam abre los ojos</span>
+                    <span class="date-badge">🏗️ Sam el Arquitecto</span>
+                    <span class="date-badge">💔 Traición de Damian</span>
+                    <span class="date-badge">🥹 Nam abre los ojos</span>
                     <span class="date-badge">⚔️ Batalla 1+ hora</span>
                     <span class="date-badge">🏆 Victoria Total</span>
                 </div>
@@ -892,22 +1236,202 @@
         </div>
     </section>
 
-    <!-- AÑO 2025 - SPOILER -->
+    <!-- AÑO 2025 - HISTORIA COMPLETA DE ENZO -->
     <section class="year-section" id="2025">
-        <div class="year-label">Capítulo IV - El Futuro</div>
+        <div class="year-label">Capítulo IV - La Segunda Guerra Mundial</div>
         <h2 class="year-title">2025</h2>
-        <p class="year-subtitle">Las sombras del pasado regresan</p>
+        <p class="year-subtitle">La perspectiva de Enzo: Espionaje, traición y guerra total</p>
+        
         <div class="story-card">
-            <div class="story-content" style="width: 100%;">
-                <div class="warning-box" style="text-align: center;">
-                    <p style="font-size: 1.2em;"><strong>📖 Próximamente...</strong></p>
+            <div class="avatar-container">
+                <img src="images/enzo.png" 
+                     alt="Avatar de Enzo" 
+                     class="player-avatar"
+                     onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'avatar-placeholder\'>Enzo</div>'">
+            </div>
+            <div class="story-content">
+                <h3>El espía en las sombras</h3>
+                <p>
+                    Mientras <strong>Nam se alejaba de TCO</strong> a finales de 2024, <span class="highlight">Enzo no abandonó el juego</span>. Al contrario, inició una misión secreta: crear <strong>cuentas alternativas (alts)</strong> para infiltrarse y observar desde las sombras. Lo que descubriría cambiaría todo...
+                </p>
+
+                <div class="info-box" style="background: linear-gradient(135deg, #fff3cd 0%, #ffe69c 100%); border-left-color: #ffc107;">
+                    <p><strong>👥 Nuevos Personajes Clave de 2025:</strong></p>
+                </div>
+
+                <div class="character-showcase">
+                    <div class="character-card">
+                        <img src="images/enzo.png" alt="Enzo" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Crect fill=%22%2322c55e%22 width=%22120%22 height=%22120%22 rx=%2260%22/%3E%3Ctext fill=%22white%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2230%22%3EE%3C/text%3E%3C/svg%3E'">
+                        <h4>Enzo (Diego)</h4>
+                        <p class="role-ally">Protagonista 2025</p>
+                        <p style="font-size: 0.85em; margin-top: 5px;">enzors19209<br>🕵️ El Espía</p>
+                    </div>
+
+                    <div class="character-card">
+                        <img src="images/exotic.png" alt="Exotic" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Crect fill=%22%2322c55e%22 width=%22120%22 height=%22120%22 rx=%2260%22/%3E%3Ctext fill=%22white%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2230%22%3EX%3C/text%3E%3C/svg%3E'">
+                        <h4>Tq_EX0T1C</h4>
+                        <p class="role-ally">Líder de TQ</p>
+                        <p style="font-size: 0.85em; margin-top: 5px;">Fundador del clan<br>👑 Líder Principal</p>
+                    </div>
+
+                    <div class="character-card">
+                        <img src="images/fonsi.png" alt="Fonsi" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Crect fill=%22%23f59e0b%22 width=%22120%22 height=%22120%22 rx=%2260%22/%3E%3Ctext fill=%22white%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2230%22%3EF%3C/text%3E%3C/svg%3E'">
+                        <h4>Fonsi</h4>
+                        <p class="role-neutral">Aliado Temporal</p>
+                        <p style="font-size: 0.85em; margin-top: 5px;">@elchiquitin38<br>Amigo de Exotic</p>
+                    </div>
+
+                    <div class="character-card">
+                        <img src="images/facu.png" alt="Tq_Facu" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Crect fill=%22%2322c55e%22 width=%22120%22 height=%22120%22 rx=%2260%22/%3E%3Ctext fill=%22white%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2230%22%3EF%3C/text%3E%3C/svg%3E'">
+                        <h4>Tq_Facu</h4>
+                        <p class="role-ally">Compañero de Misión</p>
+                        <p style="font-size: 0.85em; margin-top: 5px;">Operación Guardia Nocturna<br>🕵️ Agente Doble</p>
+                    </div>
+
+                    <div class="character-card">
+                        <img src="images/pan.png" alt="Tq_Pan" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Crect fill=%22%2322c55e%22 width=%22120%22 height=%22120%22 rx=%2260%22/%3E%3Ctext fill=%22white%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2230%22%3EP%3C/text%3E%3C/svg%3E'">
+                        <h4>Tq_Pan</h4>
+                        <p class="role-ally">Nueva Amiga</p>
+                        <p style="font-size: 0.85em; margin-top: 5px;">Conocida el 18/01/2025<br>🤝 Aliada</p>
+                    </div>
+
+                    <div class="character-card">
+                        <img src="images/gonza.png" alt="Gonza" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Crect fill=%22%23f59e0b%22 width=%22120%22 height=%22120%22 rx=%2260%22/%3E%3Ctext fill=%22white%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2230%22%3EG%3C/text%3E%3C/svg%3E'">
+                        <h4>Gonza</h4>
+                        <p class="role-neutral">Conflictivo</p>
+                        <p style="font-size: 0.85em; margin-top: 5px;">Ex miembro de TQ<br>⚠️ Traicionado por Hallow</p>
+                    </div>
+
+                    <div class="character-card">
+                        <img src="images/hallow.png" alt="Hallow" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Crect fill=%22%23ef4444%22 width=%22120%22 height=%22120%22 rx=%2260%22/%3E%3Ctext fill=%22white%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2230%22%3EH%3C/text%3E%3C/svg%3E'">
+                        <h4>Hallow</h4>
+                        <p class="role-enemy">Antagonista Interno</p>
+                        <p style="font-size: 0.85em; margin-top: 5px;">Llamó traidor a Gonza<br>💔 Creó conflictos</p>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 50px; font-size: 1.8em; color: #111;">🕵️ ESPIONAJE: Meses antes de Diciembre 2024</h3>
+                <p>
+                    Enzo inició sesión en sus <strong>cuentas alternativas</strong> y se convirtió en un <span class="highlight">espía digital</span>. Observaba desde las sombras lo que hacían <strong>Damián y Napoleón</strong>. Lo que descubrió fue impactante:
+                </p>
+                <p>
+                    Ellos estaban con el <strong>Clan TQ</strong> (en el que Enzo tenía amigos en su cuenta principal <em>enzors19209</em>, que actualmente es su Discord). Enzo observó cómo Damián estaba en un servidor con Sam, usando una alt llamada <strong>@ElJordans0</strong>.
+                </p>
+
+                <div class="warning-box" style="background: linear-gradient(135deg, #e7f3ff 0%, #cce5ff 100%); border-left-color: #0066cc;">
+                    <p><strong>🔍 El incidente con Fonsi:</strong> Se unió al servidor un amigo de <strong>Tq_EX0T1C</strong> (líder y fundador del clan TQ), llamado <strong>Fonsi</strong>. En ese momento, Fonsi estaba usando una alt que Exotic le había regalado: <em>@elchiquitin38</em>. Fonsi estaba <span class="highlight">raideando a Damián</span> debido a que este estaba abusando de su administrador, teniendo demasiado tiempo y torturando al servidor latino con construcciones absurdas como <strong>ciudades y un puente extremadamente largo</strong>. Enzo se retiró antes de levantar sospechas.</p>
+                </div>
+
+                <h3 style="margin-top: 50px; font-size: 1.8em; color: #111;">📅 FINALES DE DICIEMBRE 2024: La confrontación</h3>
+                <p>
+                    Ya en su cuenta original <em>enzors19209</em>, Enzo estaba con miembros del clan TQ: <strong>Exotic, Little</strong>, entre otros. Entonces apareció <strong>Napoleón</strong> y le reclamó por qué nunca le escribía en Discord.
+                </p>
+                <p>
+                    Enzo chateó con Napoleón un buen rato, y de esos chats <span class="highlight">sacaron evidencias cruciales</span>. Napoleón admitió cosas como <em>"Manipulé a Gonza"</em>. Esto llevó a Napoleón a <strong>crashear el servidor</strong> donde estaban todos.
+                </p>
+                <p>
+                    Enzo, enfurecido por haberse metido con sus amigos y con él nuevamente, tomó una decisión: <span class="highlight">unirse al clan TQ para frenar de una vez por todas toda esta estupidez</span>. Exotic lo aceptó, chatearon por Discord y le mandó el link del servidor del clan TQ.
+                </p>
+
+                <div class="warning-box">
+                    <p><strong>💥 El ataque de Napoleón:</strong> Como siempre, NO DURÓ MUCHO. Napoleón se unió al servidor de Discord del clan TQ con un bot llamado <strong>"Pedro Invasoes"</strong> y lo raideó todo. Tuvieron que recrear otro servidor de Discord para recuperarse de los ataques de los líderes del clan MG.</p>
+                </div>
+
+                <h3 style="margin-top: 50px; font-size: 1.8em; color: #111;">🌅 INICIOS DE 2025: Nuevas alianzas</h3>
+                <p>
+                    En el clan TQ, Enzo conoció a varias personas, incluyendo a una chica llamada <strong>Tq_Pan</strong>. Tuvieron chats, se hicieron buenos amigos y Enzo le mostró las <span class="highlight">evidencias en contra del clan MG</span>. Se conocieron el <strong>18 de Enero del 2025</strong>.
+                </p>
+
+                <h3 style="margin-top: 50px; font-size: 1.8em; color: #111;">🤝 ALIANZA TEMPORAL TQ + MG</h3>
+                <p>
+                    Por un tiempo, el clan TQ se alió con el clan MG. Pero <strong>Hallow</strong> estuvo en desacuerdo y llamó <em>"traidor"</em> a <strong>Gonza</strong> (que era miembro de TQ en ese momento). Esto llevó a Gonza a distanciarse y odiar profundamente a Hallow.
+                </p>
+                <p>
+                    Enzo, sin embargo, estaba bien tanto con Gonza como con Hallow. No tenía problemas con ninguno para discutir.
+                </p>
+
+                <div class="warning-box" style="background: linear-gradient(135deg, #fff5f5 0%, #ffe5e5 100%); border-left-color: #ff4444;">
+                    <p><strong>⚠️ La ruptura definitiva:</strong> Napoleón y Damián comenzaron a enviar insultos, mensajes racistas, creyéndose los mejores, y subiendo contenido +18 en las cuentas de Discord del clan TQ. Esto rompió de forma definitiva la paz. <span class="highlight">El clan TQ declaró oficialmente la GUERRA contra el clan MG</span>. Gracias a todo lo que mandaban en Discord y Roblox, TQ sacó puras evidencias en contra, pero aún necesitaban más para defenderse.</p>
+                </div>
+
+                <h3 style="margin-top: 50px; font-size: 1.8em; color: #111;">🌙 OPERACIÓN: GUARDIA NOCTURNA (Finales de Enero 2025)</h3>
+                <p>
+                    Esta fue una de las misiones más épicas de la historia de TCO. Enzo (<em>enzors19209</em>) y un miembro llamado <strong>Tq_Facu</strong> se infiltraron en el clan MG usando <span class="highlight">multicuentas de Discord</span>.
+                </p>
+                <p>
+                    Enzo creaba cuentas alternativas y Napoleón le mandaba links de invitación por Discord. Enzo luego los mandaba a su alt para que Tq_Facu los usara. Así, pudieron <strong>mostrar evidencias en contra del clan MG por MD</strong> a los miembros que pertenecían a esa "oscuridad profunda", para que se largaran antes de que el clan MG llegara a más de 100 miembros.
+                </p>
+
+                <div class="battle-section">
+                    <h3>⚔️ SEGUNDA GUERRA MUNDIAL DE TCO ⚔️</h3>
+                    <p style="font-size: 1.2em; margin-bottom: 20px;"><strong>Finales de Enero - Inicios de Febrero 2025</strong></p>
+                    <p>
+                        Se declaró <span style="color: #ffd700; font-weight: bold;">oficialmente la GUERRA del CLAN TQ CONTRA EL CLAN MG</span>. Los líderes Napoleón y Damián se enfurecieron debido a la Operación Guardia Nocturna.
+                    </p>
                     <p style="margin-top: 20px;">
-                        Enzo estaba en Alts para hacerse el inactivo.<br>
-                        Damian y Napoleon estaban con sus amigos del clan TQ.<br>
-                        Y vio los abusos de parte de Napoleon y Damian...<br>
-                        <span style="color: #666; font-size: 0.9em;">[Continuará]</span>
+                        Ellos difamaban al clan TQ diciendo que usaban <em>Exploits</em>, cuando solo los usaban en defensa personal y sin abusar. Los llamaban <em>raiders, griefers</em>, etc.
+                    </p>
+                    <p style="margin-top: 20px; font-size: 1.3em;">
+                        <strong>Pero TQ se defendió:</strong> Pusieron las evidencias en ID (Discord) para que todo el servidor las viera. Cada texto que mandaba MG, TQ le sacaba evidencias. Enzo y Facu siguieron así, hasta que pararon.
                     </p>
                 </div>
+
+                <h3 style="margin-top: 50px; font-size: 1.8em; color: #111;">💥 FEBRERO 2025: El intento de crash</h3>
+                <p>
+                    En otro servidor de <em>The Chosen One</em>, donde TQ se unía y tenía que defenderse de Napoleón y MG (aunque ya algunos miembros de MG se habían unido a TQ por las evidencias), <strong>Napoleón presionó a un administrador</strong> para tratar de crashear todo el servidor.
+                </p>
+                <p>
+                    Pero <span class="highlight">fracasó</span>. El administrador hizo <em>delcubes all</em> y Enzo logró soportarlo, atrayendo así a los miembros del clan TQ para defenderse con evidencias y, a veces, con Exploits si ellos trataban de hacerles algo.
+                </p>
+
+                <h3 style="margin-top: 50px; font-size: 1.8em; color: #111;">🏆 FINALES DE FEBRERO - INICIOS DE MARZO 2025: La victoria</h3>
+                <p>
+                    Debido a la guerra (la <strong>Segunda Guerra Mundial en The Chosen One</strong>), el clan MG fue cayendo poco a poco. El <span class="highlight">clan TQ ganó oficialmente la guerra</span>, consiguiendo más miembros, beneficios, canales, mejores líderes, etc.
+                </p>
+
+                <div class="victory-box">
+                    <h3>🎉 ¡VICTORIA TOTAL DEL CLAN TQ! 🎉</h3>
+                    <p style="font-size: 1.1em; margin-bottom: 15px;">
+                        <strong>¡El clan MG fue derrotado!</strong> 🥳<br>
+                        La Segunda Guerra Mundial de TCO terminó
+                    </p>
+                    <p style="color: #555;">
+                        El clan TQ emergió como la facción más fuerte y respetada de la comunidad latina de <em>The Chosen One</em>.
+                    </p>
+                </div>
+
+                <h3 style="margin-top: 50px; font-size: 1.8em; color: #111;">📉 MARZO 2025: El declive de TQ</h3>
+                <p>
+                    El clan TQ fue luego convirtiéndose en una comunidad de <em>Dead Rails</em>. Pero como el que controlaba la cuenta principal de Discord de <strong>Tq_Facu</strong> (parece que fue su primo) se encargó de destruir de poco a poco el servidor de Discord, el clan decayó.
+                </p>
+
+                <div class="info-box" style="background: linear-gradient(135deg, #e7f3ff 0%, #cce5ff 100%); border-left-color: #0066cc;">
+                    <p><strong>📊 CONSECUENCIAS DESPUÉS DE LA GUERRA MASIVA:</strong></p>
+                    <p style="margin-top: 15px;">
+                        Debido a la guerra, hubo personas que odiaban al clan TQ y otras al clan MG. Pero el <span class="highlight">clan TQ fue más conocido</span>.
+                    </p>
+                    <p style="margin-top: 15px;">
+                        La razón por la que algunas personas odiaban al clan TQ es porque un día hubo conflictos con <strong>Gonza</strong>, y entonces apoyó al clan MG por cierto tiempo.
+                    </p>
+                    <p style="margin-top: 15px;">
+                        Pero esto paró gracias a que Enzo solía unirse a servidores diferentes de <em>The Chosen One</em> para <span class="highlight">explicarles a las personas que odiaban al clan TQ</span>, poniendo evidencias y chateando. De poco a poco, el odio fue desapareciendo.
+                    </p>
+                </div>
+
+                <div class="timeline-dates">
+                    <span class="date-badge">🕵️ Espionaje con Alts</span>
+                    <span class="date-badge">📅 18/01/2025: Conoce a Pan</span>
+                    <span class="date-badge">🌙 Operación Guardia Nocturna</span>
+                    <span class="date-badge">⚔️ Segunda Guerra Mundial</span>
+                    <span class="date-badge">🏆 Victoria de TQ</span>
+                    <span class="date-badge">📉 Declive de TQ</span>
+                </div>
+
+                <p style="font-size: 1.2em; color: #666; font-style: italic; text-align: center; margin-top: 40px; padding: 30px; background: #f8f9fa; border-radius: 15px;">
+                    <strong>Hay más cosas que normalmente han sucedido en 2025...</strong><br>
+                    <span style="color: #999;">Pero esta parte se centra en la Segunda Guerra Mundial de The Chosen One.<br>
+                    Próximamente: Más sucesos de 2025 y contacto con otros clanes como SH.</span>
+                </p>
             </div>
         </div>
     </section>
@@ -932,6 +1456,43 @@
     </footer>
 
     <script>
+        // CONFIGURACIÓN INICIAL
+        let settings = JSON.parse(localStorage.getItem('tcoSettings')) || {
+            darkMode: false,
+            progressBar: true,
+            counter: true
+        };
+
+        // APLICAR CONFIGURACIÓN AL CARGAR
+        window.onload = function() {
+            applySettings();
+            updateCharacterCount();
+        };
+
+        function applySettings() {
+            if (settings.darkMode) {
+                document.body.classList.add('dark-mode');
+                document.getElementById('darkModeToggle').classList.add('active');
+            }
+            if (settings.progressBar) {
+                document.querySelector('.reading-progress').style.display = 'block';
+                document.getElementById('progressToggle').classList.add('active');
+            } else {
+                document.querySelector('.reading-progress').style.display = 'none';
+            }
+            if (settings.counter) {
+                document.getElementById('characterCounter').style.display = 'block';
+                document.getElementById('counterToggle').classList.add('active');
+            } else {
+                document.getElementById('characterCounter').style.display = 'none';
+            }
+        }
+
+        function saveSettings() {
+            localStorage.setItem('tcoSettings', JSON.stringify(settings));
+        }
+
+        // OBSERVER PARA ANIMACIONES
         const observerOptions = {
             threshold: 0.15,
             rootMargin: "0px 0px -50px 0px"
@@ -949,6 +1510,7 @@
             observer.observe(el);
         });
 
+        // SMOOTH SCROLL
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -959,21 +1521,58 @@
             });
         });
 
+        // NAVBAR SCROLL EFFECT + PROGRESS BAR + BACK TO TOP
         let lastScroll = 0;
         window.addEventListener('scroll', () => {
             const nav = document.querySelector('nav');
             const currentScroll = window.pageYOffset;
             
+            // Navbar shadow
             if (currentScroll > 100) {
                 nav.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
             } else {
                 nav.style.boxShadow = '0 2px 10px rgba(0,0,0,0.05)';
             }
             
+            // Progress bar
+            if (settings.progressBar) {
+                const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = (currentScroll / scrollHeight) * 100;
+                document.getElementById('readingProgress').style.width = scrolled + '%';
+            }
+
+            // Back to top button
+            const backToTop = document.getElementById('backToTop');
+            if (currentScroll > 500) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+            
             lastScroll = currentScroll;
         });
 
-        // FUNCIONES DEL MODAL DE EXTRAS
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // CONTADOR DE PERSONAJES
+        function updateCharacterCount() {
+            const characters = document.querySelectorAll('.character-card').length;
+            document.getElementById('characterCounter').innerHTML = `👥 Personajes: ${characters}`;
+        }
+
+        // MODALES
+        function openSettings() {
+            document.getElementById('settingsModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSettings() {
+            document.getElementById('settingsModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
         function openExtras() {
             document.getElementById('extrasModal').classList.add('active');
             document.body.style.overflow = 'hidden';
@@ -984,15 +1583,39 @@
             document.body.style.overflow = 'auto';
         }
 
+        // TOGGLES
+        function toggleDarkMode() {
+            settings.darkMode = !settings.darkMode;
+            document.body.classList.toggle('dark-mode');
+            document.getElementById('darkModeToggle').classList.toggle('active');
+            saveSettings();
+        }
+
+        function toggleProgress() {
+            settings.progressBar = !settings.progressBar;
+            document.getElementById('progressToggle').classList.toggle('active');
+            document.querySelector('.reading-progress').style.display = settings.progressBar ? 'block' : 'none';
+            saveSettings();
+        }
+
+        function toggleCounter() {
+            settings.counter = !settings.counter;
+            document.getElementById('counterToggle').classList.toggle('active');
+            document.getElementById('characterCounter').style.display = settings.counter ? 'block' : 'none';
+            saveSettings();
+        }
+
+        // CERRAR MODALES
         window.onclick = function(event) {
-            const modal = document.getElementById('extrasModal');
-            if (event.target === modal) {
-                closeExtras();
-            }
+            const settingsModal = document.getElementById('settingsModal');
+            const extrasModal = document.getElementById('extrasModal');
+            if (event.target === settingsModal) closeSettings();
+            if (event.target === extrasModal) closeExtras();
         }
 
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Escape') {
+                closeSettings();
                 closeExtras();
             }
         });

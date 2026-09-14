@@ -1249,10 +1249,7 @@ beep(880,0.1);
 alert('✅ Historia actualizada');
 }catch(e){ alert('Error: '+e.message); }
 }
-</script>
-</body>
-</html>
-/* ===== EDITAR COMENTARIO PROPIO ===== */
+ /* ===== EDITAR COMENTARIO PROPIO ===== */
 async function editMyComment(commentId, context, currentText){
 const newText = prompt('Editá tu comentario:', currentText);
 if(newText === null) return;
@@ -1270,3 +1267,7 @@ loadComments(context);
 beep(720,0.05);
 }catch(e){ alert('Error: '+e.message); }
 }
+
+</script>
+</body>
+</html>

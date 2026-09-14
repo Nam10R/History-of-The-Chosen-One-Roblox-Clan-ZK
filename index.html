@@ -293,6 +293,60 @@ footer strong{color:var(--gold);font-family:'Bebas Neue';letter-spacing:1px;font
 .wiki-term:hover{transform:translateX(4px);border-left-color:var(--gold2)}
 .wiki-term h4{color:var(--gold);font-family:'Bebas Neue';font-size:1.2em;letter-spacing:.5px;margin-bottom:6px}
 .wiki-term p{color:var(--mut);font-size:.9em;line-height:1.5}
+  /* ===== COMMENTS ===== */
+.comments-section{margin-top:30px;border-top:1px solid var(--line);padding-top:24px}
+.comments-section h4{font-family:'Bebas Neue';font-size:1.3em;letter-spacing:.5px;margin-bottom:14px;color:var(--gold)}
+.comment{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin-bottom:10px;display:flex;gap:12px;align-items:flex-start}
+.comment-avatar{width:36px;height:36px;border-radius:50%;background:var(--gold);color:#000;display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0;font-size:.9em}
+.comment-body{flex:1;min-width:0}
+.comment-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.comment-user{font-weight:700;color:var(--gold);font-size:.9em}
+.comment-time{color:var(--mut);font-size:.75em}
+.comment-text{color:#c4c4cc;font-size:.9em;line-height:1.5;word-wrap:break-word}
+.comment-admin-btn{background:none;border:none;color:var(--red);cursor:pointer;font-size:.75em;padding:2px 6px;opacity:.6;transition:.2s}
+.comment-admin-btn:hover{opacity:1}
+.comment-form{display:flex;gap:8px;margin-top:14px}
+.comment-form input{flex:1;background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:10px 14px;color:var(--txt);font-size:.9em;font-family:inherit}
+.comment-form input:focus{outline:none;border-color:var(--gold)}
+.comment-form button{background:var(--gold);color:#000;border:none;padding:10px 20px;border-radius:10px;font-weight:700;cursor:pointer;transition:.2s;font-family:inherit}
+.comment-form button:hover{background:var(--gold2);transform:translateY(-1px)}
+
+/* ===== LEADERBOARD ===== */
+.leaderboard{max-width:800px;margin:40px auto 0}
+.lb-entry{display:flex;align-items:center;gap:16px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin-bottom:10px;transition:.3s}
+.lb-entry:hover{transform:translateX(6px);border-color:var(--gold)}
+.lb-entry.top1{background:linear-gradient(135deg,rgba(212,175,55,.15),transparent);border-color:var(--gold)}
+.lb-entry.top2{background:linear-gradient(135deg,rgba(192,192,192,.08),transparent);border-color:#c0c0c0}
+.lb-entry.top3{background:linear-gradient(135deg,rgba(205,127,50,.08),transparent);border-color:#cd7f32}
+.lb-rank{font-family:'Bebas Neue';font-size:2em;color:var(--gold);width:50px;text-align:center;flex-shrink:0}
+.lb-entry.top2 .lb-rank{color:#c0c0c0}
+.lb-entry.top3 .lb-rank{color:#cd7f32}
+.lb-avatar{width:50px;height:50px;border-radius:50%;background:var(--gold);color:#000;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.3em;flex-shrink:0}
+.lb-info{flex:1;min-width:0}
+.lb-name{font-weight:700;font-size:1.05em;margin-bottom:2px}
+.lb-stats{color:var(--mut);font-size:.82em}
+.lb-score{font-family:'Bebas Neue';font-size:1.4em;color:var(--gold);flex-shrink:0}
+
+/* ===== ADMIN BADGE ===== */
+.admin-badge{display:inline-block;background:var(--red);color:#fff;font-size:.7em;padding:2px 8px;border-radius:10px;margin-left:6px;font-weight:700;letter-spacing:.5px}
+
+/* ===== SPY MODE (2025) ===== */
+body.spy-mode .chapter#c2025{background:linear-gradient(180deg,transparent,rgba(61,220,132,.03),transparent);position:relative}
+body.spy-mode .chapter#c2025::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(61,220,132,.03) 2px,rgba(61,220,132,.03) 4px);pointer-events:none;z-index:1}
+body.spy-mode .chapter#c2025 .card{border-color:rgba(61,220,132,.3)}
+body.spy-mode .chapter#c2025 .hl{color:#3ddc84;border-bottom-color:#3ddc84}
+
+/* ===== BATTLE MODE (2024, 2025, 2026 raids) ===== */
+body.battle-mode .battle,body.battle-mode .victory{position:relative;overflow:hidden}
+body.battle-mode .battle::before,body.battle-mode .victory::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(226,59,59,.08) 0%,transparent 70%);animation:battlePulse 3s infinite;pointer-events:none}
+@keyframes battlePulse{0%,100%{opacity:.3;transform:scale(.8)}50%{opacity:.6;transform:scale(1.1)}}
+body.battle-mode .battle{box-shadow:0 0 40px rgba(226,59,59,.2),inset 0 0 30px rgba(226,59,59,.05)}
+
+/* ===== CHAPTER MUSIC INDICATOR ===== */
+.music-indicator{position:fixed;bottom:26px;left:26px;background:var(--card);border:1px solid var(--line);border-radius:30px;padding:8px 16px;font-size:.8em;color:var(--mut);display:none;align-items:center;gap:8px;z-index:900;transition:.3s}
+.music-indicator.show{display:flex}
+.music-indicator .note{color:var(--gold);animation:musicBounce 1.5s infinite}
+@keyframes musicBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
 </style>
 </head>
   <!-- AUTH SCREEN (OBLIGATORIO) -->
@@ -399,6 +453,14 @@ footer strong{color:var(--gold);font-family:'Bebas Neue';letter-spacing:1px;font
       <p data-i18n="y22p2">A simple vista era solo un jugador más, una estadística en un año que terminaba. Solo la curiosidad de aprender las mecánicas de un juego a punto de explotar.</p>
       <div class="box blue"><p><strong data-i18n="y22b">Dato importante:</strong> User ID de Roblox: <span class="hl">607353710</span> — el número que marcaría el inicio de una leyenda.</p></div>
       <p data-i18n="y22p3">Pero ese simple clic no era el final de una partida, sino <span class="hl">el primer latido de una leyenda</span>. El escenario estaba listo y la historia del Clan ZK comenzaba a forjarse en las sombras...</p>
+       <div class="comments-section">
+        <h4>💬 Comentarios sobre 2022</h4>
+        <div id="comments-chapter-2022" class="comments-list"></div>
+        <div class="comment-form">
+          <input type="text" id="comment-input-2022" placeholder="Dejá tu comentario..." maxlength="500">
+          <button onclick="postComment('chapter-2022','comment-input-2022')">Publicar</button>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -415,6 +477,14 @@ footer strong{color:var(--gold);font-family:'Bebas Neue';letter-spacing:1px;font
       <div class="box red warn"><p>⚠️ <em data-i18n="y23q">"Dar Enlighten a un jugador no era solo poder: era estar dispuesto a perderlo todo. Un riesgo que separaba a los verdaderos líderes de los meros espectadores."</em></p></div>
       <p data-i18n="y23p3">En medio del caos surgieron rituales únicos: <em>"Simón Dice"</em>, batallas de construcciones imposibles y votaciones que decidían el destino de servidores enteros.</p>
       <p data-i18n="y23p4">The Chosen One era brillante, sí, pero sus <strong>inseguridades</strong> lo volvían un territorio salvaje. Nam observaba, aprendía y se preparaba. Porque después del caos... vendría la verdadera guerra.</p>
+ <div class="comments-section">
+        <h4>💬 Comentarios sobre 2023</h4>
+        <div id="comments-chapter-2023" class="comments-list"></div>
+        <div class="comment-form">
+          <input type="text" id="comment-input-2023" placeholder="Dejá tu comentario..." maxlength="500">
+          <button onclick="postComment('chapter-2023','comment-input-2022')">Publicar</button>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -463,6 +533,14 @@ footer strong{color:var(--gold);font-family:'Bebas Neue';letter-spacing:1px;font
       <div class="box blue"><p><strong data-i18n="y24leg">🎮 Legado 2024:</strong> <span data-i18n="y24legt">Tras meses de manipulación, la valentía de Nam y Enzo restauró el orden. Los servidores latinos volvieron a ser un lugar justo y renovado.</span></p></div>
       <div class="badges"><span class="badge" data-i18n="b1">📅 Ene-Jun: Paz</span><span class="badge" data-i18n="b2">🏗️ Sam</span><span class="badge" data-i18n="b3">💔 Traición</span><span class="badge" data-i18n="b4">🥹 Nam despierta</span><span class="badge" data-i18n="b5">⚔️ Batalla</span><span class="badge" data-i18n="b6">🏆 Victoria</span></div>
       <div class="teaser"><strong data-i18n="y24te">Pero esto no terminó acá...</strong><br><span data-i18n="y24te2">(Spoiler 2025)</span></div>
+ <div class="comments-section">
+        <h4>💬 Comentarios sobre 2024</h4>
+        <div id="comments-chapter-2024" class="comments-list"></div>
+        <div class="comment-form">
+          <input type="text" id="comment-input-2024" placeholder="Dejá tu comentario..." maxlength="500">
+          <button onclick="postComment('chapter-2024','comment-input-2022')">Publicar</button>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -523,6 +601,14 @@ footer strong{color:var(--gold);font-family:'Bebas Neue';letter-spacing:1px;font
       <div class="box blue"><p><strong data-i18n="y25cons">📊 CONSECUENCIAS:</strong> <span data-i18n="y25cons2">Hubo quienes odiaban a TQ y otros a MG, pero TQ fue más conocido. Algunos odiaban a TQ por conflictos con Gonza, que apoyó a MG un tiempo. Enzo se unía a servers distintos explicando con evidencias, y el odio fue desapareciendo.</span></p></div>
       <div class="badges"><span class="badge" data-i18n="b7">🕵️ Espionaje</span><span class="badge" data-i18n="b8">📅 18/01 Pan</span><span class="badge" data-i18n="b9">🌙 Guardia Nocturna</span><span class="badge" data-i18n="b10">⚔️ 2da Guerra</span><span class="badge" data-i18n="b11">🏆 Victoria TQ</span><span class="badge" data-i18n="b12">📉 Declive</span></div>
       <div class="teaser"><strong data-i18n="y25te">Hay más sucesos en 2025...</strong><br><span data-i18n="y25te2">Próximamente: más contacto con clanes como SH.</span></div>
+ <div class="comments-section">
+        <h4>💬 Comentarios sobre 2025</h4>
+        <div id="comments-chapter-2025" class="comments-list"></div>
+        <div class="comment-form">
+          <input type="text" id="comment-input-2025" placeholder="Dejá tu comentario..." maxlength="500">
+          <button onclick="postComment('chapter-2025','comment-input-2022')">Publicar</button>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -593,10 +679,17 @@ footer strong{color:var(--gold);font-family:'Bebas Neue';letter-spacing:1px;font
       </div>
       <div class="badges"><span class="badge" data-i18n="b13">📅 Ene: Regreso</span><span class="badge" data-i18n="b14">🧱 Raids</span><span class="badge" data-i18n="b15">🏴 Feb: IJC</span><span class="badge" data-i18n="b16">🧪 Mar: NamHUB</span><span class="badge" data-i18n="b17">⚔️ Raid SDZ</span><span class="badge" data-i18n="b18">🔮 Jun: Próximamente</span></div>
       <div class="teaser"><strong data-i18n="y26te">Junio 2026... Próximamente...</strong><br><span data-i18n="y26te2">(se picó todo)</span></div>
+  <div class="comments-section">
+        <h4>💬 Comentarios sobre 2026</h4>
+        <div id="comments-chapter-2026" class="comments-list"></div>
+        <div class="comment-form">
+          <input type="text" id="comment-input-2026" placeholder="Dejá tu comentario..." maxlength="500">
+          <button onclick="postComment('chapter-2026','comment-input-2022')">Publicar</button>
+        </div>
+      </div>
     </div>
   </div>
 </section>
-
 <!-- HALL OF FAME -->
 <section class="special" id="hof">
   <div class="special-inner">
@@ -612,7 +705,16 @@ footer strong{color:var(--gold);font-family:'Bebas Neue';letter-spacing:1px;font
     </div>
   </div>
 </section>
-
+<!-- LEADERBOARD -->
+<section class="special" id="leaderboard">
+  <div class="special-inner">
+    <h2 class="sec-title" data-i18n="lbT">🏆 <em>LEADERBOARD</em></h2>
+    <p class="sec-sub" data-i18n="lbS">Los miembros más activos del archivo</p>
+    <div class="leaderboard" id="leaderboardList">
+      <div class="no-stories">Cargando ranking...</div>
+    </div>
+  </div>
+</section>
 <!-- MAPA -->
 <section class="special" id="map" style="background:linear-gradient(180deg,transparent,rgba(226,59,59,.04),transparent)">
   <div class="special-inner">
@@ -1534,7 +1636,6 @@ window.loadStories = async function(){
     for(const docSnap of snap.docs){
       const s = docSnap.data();
       const storyId = docSnap.id;
-      // Contar likes
       const likesQ = window.firebaseFunctions.query(
         window.firebaseFunctions.collection(window.firebaseDb,'likes'),
         window.firebaseFunctions.where('storyId','==',storyId)
@@ -1556,6 +1657,7 @@ window.loadStories = async function(){
       }
       
       const isOwner = window.currentUser && s.userId === window.currentUser.uid;
+      const isAdmin = window.currentUser && ADMIN_EMAILS.includes(window.currentUser.email);
       
       const card = document.createElement('div');
       card.className = 'story-card-custom';
@@ -1570,14 +1672,300 @@ window.loadStories = async function(){
           <button class="like-btn ${userLikes.laugh?'active':''}" onclick="toggleLike('${storyId}','laugh',this)">😂 <span class="like-count">${likeCounts.laugh||0}</span></button>
           <button class="like-btn ${userLikes.skull?'active':''}" onclick="toggleLike('${storyId}','skull',this)">💀 <span class="like-count">${likeCounts.skull||0}</span></button>
           <button class="share-btn" onclick="shareStory('${storyId}','${s.name}','twitter')">🐦 Compartir</button>
-          ${isOwner?`<button class="delete-btn" onclick="deleteMyStory('${storyId}')">🗑️ Borrar</button>`:''}
+          ${(isOwner||isAdmin)?`<button class="delete-btn" onclick="deleteMyStory('${storyId}')">🗑️ Borrar</button>`:''}
+        </div>
+        <div class="comments-section">
+          <h4>💬 Comentarios</h4>
+          <div id="comments-story-${storyId}" class="comments-list"></div>
+          <div class="comment-form">
+            <input type="text" id="comment-input-story-${storyId}" placeholder="Dejá tu comentario..." maxlength="500">
+            <button onclick="postComment('story-${storyId}','comment-input-story-${storyId}')">Publicar</button>
+          </div>
         </div>
       `;
       grid.appendChild(card);
+      loadComments('story-'+storyId);
     }
   }catch(e){
     grid.innerHTML='<div class="no-stories">Error al cargar historias: '+e.message+'</div>';
   }
+};
+  /* ===== ADMIN EMAILS (agregá el tuyo y el de Enzo) ===== */
+const ADMIN_EMAILS = [
+  'enbeta@gmail.com',  // 👈 Cambiá por tu email
+  'enbeta@gmail.com' // 👈 Cambiá por el email de Enzo
+];
+
+function isAdmin(user){
+  return user && ADMIN_EMAILS.includes(user.email);
+}
+
+/* ===== COMENTARIOS ===== */
+window.postComment = async function(context, inputId){
+  if(!window.currentUser){openModal('authModal');return;}
+  const input = document.getElementById(inputId);
+  const text = input.value.trim();
+  if(!text){alert('Escribí algo');return;}
+  if(text.length>500){alert('Máximo 500 caracteres');return;}
+  if(containsBadWords(text)){alert('⚠️ Tu comentario contiene palabras inapropiadas');return;}
+  
+  try{
+    await window.firebaseFunctions.addDoc(window.firebaseFunctions.collection(window.firebaseDb,'comments'),{
+      context: context,
+      userId: window.currentUser.uid,
+      userEmail: window.currentUser.email,
+      nickname: currentUserProfile ? currentUserProfile.nickname : 'Usuario',
+      text: text,
+      createdAt: window.firebaseFunctions.serverTimestamp()
+    });
+    input.value='';
+    loadComments(context);
+    beep(720,0.05);
+  }catch(e){alert('Error: '+e.message);}
+};
+
+window.loadComments = async function(context){
+  const container = document.getElementById('comments-'+context);
+  if(!container) return;
+  try{
+    const q = window.firebaseFunctions.query(
+      window.firebaseFunctions.collection(window.firebaseDb,'comments'),
+      window.firebaseFunctions.where('context','==',context),
+      window.firebaseFunctions.orderBy('createdAt','asc')
+    );
+    const snap = await window.firebaseFunctions.getDocs(q);
+    container.innerHTML='';
+    if(snap.empty){
+      container.innerHTML='<p style="color:var(--mut);font-size:.85em;font-style:italic">Sé el primero en comentar</p>';
+      return;
+    }
+    snap.forEach(docSnap=>{
+      const c = docSnap.data();
+      const isAdminUser = ADMIN_EMAILS.includes(c.userEmail);
+      const div = document.createElement('div');
+      div.className='comment';
+      const timeAgo = c.createdAt ? timeSince(c.createdAt.toDate()) : 'recién';
+      div.innerHTML=`
+        <div class="comment-avatar">${c.nickname[0].toUpperCase()}</div>
+        <div class="comment-body">
+          <div class="comment-header">
+            <span class="comment-user">${c.nickname}${isAdminUser?'<span class="admin-badge">ADMIN</span>':''}</span>
+            <span class="comment-time">${timeAgo}</span>
+          </div>
+          <div class="comment-text">${escapeHtml(c.text)}</div>
+          ${isAdmin(window.currentUser)?`<button class="comment-admin-btn" onclick="deleteComment('${docSnap.id}','${context}')">🗑️ Borrar</button>`:''}
+        </div>
+      `;
+      container.appendChild(div);
+    });
+  }catch(e){container.innerHTML='<p style="color:var(--red);font-size:.85em">Error al cargar comentarios</p>';}
+};
+
+window.deleteComment = async function(commentId, context){
+  if(!confirm('¿Borrar este comentario?')) return;
+  try{
+    const { doc, deleteDoc } = await import('https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js');
+    await deleteDoc(doc(window.firebaseDb,'comments',commentId));
+    loadComments(context);
+    beep(440,0.05);
+  }catch(e){alert('Error: '+e.message);}
+};
+
+function escapeHtml(text){
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+function timeSince(date){
+  const seconds = Math.floor((new Date() - date) / 1000);
+  let interval = seconds / 31536000;
+  if (interval > 1) return Math.floor(interval) + ' año' + (Math.floor(interval)>1?'s':'');
+  interval = seconds / 2592000;
+  if (interval > 1) return Math.floor(interval) + ' mes' + (Math.floor(interval)>1?'es':'');
+  interval = seconds / 86400;
+  if (interval > 1) return Math.floor(interval) + ' día' + (Math.floor(interval)>1?'s':'');
+  interval = seconds / 3600;
+  if (interval > 1) return Math.floor(interval) + ' hora' + (Math.floor(interval)>1?'s':'');
+  interval = seconds / 60;
+  if (interval > 1) return Math.floor(interval) + ' minuto' + (Math.floor(interval)>1?'s':'');
+  return 'recién';
+}
+
+// Cargar comentarios de capítulos al inicio
+['chapter-2022','chapter-2023','chapter-2024','chapter-2025','chapter-2026'].forEach(c=>loadComments(c));
+
+/* ===== LEADERBOARD ===== */
+window.loadLeaderboard = async function(){
+  const list = document.getElementById('leaderboardList');
+  if(!list) return;
+  try{
+    const storiesSnap = await window.firebaseFunctions.getDocs(window.firebaseFunctions.collection(window.firebaseDb,'stories'));
+    const likesSnap = await window.firebaseFunctions.getDocs(window.firebaseFunctions.collection(window.firebaseDb,'likes'));
+    const usersSnap = await window.firebaseFunctions.getDocs(window.firebaseFunctions.collection(window.firebaseDb,'users'));
+    
+    const userScores = {};
+    usersSnap.forEach(doc=>{
+      const u = doc.data();
+      userScores[u.userId] = {
+        nickname: u.nickname,
+        avatarUrl: u.avatarUrl,
+        stories: 0,
+        likesReceived: 0,
+        score: 0
+      };
+    });
+    
+    storiesSnap.forEach(doc=>{
+      const s = doc.data();
+      if(userScores[s.userId]){
+        userScores[s.userId].stories++;
+        userScores[s.userId].score += 10;
+      }
+    });
+    
+    likesSnap.forEach(doc=>{
+      const l = doc.data();
+      const storyDoc = storiesSnap.docs.find(d=>d.id===l.storyId);
+      if(storyDoc && userScores[storyDoc.data().userId]){
+        userScores[storyDoc.data().userId].likesReceived++;
+        userScores[storyDoc.data().userId].score += 2;
+      }
+    });
+    
+    const sorted = Object.entries(userScores)
+      .map(([uid,data])=>({uid,...data}))
+      .sort((a,b)=>b.score-a.score)
+      .slice(0,10);
+    
+    if(sorted.length===0){
+      list.innerHTML='<div class="no-stories">Aún no hay actividad en el ranking</div>';
+      return;
+    }
+    
+    list.innerHTML='';
+    sorted.forEach((u,i)=>{
+      const rank = i+1;
+      const topClass = rank===1?'top1':rank===2?'top2':rank===3?'top3':'';
+      const medal = rank===1?'🥇':rank===2?'🥈':rank===3?'🥉':rank;
+      const entry = document.createElement('div');
+      entry.className = 'lb-entry '+topClass;
+      entry.innerHTML=`
+        <div class="lb-rank">${medal}</div>
+        <div class="lb-avatar" ${u.avatarUrl?`style="background-image:url(${u.avatarUrl});background-size:cover"`:''}>${u.avatarUrl?'':u.nickname[0].toUpperCase()}</div>
+        <div class="lb-info">
+          <div class="lb-name">${u.nickname}</div>
+          <div class="lb-stats">${u.stories} historia${u.stories!==1?'s':''} · ${u.likesReceived} like${u.likesReceived!==1?'s':''}</div>
+        </div>
+        <div class="lb-score">${u.score} pts</div>
+      `;
+      list.appendChild(entry);
+    });
+  }catch(e){
+    list.innerHTML='<div class="no-stories">Error al cargar ranking: '+e.message+'</div>';
+  }
+};
+loadLeaderboard();
+
+/* ===== MODOS VISUALES POR CAPÍTULO ===== */
+function updateChapterModes(){
+  const sections = document.querySelectorAll('.chapter');
+  let currentChapter = null;
+  sections.forEach(s=>{
+    const rect = s.getBoundingClientRect();
+    if(rect.top < window.innerHeight/2 && rect.bottom > window.innerHeight/2){
+      currentChapter = s.id;
+    }
+  });
+  
+  // Modo Espía en 2025
+  if(currentChapter === 'c2025'){
+    document.body.classList.add('spy-mode');
+  }else{
+    document.body.classList.remove('spy-mode');
+  }
+  
+  // Modo Batalla en 2024, 2025, 2026
+  if(['c2024','c2025','c2026'].includes(currentChapter)){
+    document.body.classList.add('battle-mode');
+  }else{
+    document.body.classList.remove('battle-mode');
+  }
+  
+  // Música por capítulo
+  updateChapterMusic(currentChapter);
+}
+
+window.addEventListener('scroll', updateChapterModes);
+setTimeout(updateChapterModes, 1000);
+
+/* ===== MÚSICA POR CAPÍTULO ===== */
+let currentChapterAudio = null;
+let currentChapterId = null;
+const CHAPTER_MUSIC = {
+  'c2022': {freq: [220, 330], type: 'sine', gain: 0.008, name: '2022 · Orígenes'},
+  'c2023': {freq: [196, 294], type: 'triangle', gain: 0.010, name: '2023 · Caos'},
+  'c2024': {freq: [165, 247, 330], type: 'sawtooth', gain: 0.006, name: '2024 · Gran Guerra'},
+  'c2025': {freq: [146, 220, 294], type: 'square', gain: 0.004, name: '2025 · Espionaje'},
+  'c2026': {freq: [110, 165, 220], type: 'sine', gain: 0.009, name: '2026 · El Regreso'}
+};
+
+function updateChapterMusic(chapterId){
+  if(chapterId === currentChapterId) return;
+  currentChapterId = chapterId;
+  
+  const indicator = document.getElementById('musicIndicator');
+  const nameEl = document.getElementById('musicChapterName');
+  
+  if(!chapterId || !CHAPTER_MUSIC[chapterId]){
+    stopChapterMusic();
+    indicator.classList.remove('show');
+    return;
+  }
+  
+  if(!SOUND){
+    indicator.classList.add('show');
+    nameEl.textContent = CHAPTER_MUSIC[chapterId].name;
+    return;
+  }
+  
+  stopChapterMusic();
+  const config = CHAPTER_MUSIC[chapterId];
+  try{
+    const c = ctx();
+    currentChapterAudio = {nodes:[]};
+    config.freq.forEach(f=>{
+      const o = c.createOscillator();
+      const g = c.createGain();
+      o.type = config.type;
+      o.frequency.value = f;
+      g.gain.value = config.gain;
+      o.connect(g);
+      g.connect(c.destination);
+      o.start();
+      currentChapterAudio.nodes.push(o,g);
+    });
+    indicator.classList.add('show');
+    nameEl.textContent = config.name;
+  }catch(e){}
+}
+
+function stopChapterMusic(){
+  if(currentChapterAudio){
+    currentChapterAudio.nodes.forEach(n=>{
+      try{if(n.stop)n.stop();}catch(e){}
+      try{n.disconnect();}catch(e){}
+    });
+    currentChapterAudio = null;
+  }
+}
+
+// Sincronizar música con toggle de sonido
+const origToggleSound = window.toggleSound;
+window.toggleSound = function(){
+  origToggleSound();
+  if(!SOUND) stopChapterMusic();
+  else updateChapterMusic(currentChapterId);
 };
 </script>
 </body>

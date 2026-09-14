@@ -276,6 +276,39 @@ body.battle-mode .battle{box-shadow:0 0 40px rgba(226,59,59,.2),inset 0 0 30px r
 .music-indicator.show{display:flex}
 .music-indicator .note{color:var(--gold);animation:musicBounce 1.5s infinite}
 @keyframes musicBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+  /* ===== RAINBOW NEON ADMIN ===== */
+@keyframes rainbowFlow{0%{background-position:0% 50%}100%{background-position:400% 50%}}
+@keyframes rainbowGlow{
+0%,100%{filter:drop-shadow(0 0 8px rgba(255,59,59,.6)) drop-shadow(0 0 16px rgba(123,92,255,.4))}
+33%{filter:drop-shadow(0 0 8px rgba(0,255,136,.6)) drop-shadow(0 0 16px rgba(0,207,255,.4))}
+66%{filter:drop-shadow(0 0 8px rgba(255,0,212,.6)) drop-shadow(0 0 16px rgba(255,159,26,.4))}
+}
+.rainbow-name{
+background:linear-gradient(90deg,#ff3b3b,#ff9f1a,#fff700,#00ff88,#00cfff,#7b5cff,#ff00d4,#ff3b3b);
+background-size:400% 100%;
+-webkit-background-clip:text;
+background-clip:text;
+-webkit-text-fill-color:transparent;
+color:transparent;
+animation:rainbowFlow 4s linear infinite, rainbowGlow 3s ease-in-out infinite;
+font-weight:800;
+letter-spacing:.5px;
+}
+.rainbow-ring{
+border:2px solid transparent !important;
+background:linear-gradient(var(--bg2),var(--bg2)) padding-box,
+linear-gradient(90deg,#ff3b3b,#ff9f1a,#fff700,#00ff88,#00cfff,#7b5cff,#ff00d4,#ff3b3b) border-box !important;
+background-size:100% 100%,400% 100%;
+animation:rainbowFlow 4s linear infinite;
+box-shadow:0 0 12px rgba(255,59,59,.3),0 0 20px rgba(123,92,255,.2);
+}
+.edited-tag{
+color:var(--mut);
+font-size:.75em;
+font-style:italic;
+margin-left:6px;
+opacity:.8;
+}
 </style>
 </head>
 <body>
@@ -752,6 +785,8 @@ function applyMe(){
 if(!me) return;
 const ui=document.getElementById('userInfo'); ui.style.display='flex';
 document.getElementById('userNickname').textContent=me.nickname;
+const isAdminMe = ADMIN_NICKS.includes(me.nicknameLower);
+document.getElementById('userNickname').classList.toggle('rainbow-name', isAdminMe);
 const av=document.getElementById('userAvatar');
 if(me.avatar){ av.style.backgroundImage='url('+me.avatar+')'; av.textContent=''; }
 else { av.style.backgroundImage=''; av.textContent=me.nickname[0].toUpperCase(); }
@@ -994,6 +1029,8 @@ card.innerHTML=
 '<button class="like-btn '+(mine.skull?'active':'')+'" onclick="toggleLike(\''+sid+'\',\'skull\',this)">💀 <span class="like-count">'+counts.skull+'</span></button>'+
 '<button class="share-btn" onclick="shareStory(\''+sid+'\',\''+escapeHtml(s.name).replace(/'/g,"\\'")+'\')">🐦 Compartir</button>'+
 ((owner||admin)?'<button class="delete-btn" onclick="deleteMyStory(\''+sid+'\')">🗑️ Borrar</button>':'')+
+(owner?'<button class="edit-btn" onclick="editMyStory(\''+sid+'\','+JSON.stringify(s.text).replace(/'/g,"\\'")+','+JSON.stringify(s.bio).replace(/'/g,"\\'")+')">✏️ Editar</button>':'')+
+(s.editedAt?'<span class="edited-tag">(editado)</span>':'')+
 '</div>'+
 '<div class="comments-section"><h4>💬 Comentarios</h4><div id="comments-story-'+sid+'"></div>'+
 '<div class="comment-form"><input type="text" id="comment-input-story-'+sid+'" placeholder="Dejá tu comentario..." maxlength="500">'+
@@ -1066,12 +1103,14 @@ const admin = ADMIN_NICKS.includes((c.userNick||'').toLowerCase());
 const div=document.createElement('div'); div.className='comment';
 const timeAgo = typeof c.createdAt === 'number' ? timeSince(c.createdAt) : 'recién';
 div.innerHTML=
-'<div class="comment-avatar" '+(c.userAvatar?'style="background-image:url('+c.userAvatar+')"':'')+'>'+escapeHtml((c.userNick||'?')[0].toUpperCase())+'</div>'+
+'<div class="comment-avatar'+(admin?' rainbow-ring':'')+'" '+(c.userAvatar?'style="background-image:url('+c.userAvatar+')"':'')+'>'+escapeHtml((c.userNick||'?')[0].toUpperCase())+'</div>'+
 '<div class="comment-body"><div class="comment-header">'+
-'<span class="comment-user">'+escapeHtml(c.userNick)+(admin?'<span class="admin-badge">ADMIN</span>':'')+'</span>'+
+'<span class="comment-user">'+(admin?'<span class="rainbow-name">'+escapeHtml(c.userNick)+'</span>':escapeHtml(c.userNick))+(admin?'<span class="admin-badge">ADMIN</span>':'')+'</span>'+
 '<span class="comment-time">'+timeAgo+'</span></div>'+
 '<div class="comment-text">'+escapeHtml(c.text)+'</div>'+
+(me && c.userId===me.id ? '<button class="comment-admin-btn" onclick="editMyComment(\''+c.id+'\',\''+context+'\','+JSON.stringify(c.text).replace(/'/g,"\\'")+')">✏️ Editar</button>' : '')+
 (isAdminUser()?'<button class="comment-admin-btn" onclick="deleteComment(\''+c.id+'\',\''+context+'\')">🗑️ Borrar</button>':'')+
+(c.editedAt?'<span class="edited-tag">(editado)</span>':'')+
 '</div>';
 box.appendChild(div);
 });
@@ -1108,7 +1147,7 @@ const medal=r===1?'🥇':r===2?'🥈':r===3?'🥉':r;
 const e=document.createElement('div'); e.className='lb-entry '+cls;
 e.innerHTML='<div class="lb-rank">'+medal+'</div>'+
 '<div class="lb-avatar" '+(u.avatar?'style="background-image:url('+u.avatar+')"':'')+'>'+escapeHtml((u.nickname||'?')[0].toUpperCase())+'</div>'+
-'<div class="lb-info"><div class="lb-name">'+escapeHtml(u.nickname)+'</div><div class="lb-stats">'+u.stories+' historia'+(u.stories!==1?'s':'')+' · '+u.likes+' like'+(u.likes!==1?'s':'')+'</div></div>'+
+'<div class="lb-info"><div class="lb-name'+(ADMIN_NICKS.includes(u.nickname.toLowerCase())?' rainbow-name':'')+'">'+escapeHtml(u.nickname)+'</div><div class="lb-stats">'+u.stories+' historia'+(u.stories!==1?'s':'')+' · '+u.likes+' like'+(u.likes!==1?'s':'')+'</div></div>'+
 '<div class="lb-score">'+u.score+' pts</div>';
 list.appendChild(e);
 });
@@ -1188,6 +1227,46 @@ const pi=setInterval(()=>{ p+=Math.random()*22+10; if(p>=100){ p=100; clearInter
 });
 setTimeout(boot,5000);
 reveal(); runCounters();
+  /* ===== EDITAR HISTORIA PROPIA ===== */
+async function editMyStory(docId, currentText, currentBio){
+const newText = prompt('Editá tu historia:', currentText);
+if(newText === null) return; // canceló
+if(!newText.trim()){ alert('No podés dejarla vacía'); return; }
+if(newText.length > 3000){ alert('Máximo 3000 caracteres'); return; }
+if(containsBadWords(newText)){ alert('⚠️ Tu historia contiene palabras inapropiadas'); return; }
+const newBio = prompt('Editá tu biografía corta:', currentBio);
+if(newBio === null) return;
+const F = window.firebaseFunctions;
+if(!F || !window.firebaseDb) return;
+try{
+await F.updateDoc(F.doc(window.firebaseDb,'stories',docId),{
+text: newText.trim(),
+bio: newBio.trim(),
+editedAt: Date.now()
+});
+loadStories();
+beep(880,0.1);
+alert('✅ Historia actualizada');
+}catch(e){ alert('Error: '+e.message); }
+}
 </script>
 </body>
 </html>
+/* ===== EDITAR COMENTARIO PROPIO ===== */
+async function editMyComment(commentId, context, currentText){
+const newText = prompt('Editá tu comentario:', currentText);
+if(newText === null) return;
+if(!newText.trim()){ alert('No podés dejarlo vacío'); return; }
+if(newText.length > 500){ alert('Máximo 500 caracteres'); return; }
+if(containsBadWords(newText)){ alert('⚠️ Tu comentario contiene palabras inapropiadas'); return; }
+const F = window.firebaseFunctions;
+if(!F || !window.firebaseDb) return;
+try{
+await F.updateDoc(F.doc(window.firebaseDb,'comments',commentId),{
+text: newText.trim(),
+editedAt: Date.now()
+});
+loadComments(context);
+beep(720,0.05);
+}catch(e){ alert('Error: '+e.message); }
+}

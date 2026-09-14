@@ -6,6 +6,9 @@
 <title>Clan ZK — Archivo Histórico | The Chosen One</title>
 <meta name="description" content="Archivo histórico del Clan ZK (antes IJC) - The Chosen One">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</style>
+
+<!-- FIREBASE - DEBE ESTAR ACÁ -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 import { getFirestore, collection, addDoc, getDocs, query, where, orderBy, serverTimestamp, onSnapshot } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
@@ -21,8 +24,12 @@ measurementId: "G-ME50QF8K1Y"
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 window.firebaseDb = db;
-window.firebaseFunctions = {  collection, addDoc, getDocs, query, where, orderBy, serverTimestamp, onSnapshot, ref, uploadBytes, getDownloadURL };
+window.firebaseFunctions = { collection, addDoc, getDocs, query, where, orderBy, serverTimestamp, onSnapshot };
+window.firebaseReady = true; // 🔥 FLAG IMPORTANTE
+window.dispatchEvent(new Event('firebaseReady'));
 </script>
+
+</head>
 <style>
 :root{--bg:#0a0a0c;--bg2:#111114;--card:#16161a;--line:#26262c;--gold:#d4af37;--gold2:#f5d76e;--red:#e23b3b;--green:#3ddc84;--txt:#ececec;--mut:#8a8a93}
 *{margin:0;padding:0;box-sizing:border-box}
@@ -950,6 +957,7 @@ openModal('storyModal');
 }
 async function submitStory(){
 if(!me){ alert('Primero elegí tu apodo.'); return; }
+if(!window.firebaseReady){ alert('⏳ Firebase todavía está cargando, esperá 2 segundos'); return; }
 const F=window.firebaseFunctions;
 const name=document.getElementById('storyName').value.trim();
 const bio=document.getElementById('storyBio').value.trim();
@@ -957,7 +965,7 @@ const text=document.getElementById('storyText').value.trim();
 const imgFile=document.getElementById('storyImage').files[0];
 if(!name||!bio||!text){ alert('Completá todos los campos'); return; }
 if(containsBadWords(name)||containsBadWords(bio)||containsBadWords(text)){ alert('⚠️ Tu historia contiene palabras inapropiadas'); return; }
-if(!F||!window.firebaseDb){ alert('No se pudo conectar con la base de datos. Revisá las reglas de Firestore.'); return; }
+if(!F||!window.firebaseDb){ alert('❌ Firebase no disponible'); return; }
 try{
 let imgUrl=me.avatar||'';
 if(imgFile){ imgUrl=await fileToDataUrl(imgFile,256); }
@@ -966,7 +974,7 @@ closeModal('storyModal');
 document.getElementById('storyName').value=''; document.getElementById('storyBio').value=''; document.getElementById('storyText').value=''; document.getElementById('storyImage').value='';
 loadStories(); loadLeaderboard();
 beep(880,0.12);
-}catch(e){ alert('Error al publicar: '+e.message); }
+}catch(e){ alert('Error al publicar: '+e.message); console.error(e); }
 }
 async function loadStories(){
 const F=window.firebaseFunctions;
@@ -1030,10 +1038,13 @@ if(!confirm('¿Seguro que querés borrar esta historia? No se puede deshacer.'))
 try{ await F.deleteDoc(F.doc(window.firebaseDb,'stories',docId)); loadStories(); loadLeaderboard(); beep(440,0.08); }
 catch(e){ alert('Error: '+e.message); }
 }
-/* ===== COMENTARIOS ===== */
+/* ===== COMENTARIOS (CON ESPERA DE FIREBASE) ===== */
 async function postComment(context,inputId){
 if(!me){ alert('Primero elegí tu apodo.'); return; }
-const F=window.firebaseFunctions; if(!F||!window.firebaseDb){ alert('No se pudo conectar con la base de datos.'); return; }
+// Esperar Firebase
+if(!window.firebaseReady){ alert('⏳ Firebase todavía está cargando, esperá 2 segundos y probá de nuevo'); return; }
+const F = window.firebaseFunctions;
+if(!F || !window.firebaseDb){ alert('❌ Error: Firebase no está disponible'); return; }
 const input=document.getElementById(inputId); if(!input) return;
 const text=input.value.trim();
 if(!text){ alert('Escribí algo'); return; }
@@ -1042,7 +1053,7 @@ if(containsBadWords(text)){ alert('⚠️ Tu comentario contiene palabras inapro
 try{
 await F.addDoc(F.collection(window.firebaseDb,'comments'),{ context:context, userId:me.id, userNick:me.nickname, userAvatar:me.avatar, text:text, createdAt:Date.now() });
 input.value=''; loadComments(context); beep(720,0.05);
-}catch(e){ alert('Error: '+e.message); }
+}catch(e){ alert('Error: '+e.message); console.error(e); }
 }
 const commentUnsubs = {};
 function loadComments(context){
@@ -1151,14 +1162,25 @@ document.body.classList.toggle('battle-mode',['c2024','c2025','c2026'].includes(
 updateChapterMusic(cur);
 }
 window.addEventListener('scroll',updateChapterModes);
-/* ===== INIT ===== */
+/* ===== INIT (ESPERA A FIREBASE) ===== */
 function initData(){
+// Si Firebase todavía no cargó, esperar
+if(!window.firebaseReady){
+window.addEventListener('firebaseReady', initData, { once: true });
+return;
+}
 loadUserCount();
 loadStories();
 loadLeaderboard();
 ['chapter-2022','chapter-2023','chapter-2024','chapter-2025','chapter-2026'].forEach(c=>loadComments(c));
 updateChapterModes();
 reveal(); runCounters();
+const F = window.firebaseFunctions;
+if(F && window.firebaseDb){
+F.onSnapshot(F.collection(window.firebaseDb,'stories'), ()=>{ loadStories(); loadLeaderboard(); });
+F.onSnapshot(F.collection(window.firebaseDb,'likes'), ()=>{ loadStories(); loadLeaderboard(); });
+}
+}
 
 const F = window.firebaseFunctions;
 if(F && window.firebaseDb){

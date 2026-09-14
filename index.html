@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
-<!-- FIREBASE -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clan ZK — Archivo Histórico | The Chosen One</title>
+<meta name="description" content="Archivo histórico del Clan ZK (antes IJC) - The Chosen One">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendEmailVerification } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
-import { getFirestore, collection, addDoc, getDocs, query, where, orderBy, serverTimestamp, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-storage.js";
+import { getFirestore, collection, addDoc, getDocs, query, where, orderBy, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 const firebaseConfig = {
 apiKey: "AIzaSyAVudNUtJVqmctaYrkdFoBaRfS5EQscxn0",
 authDomain: "the-chosen-one-roblox.firebaseapp.com",
@@ -16,32 +19,10 @@ appId: "1:866498105236:web:3bd1d07117ae6e73a7c981",
 measurementId: "G-ME50QF8K1Y"
 };
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
 const db = getFirestore(app);
-const storage = getStorage(app);
-window.firebaseAuth = auth;
 window.firebaseDb = db;
-window.firebaseStorage = storage;
-window.firebaseFunctions = { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendEmailVerification, collection, addDoc, getDocs, query, where, orderBy, serverTimestamp, ref, uploadBytes, getDownloadURL, doc, updateDoc, deleteDoc };
-onAuthStateChanged(auth, (user) => {
-if (user) { window.currentUser = user; if(window.updateAuthUI) window.updateAuthUI(true); }
-else { window.currentUser = null; if(window.updateAuthUI) window.updateAuthUI(false); }
-});
-function updateAuthUI(loggedIn) {
-const loginBtn = document.getElementById('loginBtn');
-const userInfo = document.getElementById('userInfo');
-if(!loginBtn||!userInfo) return;
-if (loggedIn) { loginBtn.style.display = 'none'; userInfo.style.display = 'flex'; }
-else { loginBtn.style.display = 'block'; userInfo.style.display = 'none'; }
-}
-window.updateAuthUI = updateAuthUI;
+window.firebaseFunctions = { collection, addDoc, getDocs, query, where, orderBy, doc, updateDoc, deleteDoc };
 </script>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Clan ZK — Archivo Histórico | The Chosen One</title>
-<meta name="description" content="Archivo histórico del Clan ZK (antes IJC) - The Chosen One">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#0a0a0c;--bg2:#111114;--card:#16161a;--line:#26262c;--gold:#d4af37;--gold2:#f5d76e;--red:#e23b3b;--green:#3ddc84;--txt:#ececec;--mut:#8a8a93}
 *{margin:0;padding:0;box-sizing:border-box}
@@ -49,38 +30,28 @@ html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--txt);font-family:'Inter',sans-serif;line-height:1.7;overflow-x:hidden}
 body.cinema{filter:saturate(1.15) contrast(1.05)}
 ::selection{background:var(--gold);color:#000}
-.auth-screen{position:fixed;inset:0;background:var(--bg);z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px}
-.auth-screen.hidden{display:none}
-.auth-box{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:40px;max-width:420px;width:100%}
-.auth-box h2{font-family:'Bebas Neue';font-size:2.2em;letter-spacing:1px;margin-bottom:8px;text-align:center}
-.auth-box h2 em{color:var(--gold);font-style:normal}
-.auth-box p{color:var(--mut);text-align:center;margin-bottom:26px;font-size:.9em}
+.onboard{position:fixed;inset:0;background:var(--bg);z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px}
+.onboard.hidden{display:none}
+.onboard-box{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:40px;max-width:420px;width:100%;text-align:center}
+.onboard-box h2{font-family:'Bebas Neue';font-size:2.2em;letter-spacing:1px;margin-bottom:8px}
+.onboard-box h2 em{color:var(--gold);font-style:normal}
+.onboard-box>p{color:var(--mut);margin-bottom:22px;font-size:.9em}
 .auth-input{width:100%;background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:14px 16px;color:var(--txt);font-size:.95em;margin-bottom:14px;font-family:inherit;transition:.25s}
 .auth-input:focus{outline:none;border-color:var(--gold)}
 .auth-btn{width:100%;background:var(--gold);color:#000;border:none;padding:14px;border-radius:10px;font-weight:700;font-size:1em;cursor:pointer;transition:.25s;font-family:inherit;letter-spacing:.5px}
 .auth-btn:hover{background:var(--gold2);transform:translateY(-2px)}
 .auth-btn.secondary{background:var(--bg2);color:var(--txt);border:1px solid var(--line);margin-top:10px}
 .auth-btn.secondary:hover{border-color:var(--gold);color:var(--gold)}
-.auth-error{background:rgba(226,59,59,.1);border:1px solid var(--red);color:var(--red);padding:12px;border-radius:8px;margin-bottom:16px;font-size:.88em;display:none}
+.auth-error{background:rgba(226,59,59,.1);border:1px solid var(--red);color:var(--red);padding:12px;border-radius:8px;margin-bottom:16px;font-size:.88em;display:none;text-align:left}
 .auth-error.show{display:block}
-.user-info{display:none;align-items:center;gap:10px;padding:6px 14px;background:var(--card);border:1px solid var(--line);border-radius:30px;font-size:.82em}
-.user-info .avatar{width:28px;height:28px;border-radius:50%;background:var(--gold);color:#000;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.9em;cursor:pointer}
-.logout-btn{background:none;border:none;color:var(--mut);cursor:pointer;font-size:.85em;padding:4px 8px;transition:.2s}
+.onboard-preview{width:110px;height:110px;border-radius:50%;object-fit:cover;border:3px solid var(--gold);margin:6px auto 12px;display:block;background:var(--bg2)}
+.onboard-file{width:100%;background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:10px;color:var(--mut);font-size:.85em;margin-bottom:14px}
+.user-info{display:none;align-items:center;gap:10px;padding:5px 12px;background:var(--card);border:1px solid var(--line);border-radius:30px;font-size:.82em}
+.user-info .avatar{width:30px;height:30px;border-radius:50%;background:var(--gold);color:#000;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.9em;cursor:pointer;background-size:cover;background-position:center}
+.user-info span{cursor:pointer;font-weight:600}
+.logout-btn{background:none;border:none;color:var(--mut);cursor:pointer;font-size:.85em;padding:4px 6px;transition:.2s}
 .logout-btn:hover{color:var(--red)}
-.stories-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px;max-width:1200px;margin:40px auto 0}
-.story-card-custom{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:28px;transition:.3s}
-.story-card-custom:hover{transform:translateY(-4px);border-color:var(--gold);box-shadow:0 15px 35px rgba(212,175,55,.1)}
-.story-card-custom img{width:80px;height:80px;border-radius:50%;object-fit:cover;border:2px solid var(--gold);margin-bottom:16px}
-.story-card-custom h4{font-family:'Bebas Neue';font-size:1.4em;letter-spacing:.5px;margin-bottom:6px;color:var(--gold)}
-.story-card-custom .bio{color:var(--mut);font-size:.88em;margin-bottom:14px;font-style:italic}
-.story-card-custom .story-text{color:#c4c4cc;font-size:.95em;line-height:1.7;white-space:pre-wrap}
-.create-story-btn{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000;border:none;padding:16px 32px;border-radius:30px;font-weight:700;font-size:1.05em;cursor:pointer;transition:.3s;display:inline-flex;align-items:center;gap:10px;box-shadow:0 10px 30px rgba(212,175,55,.3)}
-.create-story-btn:hover{transform:translateY(-3px);box-shadow:0 15px 40px rgba(212,175,55,.4)}
-.story-form textarea{width:100%;background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:14px;color:var(--txt);font-size:.95em;font-family:inherit;resize:vertical;min-height:120px;margin-bottom:14px}
-.story-form textarea:focus{outline:none;border-color:var(--gold)}
-.story-form input[type="file"]{width:100%;background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:12px;color:var(--mut);font-size:.88em;margin-bottom:14px}
-.no-stories{text-align:center;color:var(--mut);padding:60px 20px;font-style:italic}
-.loader{position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;align-items:center;justify-content:center;transition:opacity .6s,visibility .6s}
+.loader{position:fixed;inset:0;background:var(--bg);z-index:9998;display:flex;align-items:center;justify-content:center;transition:opacity .6s,visibility .6s}
 .loader.done{opacity:0;visibility:hidden}
 .loader-inner{text-align:center;width:min(340px,82vw)}
 .loader-logo{font-family:'Bebas Neue';font-size:3.2em;letter-spacing:4px;animation:lpulse 1.4s infinite}
@@ -224,9 +195,6 @@ nav{position:fixed;top:0;width:100%;z-index:1000;background:rgba(10,10,12,.85);b
 .tog.on{background:var(--gold)}
 .tog i{position:absolute;top:3px;left:3px;width:22px;height:22px;background:#fff;border-radius:50%;transition:.3s}
 .tog.on i{left:29px}
-.lang-row{display:flex;gap:10px;margin-top:8px}
-.lang-btn{flex:1;padding:11px;background:var(--card);border:1px solid var(--line);border-radius:10px;color:var(--txt);cursor:pointer;font-weight:600;font-family:inherit;transition:.25s}
-.lang-btn.active{border-color:var(--gold);color:var(--gold);background:rgba(212,175,55,.08)}
 .char-modal-img{width:150px;height:150px;border-radius:50%;object-fit:cover;border:3px solid var(--gold);margin:10px auto 18px;display:block}
 .char-modal-name{font-family:'Bebas Neue';font-size:2.2em;letter-spacing:1px}
 .char-modal-role{font-weight:700;letter-spacing:1px;font-size:.85em;margin-bottom:14px}
@@ -240,11 +208,22 @@ footer strong{color:var(--gold);font-family:'Bebas Neue';letter-spacing:1px;font
 .like-btn{background:var(--bg2);border:1px solid var(--line);color:var(--mut);padding:6px 12px;border-radius:20px;cursor:pointer;font-size:.85em;transition:.2s;display:inline-flex;align-items:center;gap:4px}
 .like-btn:hover{border-color:var(--gold);color:var(--gold)}
 .like-btn.active{background:var(--gold);color:#000;border-color:var(--gold)}
-.share-btn{background:none;border:1px solid var(--line);color:var(--mut);padding:6px 12px;border-radius:20px;cursor:pointer;font-size:.85em;transition:.2s}
+.share-btn,.delete-btn{background:none;border:1px solid var(--line);color:var(--mut);padding:6px 12px;border-radius:20px;cursor:pointer;font-size:.85em;transition:.2s}
 .share-btn:hover{border-color:var(--gold);color:var(--gold)}
-.edit-btn,.delete-btn{background:none;border:1px solid var(--line);color:var(--mut);padding:6px 12px;border-radius:20px;cursor:pointer;font-size:.85em;transition:.2s}
-.edit-btn:hover{border-color:var(--gold);color:var(--gold)}
 .delete-btn:hover{border-color:var(--red);color:var(--red)}
+.stories-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px;max-width:1200px;margin:20px auto 0}
+.story-card-custom{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:28px;transition:.3s}
+.story-card-custom:hover{transform:translateY(-4px);border-color:var(--gold);box-shadow:0 15px 35px rgba(212,175,55,.1)}
+.story-card-custom img.story-ava{width:80px;height:80px;border-radius:50%;object-fit:cover;border:2px solid var(--gold);margin-bottom:16px}
+.story-card-custom h4{font-family:'Bebas Neue';font-size:1.4em;letter-spacing:.5px;margin-bottom:6px;color:var(--gold)}
+.story-card-custom .bio{color:var(--mut);font-size:.88em;margin-bottom:14px;font-style:italic}
+.story-card-custom .story-text{color:#c4c4cc;font-size:.95em;line-height:1.7;white-space:pre-wrap}
+.create-story-btn{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000;border:none;padding:16px 32px;border-radius:30px;font-weight:700;font-size:1.05em;cursor:pointer;transition:.3s;display:inline-flex;align-items:center;gap:10px;box-shadow:0 10px 30px rgba(212,175,55,.3)}
+.create-story-btn:hover{transform:translateY(-3px);box-shadow:0 15px 40px rgba(212,175,55,.4)}
+.story-form textarea{width:100%;background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:14px;color:var(--txt);font-size:.95em;font-family:inherit;resize:vertical;min-height:120px;margin-bottom:14px}
+.story-form textarea:focus{outline:none;border-color:var(--gold)}
+.story-form input[type="file"]{width:100%;background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:12px;color:var(--mut);font-size:.88em;margin-bottom:14px}
+.no-stories{text-align:center;color:var(--mut);padding:40px 20px;font-style:italic}
 .wiki-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;max-width:1100px;margin:30px auto 0}
 .wiki-term{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:10px;padding:18px 20px;transition:.3s}
 .wiki-term:hover{transform:translateX(4px);border-left-color:var(--gold2)}
@@ -253,7 +232,7 @@ footer strong{color:var(--gold);font-family:'Bebas Neue';letter-spacing:1px;font
 .comments-section{margin-top:30px;border-top:1px solid var(--line);padding-top:24px}
 .comments-section h4{font-family:'Bebas Neue';font-size:1.3em;letter-spacing:.5px;margin-bottom:14px;color:var(--gold)}
 .comment{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin-bottom:10px;display:flex;gap:12px;align-items:flex-start}
-.comment-avatar{width:36px;height:36px;border-radius:50%;background:var(--gold);color:#000;display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0;font-size:.9em}
+.comment-avatar{width:36px;height:36px;border-radius:50%;background:var(--gold);color:#000;display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0;font-size:.9em;background-size:cover;background-position:center}
 .comment-body{flex:1;min-width:0}
 .comment-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
 .comment-user{font-weight:700;color:var(--gold);font-size:.9em}
@@ -273,9 +252,8 @@ footer strong{color:var(--gold);font-family:'Bebas Neue';letter-spacing:1px;font
 .lb-entry.top2{background:linear-gradient(135deg,rgba(192,192,192,.08),transparent);border-color:#c0c0c0}
 .lb-entry.top3{background:linear-gradient(135deg,rgba(205,127,50,.08),transparent);border-color:#cd7f32}
 .lb-rank{font-family:'Bebas Neue';font-size:2em;color:var(--gold);width:50px;text-align:center;flex-shrink:0}
-.lb-entry.top2 .lb-rank{color:#c0c0c0}
-.lb-entry.top3 .lb-rank{color:#cd7f32}
-.lb-avatar{width:50px;height:50px;border-radius:50%;background:var(--gold);color:#000;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.3em;flex-shrink:0;background-size:cover}
+.lb-entry.top2 .lb-rank{color:#c0c0c0}.lb-entry.top3 .lb-rank{color:#cd7f32}
+.lb-avatar{width:50px;height:50px;border-radius:50%;background:var(--gold);color:#000;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.3em;flex-shrink:0;background-size:cover;background-position:center}
 .lb-info{flex:1;min-width:0}
 .lb-name{font-weight:700;font-size:1.05em;margin-bottom:2px}
 .lb-stats{color:var(--mut);font-size:.82em}
@@ -296,28 +274,16 @@ body.battle-mode .battle{box-shadow:0 0 40px rgba(226,59,59,.2),inset 0 0 30px r
 </style>
 </head>
 <body>
-<!-- AUTH SCREEN -->
-<div class="auth-screen" id="authScreen">
-<div class="auth-box">
-<h2>BIENVENIDO AL <em>ARCHIVO DE TCO</em></h2>
-<div style="text-align:center;color:var(--gold);font-size:.85em;margin-bottom:14px;font-weight:600" id="userCountDisplay">Cargando comunidad...</div>
-<p>Debés iniciar sesión o registrarte para acceder al contenido</p>
-<div class="auth-error" id="authScreenError"></div>
-<div id="loginScreenForm">
-<input type="email" class="auth-input" id="screenLoginEmail" placeholder="Email">
-<input type="password" class="auth-input" id="screenLoginPassword" placeholder="Contraseña">
-<button class="auth-btn" onclick="screenLogin()">INICIAR SESIÓN</button>
-<button class="auth-btn secondary" onclick="resendVerificationEmail()">📧 Reenviar email de verificación</button>
-<button class="auth-btn secondary" onclick="showScreenRegister()">¿No tenés cuenta? Registrate</button>
-</div>
-<div id="registerScreenForm" style="display:none">
-<input type="email" class="auth-input" id="screenRegEmail" placeholder="Email">
-<input type="password" class="auth-input" id="screenRegPassword" placeholder="Contraseña (mínimo 6 caracteres)">
-<input type="password" class="auth-input" id="screenRegPassword2" placeholder="Confirmar contraseña">
-<input type="text" class="auth-input" id="screenRegNickname" placeholder="¿Cómo quieres que te llamemos? (apodo)" maxlength="20">
-<button class="auth-btn" onclick="screenRegister()">REGISTRARSE</button>
-<button class="auth-btn secondary" onclick="showScreenLogin()">¿Ya tenés cuenta? Iniciá sesión</button>
-</div>
+<!-- ONBOARDING (apodo + imagen, una sola vez) -->
+<div class="onboard" id="onboardScreen">
+<div class="onboard-box">
+<h2>BIENVENIDO AL <em>ARCHIVO</em></h2>
+<p>Elegí tu identidad. El apodo es único y no se puede repetir.</p>
+<div class="auth-error" id="onboardError"></div>
+<input type="text" class="auth-input" id="onboardNick" placeholder="Tu apodo (3-20 caracteres)" maxlength="20">
+<img class="onboard-preview" id="onboardPreview" alt="" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='110' height='110'%3E%3Crect fill='%2316161a' width='110' height='110' rx='55'/%3E%3Ctext fill='%238a8a93' x='50%25' y='50%25' text-anchor='middle' dy='.3em' font-size='14'%3ETu foto%3C/text%3E%3C/svg%3E">
+<input type="file" class="onboard-file" id="onboardImg" accept="image/*">
+<button class="auth-btn" onclick="completeOnboarding()">ENTRAR AL ARCHIVO</button>
 </div>
 </div>
 <!-- LOADER -->
@@ -332,26 +298,16 @@ body.battle-mode .battle{box-shadow:0 0 40px rgba(226,59,59,.2),inset 0 0 30px r
 <nav>
 <div class="nav-inner">
 <div class="logo" onclick="go('#hero')">CLAN <span>ZK</span></div>
-<div class="nav-links" id="navLinks">
-<a href="#c2022">2022</a>
-<a href="#c2023">2023</a>
-<a href="#c2024">2024</a>
-<a href="#c2025">2025</a>
-<a href="#c2026">2026</a>
-<a href="#hof">🏆 Hall</a>
-<a href="#leaderboard">📊 Ranking</a>
-<a href="#map">🗺️ Mapa</a>
+<div class="nav-links">
+<a href="#c2022">2022</a><a href="#c2023">2023</a><a href="#c2024">2024</a><a href="#c2025">2025</a><a href="#c2026">2026</a>
+<a href="#hof">🏆 Hall</a><a href="#leaderboard">📊 Ranking</a><a href="#map">🗺️ Mapa</a>
 </div>
 <div class="nav-tools">
-<div class="search-box">
-<span>🔍</span>
-<input type="text" id="searchInput" placeholder="Buscar personaje..." oninput="doSearch(this.value)">
-</div>
-<button class="icon-btn" id="loginBtn" onclick="openModal('authModal')" title="Iniciar sesión">👤</button>
+<div class="search-box"><span>🔍</span><input type="text" id="searchInput" placeholder="Buscar personaje..." oninput="doSearch(this.value)"></div>
 <div class="user-info" id="userInfo">
 <div class="avatar" id="userAvatar" onclick="openProfileModal()" title="Mi perfil">U</div>
-<span id="userNickname" onclick="openProfileModal()" style="cursor:pointer">Usuario</span>
-<button class="logout-btn" onclick="logoutUser()">Salir</button>
+<span id="userNickname" onclick="openProfileModal()">Usuario</span>
+<button class="logout-btn" onclick="resetDeviceProfile()" title="Cambiar de perfil en este dispositivo">✕</button>
 </div>
 <button class="icon-btn" onclick="openModal('extrasModal')" title="Extras">📚</button>
 <button class="icon-btn" onclick="openModal('settingsModal')" title="Ajustes">⚙️</button>
@@ -360,7 +316,7 @@ body.battle-mode .battle{box-shadow:0 0 40px rgba(226,59,59,.2),inset 0 0 30px r
 </div>
 </nav>
 <!-- RAIL -->
-<div class="rail" id="rail">
+<div class="rail">
 <div class="rail-fill" id="railFill"></div>
 <div class="rail-dot active" data-target="hero" onclick="go('#hero')"><span class="rail-label">Inicio</span></div>
 <div class="rail-dot" data-target="c2022" onclick="go('#c2022')"><span class="rail-label">2022</span></div>
@@ -396,11 +352,8 @@ body.battle-mode .battle{box-shadow:0 0 40px rgba(226,59,59,.2),inset 0 0 30px r
 <p>Pero ese simple clic no era el final de una partida, sino <span class="hl">el primer latido de una leyenda</span>. El escenario estaba listo y la historia del Clan ZK comenzaba a forjarse en las sombras...</p>
 <div class="comments-section">
 <h4>💬 Comentarios sobre 2022</h4>
-<div id="comments-chapter-2022" class="comments-list"></div>
-<div class="comment-form">
-<input type="text" id="comment-input-2022" placeholder="Dejá tu comentario..." maxlength="500">
-<button onclick="postComment('chapter-2022','comment-input-2022')">Publicar</button>
-</div>
+<div id="comments-chapter-2022"></div>
+<div class="comment-form"><input type="text" id="comment-input-2022" placeholder="Dejá tu comentario..." maxlength="500"><button onclick="postComment('chapter-2022','comment-input-2022')">Publicar</button></div>
 </div>
 </div>
 </div>
@@ -419,11 +372,8 @@ body.battle-mode .battle{box-shadow:0 0 40px rgba(226,59,59,.2),inset 0 0 30px r
 <p>The Chosen One era brillante, sí, pero sus <strong>inseguridades</strong> lo volvían un territorio salvaje. Nam observaba, aprendía y se preparaba. Porque después del caos... vendría la verdadera guerra.</p>
 <div class="comments-section">
 <h4>💬 Comentarios sobre 2023</h4>
-<div id="comments-chapter-2023" class="comments-list"></div>
-<div class="comment-form">
-<input type="text" id="comment-input-2023" placeholder="Dejá tu comentario..." maxlength="500">
-<button onclick="postComment('chapter-2023','comment-input-2023')">Publicar</button>
-</div>
+<div id="comments-chapter-2023"></div>
+<div class="comment-form"><input type="text" id="comment-input-2023" placeholder="Dejá tu comentario..." maxlength="500"><button onclick="postComment('chapter-2023','comment-input-2023')">Publicar</button></div>
 </div>
 </div>
 </div>
@@ -470,11 +420,8 @@ body.battle-mode .battle{box-shadow:0 0 40px rgba(226,59,59,.2),inset 0 0 30px r
 <div class="teaser"><strong>Pero esto no terminó acá...</strong><br><span>(Spoiler 2025)</span></div>
 <div class="comments-section">
 <h4>💬 Comentarios sobre 2024</h4>
-<div id="comments-chapter-2024" class="comments-list"></div>
-<div class="comment-form">
-<input type="text" id="comment-input-2024" placeholder="Dejá tu comentario..." maxlength="500">
-<button onclick="postComment('chapter-2024','comment-input-2024')">Publicar</button>
-</div>
+<div id="comments-chapter-2024"></div>
+<div class="comment-form"><input type="text" id="comment-input-2024" placeholder="Dejá tu comentario..." maxlength="500"><button onclick="postComment('chapter-2024','comment-input-2024')">Publicar</button></div>
 </div>
 </div>
 </div>
@@ -528,11 +475,8 @@ body.battle-mode .battle{box-shadow:0 0 40px rgba(226,59,59,.2),inset 0 0 30px r
 <div class="teaser"><strong>Hay más sucesos en 2025...</strong><br><span>Próximamente: más contacto con clanes como SH.</span></div>
 <div class="comments-section">
 <h4>💬 Comentarios sobre 2025</h4>
-<div id="comments-chapter-2025" class="comments-list"></div>
-<div class="comment-form">
-<input type="text" id="comment-input-2025" placeholder="Dejá tu comentario..." maxlength="500">
-<button onclick="postComment('chapter-2025','comment-input-2025')">Publicar</button>
-</div>
+<div id="comments-chapter-2025"></div>
+<div class="comment-form"><input type="text" id="comment-input-2025" placeholder="Dejá tu comentario..." maxlength="500"><button onclick="postComment('chapter-2025','comment-input-2025')">Publicar</button></div>
 </div>
 </div>
 </div>
@@ -597,16 +541,13 @@ body.battle-mode .battle{box-shadow:0 0 40px rgba(226,59,59,.2),inset 0 0 30px r
 <div class="teaser"><strong>Junio 2026... Próximamente...</strong><br><span>(se picó todo)</span></div>
 <div class="comments-section">
 <h4>💬 Comentarios sobre 2026</h4>
-<div id="comments-chapter-2026" class="comments-list"></div>
-<div class="comment-form">
-<input type="text" id="comment-input-2026" placeholder="Dejá tu comentario..." maxlength="500">
-<button onclick="postComment('chapter-2026','comment-input-2026')">Publicar</button>
-</div>
+<div id="comments-chapter-2026"></div>
+<div class="comment-form"><input type="text" id="comment-input-2026" placeholder="Dejá tu comentario..." maxlength="500"><button onclick="postComment('chapter-2026','comment-input-2026')">Publicar</button></div>
 </div>
 </div>
 </div>
 </section>
-<!-- HALL OF FAME -->
+<!-- HALL -->
 <section class="special" id="hof">
 <div class="special-inner">
 <h2 class="sec-title">HALL DE LA <em>FAMA</em></h2>
@@ -652,7 +593,7 @@ body.battle-mode .battle{box-shadow:0 0 40px rgba(226,59,59,.2),inset 0 0 30px r
 <p style="margin-top:10px">Documentando la historia de The Chosen One</p>
 <p style="margin-top:14px;font-size:.8em">The Chosen One © TomazDev · User ID 607353710 · Game ID 11137575513</p>
 </footer>
-<!-- SETTINGS MODAL -->
+<!-- SETTINGS -->
 <div class="modal" id="settingsModal">
 <div class="modal-c">
 <button class="modal-x" onclick="closeModal('settingsModal')">×</button>
@@ -662,7 +603,7 @@ body.battle-mode .battle{box-shadow:0 0 40px rgba(226,59,59,.2),inset 0 0 30px r
 <div class="setting"><div><h4>🔊 Sonidos</h4><p>Clicks sutiles al interactuar</p></div><div class="tog on" id="togSound" onclick="toggleSound()"><i></i></div></div>
 </div>
 </div>
-<!-- CHARACTER MODAL -->
+<!-- CHAR MODAL -->
 <div class="modal" id="charModal">
 <div class="modal-c big">
 <button class="modal-x" onclick="closeModal('charModal')">×</button>
@@ -670,6 +611,20 @@ body.battle-mode .battle{box-shadow:0 0 40px rgba(226,59,59,.2),inset 0 0 30px r
 <div class="char-modal-name" id="cmName"></div>
 <div class="char-modal-role" id="cmRole"></div>
 <p id="cmDesc" style="color:var(--mut)"></p>
+</div>
+</div>
+<!-- PROFILE MODAL -->
+<div class="modal" id="profileModal">
+<div class="modal-c big">
+<button class="modal-x" onclick="closeModal('profileModal')">×</button>
+<h2>MI <em>PERFIL</em></h2>
+<p>Tu identidad en el archivo</p>
+<div class="auth-error" id="profileError"></div>
+<img class="onboard-preview" id="profilePreview" alt="">
+<input type="file" class="onboard-file" id="profileImg" accept="image/*">
+<input type="text" class="auth-input" id="profileNick" placeholder="Apodo" maxlength="20">
+<div id="nicknameCooldown" style="color:var(--mut);font-size:.8em;margin-top:-10px;margin-bottom:12px;display:none"></div>
+<button class="auth-btn" onclick="saveProfile()">GUARDAR CAMBIOS</button>
 </div>
 </div>
 <!-- DRAWER -->
@@ -691,20 +646,15 @@ body.battle-mode .battle{box-shadow:0 0 40px rgba(226,59,59,.2),inset 0 0 30px r
 <a class="drawer-link" onclick="toggleMenu();go('#leaderboard')">Leaderboard<small>Ranking de miembros activos</small></a>
 <a class="drawer-link" onclick="toggleMenu();go('#map')">Mapa de Alianzas<small>Quién era quién en la guerra</small></a>
 <a class="drawer-link" onclick="toggleMenu();openModal('extrasModal')">Extras · Otros Clanes<small>MG, SDZ, TQ, Admin Community...</small></a>
-<div class="drawer-sec">👥 Personajes Clave</div>
-<a class="drawer-link" onclick="toggleMenu();charModal('nam')">🏅 Nam <small>Protagonista</small></a>
-<a class="drawer-link" onclick="toggleMenu();charModal('enzo')">🕵️ Enzo <small>Co-Líder</small></a>
-<a class="drawer-link" onclick="toggleMenu();charModal('damian')">😈 i11rl <small>Antagonista</small></a>
-<a class="drawer-link" onclick="toggleMenu();charModal('radical')">🧠 Radical <small>La Mente Brillante</small></a>
-<a class="drawer-link" onclick="toggleMenu();charModal('zeen')">💀 Zeen <small>Líder de SDZ</small></a>
+<div class="drawer-sec">👤 Mi cuenta</div>
+<a class="drawer-link" onclick="toggleMenu();openProfileModal()">Mi Perfil<small>Apodo e imagen</small></a>
 <div class="drawer-sec">⚙️ Página</div>
-<a class="drawer-link" onclick="toggleMenu();openProfileModal()"> Mi Perfil<small>Apodo, bio y avatar</small></a>
 <a class="drawer-link" onclick="toggleMenu();openModal('settingsModal')">Ajustes<small>Modo cine y sonidos</small></a>
 <a class="drawer-link" onclick="toggleMenu();go('#hero')">Volver arriba<small>Regresar a la portada</small></a>
 </div>
 <div class="drawer-foot">User ID 607353710 · Game ID 11137575513</div>
 </div>
-<!-- EXTRAS MODAL -->
+<!-- EXTRAS -->
 <div class="modal" id="extrasModal">
 <div class="modal-c">
 <button class="modal-x" onclick="closeModal('extrasModal')">×</button>
@@ -718,11 +668,11 @@ body.battle-mode .battle{box-shadow:0 0 40px rgba(226,59,59,.2),inset 0 0 30px r
 <div class="hub feat"><div class="ic">🏴</div><h4>Clan IJC → ZK</h4><p>Feb 2026: Nam y Enzo fundan el IJC (Investigación de Justicia y Corrupción). Fines de 2026: renace como Clan ZK.</p><span class="tag">NUESTRO CLAN</span></div>
 </div>
 <h3 style="font-family:'Bebas Neue';font-size:1.6em;letter-spacing:.5px;margin:30px 0 14px;color:var(--gold)">HISTORIAS DE LA <em>COMUNIDAD</em></h3>
-<p style="color:var(--mut);font-size:.9em;margin-bottom:20px">Las experiencias de otros jugadores en The Chosen One</p>
-<div style="text-align:center;margin:20px 0">
+<p style="color:var(--mut);font-size:.9em;margin-bottom:16px">Las experiencias de otros jugadores en The Chosen One</p>
+<div style="text-align:center;margin:16px 0">
 <button class="create-story-btn" onclick="closeModal('extrasModal');openStoryCreator()"><span style="font-size:1.3em">+</span><span>Crear tu historia</span></button>
 </div>
-<div class="stories-grid" id="storiesGrid" style="max-width:100%;margin:20px 0"><div class="no-stories">Cargando historias...</div></div>
+<div class="stories-grid" id="storiesGrid" style="max-width:100%"><div class="no-stories">Cargando historias...</div></div>
 <h3 style="font-family:'Bebas Neue';font-size:1.6em;letter-spacing:.5px;margin:30px 0 14px;color:var(--gold)">📚 WIKI DE <em>TÉRMINOS</em></h3>
 <div class="wiki-grid">
 <div class="wiki-term"><h4>;bkit others</h4><p>Script de 2023 que crasheaba a todos los jugadores cercanos. El arma definitiva de la era del caos.</p></div>
@@ -736,30 +686,7 @@ body.battle-mode .battle{box-shadow:0 0 40px rgba(226,59,59,.2),inset 0 0 30px r
 </div>
 </div>
 </div>
-<!-- AUTH MODAL -->
-<div class="modal" id="authModal">
-<div class="modal-c big">
-<button class="modal-x" onclick="closeModal('authModal')">×</button>
-<h2>BIENVENIDO AL <em>ARCHIVO</em></h2>
-<p>Iniciá sesión o registrate para crear tu propia historia</p>
-<div class="auth-error" id="authError"></div>
-<div id="loginForm">
-<input type="email" class="auth-input" id="loginEmail" placeholder="Email">
-<input type="password" class="auth-input" id="loginPassword" placeholder="Contraseña">
-<button class="auth-btn" onclick="loginUser()">INICIAR SESIÓN</button>
-<button class="auth-btn secondary" onclick="showRegister()">¿No tenés cuenta? Registrate</button>
-</div>
-<div id="registerForm" style="display:none">
-<input type="email" class="auth-input" id="regEmail" placeholder="Email">
-<input type="password" class="auth-input" id="regPassword" placeholder="Contraseña (mínimo 6 caracteres)">
-<input type="password" class="auth-input" id="regPassword2" placeholder="Confirmar contraseña">
-<input type="text" class="auth-input" id="regNickname" placeholder="¿Cómo quieres que te llamemos? (apodo)" maxlength="20">
-<button class="auth-btn" onclick="registerUser()">REGISTRARSE</button>
-<button class="auth-btn secondary" onclick="showLogin()">¿Ya tenés cuenta? Iniciá sesión</button>
-</div>
-</div>
-</div>
-<!-- CREATE STORY MODAL -->
+<!-- STORY MODAL -->
 <div class="modal" id="storyModal">
 <div class="modal-c">
 <button class="modal-x" onclick="closeModal('storyModal')">×</button>
@@ -774,64 +701,135 @@ body.battle-mode .battle{box-shadow:0 0 40px rgba(226,59,59,.2),inset 0 0 30px r
 </div>
 </div>
 </div>
-<!-- PROFILE MODAL -->
-<div class="modal" id="profileModal">
-<div class="modal-c">
-<button class="modal-x" onclick="closeModal('profileModal')">×</button>
-<h2>MI <em>PERFIL</em></h2>
-<p>Configurá tu identidad en el archivo</p>
-<div class="auth-error" id="profileError"></div>
-<div style="text-align:center;margin:20px 0"><img id="profileAvatarPreview" src="" alt="" style="width:120px;height:120px;border-radius:50%;object-fit:cover;border:3px solid var(--gold)"></div>
-<input type="file" id="profileAvatarInput" accept="image/*" style="width:100%;background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:12px;color:var(--mut);font-size:.88em;margin-bottom:14px">
-<input type="text" class="auth-input" id="profileNickname" placeholder="Apodo" maxlength="20">
-<div id="nicknameCooldown" style="color:var(--mut);font-size:.8em;margin-top:-10px;margin-bottom:14px;display:none"></div>
-<textarea class="auth-input" id="profileBio" placeholder="Biografía (opcional, máx 200 caracteres)" maxlength="200" style="min-height:80px;resize:vertical"></textarea>
-<button class="auth-btn" onclick="saveProfile()">GUARDAR CAMBIOS</button>
-<button class="auth-btn secondary" onclick="closeModal('profileModal')">Cancelar</button>
-</div>
-</div>
 <!-- MUSIC INDICATOR -->
-<div class="music-indicator" id="musicIndicator"><span class="note">🎵</span><span id="musicChapterName">Capítulo actual</span></div>
+<div class="music-indicator" id="musicIndicator"><span class="note">🎵</span><span id="musicChapterName"></span></div>
 <button class="top-btn" id="topBtn" onclick="go('#hero')">↑</button>
 <script>
-/* ============ ADMIN ============ */
-const ADMIN_EMAILS = ['enbeta@gmail.com']; // 👈 agregá acá el email de Enzo
-function isAdmin(user){ return user && ADMIN_EMAILS.includes(user.email); }
-/* ============ DATA ============ */
-const CHARS={
-nam:{name:"Nam",role:"Protagonista · Líder IJC",color:"#d4af37",img:"images/nam.png",desc:"elfrancho14 (ID 607353710). El corazón de la historia. De jugador +1 a fundador del Clan IJC y creador de NamHUB."},
-enzo:{name:"Enzo (Diego)",role:"Co-Líder · El Espía",color:"#3ddc84",img:"images/enzo.png",desc:"enzors19209. Abrió los ojos a Nam en 2024, lideró el espionaje y la Operación Guardia Nocturna en 2025. Hermano de guerra."},
-sam:{name:"Sam",role:"El Arquitecto",color:"#d4af37",img:"images/sam.png",desc:"Primer amigo de Nam en TCO. Sin Robux, arquitecto real. Construyeron una ciudad juntos. Luego se acercó a Damian..."},
-damian:{name:"i11rl (Damian)",role:"Antagonista",color:"#e23b3b",img:"images/i11rl.png",desc:"El Manipulador. Tomó control de los servers latinos, traicionó a Nam y lideró el clan MG."},
-snoopy:{name:"Snoopy",role:"Aliado de Damian",color:"#e23b3b",img:"images/snoopy.png",desc:"Nuevo amigo de i11rl. Parte del trío enemigo en la batalla de 2024."},
-napoleon:{name:"Napoleon",role:"Aliado de Damian",color:"#e23b3b",img:"images/napoleon.png",desc:"Amigo de i11rl. Admitió 'manipulé a Gonza'. Liberado tras la batalla, luego spameó contra el IJC."},
-exotic:{name:"Tq_EX0T1C",role:"Líder de TQ",color:"#3ddc84",img:"images/exotic.png",desc:"Fundador y líder principal del clan TQ. Aceptó a Enzo para la guerra contra MG."},
-fonsi:{name:"Fonsi",role:"Aliado Temporal",color:"#d4af37",img:"images/fonsi.png",desc:"@elchiquitin38. Amigo de Exotic. Raideó a Damian por abusar del server latino."},
-facu:{name:"Tq_Facu",role:"Agente Doble",color:"#3ddc84",img:"images/facu.png",desc:"Compañero de Enzo en la Operación Guardia Nocturna. Infiltraron MG con multicuentas."},
-pan:{name:"Tq_Pan",role:"Nueva Amiga",color:"#3ddc84",img:"images/pan.png",desc:"Conocida el 18/01/2025. Enzo le mostró las evidencias contra MG. Aliada."},
-gonza:{name:"Gonza",role:"Conflictivo",color:"#d4af37",img:"images/gonza.png",desc:"Ex miembro de TQ. Hallow lo llamó traidor. Apoyó a MG un tiempo hasta que Enzo calmó las aguas."},
-hallow:{name:"Hallow",role:"Antagonista Interno",color:"#e23b3b",img:"images/hallow.png",desc:"Llamó traidor a Gonza, generando conflictos dentro de TQ durante la alianza con MG."},
-radical:{name:"Radical",role:"La Mente Brillante",color:"#3ddc84",img:"images/radical.png",desc:"Sobrevivió la crash machine cuando todos lagearon. Muy inteligente. Se unió al IJC."},
-adan:{name:"Adan",role:"Miembro IJC",color:"#3ddc84",img:"images/adan.png",desc:"Amigo de Radical. Intentó raidear a Nam, pidió perdón y se unió al clan."},
-roman:{name:"Romantco",role:"Aliado del Leak",color:"#3ddc84",img:"images/roman.png",desc:"Filtró RomazHUB en secreto a Nam. Construyeron la ciudad de Roma juntos. Scripts para el bien."},
-system:{name:"System",role:"Fundador de LS",color:"#3ddc84",img:"images/system.png",desc:"@igot_KJ8. Fundó Legacy Service. Le pasó Autobuild y Paint a Nam para NamHUB. Sin preguntas."},
-zeen:{name:"Zeen",role:"Líder de SDZ",color:"#e23b3b",img:"images/zeen.png",desc:"DARKTHEWHITE2. Líder del clan SDZ, que resultó ser una copia del clan MG. Derrotado en el raid."},
-stumblero:{name:"Stumblero",role:"El que se fue",color:"#d4af37",img:"images/stumblero.png",desc:"Amigo de Radical. Intentó raidear a Nam, se rindió y decidió desaparecer de TCO."}
-};
-/* ============ UTILS ============ */
-function escapeHtml(text){ const div=document.createElement('div'); div.textContent=(text==null?'':String(text)); return div.innerHTML; }
-function timeSince(date){
-const seconds=Math.floor((new Date()-date)/1000);
-let i=seconds/31536000; if(i>1)return Math.floor(i)+' años';
-i=seconds/2592000; if(i>1)return Math.floor(i)+' meses';
-i=seconds/86400; if(i>1)return Math.floor(i)+' días';
-i=seconds/3600; if(i>1)return Math.floor(i)+' horas';
-i=seconds/60; if(i>1)return Math.floor(i)+' minutos';
+/* ===== IDENTIDAD (sin login: apodo + imagen, guardado local) ===== */
+const LS_KEY='zk_profile';
+const ADMIN_NICKS=['nam','enzo']; // 👈 apodos de admin (en minúscula)
+let me=null, booted=false;
+function loadLocalProfile(){ try{ return JSON.parse(localStorage.getItem(LS_KEY)); }catch(e){ return null; } }
+function saveLocalProfile(p){ localStorage.setItem(LS_KEY, JSON.stringify(p)); }
+function isAdminUser(){ return me && ADMIN_NICKS.includes(me.nicknameLower); }
+function escapeHtml(t){ const d=document.createElement('div'); d.textContent=(t==null?'':String(t)); return d.innerHTML; }
+function timeSince(ms){
+const s=Math.floor((Date.now()-ms)/1000);
+let i=s/31536000; if(i>1)return Math.floor(i)+' años';
+i=s/2592000; if(i>1)return Math.floor(i)+' meses';
+i=s/86400; if(i>1)return Math.floor(i)+' días';
+i=s/3600; if(i>1)return Math.floor(i)+' horas';
+i=s/60; if(i>1)return Math.floor(i)+' minutos';
 return 'recién';
 }
 const BAD_WORDS=['puta','puto','perra','mierda','carajo','concha','boludo','pelotudo','forro','hijo de puta','hdp','zorra','gil','mogolico','negro de mierda','sudaca','trolo','trava','maricon','maricón','pajero','pija','culiao','weon','conchetumadre','ctm'];
-function containsBadWords(text){ const lower=String(text).toLowerCase(); return BAD_WORDS.some(w=>lower.includes(w)); }
-/* ============ SOUND ============ */
+function containsBadWords(t){ const l=String(t).toLowerCase(); return BAD_WORDS.some(w=>l.includes(w)); }
+function fileToDataUrl(file,size){
+return new Promise((res,rej)=>{
+const img=new Image(); const url=URL.createObjectURL(file);
+img.onload=()=>{ const c=document.createElement('canvas'); c.width=size; c.height=size;
+const x=c.getContext('2d'); const m=Math.min(img.width,img.height);
+x.drawImage(img,(img.width-m)/2,(img.height-m)/2,m,m,0,0,size,size);
+URL.revokeObjectURL(url); res(c.toDataURL('image/jpeg',0.8)); };
+img.onerror=rej; img.src=url;
+});
+}
+async function nicknameTaken(lower,excludeDocId){
+const F=window.firebaseFunctions; if(!F||!window.firebaseDb) return false;
+try{
+const q=F.query(F.collection(window.firebaseDb,'users'),F.where('nicknameLower','==',lower));
+const snap=await F.getDocs(q);
+for(const d of snap.docs){ if(d.id!==excludeDocId) return true; }
+return false;
+}catch(e){ console.warn('No se pudo verificar el apodo:',e); return false; }
+}
+function applyMe(){
+if(!me) return;
+const ui=document.getElementById('userInfo'); ui.style.display='flex';
+document.getElementById('userNickname').textContent=me.nickname;
+const av=document.getElementById('userAvatar');
+if(me.avatar){ av.style.backgroundImage='url('+me.avatar+')'; av.textContent=''; }
+else { av.style.backgroundImage=''; av.textContent=me.nickname[0].toUpperCase(); }
+}
+/* ===== ONBOARDING ===== */
+document.getElementById('onboardImg').addEventListener('change',async e=>{
+const f=e.target.files[0]; if(!f) return;
+document.getElementById('onboardPreview').src=await fileToDataUrl(f,110);
+});
+async function completeOnboarding(){
+const err=document.getElementById('onboardError'); err.classList.remove('show');
+const nick=document.getElementById('onboardNick').value.trim();
+const showE=m=>{ err.textContent=m; err.classList.add('show'); };
+if(nick.length<3||nick.length>20){ showE('El apodo debe tener entre 3 y 20 caracteres'); return; }
+if(containsBadWords(nick)){ showE('⚠️ El apodo contiene palabras inapropiadas. Elegí otro.'); return; }
+const lower=nick.toLowerCase();
+if(await nicknameTaken(lower,null)){ showE('❌ Ese apodo ya está usado por otro miembro. Elegí otro.'); return; }
+let avatar='';
+const f=document.getElementById('onboardImg').files[0];
+if(f){ try{ avatar=await fileToDataUrl(f,128); }catch(e){} }
+const profile={ id:'u_'+Date.now().toString(36)+Math.random().toString(36).slice(2,7), nickname:nick, nicknameLower:lower, avatar:avatar, bio:'', createdAt:Date.now(), nicknameChangedAt:0, docId:null };
+const F=window.firebaseFunctions;
+if(F&&window.firebaseDb){
+try{ const ref=await F.addDoc(F.collection(window.firebaseDb,'users'),{ userId:profile.id, nickname:nick, nicknameLower:lower, avatar:avatar, bio:'', createdAt:Date.now(), nicknameChangedAt:0 }); profile.docId=ref.id; }
+catch(e){ console.warn('No se pudo registrar el apodo online:',e); }
+}
+saveLocalProfile(profile);
+me=profile; applyMe();
+document.getElementById('onboardScreen').classList.add('hidden');
+document.body.style.overflow='';
+initData();
+beep(880,0.12);
+}
+function resetDeviceProfile(){
+if(!confirm('¿Cambiar de perfil en este dispositivo? Se borrará tu apodo guardado acá (tu historia y comentarios quedan online).')) return;
+localStorage.removeItem(LS_KEY);
+location.reload();
+}
+/* ===== PERFIL ===== */
+async function openProfileModal(){
+if(!me) return;
+document.getElementById('profileNick').value=me.nickname;
+document.getElementById('profilePreview').src=me.avatar||'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22110%22 height=%22110%22%3E%3Crect fill=%22%2316161a%22 width=%22110%22 height=%22110%22 rx=%2255%22/%3E%3Ctext fill=%22%238a8a93%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2214%22%3ESin foto%3C/text%3E%3C/svg%3E';
+document.getElementById('profileError').classList.remove('show');
+const cd=document.getElementById('nicknameCooldown'); const inp=document.getElementById('profileNick');
+if(me.nicknameChangedAt){
+const days=(Date.now()-me.nicknameChangedAt)/(1000*60*60*24);
+if(days<7){ const left=Math.ceil(7-days); cd.style.display='block'; cd.textContent='⏱️ Podés cambiar tu apodo en '+left+' día'+(left!==1?'s':''); inp.disabled=true; }
+else { cd.style.display='none'; inp.disabled=false; }
+}else{ cd.style.display='none'; inp.disabled=false; }
+openModal('profileModal');
+}
+document.getElementById('profileImg').addEventListener('change',async e=>{
+const f=e.target.files[0]; if(!f) return;
+document.getElementById('profilePreview').src=await fileToDataUrl(f,110);
+});
+async function saveProfile(){
+if(!me) return;
+const err=document.getElementById('profileError'); err.classList.remove('show');
+const showE=m=>{ err.textContent=m; err.classList.add('show'); };
+const newNick=document.getElementById('profileNick').value.trim();
+const newLower=newNick.toLowerCase();
+let newAvatar=me.avatar;
+const f=document.getElementById('profileImg').files[0];
+if(f){ try{ newAvatar=await fileToDataUrl(f,128); }catch(e){} }
+const nickChanged=newLower!==me.nicknameLower;
+if(nickChanged){
+if(newNick.length<3||newNick.length>20){ showE('El apodo debe tener entre 3 y 20 caracteres'); return; }
+if(containsBadWords(newNick)){ showE('⚠️ El apodo contiene palabras inapropiadas'); return; }
+if(me.nicknameChangedAt){ const days=(Date.now()-me.nicknameChangedAt)/(1000*60*60*24); if(days<7){ showE('⏱️ Debés esperar 7 días entre cambios de apodo'); return; } }
+if(await nicknameTaken(newLower,me.docId)){ showE('❌ Ese apodo ya está usado por otro miembro'); return; }
+}
+me.nickname=newNick; me.nicknameLower=newLower; me.avatar=newAvatar;
+if(nickChanged) me.nicknameChangedAt=Date.now();
+saveLocalProfile(me); applyMe();
+const F=window.firebaseFunctions;
+if(F&&window.firebaseDb&&me.docId){
+try{ await F.updateDoc(F.doc(window.firebaseDb,'users',me.docId),{ nickname:me.nickname, nicknameLower:me.nicknameLower, avatar:me.avatar, nicknameChangedAt:me.nicknameChangedAt }); }catch(e){ console.warn(e); }
+}
+closeModal('profileModal');
+beep(880,0.1);
+}
+/* ===== SONIDO / CINE ===== */
 let SOUND=true, audioCtx=null, cinemaAudio=null;
 function ctx(){ if(!audioCtx) audioCtx=new (window.AudioContext||window.webkitAudioContext)(); return audioCtx; }
 function beep(freq=660,dur=0.06,type='sine',vol=0.04){
@@ -842,8 +840,7 @@ o.connect(g); g.connect(c.destination); o.start();
 g.gain.exponentialRampToValueAtTime(0.0001,c.currentTime+dur); o.stop(c.currentTime+dur);
 }catch(e){}
 }
-function toggleSound(){ SOUND=!SOUND; document.getElementById('togSound').classList.toggle('on',SOUND); if(SOUND) beep(880,0.08); if(!SOUND) stopChapterMusic(); }
-/* ============ CINEMA ============ */
+function toggleSound(){ SOUND=!SOUND; document.getElementById('togSound').classList.toggle('on',SOUND); if(SOUND) beep(880,0.08); if(!SOUND) stopChapterMusic(); else updateChapterMusic(currentChapterId,true); }
 let CINEMA=false;
 function toggleCinema(){
 CINEMA=!CINEMA;
@@ -862,19 +859,19 @@ lfo.connect(lg); lg.connect(cinemaAudio.nodes[1]); lfo.start(); cinemaAudio.node
 }catch(e){}
 }
 function stopCinemaMusic(){ if(cinemaAudio){ cinemaAudio.nodes.forEach(n=>{try{if(n.stop)n.stop();}catch(e){} try{n.disconnect();}catch(e){}}); cinemaAudio=null; } }
-/* ============ REVEAL / RAIL ============ */
+/* ===== SCROLL / RAIL ===== */
 function reveal(){
 document.querySelectorAll('.card').forEach(el=>{ if(el.getBoundingClientRect().top<window.innerHeight-60) el.classList.add('visible'); });
 let cur='hero';
 document.querySelectorAll('section[id]').forEach(s=>{ if(s.getBoundingClientRect().top<window.innerHeight/2) cur=s.id; });
 document.querySelectorAll('.rail-dot').forEach(d=>d.classList.toggle('active',d.dataset.target===cur));
-document.querySelectorAll('.nav-links a').forEach(a=>d.classList&&0);
+document.querySelectorAll('.nav-links a').forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+cur));
 const dots=[...document.querySelectorAll('.rail-dot')]; const ai=dots.findIndex(d=>d.classList.contains('active'));
 const fill=document.getElementById('railFill'); if(fill&&dots.length) fill.style.height=(Math.max(ai,0)/(dots.length-1)*100)+'%';
 document.getElementById('topBtn').classList.toggle('show',window.pageYOffset>500);
 }
-window.addEventListener('scroll',reveal); window.addEventListener('load',reveal); reveal();
-/* ============ COUNTERS ============ */
+window.addEventListener('scroll',reveal);
+/* ===== COUNTERS ===== */
 let counted=false;
 function runCounters(){
 if(counted) return; const first=document.querySelector('.stat'); if(!first) return;
@@ -884,371 +881,229 @@ const target=+el.dataset.count; let n=0; const step=Math.max(1,Math.round(target
 const t=setInterval(()=>{ n+=step; if(n>=target){n=target;clearInterval(t);} el.textContent=n+(target===218?'M':target===30?'+':''); },25);
 });
 }
-window.addEventListener('scroll',runCounters); window.addEventListener('load',runCounters);
-/* ============ SEARCH ============ */
+window.addEventListener('scroll',runCounters);
+/* ===== SEARCH ===== */
 function doSearch(q){
 q=q.trim().toLowerCase();
 if(!q){ document.querySelectorAll('.char').forEach(c=>c.style.display=''); removeNoResult(); return; }
 let any=false;
-document.querySelectorAll('.char').forEach(c=>{ const name=c.querySelector('h4').textContent.toLowerCase(); const match=name.includes(q); c.style.display=match?'':'none'; if(match)any=true; });
+document.querySelectorAll('.char').forEach(c=>{ const n=c.querySelector('h4').textContent.toLowerCase(); const m=n.includes(q); c.style.display=m?'':'none'; if(m)any=true; });
 toggleNoResult(!any,q);
 }
-function toggleNoResult(show,q){ removeNoResult(); if(show){ const d=document.createElement('div'); d.className='no-result'; d.id='noResult'; d.textContent='No se encontraron personajes para "'+q+'"'; const h=document.querySelector('#hof'); if(h)h.before(d); } }
-function removeNoResult(){ const n=document.getElementById('noResult'); if(n)n.remove(); }
-/* ============ CHAR MODAL ============ */
+function toggleNoResult(show,q){ removeNoResult(); if(show){ const d=document.createElement('div'); d.className='no-result'; d.textContent='No se encontraron personajes para "'+q+'"'; const h=document.querySelector('#hof'); if(h)h.before(d); } }
+function removeNoResult(){ document.querySelectorAll('.no-result').forEach(n=>{ if(n.textContent.startsWith('No se encontraron')) n.remove(); }); }
+/* ===== CHAR MODAL ===== */
+const CHARS={
+nam:{name:"Nam",role:"Protagonista · Líder IJC",color:"#d4af37",img:"images/nam.png",desc:"elfrancho14 (ID 607353710). El corazón de la historia. De jugador +1 a fundador del Clan IJC y creador de NamHUB."},
+enzo:{name:"Enzo (Diego)",role:"Co-Líder · El Espía",color:"#3ddc84",img:"images/enzo.png",desc:"enzors19209. Abrió los ojos a Nam en 2024, lideró el espionaje y la Operación Guardia Nocturna en 2025."},
+sam:{name:"Sam",role:"El Arquitecto",color:"#d4af37",img:"images/sam.png",desc:"Primer amigo de Nam en TCO. Sin Robux, arquitecto real. Construyeron una ciudad juntos."},
+damian:{name:"i11rl (Damian)",role:"Antagonista",color:"#e23b3b",img:"images/i11rl.png",desc:"El Manipulador. Tomó control de los servers latinos, traicionó a Nam y lideró el clan MG."},
+snoopy:{name:"Snoopy",role:"Aliado de Damian",color:"#e23b3b",img:"images/snoopy.png",desc:"Nuevo amigo de i11rl. Parte del trío enemigo en la batalla de 2024."},
+napoleon:{name:"Napoleon",role:"Aliado de Damian",color:"#e23b3b",img:"images/napoleon.png",desc:"Amigo de i11rl. Admitió 'manipulé a Gonza'. Liberado tras la batalla."},
+exotic:{name:"Tq_EX0T1C",role:"Líder de TQ",color:"#3ddc84",img:"images/exotic.png",desc:"Fundador y líder principal del clan TQ."},
+fonsi:{name:"Fonsi",role:"Aliado Temporal",color:"#d4af37",img:"images/fonsi.png",desc:"@elchiquitin38. Amigo de Exotic. Raideó a Damian por abusar del server latino."},
+facu:{name:"Tq_Facu",role:"Agente Doble",color:"#3ddc84",img:"images/facu.png",desc:"Compañero de Enzo en la Operación Guardia Nocturna."},
+pan:{name:"Tq_Pan",role:"Nueva Amiga",color:"#3ddc84",img:"images/pan.png",desc:"Conocida el 18/01/2025. Aliada de Enzo."},
+gonza:{name:"Gonza",role:"Conflictivo",color:"#d4af37",img:"images/gonza.png",desc:"Ex miembro de TQ. Hallow lo llamó traidor."},
+hallow:{name:"Hallow",role:"Antagonista Interno",color:"#e23b3b",img:"images/hallow.png",desc:"Llamó traidor a Gonza, generando conflictos dentro de TQ."},
+radical:{name:"Radical",role:"La Mente Brillante",color:"#3ddc84",img:"images/radical.png",desc:"Sobrevivió la crash machine cuando todos lagearon. Se unió al IJC."},
+adan:{name:"Adan",role:"Miembro IJC",color:"#3ddc84",img:"images/adan.png",desc:"Amigo de Radical. Se unió al clan."},
+roman:{name:"Romantco",role:"Aliado del Leak",color:"#3ddc84",img:"images/roman.png",desc:"Filtró RomazHUB en secreto a Nam. Constructor de Roma."},
+system:{name:"System",role:"Fundador de LS",color:"#3ddc84",img:"images/system.png",desc:"@igot_KJ8. Fundó Legacy Service. Le pasó Autobuild y Paint a Nam."},
+zeen:{name:"Zeen",role:"Líder de SDZ",color:"#e23b3b",img:"images/zeen.png",desc:"DARKTHEWHITE2. Líder del clan SDZ, copia del clan MG."},
+stumblero:{name:"Stumblero",role:"El que se fue",color:"#d4af37",img:"images/stumblero.png",desc:"Amigo de Radical. Desapareció de TCO."}
+};
 function charModal(id){
 const c=CHARS[id]; if(!c) return;
-document.getElementById('cmImg').src=c.img;
-document.getElementById('cmImg').onerror=function(){this.onerror=null;this.src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22150%22 height=%22150%22%3E%3Crect fill=%22"+encodeURIComponent(c.color)+"%22 width=%22150%22 height=%22150%22 rx=%2275%22/%3E%3Ctext fill=%22%23000%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2254%22%3E"+encodeURIComponent(c.name[0])+"%3C/text%3E%3C/svg%3E";};
+const img=document.getElementById('cmImg'); img.src=c.img;
+img.onerror=function(){ this.onerror=null; this.src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22150%22 height=%22150%22%3E%3Crect fill=%22"+encodeURIComponent(c.color)+"%22 width=%22150%22 height=%22150%22 rx=%2275%22/%3E%3Ctext fill=%22%23000%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2254%22%3E"+encodeURIComponent(c.name[0])+"%3C/text%3E%3C/svg%3E"; };
 document.getElementById('cmName').textContent=c.name;
 const r=document.getElementById('cmRole'); r.textContent=c.role; r.style.color=c.color;
 document.getElementById('cmDesc').textContent=c.desc;
 openModal('charModal'); beep(720,0.07);
 }
-/* ============ MODALS ============ */
-function openModal(id){ document.getElementById(id).classList.add('active'); document.body.style.overflow='hidden'; beep(); }
-function closeModal(id){ document.getElementById(id).classList.remove('active'); document.body.style.overflow=''; }
-window.onclick=e=>{ if(e.target.classList.contains('modal')){ e.target.classList.remove('active'); document.body.style.overflow=''; } };
-document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ document.querySelectorAll('.modal.active').forEach(m=>m.classList.remove('active')); document.body.style.overflow=''; } });
-/* ============ NAV ============ */
+/* ===== MODALES / NAV ===== */
+function openModal(id){ document.getElementById(id).classList.add('active'); beep(); }
+function closeModal(id){ document.getElementById(id).classList.remove('active'); }
+window.onclick=e=>{ if(e.target.classList.contains('modal')) e.target.classList.remove('active'); };
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') document.querySelectorAll('.modal.active').forEach(m=>m.classList.remove('active')); });
 function go(sel){ const t=document.querySelector(sel); if(t){ t.scrollIntoView({behavior:'smooth'}); beep(520,0.05); } }
-document.querySelectorAll('.nav-links a, .rail-dot').forEach(el=>el.addEventListener('click',()=>beep(600,0.04)));
-/* ============ LOADER ============ */
-document.body.style.overflow='hidden';
+function toggleMenu(){
+const d=document.getElementById('drawer'), o=document.getElementById('drawerOverlay');
+const open=d.classList.toggle('open'); o.classList.toggle('show',open);
+beep(open?620:440,0.05);
+}
+/* ===== LOADER ===== */
 const LOADER_MSGS=['CONECTANDO CON TCO...','CARGANDO EXPEDIENTES 2022-2026...','DESCRIPTANDO PERSONAJES...','ARCHIVO LISTO.'];
 let lmi=0;
 const lmsgInt=setInterval(()=>{ const t=document.getElementById('loaderTxt'); if(t){ lmi=(lmi+1)%LOADER_MSGS.length; t.textContent=LOADER_MSGS[lmi]; } },800);
 function hideLoader(){
 clearInterval(lmsgInt);
 const l=document.getElementById('loader'); if(!l) return;
-l.classList.add('done');
-if(!document.getElementById('authScreen') || document.getElementById('authScreen').classList.contains('hidden')) document.body.style.overflow='';
-setTimeout(()=>l.remove(),700);
-beep(520,0.12,'triangle',0.05);
+l.classList.add('done'); setTimeout(()=>l.remove(),700);
 }
-window.addEventListener('load',()=>{
-const fill=document.getElementById('loaderFill'); let p=0;
-const pi=setInterval(()=>{ p+=Math.random()*22+10; if(p>=100){p=100;clearInterval(pi); setTimeout(hideLoader,400);} if(fill) fill.style.width=p+'%'; },140);
-});
-setTimeout(()=>{ if(document.getElementById('loader')) hideLoader(); },5000);
-/* ============ DRAWER ============ */
-function toggleMenu(){
-const d=document.getElementById('drawer'), o=document.getElementById('drawerOverlay');
-const open=d.classList.toggle('open');
-o.classList.toggle('show',open);
-beep(open?620:440,0.05);
-}
-/* ============ AUTH (modal interno) ============ */
-function showRegister(){ document.getElementById('loginForm').style.display='none'; document.getElementById('registerForm').style.display='block'; document.getElementById('authError').classList.remove('show'); }
-function showLogin(){ document.getElementById('loginForm').style.display='block'; document.getElementById('registerForm').style.display='none'; document.getElementById('authError').classList.remove('show'); }
-function showAuthError(msg){ const el=document.getElementById('authError'); el.textContent=msg; el.classList.add('show'); }
-async function loginUser(){
-const F=window.firebaseFunctions; if(!F){showAuthError('Firebase no cargó aún, esperá unos segundos');return;}
-const email=document.getElementById('loginEmail').value.trim();
-const pass=document.getElementById('loginPassword').value;
-if(!email||!pass){showAuthError('Completá todos los campos');return;}
-try{ await F.signInWithEmailAndPassword(window.firebaseAuth,email,pass); closeModal('authModal'); beep(880,0.1); }
-catch(e){ showAuthError(e.message.includes('invalid')?'Email o contraseña incorrectos':e.message); }
-}
-async function registerUser(){
-const F=window.firebaseFunctions; if(!F){showAuthError('Firebase no cargó aún, esperá unos segundos');return;}
-const email=document.getElementById('regEmail').value.trim();
-const pass=document.getElementById('regPassword').value;
-const pass2=document.getElementById('regPassword2').value;
-const nickname=document.getElementById('regNickname').value.trim();
-if(!email||!pass||!pass2||!nickname){showAuthError('Completá todos los campos');return;}
-if(pass.length<6){showAuthError('La contraseña debe tener al menos 6 caracteres');return;}
-if(pass!==pass2){showAuthError('Las contraseñas no coinciden');return;}
-if(nickname.length<3||nickname.length>20){showAuthError('El apodo debe tener entre 3 y 20 caracteres');return;}
-if(containsBadWords(nickname)){showAuthError('⚠️ El apodo contiene palabras inapropiadas. Elegí otro.');return;}
-try{
-const cred=await F.createUserWithEmailAndPassword(window.firebaseAuth,email,pass);
-await F.addDoc(F.collection(window.firebaseDb,'users'),{userId:cred.user.uid,email:email,nickname:nickname,bio:'',avatarUrl:'',nicknameChangedAt:0,createdAt:F.serverTimestamp()});
-await F.sendEmailVerification(cred.user);
-closeModal('authModal');
-beep(880,0.1);
-}catch(e){ showAuthError(e.message.includes('email-already')?'Este email ya está registrado':e.message); }
-}
-/* ============ AUTH SCREEN (obligatorio) ============ */
-function showScreenRegister(){ document.getElementById('loginScreenForm').style.display='none'; document.getElementById('registerScreenForm').style.display='block'; document.getElementById('authScreenError').classList.remove('show'); }
-function showScreenLogin(){ document.getElementById('loginScreenForm').style.display='block'; document.getElementById('registerScreenForm').style.display='none'; document.getElementById('authScreenError').classList.remove('show'); }
-function showScreenAuthError(msg){ const el=document.getElementById('authScreenError'); el.textContent=msg; el.classList.add('show'); }
-async function screenLogin(){
-const F=window.firebaseFunctions; if(!F){showScreenAuthError('Firebase no cargó aún, esperá unos segundos');return;}
-const email=document.getElementById('screenLoginEmail').value.trim();
-const pass=document.getElementById('screenLoginPassword').value;
-if(!email||!pass){showScreenAuthError('Completá todos los campos');return;}
-try{ await F.signInWithEmailAndPassword(window.firebaseAuth,email,pass); beep(880,0.1); }
-catch(e){ showScreenAuthError(e.message.includes('invalid')?'Email o contraseña incorrectos':e.message); }
-}
-async function screenRegister(){
-const F=window.firebaseFunctions; if(!F){showScreenAuthError('Firebase no cargó aún, esperá unos segundos');return;}
-const email=document.getElementById('screenRegEmail').value.trim();
-const pass=document.getElementById('screenRegPassword').value;
-const pass2=document.getElementById('screenRegPassword2').value;
-const nickname=document.getElementById('screenRegNickname').value.trim();
-if(!email||!pass||!pass2||!nickname){showScreenAuthError('Completá todos los campos');return;}
-if(pass.length<6){showScreenAuthError('La contraseña debe tener al menos 6 caracteres');return;}
-if(pass!==pass2){showScreenAuthError('Las contraseñas no coinciden');return;}
-if(nickname.length<3||nickname.length>20){showScreenAuthError('El apodo debe tener entre 3 y 20 caracteres');return;}
-if(containsBadWords(nickname)){showScreenAuthError('⚠️ El apodo contiene palabras inapropiadas. Elegí otro.');return;}
-try{
-const cred=await F.createUserWithEmailAndPassword(window.firebaseAuth,email,pass);
-await F.addDoc(F.collection(window.firebaseDb,'users'),{userId:cred.user.uid,email:email,nickname:nickname,bio:'',avatarUrl:'',nicknameChangedAt:0,createdAt:F.serverTimestamp()});
-await F.sendEmailVerification(cred.user);
-showScreenAuthError('¡Registro exitoso, '+escapeHtml(nickname)+'! Revisá tu correo y hacé click en el link de verificación (mirá spam).');
-beep(880,0.1);
-}catch(e){ showScreenAuthError(e.message.includes('email-already')?'Este email ya está registrado':e.message); }
-}
-async function resendVerificationEmail(){
-const F=window.firebaseFunctions; if(!F){showScreenAuthError('Firebase no cargó aún');return;}
-const email=document.getElementById('screenLoginEmail').value.trim();
-const pass=document.getElementById('screenLoginPassword').value;
-if(!email||!pass){showScreenAuthError('Ingresá tu email y contraseña para reenviar el link');return;}
-try{
-const cred=await F.signInWithEmailAndPassword(window.firebaseAuth,email,pass);
-await F.sendEmailVerification(cred.user);
-await F.signOut(window.firebaseAuth);
-showScreenAuthError('✅ Email de verificación reenviado. Revisá tu correo (y spam).');
-beep(880,0.1);
-}catch(e){ showScreenAuthError('Error al reenviar: '+e.message); }
-}
-async function logoutUser(){
-const F=window.firebaseFunctions; if(!F) return;
-await F.signOut(window.firebaseAuth);
-beep(440,0.08);
-}
-/* ============ PERFIL ============ */
-let currentUserProfile=null;
-async function loadUserProfile(userId){
-const F=window.firebaseFunctions; if(!F) return;
-try{
-const q=F.query(F.collection(window.firebaseDb,'users'),F.where('userId','==',userId));
-const snap=await F.getDocs(q);
-if(!snap.empty){
-currentUserProfile={...snap.docs[0].data(),docId:snap.docs[0].id};
-document.getElementById('userNickname').textContent=currentUserProfile.nickname||'Usuario';
-const av=document.getElementById('userAvatar');
-if(currentUserProfile.avatarUrl){ av.style.backgroundImage='url('+currentUserProfile.avatarUrl+')'; av.style.backgroundSize='cover'; av.textContent=''; }
-else { av.style.backgroundImage=''; av.textContent=(currentUserProfile.nickname||'U')[0].toUpperCase(); }
-}
-}catch(e){console.error('Error loading profile:',e);}
-}
-window.openProfileModal=async function(){
-if(!window.currentUser){showScreenAuthError('Iniciá sesión primero');return;}
-if(!currentUserProfile) await loadUserProfile(window.currentUser.uid);
-if(currentUserProfile){
-document.getElementById('profileNickname').value=currentUserProfile.nickname||'';
-document.getElementById('profileBio').value=currentUserProfile.bio||'';
-const preview=document.getElementById('profileAvatarPreview');
-preview.src=currentUserProfile.avatarUrl||('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Crect fill=%22%23d4af37%22 width=%22120%22 height=%22120%22 rx=%2260%22/%3E%3Ctext fill=%22%23000%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2240%22%3E'+encodeURIComponent((currentUserProfile.nickname||'U')[0].toUpperCase())+'%3C/text%3E%3C/svg%3E');
-const cooldown=document.getElementById('nicknameCooldown');
-const nickInput=document.getElementById('profileNickname');
-if(currentUserProfile.nicknameChangedAt){
-const daysSince=(Date.now()-currentUserProfile.nicknameChangedAt)/(1000*60*60*24);
-if(daysSince<7){ const daysLeft=Math.ceil(7-daysSince); cooldown.style.display='block'; cooldown.textContent='⏱️ Podés cambiar tu apodo en '+daysLeft+' día'+(daysLeft!==1?'s':''); nickInput.disabled=true; }
-else { cooldown.style.display='none'; nickInput.disabled=false; }
-}else{ cooldown.style.display='none'; nickInput.disabled=false; }
-}
-openModal('profileModal');
-};
-window.saveProfile=async function(){
-const F=window.firebaseFunctions; if(!F||!window.currentUser||!currentUserProfile) return;
-const newNickname=document.getElementById('profileNickname').value.trim();
-const newBio=document.getElementById('profileBio').value.trim();
-const newAvatarFile=document.getElementById('profileAvatarInput').files[0];
-const errEl=document.getElementById('profileError'); errEl.classList.remove('show');
-if(newNickname.length<3||newNickname.length>20){errEl.textContent='El apodo debe tener entre 3 y 20 caracteres';errEl.classList.add('show');return;}
-if(containsBadWords(newNickname)){errEl.textContent='⚠️ El apodo contiene palabras inapropiadas';errEl.classList.add('show');return;}
-const nicknameChanged=newNickname!==currentUserProfile.nickname;
-if(nicknameChanged&&currentUserProfile.nicknameChangedAt){
-const daysSince=(Date.now()-currentUserProfile.nicknameChangedAt)/(1000*60*60*24);
-if(daysSince<7){errEl.textContent='⏱️ Debés esperar 7 días entre cambios de apodo';errEl.classList.add('show');return;}
-}
-try{
-let avatarUrl=currentUserProfile.avatarUrl||'';
-if(newAvatarFile){
-const imgRef=F.ref(window.firebaseStorage,'avatars/'+window.currentUser.uid+'_'+Date.now());
-await F.uploadBytes(imgRef,newAvatarFile);
-avatarUrl=await F.getDownloadURL(imgRef);
-}
-const updates={nickname:newNickname,bio:newBio,avatarUrl:avatarUrl};
-if(nicknameChanged) updates.nicknameChangedAt=Date.now();
-await F.updateDoc(F.doc(window.firebaseDb,'users',currentUserProfile.docId),updates);
-currentUserProfile={...currentUserProfile,...updates};
-document.getElementById('userNickname').textContent=newNickname;
-const av=document.getElementById('userAvatar');
-if(avatarUrl){ av.style.backgroundImage='url('+avatarUrl+')'; av.style.backgroundSize='cover'; av.textContent=''; }
-else av.textContent=newNickname[0].toUpperCase();
-closeModal('profileModal');
-beep(880,0.1);
-}catch(e){ errEl.textContent='Error: '+e.message; errEl.classList.add('show'); }
-};
-/* ============ STORIES ============ */
+/* ===== STORIES ===== */
 function openStoryCreator(){
-if(!window.currentUser){showScreenAuthError('Iniciá sesión para crear tu historia');return;}
+if(!me){ alert('Primero elegí tu apodo para poder publicar.'); return; }
+if(me.nickname) document.getElementById('storyName').value=me.nickname;
 openModal('storyModal');
 }
 async function submitStory(){
-const F=window.firebaseFunctions; if(!F||!window.currentUser){openModal('authModal');return;}
+if(!me){ alert('Primero elegí tu apodo.'); return; }
+const F=window.firebaseFunctions;
 const name=document.getElementById('storyName').value.trim();
 const bio=document.getElementById('storyBio').value.trim();
 const text=document.getElementById('storyText').value.trim();
 const imgFile=document.getElementById('storyImage').files[0];
-if(!name||!bio||!text){alert('Completá todos los campos');return;}
-if(containsBadWords(name)||containsBadWords(bio)||containsBadWords(text)){alert('⚠️ Tu historia contiene palabras inapropiadas');return;}
+if(!name||!bio||!text){ alert('Completá todos los campos'); return; }
+if(containsBadWords(name)||containsBadWords(bio)||containsBadWords(text)){ alert('⚠️ Tu historia contiene palabras inapropiadas'); return; }
+if(!F||!window.firebaseDb){ alert('No se pudo conectar con la base de datos. Revisá las reglas de Firestore.'); return; }
 try{
-let imgUrl='';
-if(imgFile){
-const imgRef=F.ref(window.firebaseStorage,'stories/'+Date.now()+'_'+imgFile.name);
-await F.uploadBytes(imgRef,imgFile);
-imgUrl=await F.getDownloadURL(imgRef);
-}
-await F.addDoc(F.collection(window.firebaseDb,'stories'),{userId:window.currentUser.uid,userEmail:window.currentUser.email,name:name,bio:bio,text:text,imageUrl:imgUrl,createdAt:F.serverTimestamp()});
+let imgUrl=me.avatar||'';
+if(imgFile){ imgUrl=await fileToDataUrl(imgFile,256); }
+await F.addDoc(F.collection(window.firebaseDb,'stories'),{ userId:me.id, userNick:me.nickname, userAvatar:me.avatar, name:name, bio:bio, text:text, imageUrl:imgUrl, createdAt:Date.now() });
 closeModal('storyModal');
-document.getElementById('storyName').value='';document.getElementById('storyBio').value='';document.getElementById('storyText').value='';document.getElementById('storyImage').value='';
+document.getElementById('storyName').value=''; document.getElementById('storyBio').value=''; document.getElementById('storyText').value=''; document.getElementById('storyImage').value='';
 loadStories(); loadLeaderboard();
 beep(880,0.12);
 }catch(e){ alert('Error al publicar: '+e.message); }
 }
 async function loadStories(){
 const F=window.firebaseFunctions;
-const grid=document.getElementById('storiesGrid'); if(!grid||!F) return;
+const grid=document.getElementById('storiesGrid'); if(!grid) return;
+if(!F||!window.firebaseDb){ grid.innerHTML='<div class="no-stories">No se pudo conectar con la base de datos</div>'; return; }
 try{
 const q=F.query(F.collection(window.firebaseDb,'stories'),F.orderBy('createdAt','desc'));
 const snap=await F.getDocs(q);
 if(snap.empty){ grid.innerHTML='<div class="no-stories">Aún no hay historias. ¡Sé el primero en compartir la tuya!</div>'; return; }
 grid.innerHTML='';
-for(const docSnap of snap.docs){
-const s=doc.data(); const storyId=docSnap.id;
-const likesQ=F.query(F.collection(window.firebaseDb,'likes'),F.where('storyId','==',storyId));
-const likesSnap=await F.getDocs(likesQ);
-const likeCounts={fire:0,heart:0,laugh:0,skull:0}; const userLikes={};
-likesSnap.docs.forEach(l=>{ const d=l.data(); likeCounts[d.emoji]=(likeCounts[d.emoji]||0)+1; if(window.currentUser&&d.userId===window.currentUser.uid) userLikes[d.emoji]=true; });
-const isOwner=window.currentUser&&s.userId===window.currentUser.uid;
-const admin=isAdmin(window.currentUser);
+for(const d of snap.docs){
+const s=d.data(); const sid=d.id;
+const lq=F.query(F.collection(window.firebaseDb,'likes'),F.where('storyId','==',sid));
+const ls=await F.getDocs(lq);
+const counts={fire:0,heart:0,laugh:0,skull:0}; const mine={};
+ls.docs.forEach(l=>{ const dd=l.data(); counts[dd.emoji]=(counts[dd.emoji]||0)+1; if(me&&dd.userId===me.id) mine[dd.emoji]=true; });
+const owner=me&&(s.userId===me.id); const admin=isAdminUser();
 const card=document.createElement('div'); card.className='story-card-custom';
 card.innerHTML=
-(s.imageUrl?'<img src="'+escapeHtml(s.imageUrl)+'" alt="'+escapeHtml(s.name)+'">':'<div style="width:80px;height:80px;border-radius:50%;background:var(--gold);color:#000;display:flex;align-items:center;justify-content:center;font-family:\'Bebas Neue\';font-size:2em;margin-bottom:16px">'+escapeHtml((s.name||'?')[0].toUpperCase())+'</div>')+
-'<h4>'+escapeHtml(s.name)+'</h4>'+
+(s.userAvatar?'<img class="story-ava" src="'+s.userAvatar+'" alt="">':'<div class="story-ava" style="width:80px;height:80px;border-radius:50%;background:var(--gold);color:#000;display:flex;align-items:center;justify-content:center;font-family:\'Bebas Neue\';font-size:2em;margin-bottom:16px">'+escapeHtml((s.userNick||'?')[0].toUpperCase())+'</div>')+
+'<h4>'+escapeHtml(s.name)+' <span style="font-size:.6em;color:var(--mut)">por '+escapeHtml(s.userNick||'anónimo')+'</span></h4>'+
 '<div class="bio">'+escapeHtml(s.bio)+'</div>'+
+(s.imageUrl&&s.imageUrl!==s.userAvatar?'<img src="'+s.imageUrl+'" alt="" style="width:100%;border-radius:12px;margin-bottom:14px">':'')+
 '<div class="story-text">'+escapeHtml(s.text)+'</div>'+
 '<div class="story-actions">'+
-'<button class="like-btn '+(userLikes.fire?'active':'')+'" onclick="toggleLike(\''+storyId+'\',\'fire\',this)">🔥 <span class="like-count">'+likeCounts.fire+'</span></button>'+
-'<button class="like-btn '+(userLikes.heart?'active':'')+'" onclick="toggleLike(\''+storyId+'\',\'heart\',this)">❤️ <span class="like-count">'+likeCounts.heart+'</span></button>'+
-'<button class="like-btn '+(userLikes.laugh?'active':'')+'" onclick="toggleLike(\''+storyId+'\',\'laugh\',this)">😂 <span class="like-count">'+likeCounts.laugh+'</span></button>'+
-'<button class="like-btn '+(userLikes.skull?'active':'')+'" onclick="toggleLike(\''+storyId+'\',\'skull\',this)">💀 <span class="like-count">'+likeCounts.skull+'</span></button>'+
-'<button class="share-btn" onclick="shareStory(\''+storyId+'\',\''+escapeHtml(s.name).replace(/'/g,"\\'")+'\')">🐦 Compartir</button>'+
-((isOwner||admin)?'<button class="delete-btn" onclick="deleteMyStory(\''+storyId+'\')">🗑️ Borrar</button>':'')+
+'<button class="like-btn '+(mine.fire?'active':'')+'" onclick="toggleLike(\''+sid+'\',\'fire\',this)">🔥 <span class="like-count">'+counts.fire+'</span></button>'+
+'<button class="like-btn '+(mine.heart?'active':'')+'" onclick="toggleLike(\''+sid+'\',\'heart\',this)">❤️ <span class="like-count">'+counts.heart+'</span></button>'+
+'<button class="like-btn '+(mine.laugh?'active':'')+'" onclick="toggleLike(\''+sid+'\',\'laugh\',this)">😂 <span class="like-count">'+counts.laugh+'</span></button>'+
+'<button class="like-btn '+(mine.skull?'active':'')+'" onclick="toggleLike(\''+sid+'\',\'skull\',this)">💀 <span class="like-count">'+counts.skull+'</span></button>'+
+'<button class="share-btn" onclick="shareStory(\''+sid+'\',\''+escapeHtml(s.name).replace(/'/g,"\\'")+'\')">🐦 Compartir</button>'+
+((owner||admin)?'<button class="delete-btn" onclick="deleteMyStory(\''+sid+'\')">🗑️ Borrar</button>':'')+
 '</div>'+
-'<div class="comments-section"><h4>💬 Comentarios</h4><div id="comments-story-'+storyId+'" class="comments-list"></div>'+
-'<div class="comment-form"><input type="text" id="comment-input-story-'+storyId+'" placeholder="Dejá tu comentario..." maxlength="500">'+
-'<button onclick="postComment(\'story-'+storyId+'\',\'comment-input-story-'+storyId+'\')">Publicar</button></div></div>';
+'<div class="comments-section"><h4>💬 Comentarios</h4><div id="comments-story-'+sid+'"></div>'+
+'<div class="comment-form"><input type="text" id="comment-input-story-'+sid+'" placeholder="Dejá tu comentario..." maxlength="500">'+
+'<button onclick="postComment(\'story-'+sid+'\',\'comment-input-story-'+sid+'\')">Publicar</button></div></div>';
 grid.appendChild(card);
-loadComments('story-'+storyId);
+loadComments('story-'+sid);
 }
 }catch(e){ grid.innerHTML='<div class="no-stories">Error al cargar historias: '+escapeHtml(e.message)+'</div>'; }
 }
-window.toggleLike=async function(storyId,emoji,btn){
-const F=window.firebaseFunctions; if(!F||!window.currentUser){showScreenAuthError('Iniciá sesión para dar like');return;}
-try{
-const q=F.query(F.collection(window.firebaseDb,'likes'),F.where('storyId','==',storyId),F.where('userId','==',window.currentUser.uid),F.where('emoji','==',emoji));
-const snap=await F.getDocs(q);
-const countEl=btn.querySelector('.like-count');
-if(!snap.empty){ await F.deleteDoc(F.doc(window.firebaseDb,'likes',snap.docs[0].id)); btn.classList.remove('active'); countEl.textContent=Math.max(0,parseInt(countEl.textContent)-1); }
-else{ await F.addDoc(F.collection(window.firebaseDb,'likes'),{storyId:storyId,userId:window.currentUser.uid,emoji:emoji,createdAt:F.serverTimestamp()}); btn.classList.add('active'); countEl.textContent=parseInt(countEl.textContent)+1; beep(720,0.04); }
-}catch(e){console.error(e);}
-};
-window.shareStory=async function(storyId,nickname){
-const url=window.location.href;
-const text='Mirá la historia de '+nickname+' en el Archivo del Clan ZK!';
-try{ await navigator.clipboard.writeText(text+' '+url); alert('✅ Link copiado al portapapeles! Pegalo en Twitter/Discord donde quieras.'); }
-catch(e){ window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(text)+'&url='+encodeURIComponent(url),'_blank'); }
-};
-window.deleteMyStory=async function(docId){
+async function toggleLike(storyId,emoji,btn){
+if(!me){ alert('Primero elegí tu apodo.'); return; }
 const F=window.firebaseFunctions; if(!F) return;
-if(!confirm('¿Seguro que querés borrar esta historia? Esta acción no se puede deshacer.')) return;
+try{
+const q=F.query(F.collection(window.firebaseDb,'likes'),F.where('storyId','==',storyId),F.where('userId','==',me.id),F.where('emoji','==',emoji));
+const snap=await F.getDocs(q);
+const cEl=btn.querySelector('.like-count');
+if(!snap.empty){ await F.deleteDoc(F.doc(window.firebaseDb,'likes',snap.docs[0].id)); btn.classList.remove('active'); cEl.textContent=Math.max(0,parseInt(cEl.textContent)-1); }
+else{ await F.addDoc(F.collection(window.firebaseDb,'likes'),{ storyId:storyId, userId:me.id, emoji:emoji, createdAt:Date.now() }); btn.classList.add('active'); cEl.textContent=parseInt(cEl.textContent)+1; beep(720,0.04); }
+}catch(e){ console.error(e); }
+}
+async function shareStory(sid,nick){
+const url=window.location.href;
+const txt='Mirá la historia de '+nick+' en el Archivo del Clan ZK!';
+try{ await navigator.clipboard.writeText(txt+' '+url); alert('✅ Link copiado! Pegalo en Twitter/Discord donde quieras.'); }
+catch(e){ window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(txt)+'&url='+encodeURIComponent(url),'_blank'); }
+}
+async function deleteMyStory(docId){
+const F=window.firebaseFunctions; if(!F) return;
+if(!confirm('¿Seguro que querés borrar esta historia? No se puede deshacer.')) return;
 try{ await F.deleteDoc(F.doc(window.firebaseDb,'stories',docId)); loadStories(); loadLeaderboard(); beep(440,0.08); }
-catch(e){alert('Error: '+e.message);}
-};
-/* ============ COMENTARIOS ============ */
-window.postComment=async function(context,inputId){
-const F=window.firebaseFunctions; if(!F||!window.currentUser){showScreenAuthError('Iniciá sesión para comentar');return;}
+catch(e){ alert('Error: '+e.message); }
+}
+/* ===== COMENTARIOS ===== */
+async function postComment(context,inputId){
+if(!me){ alert('Primero elegí tu apodo.'); return; }
+const F=window.firebaseFunctions; if(!F||!window.firebaseDb){ alert('No se pudo conectar con la base de datos.'); return; }
 const input=document.getElementById(inputId); if(!input) return;
 const text=input.value.trim();
-if(!text){alert('Escribí algo');return;}
-if(text.length>500){alert('Máximo 500 caracteres');return;}
-if(containsBadWords(text)){alert('⚠️ Tu comentario contiene palabras inapropiadas');return;}
+if(!text){ alert('Escribí algo'); return; }
+if(text.length>500){ alert('Máximo 500 caracteres'); return; }
+if(containsBadWords(text)){ alert('⚠️ Tu comentario contiene palabras inapropiadas'); return; }
 try{
-await F.addDoc(F.collection(window.firebaseDb,'comments'),{context:context,userId:window.currentUser.uid,userEmail:window.currentUser.email,nickname:(currentUserProfile?currentUserProfile.nickname:'Usuario'),text:text,createdAt:F.serverTimestamp()});
-input.value='';
-loadComments(context);
-beep(720,0.05);
-}catch(e){alert('Error: '+e.message);}
-};
-window.loadComments=async function(context){
+await F.addDoc(F.collection(window.firebaseDb,'comments'),{ context:context, userId:me.id, userNick:me.nickname, userAvatar:me.avatar, text:text, createdAt:Date.now() });
+input.value=''; loadComments(context); beep(720,0.05);
+}catch(e){ alert('Error: '+e.message); }
+}
+async function loadComments(context){
 const F=window.firebaseFunctions;
-const container=document.getElementById('comments-'+context); if(!container||!F) return;
+const box=document.getElementById('comments-'+context); if(!box||!F||!window.firebaseDb) return;
 try{
 const q=F.query(F.collection(window.firebaseDb,'comments'),F.where('context','==',context),F.orderBy('createdAt','asc'));
 const snap=await F.getDocs(q);
-container.innerHTML='';
-if(snap.empty){ container.innerHTML='<p style="color:var(--mut);font-size:.85em;font-style:italic">Sé el primero en comentar</p>'; return; }
-snap.forEach(docSnap=>{
-const c=docSnap.data();
-const adminUser=ADMIN_EMAILS.includes(c.userEmail);
+box.innerHTML='';
+if(snap.empty){ box.innerHTML='<p style="color:var(--mut);font-size:.85em;font-style:italic">Sé el primero en comentar</p>'; return; }
+snap.forEach(d=>{
+const c=d.data(); const admin=ADMIN_NICKS.includes((c.userNick||'').toLowerCase());
 const div=document.createElement('div'); div.className='comment';
-const t=c.createdAt?timeSince(c.createdAt.toDate()):'recién';
-div.innerHTML='<div class="comment-avatar">'+escapeHtml((c.nickname||'?')[0].toUpperCase())+'</div>'+
-'<div class="comment-body"><div class="comment-header"><span class="comment-user">'+escapeHtml(c.nickname)+(adminUser?'<span class="admin-badge">ADMIN</span>':'')+'</span><span class="comment-time">'+t+'</span></div>'+
+div.innerHTML='<div class="comment-avatar" '+(c.userAvatar?'style="background-image:url('+c.userAvatar+')"':'')+'>'+escapeHtml((c.userNick||'?')[0].toUpperCase())+'</div>'+
+'<div class="comment-body"><div class="comment-header"><span class="comment-user">'+escapeHtml(c.userNick)+(admin?'<span class="admin-badge">ADMIN</span>':'')+'</span><span class="comment-time">'+timeSince(c.createdAt)+'</span></div>'+
 '<div class="comment-text">'+escapeHtml(c.text)+'</div>'+
-(isAdmin(window.currentUser)?'<button class="comment-admin-btn" onclick="deleteComment(\''+docSnap.id+'\',\''+context+'\')">🗑️ Borrar</button>':'')+
+((isAdminUser())?'<button class="comment-admin-btn" onclick="deleteComment(\''+d.id+'\',\''+context+'\')">🗑️ Borrar</button>':'')+
 '</div>';
-container.appendChild(div);
+box.appendChild(div);
 });
-}catch(e){container.innerHTML='<p style="color:var(--red);font-size:.85em">Error al cargar comentarios</p>';}
-};
-window.deleteComment=async function(commentId,context){
+}catch(e){ box.innerHTML='<p style="color:var(--red);font-size:.85em">Error al cargar comentarios</p>'; }
+}
+async function deleteComment(id,context){
 const F=window.firebaseFunctions; if(!F) return;
 if(!confirm('¿Borrar este comentario?')) return;
-try{ await F.deleteDoc(F.doc(window.firebaseDb,'comments',commentId)); loadComments(context); beep(440,0.05); }
-catch(e){alert('Error: '+e.message);}
-};
-/* ============ LEADERBOARD ============ */
-window.loadLeaderboard=async function(){
+try{ await F.deleteDoc(F.doc(window.firebaseDb,'comments',id)); loadComments(context); beep(440,0.05); }
+catch(e){ alert('Error: '+e.message); }
+}
+/* ===== LEADERBOARD ===== */
+async function loadLeaderboard(){
 const F=window.firebaseFunctions;
-const list=document.getElementById('leaderboardList'); if(!list||!F) return;
+const list=document.getElementById('leaderboardList'); if(!list) return;
+if(!F||!window.firebaseDb){ list.innerHTML='<div class="no-stories">No se pudo conectar con la base de datos</div>'; return; }
 try{
+const usersSnap=await F.getDocs(F.collection(window.firebaseDb,'users'));
 const storiesSnap=await F.getDocs(F.collection(window.firebaseDb,'stories'));
 const likesSnap=await F.getDocs(F.collection(window.firebaseDb,'likes'));
-const usersSnap=await F.getDocs(F.collection(window.firebaseDb,'users'));
-const userScores={};
-usersSnap.forEach(d=>{ const u=d.data(); userScores[u.userId]={nickname:u.nickname,avatarUrl:u.avatarUrl,stories:0,likesReceived:0,score:0}; });
-storiesSnap.forEach(d=>{ const s=d.data(); if(userScores[s.userId]){userScores[s.userId].stories++;userScores[s.userId].score+=10;} });
-const storyOwners={}; storiesSnap.forEach(d=>{storyOwners[d.id]=d.data().userId;});
-likesSnap.forEach(d=>{ const l=d.data(); const owner=storyOwners[l.storyId]; if(owner&&userScores[owner]){userScores[owner].likesReceived++;userScores[owner].score+=2;} });
-const sorted=Object.values(userScores).sort((a,b)=>b.score-a.score).slice(0,10);
-if(sorted.length===0){ list.innerHTML='<div class="no-stories">Aún no hay actividad en el ranking</div>'; return; }
+const scores={};
+usersSnap.forEach(d=>{ const u=d.data(); scores[u.userId]={ nickname:u.nickname, avatar:u.avatar, stories:0, likes:0, score:0 }; });
+if(me&&!scores[me.id]) scores[me.id]={ nickname:me.nickname, avatar:me.avatar, stories:0, likes:0, score:0 };
+const owners={}; storiesSnap.forEach(d=>{ owners[d.id]=d.data().userId; if(scores[owners[d.id]]){ scores[owners[d.id]].stories++; scores[owners[d.id]].score+=10; } });
+likesSnap.forEach(d=>{ const o=owners[d.data().storyId]; if(o&&scores[o]){ scores[o].likes++; scores[o].score+=2; } });
+const sorted=Object.values(scores).sort((a,b)=>b.score-a.score).slice(0,10);
+if(!sorted.length){ list.innerHTML='<div class="no-stories">Aún no hay actividad en el ranking</div>'; return; }
 list.innerHTML='';
 sorted.forEach((u,i)=>{
-const rank=i+1;
-const topClass=rank===1?'top1':rank===2?'top2':rank===3?'top3':'';
-const medal=rank===1?'🥇':rank===2?'🥈':rank===3?'🥉':rank;
-const entry=document.createElement('div'); entry.className='lb-entry '+topClass;
-entry.innerHTML='<div class="lb-rank">'+medal+'</div>'+
-'<div class="lb-avatar" '+(u.avatarUrl?'style="background-image:url('+escapeHtml(u.avatarUrl)+');background-size:cover"':'')+'>'+(u.avatarUrl?'':escapeHtml((u.nickname||'?')[0].toUpperCase()))+'</div>'+
-'<div class="lb-info"><div class="lb-name">'+escapeHtml(u.nickname)+'</div><div class="lb-stats">'+u.stories+' historia'+(u.stories!==1?'s':'')+' · '+u.likesReceived+' like'+(u.likesReceived!==1?'s':'')+'</div></div>'+
+const r=i+1; const cls=r===1?'top1':r===2?'top2':r===3?'top3':'';
+const medal=r===1?'🥇':r===2?'🥈':r===3?'🥉':r;
+const e=document.createElement('div'); e.className='lb-entry '+cls;
+e.innerHTML='<div class="lb-rank">'+medal+'</div>'+
+'<div class="lb-avatar" '+(u.avatar?'style="background-image:url('+u.avatar+')"':'')+'>'+escapeHtml((u.nickname||'?')[0].toUpperCase())+'</div>'+
+'<div class="lb-info"><div class="lb-name">'+escapeHtml(u.nickname)+'</div><div class="lb-stats">'+u.stories+' historia'+(u.stories!==1?'s':'')+' · '+u.likes+' like'+(u.likes!==1?'s':'')+'</div></div>'+
 '<div class="lb-score">'+u.score+' pts</div>';
-list.appendChild(entry);
+list.appendChild(e);
 });
 }catch(e){ list.innerHTML='<div class="no-stories">Error al cargar ranking</div>'; }
-};
-/* ============ CONTADOR USUARIOS ============ */
-async function loadUserCount(){
-const F=window.firebaseFunctions; if(!F) return;
-try{ const snap=await F.getDocs(F.collection(window.firebaseDb,'users')); const el=document.getElementById('userCountDisplay'); if(el) el.innerHTML='👥 Ya somos <strong>'+snap.size+'</strong> miembros del archivo'; }catch(e){}
 }
-/* ============ MODOS POR CAPÍTULO + MÚSICA ============ */
+async function loadUserCount(){
+const F=window.firebaseFunctions; if(!F||!window.firebaseDb) return;
+try{ const s=await F.getDocs(F.collection(window.firebaseDb,'users')); console.log('Miembros registrados:',s.size); }catch(e){}
+}
+/* ===== MODOS + MÚSICA POR CAPÍTULO ===== */
 let currentChapterAudio=null, currentChapterId=null;
 const CHAPTER_MUSIC={
 'c2022':{freq:[220,330],type:'sine',gain:0.008,name:'2022 · Orígenes'},
@@ -1258,50 +1113,56 @@ const CHAPTER_MUSIC={
 'c2026':{freq:[110,165,220],type:'sine',gain:0.009,name:'2026 · El Regreso'}
 };
 function stopChapterMusic(){ if(currentChapterAudio){ currentChapterAudio.nodes.forEach(n=>{try{if(n.stop)n.stop();}catch(e){} try{n.disconnect();}catch(e){}}); currentChapterAudio=null; } }
-function updateChapterMusic(chapterId){
-const indicator=document.getElementById('musicIndicator'); const nameEl=document.getElementById('musicChapterName');
-if(!indicator||!nameEl) return;
-if(chapterId===currentChapterId) return;
-currentChapterId=chapterId;
-if(!chapterId||!CHAPTER_MUSIC[chapterId]){ stopChapterMusic(); indicator.classList.remove('show'); return; }
-indicator.classList.add('show'); nameEl.textContent=CHAPTER_MUSIC[chapterId].name;
+function updateChapterMusic(id,force){
+const ind=document.getElementById('musicIndicator'), nm=document.getElementById('musicChapterName');
+if(!ind||!nm) return;
+if(!force&&id===currentChapterId) return;
+currentChapterId=id;
+if(!id||!CHAPTER_MUSIC[id]){ stopChapterMusic(); ind.classList.remove('show'); return; }
+ind.classList.add('show'); nm.textContent=CHAPTER_MUSIC[id].name;
 if(!SOUND){ stopChapterMusic(); return; }
 stopChapterMusic();
-const cfg=CHAPTER_MUSIC[chapterId];
+const cfg=CHAPTER_MUSIC[id];
 try{ const c=ctx(); currentChapterAudio={nodes:[]};
 cfg.freq.forEach(f=>{ const o=c.createOscillator(), g=c.createGain(); o.type=cfg.type; o.frequency.value=f; g.gain.value=cfg.gain; o.connect(g); g.connect(c.destination); o.start(); currentChapterAudio.nodes.push(o,g); });
 }catch(e){}
 }
 function updateChapterModes(){
-const sections=document.querySelectorAll('.chapter');
 let cur=null;
-sections.forEach(s=>{ const r=s.getBoundingClientRect(); if(r.top<window.innerHeight/2&&r.bottom>window.innerHeight/2) cur=s.id; });
+document.querySelectorAll('.chapter').forEach(s=>{ const r=s.getBoundingClientRect(); if(r.top<window.innerHeight/2&&r.bottom>window.innerHeight/2) cur=s.id; });
 document.body.classList.toggle('spy-mode',cur==='c2025');
 document.body.classList.toggle('battle-mode',['c2024','c2025','c2026'].includes(cur));
 updateChapterMusic(cur);
 }
 window.addEventListener('scroll',updateChapterModes);
-/* ============ INIT (después de que Firebase cargue) ============ */
+/* ===== INIT ===== */
 function initData(){
 loadUserCount();
 loadStories();
 loadLeaderboard();
 ['chapter-2022','chapter-2023','chapter-2024','chapter-2025','chapter-2026'].forEach(loadComments);
 updateChapterModes();
+reveal(); runCounters();
+}
+function boot(){
+if(booted) return; booted=true;
+hideLoader();
+me=loadLocalProfile();
+if(me){
+applyMe();
+document.getElementById('onboardScreen').classList.add('hidden');
+document.body.style.overflow='';
+initData();
+}else{
+document.body.style.overflow='hidden';
+}
 }
 window.addEventListener('load',()=>{
-const orig=window.updateAuthUI;
-if(orig){
-window.updateAuthUI=function(loggedIn){
-orig(loggedIn);
-if(loggedIn&&window.currentUser){ loadUserProfile(window.currentUser.uid); loadStories(); loadLeaderboard(); }
-else{ currentUserProfile=null; loadStories(); }
-};
-if(window.currentUser) window.updateAuthUI(true);
-}
-initData();
+const fill=document.getElementById('loaderFill'); let p=0;
+const pi=setInterval(()=>{ p+=Math.random()*22+10; if(p>=100){ p=100; clearInterval(pi); setTimeout(boot,350); } if(fill) fill.style.width=p+'%'; },140);
 });
-setTimeout(()=>{ if(window.firebaseFunctions) initData(); },2500);
+setTimeout(boot,5000);
+reveal(); runCounters();
 </script>
 </body>
 </html>

@@ -1,1840 +1,767 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La historia del Clan ZK (Anteriormente IJC)</title>
-    <meta name="description" content="Archivo histórico del Clan ZK - The Chosen One">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background-color: #ffffff;
-            color: #111111;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.6;
-            overflow-x: hidden;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        body.dark-mode {
-            background-color: #0a0a0a;
-            color: #e0e0e0;
-        }
-
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(10px);
-            padding: 20px 0;
-            z-index: 1000;
-            border-bottom: 1px solid #eaeaea;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
-        }
-
-        body.dark-mode nav {
-            background: rgba(20, 20, 20, 0.98);
-            border-bottom-color: #333;
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-
-        nav a {
-            color: #111;
-            text-decoration: none;
-            font-size: 0.85em;
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
-            position: relative;
-            padding: 5px 10px;
-        }
-
-        body.dark-mode nav a {
-            color: #e0e0e0;
-        }
-
-        nav a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 50%;
-            background-color: #111;
-            transition: all 0.3s ease;
-            transform: translateX(-50%);
-        }
-
-        body.dark-mode nav a::after {
-            background-color: #667eea;
-        }
-
-        nav a:hover::after {
-            width: 80%;
-        }
-
-        nav a:hover {
-            background: #f5f5f5;
-            border-radius: 5px;
-        }
-
-        body.dark-mode nav a:hover {
-            background: #1a1a1a;
-        }
-
-        .extras-btn, .settings-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white !important;
-            padding: 8px 20px !important;
-            border-radius: 20px;
-            cursor: pointer;
-            border: none;
-            font-size: 0.85em !important;
-            font-weight: 600 !important;
-            letter-spacing: 1px !important;
-            text-transform: uppercase !important;
-            transition: all 0.3s ease;
-        }
-
-        .extras-btn:hover, .settings-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
-
-        .settings-btn {
-            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-        }
-
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 120px 20px 60px;
-            background: linear-gradient(135deg, #fafafa 0%, #ffffff 100%);
-            transition: background 0.3s ease;
-        }
-
-        body.dark-mode .hero {
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
-        }
-
-        .game-icon {
-            width: 150px;
-            height: 150px;
-            border-radius: 30px;
-            margin-bottom: 40px;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.12);
-            transition: transform 0.3s ease;
-            background: #f0f0f0;
-            object-fit: cover;
-        }
-
-        .game-icon:hover {
-            transform: translateY(-10px) scale(1.05);
-        }
-
-        .hero h1 {
-            font-size: 4em;
-            font-weight: 800;
-            letter-spacing: -2px;
-            margin-bottom: 20px;
-            line-height: 1.1;
-        }
-
-        .hero h1 span {
-            font-size: 0.4em;
-            color: #666;
-            font-weight: 400;
-            display: block;
-            margin-top: 10px;
-            letter-spacing: 0;
-        }
-
-        body.dark-mode .hero h1 span {
-            color: #999;
-        }
-
-        .hero p {
-            font-size: 1.3em;
-            color: #666;
-            max-width: 700px;
-            line-height: 1.6;
-        }
-
-        .year-section {
-            min-height: 100vh;
-            padding: 140px 20px 100px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            border-top: 1px solid #f0f0f0;
-            position: relative;
-            transition: border-color 0.3s ease;
-        }
-
-        body.dark-mode .year-section {
-            border-top-color: #222;
-        }
-
-        .year-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 1px;
-            height: 60px;
-            background: linear-gradient(to bottom, #eaeaea, transparent);
-        }
-
-        body.dark-mode .year-section::before {
-            background: linear-gradient(to bottom, #333, transparent);
-        }
-
-        .year-label {
-            font-size: 0.85em;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            color: #999;
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-
-        .year-title {
-            font-size: 3.5em;
-            font-weight: 800;
-            margin-bottom: 15px;
-            text-align: center;
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-            letter-spacing: -1px;
-        }
-
-        .year-subtitle {
-            font-size: 1.4em;
-            color: #666;
-            margin-bottom: 70px;
-            text-align: center;
-            font-style: italic;
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
-            font-weight: 300;
-        }
-
-        body.dark-mode .year-subtitle {
-            color: #999;
-        }
-
-        .year-title.visible, .year-subtitle.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .story-card {
-            max-width: 1100px;
-            width: 100%;
-            display: flex;
-            gap: 60px;
-            align-items: flex-start;
-            opacity: 0;
-            transform: translateY(60px);
-            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
-            background: #fafafa;
-            padding: 60px;
-            border-radius: 24px;
-            border: 1px solid #f0f0f0;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
-        }
-
-        body.dark-mode .story-card {
-            background: #1a1a1a;
-            border-color: #333;
-        }
-
-        .story-card.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .avatar-container {
-            flex-shrink: 0;
-            position: relative;
-        }
-
-        .player-avatar {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid #ffffff;
-            background: #f0f0f0;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        body.dark-mode .player-avatar {
-            border-color: #333;
-        }
-
-        .player-avatar:hover {
-            transform: scale(1.05);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
-        }
-
-        .avatar-placeholder {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3em;
-            color: white;
-            font-weight: bold;
-            border: 4px solid #ffffff;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-        }
-
-        .story-content h3 {
-            font-size: 2em;
-            margin-bottom: 30px;
-            font-weight: 700;
-            color: #111;
-        }
-
-        body.dark-mode .story-content h3 {
-            color: #e0e0e0;
-        }
-
-        .story-content p {
-            font-size: 1.15em;
-            color: #444;
-            line-height: 1.9;
-            margin-bottom: 25px;
-        }
-
-        body.dark-mode .story-content p {
-            color: #ccc;
-        }
-
-        .highlight {
-            color: #111;
-            font-weight: 700;
-            border-bottom: 2px solid #111;
-            padding-bottom: 2px;
-        }
-
-        body.dark-mode .highlight {
-            color: #667eea;
-            border-bottom-color: #667eea;
-        }
-
-        .warning-box {
-            background: linear-gradient(135deg, #fff5f5 0%, #ffe5e5 100%);
-            border-left: 5px solid #ff4444;
-            padding: 30px;
-            margin: 30px 0;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(255,68,68,0.1);
-        }
-
-        body.dark-mode .warning-box {
-            background: linear-gradient(135deg, #2a1a1a 0%, #1a0f0f 100%);
-        }
-
-        .warning-box p {
-            margin: 0;
-            color: #555;
-            font-style: italic;
-        }
-
-        body.dark-mode .warning-box p {
-            color: #ccc;
-        }
-
-        .info-box {
-            background: #f8f9ff;
-            border-left: 5px solid #667eea;
-            padding: 25px;
-            margin: 25px 0;
-            border-radius: 12px;
-        }
-
-        body.dark-mode .info-box {
-            background: #1a1a2e;
-        }
-
-        .info-box p {
-            margin: 0;
-            color: #555;
-        }
-
-        body.dark-mode .info-box p {
-            color: #ccc;
-        }
-
-        .character-showcase {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 30px;
-            margin: 40px 0;
-            width: 100%;
-        }
-
-        .character-card {
-            text-align: center;
-            padding: 20px;
-            background: white;
-            border-radius: 15px;
-            border: 2px solid #f0f0f0;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        body.dark-mode .character-card {
-            background: #1a1a1a;
-            border-color: #333;
-        }
-
-        .character-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-        }
-
-        .character-card img {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 15px;
-            border: 3px solid #eaeaea;
-        }
-
-        body.dark-mode .character-card img {
-            border-color: #333;
-        }
-
-        .character-card h4 {
-            font-size: 1.2em;
-            margin-bottom: 5px;
-            color: #111;
-        }
-
-        body.dark-mode .character-card h4 {
-            color: #e0e0e0;
-        }
-
-        .character-card p {
-            font-size: 0.9em;
-            color: #666;
-            margin: 0;
-        }
-
-        body.dark-mode .character-card p {
-            color: #999;
-        }
-
-        .role-ally {
-            color: #22c55e;
-            font-weight: 600;
-            font-size: 0.85em;
-        }
-
-        .role-enemy {
-            color: #ef4444;
-            font-weight: 600;
-            font-size: 0.85em;
-        }
-
-        .role-neutral {
-            color: #f59e0b;
-            font-weight: 600;
-            font-size: 0.85em;
-        }
-
-        .timeline-dates {
-            display: flex;
-            gap: 20px;
-            margin: 30px 0;
-            flex-wrap: wrap;
-        }
-
-        .date-badge {
-            background: #111;
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-size: 0.9em;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-        }
-
-        body.dark-mode .date-badge {
-            background: #667eea;
-        }
-
-        .battle-section {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            color: white;
-            padding: 40px;
-            border-radius: 20px;
-            margin: 40px 0;
-            text-align: center;
-        }
-
-        .battle-section h3 {
-            font-size: 2em;
-            margin-bottom: 20px;
-            color: #fff;
-        }
-
-        .battle-section p {
-            color: #e0e0e0;
-            font-size: 1.1em;
-            line-height: 1.8;
-        }
-
-        .victory-box {
-            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
-            border: 3px solid #28a745;
-            padding: 30px;
-            border-radius: 15px;
-            margin: 30px 0;
-            text-align: center;
-        }
-
-        body.dark-mode .victory-box {
-            background: linear-gradient(135deg, #1a2f1a 0%, #163e16 100%);
-        }
-
-        .victory-box h3 {
-            color: #155724;
-            font-size: 1.8em;
-            margin-bottom: 15px;
-        }
-
-        body.dark-mode .victory-box h3 {
-            color: #22c55e;
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.85);
-            z-index: 10001;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            backdrop-filter: blur(5px);
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background: #ffffff;
-            border-radius: 20px;
-            padding: 40px;
-            max-width: 1000px;
-            width: 100%;
-            max-height: 85vh;
-            overflow-y: auto;
-            position: relative;
-            border: 1px solid #eaeaea;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.25);
-        }
-
-        body.dark-mode .modal-content {
-            background: #1a1a1a;
-            border-color: #333;
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: none;
-            border: none;
-            color: #111;
-            font-size: 2em;
-            cursor: pointer;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: all 0.3s ease;
-        }
-
-        body.dark-mode .modal-close {
-            color: #e0e0e0;
-        }
-
-        .modal-close:hover {
-            background: #f0f0f0;
-        }
-
-        body.dark-mode .modal-close:hover {
-            background: #333;
-        }
-
-        .modal h2 {
-            color: #111;
-            font-size: 2.5em;
-            margin-bottom: 10px;
-        }
-
-        body.dark-mode .modal h2 {
-            color: #e0e0e0;
-        }
-
-        .modal > .modal-content > p {
-            color: #666;
-            margin-bottom: 30px;
-            font-size: 1.1em;
-        }
-
-        body.dark-mode .modal > .modal-content > p {
-            color: #999;
-        }
-
-        .clans-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-top: 20px;
-        }
-
-        .clan-card {
-            background: white;
-            border: 2px solid #eaeaea;
-            border-radius: 15px;
-            padding: 30px;
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-
-        body.dark-mode .clan-card {
-            background: #1a1a1a;
-            border-color: #333;
-        }
-
-        .clan-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-            border-color: #667eea;
-        }
-
-        .clan-card.special {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-        }
-
-        .clan-card.special h4,
-        .clan-card.special p {
-            color: white;
-        }
-
-        .clan-icon {
-            font-size: 3em;
-            margin-bottom: 15px;
-        }
-
-        .clan-card h4 {
-            font-size: 1.5em;
-            margin-bottom: 10px;
-            color: #111;
-        }
-
-        body.dark-mode .clan-card h4 {
-            color: #e0e0e0;
-        }
-
-        .clan-card p {
-            color: #666;
-            font-size: 0.95em;
-            line-height: 1.6;
-        }
-
-        body.dark-mode .clan-card p {
-            color: #999;
-        }
-
-        .clan-tag {
-            display: inline-block;
-            background: #f0f0f0;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.8em;
-            margin-top: 15px;
-            font-weight: 600;
-        }
-
-        body.dark-mode .clan-tag {
-            background: #333;
-        }
-
-        .clan-card.special .clan-tag {
-            background: rgba(255,255,255,0.2);
-            color: white;
-        }
-
-        /* BOTÓN VOLVER ARRIBA */
-        .back-to-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: none;
-            z-index: 999;
-            font-size: 1.5em;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
-            transition: all 0.3s ease;
-        }
-
-        .back-to-top.visible {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .back-to-top:hover {
-            transform: scale(1.1);
-        }
-
-        /* BARRA DE PROGRESO DE LECTURA */
-        .reading-progress {
-            position: fixed;
-            top: 80px;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: #f0f0f0;
-            z-index: 999;
-        }
-
-        body.dark-mode .reading-progress {
-            background: #1a1a1a;
-        }
-
-        .reading-progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-            width: 0%;
-            transition: width 0.1s ease;
-        }
-
-        /* CONTADOR DE PERSONAJES */
-        .character-counter {
-            position: fixed;
-            bottom: 30px;
-            left: 30px;
-            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-size: 0.9em;
-            font-weight: 600;
-            box-shadow: 0 10px 30px rgba(34, 197, 94, 0.4);
-            z-index: 999;
-        }
-
-        footer {
-            text-align: center;
-            padding: 80px 20px;
-            background: #fafafa;
-            border-top: 1px solid #eaeaea;
-            color: #888;
-            font-size: 0.9em;
-            transition: all 0.3s ease;
-        }
-
-        body.dark-mode footer {
-            background: #0a0a0a;
-            border-top-color: #222;
-        }
-
-        footer p {
-            margin: 5px 0;
-        }
-
-        /* SETTINGS PANEL */
-        .settings-panel {
-            background: white;
-            border: 2px solid #eaeaea;
-            border-radius: 15px;
-            padding: 30px;
-            margin-bottom: 20px;
-        }
-
-        body.dark-mode .settings-panel {
-            background: #1a1a1a;
-            border-color: #333;
-        }
-
-        .setting-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 0;
-            border-bottom: 1px solid #f0f0f0;
-        }
-
-        body.dark-mode .setting-item {
-            border-bottom-color: #333;
-        }
-
-        .setting-item:last-child {
-            border-bottom: none;
-        }
-
-        .toggle-switch {
-            position: relative;
-            width: 60px;
-            height: 30px;
-            background: #ddd;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .toggle-switch.active {
-            background: #667eea;
-        }
-
-        .toggle-slider {
-            position: absolute;
-            top: 3px;
-            left: 3px;
-            width: 24px;
-            height: 24px;
-            background: white;
-            border-radius: 50%;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-
-        .toggle-switch.active .toggle-slider {
-            left: 33px;
-        }
-
-        @media (max-width: 968px) {
-            .hero h1 { font-size: 3em; }
-            .year-title { font-size: 2.5em; }
-            .story-card { 
-                flex-direction: column; 
-                align-items: center; 
-                text-align: center; 
-                padding: 40px 30px;
-                gap: 40px;
-            }
-            .player-avatar, .avatar-placeholder { 
-                width: 180px; 
-                height: 180px; 
-            }
-            nav ul { gap: 15px; font-size: 0.75em; }
-            .character-showcase { grid-template-columns: repeat(2, 1fr); }
-            .clans-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-
-        @media (max-width: 480px) {
-            .hero h1 { font-size: 2.2em; }
-            .year-title { font-size: 2em; }
-            .story-card { padding: 30px 20px; }
-            .character-showcase { grid-template-columns: 1fr; }
-            .clans-grid { grid-template-columns: 1fr; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clan ZK — Archivo Histórico | The Chosen One</title>
+<meta name="description" content="Archivo histórico del Clan ZK (antes IJC) - The Chosen One">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0a0c; --bg2:#111114; --card:#16161a; --line:#26262c;
+  --gold:#d4af37; --gold2:#f5d76e; --red:#e23b3b; --green:#3ddc84;
+  --txt:#ececec; --mut:#8a8a93;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font-family:'Inter',sans-serif;line-height:1.7;overflow-x:hidden}
+body.cinema{filter:saturate(1.15) contrast(1.05)}
+::selection{background:var(--gold);color:#000}
+
+/* ===== NAV ===== */
+nav{position:fixed;top:0;width:100%;z-index:1000;background:rgba(10,10,12,.85);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);padding:14px 0;transition:.3s}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.logo{font-family:'Bebas Neue';font-size:1.5em;letter-spacing:2px;color:var(--gold);cursor:pointer;white-space:nowrap}
+.logo span{color:var(--txt)}
+.nav-links{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.nav-links a{color:var(--mut);text-decoration:none;font-size:.8em;font-weight:600;letter-spacing:1px;padding:7px 13px;border-radius:8px;transition:.25s;text-transform:uppercase}
+.nav-links a:hover,.nav-links a.active{color:var(--gold);background:rgba(212,175,55,.08)}
+.nav-tools{display:flex;gap:8px;align-items:center}
+.icon-btn{background:var(--card);border:1px solid var(--line);color:var(--txt);width:38px;height:38px;border-radius:9px;cursor:pointer;font-size:1em;display:flex;align-items:center;justify-content:center;transition:.25s}
+.icon-btn:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px)}
+.search-box{display:flex;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:9px;padding:0 12px;transition:.25s}
+.search-box:focus-within{border-color:var(--gold)}
+.search-box input{background:none;border:none;color:var(--txt);padding:8px 6px;font-size:.85em;width:130px;outline:none;font-family:inherit}
+.search-box input::placeholder{color:var(--mut)}
+
+/* ===== TIMELINE RAIL ===== */
+.rail{position:fixed;left:28px;top:50%;transform:translateY(-50%);z-index:900;display:flex;flex-direction:column;gap:26px}
+.rail::before{content:'';position:absolute;left:7px;top:6px;bottom:6px;width:2px;background:var(--line)}
+.rail-dot{position:relative;width:16px;height:16px;border-radius:50%;background:var(--bg2);border:2px solid var(--line);cursor:pointer;transition:.3s}
+.rail-dot:hover,.rail-dot.active{border-color:var(--gold);background:var(--gold);box-shadow:0 0 14px var(--gold)}
+.rail-dot .rail-label{position:absolute;left:28px;top:50%;transform:translateY(-50%);white-space:nowrap;font-size:.72em;font-weight:600;letter-spacing:1px;color:var(--mut);opacity:0;transition:.25s;pointer-events:none}
+.rail-dot:hover .rail-label,.rail-dot.active .rail-label{opacity:1;color:var(--gold)}
+.rail-fill{position:absolute;left:7px;top:6px;width:2px;background:linear-gradient(var(--gold),var(--gold2));height:0;transition:height .15s;z-index:-1}
+
+/* ===== HERO ===== */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:140px 24px 80px;position:relative;background:radial-gradient(ellipse at top,rgba(212,175,55,.07),transparent 60%)}
+.hero-badge{font-size:.75em;letter-spacing:5px;color:var(--gold);text-transform:uppercase;margin-bottom:24px;border:1px solid var(--gold);padding:7px 18px;border-radius:30px}
+.game-icon{width:130px;height:130px;border-radius:26px;margin-bottom:34px;box-shadow:0 25px 60px rgba(212,175,55,.25);object-fit:cover;border:2px solid var(--line);transition:.4s}
+.game-icon:hover{transform:translateY(-8px) scale(1.04);box-shadow:0 30px 70px rgba(212,175,55,.4)}
+.hero h1{font-family:'Bebas Neue';font-size:clamp(3em,9vw,6.5em);line-height:.95;letter-spacing:1px;margin-bottom:18px}
+.hero h1 em{color:var(--gold);font-style:normal}
+.hero .sub{font-size:1.15em;color:var(--mut);max-width:620px}
+.scroll-hint{margin-top:50px;color:var(--mut);font-size:.8em;letter-spacing:2px;animation:bob 2s infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+
+/* ===== STATS ===== */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:18px;max-width:1000px;margin:70px auto 0;padding:0 24px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px 18px;text-align:center;transition:.3s}
+.stat:hover{border-color:var(--gold);transform:translateY(-4px)}
+.stat .num{font-family:'Bebas Neue';font-size:2.6em;color:var(--gold);line-height:1}
+.stat .lbl{font-size:.78em;color:var(--mut);letter-spacing:1px;text-transform:uppercase;margin-top:6px}
+
+/* ===== SECTIONS ===== */
+.chapter{padding:120px 24px 90px;max-width:1000px;margin:0 auto;position:relative}
+.ch-head{text-align:center;margin-bottom:60px}
+.ch-num{font-size:.8em;letter-spacing:5px;color:var(--gold);text-transform:uppercase}
+.ch-title{font-family:'Bebas Neue';font-size:clamp(2.6em,6vw,4.2em);letter-spacing:1px;margin:8px 0}
+.ch-sub{color:var(--mut);font-style:italic;font-size:1.1em}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:50px;display:flex;gap:46px;align-items:flex-start;opacity:0;transform:translateY(50px);transition:all .8s cubic-bezier(.16,1,.3,1)}
+.card.visible{opacity:1;transform:none}
+.av{flex-shrink:0}
+.av img{width:180px;height:180px;border-radius:50%;object-fit:cover;border:3px solid var(--gold);box-shadow:0 15px 40px rgba(0,0,0,.5);transition:.3s}
+.av img:hover{transform:scale(1.05)}
+.av-ph{width:180px;height:180px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#8a6d1f);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue';font-size:3.4em;color:#000;border:3px solid var(--gold)}
+.card h3{font-family:'Bebas Neue';font-size:1.9em;letter-spacing:.5px;margin:28px 0 16px;color:var(--gold2)}
+.card h3:first-child{margin-top:0}
+.card p{color:#c4c4cc;margin-bottom:20px;font-size:1.05em}
+.hl{color:var(--gold);font-weight:700;border-bottom:1px solid var(--gold)}
+.box{border-radius:13px;padding:24px 26px;margin:26px 0;border-left:4px solid}
+.box.red{background:rgba(226,59,59,.08);border-color:var(--red)}
+.box.blue{background:rgba(80,140,255,.08);border-color:#508cff}
+.box.gold{background:rgba(212,175,55,.08);border-color:var(--gold)}
+.box.green{background:rgba(61,220,132,.08);border-color:var(--green)}
+.box p{margin:0;color:#c4c4cc}
+.box.warn p{font-style:italic}
+.battle{background:linear-gradient(135deg,#1a0e0e,#0e0a14);border:1px solid var(--red);border-radius:18px;padding:38px;margin:34px 0;text-align:center}
+.battle h3{color:#ff8a8a !important;margin-bottom:14px}
+.battle p{color:#d8c4c4}
+.victory{background:linear-gradient(135deg,rgba(61,220,132,.12),rgba(61,220,132,.05));border:2px solid var(--green);border-radius:18px;padding:34px;margin:30px 0;text-align:center}
+.victory h3{color:var(--green) !important}
+
+/* characters */
+.chars{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:22px;margin:34px 0}
+.char{text-align:center;background:var(--bg2);border:1px solid var(--line);border-radius:15px;padding:20px 12px;transition:.3s;cursor:pointer}
+.char:hover{transform:translateY(-5px);border-color:var(--gold);box-shadow:0 12px 28px rgba(0,0,0,.4)}
+.char img{width:96px;height:96px;border-radius:50%;object-fit:cover;margin-bottom:12px;border:2px solid var(--line)}
+.char h4{font-size:1.05em;margin-bottom:4px}
+.char .role{font-size:.78em;font-weight:700;letter-spacing:.5px}
+.role.ally{color:var(--green)}.role.enemy{color:var(--red)}.role.neutral{color:var(--gold)}
+.char .meta{font-size:.78em;color:var(--mut);margin-top:6px;line-height:1.4}
+
+/* hubs */
+.hubs{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;margin:30px 0}
+.hub{background:var(--bg2);border:1px solid var(--line);border-radius:15px;padding:26px;text-align:center;transition:.3s}
+.hub:hover{transform:translateY(-4px);border-color:var(--gold)}
+.hub.feat{background:linear-gradient(135deg,rgba(212,175,55,.15),rgba(212,175,55,.04));border-color:var(--gold)}
+.hub .ic{font-size:2.6em;margin-bottom:10px}
+.hub h4{font-family:'Bebas Neue';font-size:1.5em;letter-spacing:.5px;margin-bottom:8px}
+.hub.feat h4{color:var(--gold)}
+.hub p{font-size:.88em;color:var(--mut)}
+.tag{display:inline-block;background:var(--line);padding:4px 13px;border-radius:20px;font-size:.72em;font-weight:700;margin-top:12px;letter-spacing:.5px}
+.hub.feat .tag{background:var(--gold);color:#000}
+
+/* timeline badges */
+.badges{display:flex;gap:12px;flex-wrap:wrap;margin:30px 0}
+.badge{background:var(--bg2);border:1px solid var(--line);color:var(--txt);padding:9px 18px;border-radius:30px;font-size:.82em;font-weight:600}
+.teaser{text-align:center;margin-top:40px;padding:30px;background:var(--bg2);border:1px dashed var(--gold);border-radius:15px;color:var(--mut);font-style:italic}
+.teaser strong{color:var(--gold);font-style:normal}
+
+/* ===== HALL OF FAME ===== */
+.special{padding:110px 24px;background:linear-gradient(180deg,transparent,rgba(212,175,55,.04),transparent)}
+.special-inner{max-width:1100px;margin:0 auto}
+.sec-title{font-family:'Bebas Neue';font-size:clamp(2.2em,5vw,3.4em);text-align:center;letter-spacing:1px;margin-bottom:8px}
+.sec-title em{color:var(--gold);font-style:normal}
+.sec-sub{text-align:center;color:var(--mut);margin-bottom:50px}
+.hof{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px}
+.medal{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:30px 24px;text-align:center;transition:.35s;position:relative;overflow:hidden}
+.medal::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(212,175,55,.1),transparent);transition:.6s}
+.medal:hover::before{left:100%}
+.medal:hover{transform:translateY(-6px);border-color:var(--gold);box-shadow:0 18px 40px rgba(212,175,55,.15)}
+.medal .em{font-size:2.8em;margin-bottom:12px}
+.medal h4{font-family:'Bebas Neue';font-size:1.3em;letter-spacing:.5px;margin-bottom:6px}
+.medal .yr{color:var(--gold);font-size:.8em;font-weight:700;letter-spacing:1px}
+.medal p{color:var(--mut);font-size:.85em;margin-top:8px}
+
+/* ===== MAP ===== */
+.map-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+.rel{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:14px;padding:22px 24px;transition:.3s}
+.rel:hover{transform:translateX(4px);border-left-color:var(--gold2)}
+.rel.enemy{border-left-color:var(--red)}.rel.ally{border-left-color:var(--green)}
+.rel .who{font-weight:700;font-size:1.05em;margin-bottom:6px}
+.rel .what{color:var(--mut);font-size:.9em}
+.rel .arrow{color:var(--gold);font-weight:700}
+.rel.enemy .arrow{color:var(--red)}.rel.ally .arrow{color:var(--green)}
+
+/* ===== MODALS ===== */
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);backdrop-filter:blur(6px);z-index:2000;justify-content:center;align-items:center;padding:20px}
+.modal.active{display:flex}
+.modal-c{background:var(--bg2);border:1px solid var(--line);border-radius:20px;padding:40px;max-width:760px;width:100%;max-height:85vh;overflow-y:auto;position:relative}
+.modal-c.big{max-width:520px;text-align:center}
+.modal-x{position:absolute;top:16px;right:18px;background:none;border:none;color:var(--mut);font-size:1.8em;cursor:pointer;width:38px;height:38px;border-radius:50%;transition:.25s}
+.modal-x:hover{background:var(--card);color:var(--gold)}
+.modal-c h2{font-family:'Bebas Neue';font-size:2.4em;letter-spacing:1px;margin-bottom:6px}
+.modal-c h2 em{color:var(--gold);font-style:normal}
+.modal-c>p{color:var(--mut);margin-bottom:26px}
+.setting{display:flex;justify-content:space-between;align-items:center;padding:16px 0;border-bottom:1px solid var(--line)}
+.setting:last-child{border:none}
+.setting h4{font-size:1em;margin-bottom:3px}
+.setting p{font-size:.82em;color:var(--mut);margin:0}
+.tog{width:54px;height:28px;background:var(--line);border-radius:30px;position:relative;cursor:pointer;transition:.3s;flex-shrink:0}
+.tog.on{background:var(--gold)}
+.tog i{position:absolute;top:3px;left:3px;width:22px;height:22px;background:#fff;border-radius:50%;transition:.3s}
+.tog.on i{left:29px}
+.lang-row{display:flex;gap:10px;margin-top:8px}
+.lang-btn{flex:1;padding:11px;background:var(--card);border:1px solid var(--line);border-radius:10px;color:var(--txt);cursor:pointer;font-weight:600;font-family:inherit;transition:.25s}
+.lang-btn.active{border-color:var(--gold);color:var(--gold);background:rgba(212,175,55,.08)}
+.char-modal-img{width:150px;height:150px;border-radius:50%;object-fit:cover;border:3px solid var(--gold);margin:10px auto 18px;display:block}
+.char-modal-name{font-family:'Bebas Neue';font-size:2.2em;letter-spacing:1px}
+.char-modal-role{font-weight:700;letter-spacing:1px;font-size:.85em;margin-bottom:14px}
+.no-result{text-align:center;color:var(--mut);padding:30px}
+
+/* back to top */
+.top-btn{position:fixed;bottom:26px;right:26px;width:48px;height:48px;border-radius:50%;background:var(--gold);color:#000;border:none;font-size:1.3em;cursor:pointer;z-index:900;display:none;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(212,175,55,.4);transition:.3s}
+.top-btn.show{display:flex}.top-btn:hover{transform:scale(1.1)}
+
+footer{text-align:center;padding:70px 24px;border-top:1px solid var(--line);color:var(--mut);font-size:.88em}
+footer strong{color:var(--gold);font-family:'Bebas Neue';letter-spacing:1px;font-size:1.2em}
+
+@media(max-width:860px){
+  .rail{display:none}
+  .card{flex-direction:column;align-items:center;text-align:center;padding:34px 24px}
+  .search-box input{width:90px}
+  .nav-links{order:3;width:100%;justify-content:center}
+}
+</style>
 </head>
 <body>
 
-    <!-- BARRA DE PROGRESO DE LECTURA -->
-    <div class="reading-progress">
-        <div class="reading-progress-bar" id="readingProgress"></div>
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="logo" onclick="go('#hero')">CLAN <span>ZK</span></div>
+    <div class="nav-links" id="navLinks">
+      <a href="#c2022" data-i18n="nav22">2022</a>
+      <a href="#c2023" data-i18n="nav23">2023</a>
+      <a href="#c2024" data-i18n="nav24">2024</a>
+      <a href="#c2025" data-i18n="nav25">2025</a>
+      <a href="#c2026" data-i18n="nav26">2026</a>
+      <a href="#hof" data-i18n="navHof">🏆 Hall</a>
+      <a href="#map" data-i18n="navMap">🗺️ Mapa</a>
     </div>
-
-    <!-- CONTADOR DE PERSONAJES -->
-    <div class="character-counter" id="characterCounter">
-        👥 Personajes: 10
+    <div class="nav-tools">
+      <div class="search-box">
+        <span>🔍</span>
+        <input type="text" id="searchInput" data-i18n-ph="searchPh" placeholder="Buscar personaje..." oninput="doSearch(this.value)">
+      </div>
+      <button class="icon-btn" onclick="openModal('settingsModal')" title="Ajustes">⚙️</button>
     </div>
+  </div>
+</nav>
 
-    <!-- BOTÓN VOLVER ARRIBA -->
-    <button class="back-to-top" id="backToTop" onclick="scrollToTop()">↑</button>
+<!-- TIMELINE RAIL -->
+<div class="rail" id="rail">
+  <div class="rail-fill" id="railFill"></div>
+  <div class="rail-dot active" data-target="hero" onclick="go('#hero')"><span class="rail-label" data-i18n="navHome">Inicio</span></div>
+  <div class="rail-dot" data-target="c2022" onclick="go('#c2022')"><span class="rail-label">2022</span></div>
+  <div class="rail-dot" data-target="c2023" onclick="go('#c2023')"><span class="rail-label">2023</span></div>
+  <div class="rail-dot" data-target="c2024" onclick="go('#c2024')"><span class="rail-label">2024</span></div>
+  <div class="rail-dot" data-target="c2025" onclick="go('#c2025')"><span class="rail-label">2025</span></div>
+  <div class="rail-dot" data-target="c2026" onclick="go('#c2026')"><span class="rail-label">2026</span></div>
+</div>
 
-    <nav>
-        <ul>
-            <li><a href="#inicio">Inicio</a></li>
-            <li><a href="#2022">2022</a></li>
-            <li><a href="#2023">2023</a></li>
-            <li><a href="#2024">2024</a></li>
-            <li><a href="#2025">2025</a></li>
-            <li><a href="#2026">2026</a></li>
-            <li><button class="settings-btn" onclick="openSettings()">⚙️</button></li>
-            <li><button class="extras-btn" onclick="openExtras()">📚 Extras</button></li>
-        </ul>
-    </nav>
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-badge" data-i18n="badge">Archivo Clasificado · The Chosen One</div>
+  <img src="images/tco.png" alt="The Chosen One" class="game-icon" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22130%22 height=%22130%22%3E%3Crect fill=%22%2316161a%22 width=%22130%22 height=%22130%22 rx=%2226%22/%3E%3Ctext fill=%22%23d4af37%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2234%22 font-family=%22Arial%22%3ETCO%3C/text%3E%3C/svg%3E'">
+  <h1 data-i18n="heroTitle">LA HISTORIA DEL <em>CLAN ZK</em></h1>
+  <p class="sub" data-i18n="heroSub">Anteriormente IJC. Un archivo dedicado a los momentos, jugadores y leyendas que forjaron el legado de The Chosen One.</p>
+  <div class="scroll-hint" data-i18n="scroll">↓ DESLIZÁ PARA COMENZAR</div>
 
-    <!-- MODAL DE AJUSTES -->
-    <div class="modal" id="settingsModal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeSettings()">×</button>
-            <h2>⚙️ Ajustes</h2>
-            <p>Personalizá tu experiencia de lectura</p>
-            
-            <div class="settings-panel">
-                <div class="setting-item">
-                    <div>
-                        <h4 style="margin-bottom: 5px;">🌙 Modo Oscuro</h4>
-                        <p style="font-size: 0.9em; color: #666;">Cambia el tema de la página</p>
-                    </div>
-                    <div class="toggle-switch" id="darkModeToggle" onclick="toggleDarkMode()">
-                        <div class="toggle-slider"></div>
-                    </div>
-                </div>
+  <div class="stats">
+    <div class="stat"><div class="num" data-count="218">0</div><div class="lbl" data-i18n="stVisits">M visitas</div></div>
+    <div class="stat"><div class="num" data-count="30">0</div><div class="lbl" data-i18n="stMembers">Miembros IJC</div></div>
+    <div class="stat"><div class="num" data-count="18">0</div><div class="lbl" data-i18n="stChars">Personajes</div></div>
+    <div class="stat"><div class="num" data-count="5">0</div><div class="lbl" data-i18n="stYears">Años</div></div>
+  </div>
+</section>
 
-                <div class="setting-item">
-                    <div>
-                        <h4 style="margin-bottom: 5px;">📊 Barra de Progreso</h4>
-                        <p style="font-size: 0.9em; color: #666;">Muestra el progreso de lectura</p>
-                    </div>
-                    <div class="toggle-switch active" id="progressToggle" onclick="toggleProgress()">
-                        <div class="toggle-slider"></div>
-                    </div>
-                </div>
-
-                <div class="setting-item">
-                    <div>
-                        <h4 style="margin-bottom: 5px;">👥 Contador de Personajes</h4>
-                        <p style="font-size: 0.9em; color: #666;">Muestra el contador flotante</p>
-                    </div>
-                    <div class="toggle-switch active" id="counterToggle" onclick="toggleCounter()">
-                        <div class="toggle-slider"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div style="margin-top: 30px; padding: 20px; background: #f8f9fa; border-radius: 10px;">
-                <p style="color: #666; font-size: 0.9em;">
-                    💡 <strong>Tip:</strong> Todos los ajustes se guardan automáticamente en tu navegador.
-                </p>
-            </div>
-        </div>
+<!-- 2022 -->
+<section class="chapter" id="c2022">
+  <div class="ch-head"><div class="ch-num" data-i18n="ch1n">Capítulo I · El Comienzo</div><h2 class="ch-title" data-i18n="ch1t">Los Orígenes</h2><p class="ch-sub" data-i18n="ch1s">La historia de Nam (elfrancho14)</p></div>
+  <div class="card">
+    <div class="av"><img src="images/nam.png" alt="Nam" onerror="this.onerror=null;this.outerHTML='<div class=\'av-ph\'>N</div>'"></div>
+    <div>
+      <h3 data-i18n="y22h1">El primer paso</h3>
+      <p data-i18n="y22p1">Todo gran imperio tiene un inicio humilde. El <span class="hl">12 de noviembre de 2022</span>, Nam (conocido como <em>elfrancho14</em>) dio sus primeros pasos en The Chosen One.</p>
+      <p data-i18n="y22p2">A simple vista era solo un jugador más, una estadística en un año que terminaba. Solo la curiosidad de aprender las mecánicas de un juego a punto de explotar.</p>
+      <div class="box blue"><p><strong data-i18n="y22b">Dato importante:</strong> User ID de Roblox: <span class="hl">607353710</span> — el número que marcaría el inicio de una leyenda.</p></div>
+      <p data-i18n="y22p3">Pero ese simple clic no era el final de una partida, sino <span class="hl">el primer latido de una leyenda</span>. El escenario estaba listo y la historia del Clan ZK comenzaba a forjarse en las sombras...</p>
     </div>
+  </div>
+</section>
 
-    <!-- MODAL DE EXTRAS -->
-    <div class="modal" id="extrasModal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeExtras()">×</button>
-            <h2>📚 Otros Clanes</h2>
-            <p>Clanes y facciones que formaron parte de la historia de The Chosen One</p>
-            
-            <div class="clans-grid">
-                <div class="clan-card special">
-                    <div class="clan-icon">👑</div>
-                    <h4>Admin Community</h4>
-                    <p>Alta tecnología en scripts manejada por <strong>Pealz</strong> y <strong>2areyoumental</strong>. Los verdaderos guardianes del orden en TCO con herramientas que nadie más tenía.</p>
-                    <span class="clan-tag">Tecnología Avanzada</span>
-                </div>
-
-                <div class="clan-card">
-                    <div class="clan-icon">⚔️</div>
-                    <h4>Clan MG</h4>
-                    <p>Clan formado por <strong>Damian (i11rl)</strong> y <strong>Napoleon</strong>. Duró aproximadamente 5 meses antes de disolverse tras la Segunda Guerra Mundial.</p>
-                    <span class="clan-tag">5 Meses de Historia</span>
-                </div>
-
-                <div class="clan-card">
-                    <div class="clan-icon">💀</div>
-                    <h4>Clan SDZ</h4>
-                    <p>Clan de abusadores y griefers. <strong>Fueron derrotados por nuestro clan</strong>. Conocidos por sus tácticas sucias y abuso de poder en los servidores.</p>
-                    <span class="clan-tag" style="background: #ef4444; color: white;">DERROTADOS</span>
-                </div>
-
-                <div class="clan-card" style="background: linear-gradient(135deg, #fff3cd 0%, #ffe69c 100%); border: 2px solid #ffc107;">
-                    <div class="clan-icon">🔮</div>
-                    <h4>Spoiler 2025-2026</h4>
-                    <p><strong>2025:</strong> Se crea el Clan IJC.<br>
-                       <strong>2026:</strong> El Clan IJC cambia su nombre oficialmente a <strong>Clan ZK</strong>.</p>
-                    <span class="clan-tag" style="background: #ffc107; color: #111;">Futuro</span>
-                </div>
-            </div>
-
-            <div style="margin-top: 40px; padding: 30px; background: #f8f9fa; border-radius: 15px; text-align: center;">
-                <p style="color: #666; font-style: italic;">
-                    ⚠️ <strong>¿Conocés más clanes o detalles?</strong><br>
-                    Pasame la info y los agregamos al archivo histórico.
-                </p>
-            </div>
-        </div>
+<!-- 2023 -->
+<section class="chapter" id="c2023">
+  <div class="ch-head"><div class="ch-num" data-i18n="ch2n">Capítulo II · El Caos</div><h2 class="ch-title" data-i18n="ch2t">La Expansión</h2><p class="ch-sub" data-i18n="ch2s">El caos que forjó leyendas</p></div>
+  <div class="card">
+    <div class="av"><img src="images/nam.png" alt="Nam" onerror="this.onerror=null;this.outerHTML='<div class=\'av-ph\'>N</div>'"></div>
+    <div>
+      <h3 data-i18n="y23h1">La era de la anarquía digital</h3>
+      <p data-i18n="y23p1"><span class="hl">2023</span> marcó el año en que The Chosen One dejó de ser un juego para convertirse en un <strong>campo de batalla digital sin reglas</strong>. La popularidad se disparó y con ella llegaron quienes buscaban romper sus límites.</p>
+      <p data-i18n="y23p2">Los scripts circularon como pólvora. El legendario <span class="hl">";bkit others"</span> se volvió el arma definitiva: crasheaba a todos alrededor, sembrando caos absoluto. Era la ley del más fuerte... o del mejor script.</p>
+      <div class="box red warn"><p>⚠️ <em data-i18n="y23q">"Dar Enlighten a un jugador no era solo poder: era estar dispuesto a perderlo todo. Un riesgo que separaba a los verdaderos líderes de los meros espectadores."</em></p></div>
+      <p data-i18n="y23p3">En medio del caos surgieron rituales únicos: <em>"Simón Dice"</em>, batallas de construcciones imposibles y votaciones que decidían el destino de servidores enteros.</p>
+      <p data-i18n="y23p4">The Chosen One era brillante, sí, pero sus <strong>inseguridades</strong> lo volvían un territorio salvaje. Nam observaba, aprendía y se preparaba. Porque después del caos... vendría la verdadera guerra.</p>
     </div>
-
-    <section class="hero" id="inicio">
-        <img src="images/tco.png" 
-             alt="The Chosen One" 
-             class="game-icon"
-             onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22150%22 height=%22150%22%3E%3Crect fill=%22%23667eea%22 width=%22150%22 height=%22150%22 rx=%2230%22/%3E%3Ctext fill=%22white%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2240%22%3ETCO%3C/text%3E%3C/svg%3E'">
-        
-        <h1>La historia del Clan ZK<span>(Anteriormente IJC)</span></h1>
-        <p>Un archivo histórico dedicado a los momentos, jugadores y leyendas que forjaron el legado de The Chosen One en Roblox.</p>
-    </section>
-
-    <!-- AÑO 2022 -->
-    <section class="year-section" id="2022">
-        <div class="year-label">Capítulo I - El Comienzo</div>
-        <h2 class="year-title">Los Orígenes</h2>
-        <p class="year-subtitle">La historia de Nam (elfrancho14)</p>
-        
-        <div class="story-card">
-            <div class="avatar-container">
-                <img src="images/nam.png" 
-                     alt="Avatar de Nam" 
-                     class="player-avatar"
-                     onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'avatar-placeholder\'>Nam</div>'">
-            </div>
-            <div class="story-content">
-                <h3>El primer paso</h3>
-                <p>
-                    Todo gran imperio tiene un inicio humilde. El <span class="highlight">12 de noviembre de 2022</span>, Nam (conocido en el servidor como <em>elfrancho14</em>) dio sus primeros pasos en el mundo de <em>The Chosen One</em>. 
-                </p>
-                <p>
-                    A simple vista, era solo un jugador más en el mapa, una estadística más en un año que ya tocaba su fin. No había grandes torneos ni hazañas sonadas, solo la curiosidad de aprender las mecánicas de un juego que estaba a punto de explotar en popularidad. 
-                </p>
-                <div class="info-box">
-                    <p><strong>Dato importante:</strong> User ID de Roblox: <span class="highlight">607353710</span> - El número que marcaría el inicio de una leyenda.</p>
-                </div>
-                <p>
-                    Pero lo que nadie sabía era que ese simple clic no era el final de una partida, sino <span class="highlight">el primer latido de una leyenda</span>. El escenario estaba listo, el destino estaba escrito, y la historia del Clan ZK apenas comenzaba a forjarse en las sombras...
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- AÑO 2023 -->
-    <section class="year-section" id="2023">
-        <div class="year-label">Capítulo II - El Caos</div>
-        <h2 class="year-title">La Expansión</h2>
-        <p class="year-subtitle">El caos que forjó leyendas</p>
-        
-        <div class="story-card">
-            <div class="avatar-container">
-                <img src="images/nam.png" 
-                     alt="Avatar de Nam" 
-                     class="player-avatar"
-                     onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'avatar-placeholder\'>Nam</div>'">
-            </div>
-            <div class="story-content">
-                <h3>La era de la anarquía digital</h3>
-                <p>
-                    <span class="highlight">2023</span> marcó el año en que <em>The Chosen One</em> dejó de ser un juego para convertirse en un <strong>campo de batalla digital sin reglas</strong>. La popularidad del juego se disparó exponencialmente, y con ella, llegaron aquellos que buscaban romper sus límites.
-                </p>
-                <p>
-                    Los scripts comenzaron a circular como fuego en pólvora por los servidores. El legendario <span class="highlight">";bkit others"</span> se convirtió en el arma definitiva: un comando que crasheaba a todos los jugadores a tu alrededor, sembrando el caos absoluto en cada sesión. Era la ley del más fuerte... o del que tenía el mejor script.
-                </p>
-                
-                <div class="warning-box">
-                    <p>⚠️ <em>"Dar Enlighten a un jugador no era solo un acto de poder: era estar dispuesto a perderlo todo. Un riesgo calculado que separaba a los verdaderos líderes de los meros espectadores."</em></p>
-                </div>
-
-                <p>
-                    Pero en medio del caos, surgieron rituales únicos que definieron la cultura del servidor. Los admins organizaban eventos épicos: <em>"Simón Dice"</em>, batallas de construcciones imposibles y votaciones que decidían el destino de servidores enteros.
-                </p>
-                <p>
-                    <em>The Chosen One</em> era un juego brillante, sí, pero sus <strong>inseguridades</strong> lo convertían en un territorio salvaje donde solo los más astutos sobrevivían. Nam observaba, aprendía y se preparaba. Porque sabía que después del caos... vendría la verdadera guerra.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- AÑO 2024 -->
-    <section class="year-section" id="2024">
-        <div class="year-label">Capítulo III - La Gran Guerra</div>
-        <h2 class="year-title">2024</h2>
-        <p class="year-subtitle">La Liberación de TCO Español</p>
-        
-        <div class="story-card">
-            <div class="avatar-container">
-                <img src="images/nam.png" 
-                     alt="Avatar de Nam" 
-                     class="player-avatar"
-                     onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'avatar-placeholder\'>Nam</div>'">
-            </div>
-            <div class="story-content">
-                <h3>De la amistad a la traición</h3>
-                <p>
-                    <span class="highlight">Enero a Junio 2024</span> fueron meses de paz aparente. Todo funcionaba a la perfección en los servidores latinos de <em>The Chosen One</em>. Pero el destino tenía preparados capítulos oscuros que cambiarían todo para siempre.
-                </p>
-
-                <h3 style="margin-top: 40px; font-size: 1.6em; color: #111;">El encuentro con Sam</h3>
-                <p>
-                    Un día, Nam entró a <em>The Chosen One</em> como todos lo haríamos: con la esperanza de encontrar un servidor activo. Pero lo que encontró fue algo distinto: <strong>un server completamente solo</strong>. Solo había un jugador más: el admin, llamado <span class="highlight">Sam</span>.
-                </p>
-                <p>
-                    Sam era un jugador <strong>sin Robux</strong>, pero con algo mucho más valioso: <em>imaginación</em>. Le contó a Nam que era <strong>arquitecto</strong> en la vida real, y juntos comenzaron a construir. Lo que empezó como una simple ciudad se convirtió en un proyecto épico: calles, edificios, plazas... una civilización entera nacida de la nada.
-                </p>
-                <p>
-                    Se hicieron amigos. Pasaban horas construyendo, hablando, planeando el futuro del servidor. Era una de esas amistades que nacen en los lugares más inesperados.
-                </p>
-                <p>
-                    Pero como todas las historias, esta también tuvo su final. <strong>Un día, simplemente dejaron de hablar</strong>. Sin peleas, sin dramas... solo el silencio. La vida los llevó por caminos distintos.
-                </p>
-
-                <div class="warning-box" style="background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); border-left-color: #f59e0b;">
-                    <p>⚠️ <strong>El giro del destino:</strong> Con el tiempo, Sam se hizo amigo de <strong>Damian (i11rl)</strong>. Aunque <strong>Sam nunca estuvo involucrado directamente en la pelea</strong>, su conexión con el antagonista principal no fue casualidad. <em>¿Qué papel jugará en 2025?</em> Eso... es otra historia. 🔮</p>
-                </div>
-
-                <div class="info-box" style="background: linear-gradient(135deg, #fff3cd 0%, #ffe69c 100%); border-left-color: #ffc107; margin-top: 40px;">
-                    <p><strong>👥 Personajes Clave de esta Historia:</strong></p>
-                </div>
-
-                <div class="character-showcase">
-                    <div class="character-card">
-                        <img src="images/nam.png" alt="Nam" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Crect fill=%22%23667eea%22 width=%22120%22 height=%22120%22 rx=%2260%22/%3E%3Ctext fill=%22white%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2230%22%3EN%3C/text%3E%3C/svg%3E'">
-                        <h4>Nam</h4>
-                        <p class="role-ally">Protagonista</p>
-                        <p style="font-size: 0.85em; margin-top: 5px;">elfrancho14<br>User ID: 607353710</p>
-                    </div>
-                    
-                    <div class="character-card">
-                        <img src="images/enzo.png" alt="Enzo" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Crect fill=%22%2322c55e%22 width=%22120%22 height=%22120%22 rx=%2260%22/%3E%3Ctext fill=%22white%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2230%22%3EE%3C/text%3E%3C/svg%3E'">
-                        <h4>Enzo (Diego)</h4>
-                        <p class="role-ally">Mejor Amigo</p>
-                        <p style="font-size: 0.85em; margin-top: 5px;">Clan TQ<br>🥹 El que le abrió los ojos a Nam</p>
-                    </div>
-
-                    <div class="character-card">
-                        <img src="images/sam.png" alt="Sam" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Crect fill=%22%23f59e0b%22 width=%22120%22 height=%22120%22 rx=%2260%22/%3E%3Ctext fill=%22white%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2230%22%3ES%3C/text%3E%3C/svg%3E'">
-                        <h4>Sam</h4>
-                        <p class="role-neutral">El Arquitecto</p>
-                        <p style="font-size: 0.85em; margin-top: 5px;">Primer amigo en TCO<br>🔮 Clave en 2025</p>
-                    </div>
-                    
-                    <div class="character-card">
-                        <img src="images/i11rl.png" alt="i11rl" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Crect fill=%22%23ef4444%22 width=%22120%22 height=%22120%22 rx=%2260%22/%3E%3Ctext fill=%22white%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2230%22%3ED%3C/text%3E%3C/svg%3E'">
-                        <h4>i11rl (Damian)</h4>
-                        <p class="role-enemy">Antagonista</p>
-                        <p style="font-size: 0.85em; margin-top: 5px;">El Manipulador<br>Control total de servidores</p>
-                    </div>
-                    
-                    <div class="character-card">
-                        <img src="images/snoopy.png" alt="Snoopy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Crect fill=%22%23ef4444%22 width=%22120%22 height=%22120%22 rx=%2260%22/%3E%3Ctext fill=%22white%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2230%22%3ES%3C/text%3E%3C/svg%3E'">
-                        <h4>Snoopy</h4>
-                        <p class="role-enemy">Aliado de Damian</p>
-                        <p style="font-size: 0.85em; margin-top: 5px;">Nuevo amigo de i11rl<br>Parte del enemigo</p>
-                    </div>
-                    
-                    <div class="character-card">
-                        <img src="images/napoleon.png" alt="Napoleon" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Crect fill=%22%23ef4444%22 width=%22120%22 height=%22120%22 rx=%2260%22/%3E%3Ctext fill=%22white%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2230%22%3EN%3C/text%3E%3C/svg%3E'">
-                        <h4>Napoleon</h4>
-                        <p class="role-enemy">Aliado de Damian</p>
-                        <p style="font-size: 0.85em; margin-top: 5px;">Amigo de i11rl<br>Posteriormente liberado</p>
-                    </div>
-                </div>
-
-                <h3 style="margin-top: 50px; font-size: 1.8em; color: #111;">La traición de Damian</h3>
-                <p>
-                    Todo comenzó cuando Nam se unió a un servidor común y corriente. El admin era <strong>i11rl (Damian)</strong>. En un gesto de buena voluntad, Nam le construyó un <span class="highlight">trono épico</span> y le pidió bkit. Como recompensa, Damian le otorgó <span class="highlight">ENLIGHTEN</span>! 😊 Parecía el inicio de una gran amistad.
-                </p>
-
-                <div class="warning-box">
-                    <p><strong>La Traición:</strong> "Estaba construyendo una especie de máquina con ladrillos. Solo me acerqué... y de la nada me hizo BLIND, me hizo GLITCH. Me enfurecí. Empezamos a pelear por chat. Me banearon por unas horas. Y desde ahí... empezó TODO."</p>
-                </div>
-
-                <p>
-                    El rencor se instaló en el corazón de Nam. Cada vez se cruzaban más seguido, la bronca crecía. Damian (i11rl) empezó a hacerse conocido —probablemente por sus conexiones con ingleses famosos— y poco a poco, <span class="highlight">tomó el control de todos los servidores latinos</span>.
-                </p>
-                <p>
-                    Su modus operandi era claro: difamación, mentiras, culpar a otros sin razón. Se comportaba como un niño de 8 años, aunque afirmaba tener 17. En un giro inesperado, <strong>pidió perdón y se hicieron amigos</strong> (alrededor de noviembre). Pero era una ilusión: <span class="highlight">Damian manipulaba a Nam</span>, quien lo ayudaba para que "le crean", sin saber que era parte del juego.
-                </p>
-
-                <h3 style="margin-top: 50px; font-size: 1.8em; color: #111;">El Despertar</h3>
-                <p>
-                    Un día, llegó alguien que cambiaría el curso de la historia: <span class="highlight">Enzo 🥹</span> (también conocido como Diego), miembro del clan <strong>TQ</strong>. Enzo le contó a Nam sobre su propia batalla con Damian. Ese día, <strong>Nam abrió los ojos</strong>. Pensó en todo lo sucedido, en la manipulación, en las mentiras... y <span class="highlight">decidió luchar</span>.
-                </p>
-                <p>
-                    Para entonces, Damian ya tenía el control absoluto de los servidores latinos de <em>The Chosen One</em>. Pero no estaba solo: había conseguido dos nuevos aliados —<strong>Snoopy</strong> y <strong>Napoleon</strong>— y gracias a Damian, Enzo conoció a <strong>RaR</strong> (quien jugaría un papel importante más tarde).
-                </p>
-
-                <div class="battle-section">
-                    <h3>⚔️ LA BATALLA FINAL ⚔️</h3>
-                    <p style="font-size: 1.2em; margin-bottom: 20px;"><strong>Objetivo: LIBERAR TCO ESPAÑOL</strong></p>
-                    <p>
-                        Nam y Diego ejecutaron un plan maestro. Mientras ellos lanzaban <span style="color: #ffd700; font-weight: bold;">ataques de scripts</span>, el trío enemigo (i11rl, Snoopy y Napoleon) respondía con difamación, mentiras y culpas infundadas. Damian usaba scripts maliciosos e intentaba que Nam volviera a su lado... pero eso ya no pasaría.
-                    </p>
-                    <p style="margin-top: 20px; font-size: 1.3em;">
-                        <strong>⏱️ Duración: Más de 1 hora de batalla épica</strong><br>
-                        <strong>🏳️ Resultado: El enemigo hizo RQ (se rindió)</strong>
-                    </p>
-                </div>
-
-                <div class="victory-box">
-                    <h3>🎉 ¡VICTORIA! 🎉</h3>
-                    <p style="font-size: 1.1em; margin-bottom: 15px;">
-                        <strong>¡GANAMOS LA BATALLA!</strong> 🥳<br>
-                        Liberamos medio TCO Español
-                    </p>
-                    <p style="color: #555;">
-                        Gracias a RaR, liberamos a Napoleon, aunque él decidió tomar otro camino. Pero al cabo, <span style="font-weight: bold; color: #155724;">para nosotros éramos los héroes</span>.
-                    </p>
-                </div>
-
-                <p>
-                    Todo volvió a la normalidad. Los servidores recuperaron sus <span class="highlight">reglas</span>, surgieron <span class="highlight">ciudades</span>, se crearon <span class="highlight">juegos</span>... al fin, <em>The Chosen One</em> era el buen juego que siempre debió ser.
-                </p>
-
-                <div class="info-box" style="background: linear-gradient(135deg, #e7f3ff 0%, #cce5ff 100%); border-left-color: #0066cc;">
-                    <p><strong>🎮 Legado de 2024:</strong> Después de meses de manipulación y caos, la valentía de Nam y Enzo restauró el orden en TCO Español. Los servidores latinos volvieron a ser un lugar donde se podía jugar sin abusos, con reglas justas y una comunidad renovada.</p>
-                </div>
-
-                <div class="timeline-dates">
-                    <span class="date-badge">📅 Enero-Junio: Paz</span>
-                    <span class="date-badge">🏗️ Sam el Arquitecto</span>
-                    <span class="date-badge">💔 Traición de Damian</span>
-                    <span class="date-badge">🥹 Nam abre los ojos</span>
-                    <span class="date-badge">⚔️ Batalla 1+ hora</span>
-                    <span class="date-badge">🏆 Victoria Total</span>
-                </div>
-
-                <p style="font-size: 1.2em; color: #666; font-style: italic; text-align: center; margin-top: 40px; padding: 30px; background: #f8f9fa; border-radius: 15px;">
-                    <strong>Pero esto no terminó acá...</strong><br>
-                    <span style="color: #999;">(Spoiler 2025)</span>
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- AÑO 2025 - HISTORIA COMPLETA DE ENZO -->
-    <section class="year-section" id="2025">
-        <div class="year-label">Capítulo IV - La Segunda Guerra Mundial</div>
-        <h2 class="year-title">2025</h2>
-        <p class="year-subtitle">La perspectiva de Enzo: Espionaje, traición y guerra total</p>
-        
-        <div class="story-card">
-            <div class="avatar-container">
-                <img src="images/enzo.png" 
-                     alt="Avatar de Enzo" 
-                     class="player-avatar"
-                     onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'avatar-placeholder\'>Enzo</div>'">
-            </div>
-            <div class="story-content">
-                <h3>El espía en las sombras</h3>
-                <p>
-                    Mientras <strong>Nam se alejaba de TCO</strong> a finales de 2024, <span class="highlight">Enzo no abandonó el juego</span>. Al contrario, inició una misión secreta: crear <strong>cuentas alternativas (alts)</strong> para infiltrarse y observar desde las sombras. Lo que descubriría cambiaría todo...
-                </p>
-
-                <div class="info-box" style="background: linear-gradient(135deg, #fff3cd 0%, #ffe69c 100%); border-left-color: #ffc107;">
-                    <p><strong>👥 Nuevos Personajes Clave de 2025:</strong></p>
-                </div>
-
-                <div class="character-showcase">
-                    <div class="character-card">
-                        <img src="images/enzo.png" alt="Enzo" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Crect fill=%22%2322c55e%22 width=%22120%22 height=%22120%22 rx=%2260%22/%3E%3Ctext fill=%22white%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2230%22%3EE%3C/text%3E%3C/svg%3E'">
-                        <h4>Enzo (Diego)</h4>
-                        <p class="role-ally">Protagonista 2025</p>
-                        <p style="font-size: 0.85em; margin-top: 5px;">enzors19209<br>🕵️ El Espía</p>
-                    </div>
-
-                    <div class="character-card">
-                        <img src="images/exotic.png" alt="Exotic" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Crect fill=%22%2322c55e%22 width=%22120%22 height=%22120%22 rx=%2260%22/%3E%3Ctext fill=%22white%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2230%22%3EX%3C/text%3E%3C/svg%3E'">
-                        <h4>Tq_EX0T1C</h4>
-                        <p class="role-ally">Líder de TQ</p>
-                        <p style="font-size: 0.85em; margin-top: 5px;">Fundador del clan<br>👑 Líder Principal</p>
-                    </div>
-
-                    <div class="character-card">
-                        <img src="images/fonsi.png" alt="Fonsi" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Crect fill=%22%23f59e0b%22 width=%22120%22 height=%22120%22 rx=%2260%22/%3E%3Ctext fill=%22white%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2230%22%3EF%3C/text%3E%3C/svg%3E'">
-                        <h4>Fonsi</h4>
-                        <p class="role-neutral">Aliado Temporal</p>
-                        <p style="font-size: 0.85em; margin-top: 5px;">@elchiquitin38<br>Amigo de Exotic</p>
-                    </div>
-
-                    <div class="character-card">
-                        <img src="images/facu.png" alt="Tq_Facu" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Crect fill=%22%2322c55e%22 width=%22120%22 height=%22120%22 rx=%2260%22/%3E%3Ctext fill=%22white%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2230%22%3EF%3C/text%3E%3C/svg%3E'">
-                        <h4>Tq_Facu</h4>
-                        <p class="role-ally">Compañero de Misión</p>
-                        <p style="font-size: 0.85em; margin-top: 5px;">Operación Guardia Nocturna<br>🕵️ Agente Doble</p>
-                    </div>
-
-                    <div class="character-card">
-                        <img src="images/pan.png" alt="Tq_Pan" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Crect fill=%22%2322c55e%22 width=%22120%22 height=%22120%22 rx=%2260%22/%3E%3Ctext fill=%22white%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2230%22%3EP%3C/text%3E%3C/svg%3E'">
-                        <h4>Tq_Pan</h4>
-                        <p class="role-ally">Nueva Amiga</p>
-                        <p style="font-size: 0.85em; margin-top: 5px;">Conocida el 18/01/2025<br>🤝 Aliada</p>
-                    </div>
-
-                    <div class="character-card">
-                        <img src="images/gonza.png" alt="Gonza" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Crect fill=%22%23f59e0b%22 width=%22120%22 height=%22120%22 rx=%2260%22/%3E%3Ctext fill=%22white%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2230%22%3EG%3C/text%3E%3C/svg%3E'">
-                        <h4>Gonza</h4>
-                        <p class="role-neutral">Conflictivo</p>
-                        <p style="font-size: 0.85em; margin-top: 5px;">Ex miembro de TQ<br>⚠️ Traicionado por Hallow</p>
-                    </div>
-
-                    <div class="character-card">
-                        <img src="images/hallow.png" alt="Hallow" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Crect fill=%22%23ef4444%22 width=%22120%22 height=%22120%22 rx=%2260%22/%3E%3Ctext fill=%22white%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2230%22%3EH%3C/text%3E%3C/svg%3E'">
-                        <h4>Hallow</h4>
-                        <p class="role-enemy">Antagonista Interno</p>
-                        <p style="font-size: 0.85em; margin-top: 5px;">Llamó traidor a Gonza<br>💔 Creó conflictos</p>
-                    </div>
-                </div>
-
-                <h3 style="margin-top: 50px; font-size: 1.8em; color: #111;">🕵️ ESPIONAJE: Meses antes de Diciembre 2024</h3>
-                <p>
-                    Enzo inició sesión en sus <strong>cuentas alternativas</strong> y se convirtió en un <span class="highlight">espía digital</span>. Observaba desde las sombras lo que hacían <strong>Damián y Napoleón</strong>. Lo que descubrió fue impactante:
-                </p>
-                <p>
-                    Ellos estaban con el <strong>Clan TQ</strong> (en el que Enzo tenía amigos en su cuenta principal <em>enzors19209</em>, que actualmente es su Discord). Enzo observó cómo Damián estaba en un servidor con Sam, usando una alt llamada <strong>@ElJordans0</strong>.
-                </p>
-
-                <div class="warning-box" style="background: linear-gradient(135deg, #e7f3ff 0%, #cce5ff 100%); border-left-color: #0066cc;">
-                    <p><strong>🔍 El incidente con Fonsi:</strong> Se unió al servidor un amigo de <strong>Tq_EX0T1C</strong> (líder y fundador del clan TQ), llamado <strong>Fonsi</strong>. En ese momento, Fonsi estaba usando una alt que Exotic le había regalado: <em>@elchiquitin38</em>. Fonsi estaba <span class="highlight">raideando a Damián</span> debido a que este estaba abusando de su administrador, teniendo demasiado tiempo y torturando al servidor latino con construcciones absurdas como <strong>ciudades y un puente extremadamente largo</strong>. Enzo se retiró antes de levantar sospechas.</p>
-                </div>
-
-                <h3 style="margin-top: 50px; font-size: 1.8em; color: #111;">📅 FINALES DE DICIEMBRE 2024: La confrontación</h3>
-                <p>
-                    Ya en su cuenta original <em>enzors19209</em>, Enzo estaba con miembros del clan TQ: <strong>Exotic, Little</strong>, entre otros. Entonces apareció <strong>Napoleón</strong> y le reclamó por qué nunca le escribía en Discord.
-                </p>
-                <p>
-                    Enzo chateó con Napoleón un buen rato, y de esos chats <span class="highlight">sacaron evidencias cruciales</span>. Napoleón admitió cosas como <em>"Manipulé a Gonza"</em>. Esto llevó a Napoleón a <strong>crashear el servidor</strong> donde estaban todos.
-                </p>
-                <p>
-                    Enzo, enfurecido por haberse metido con sus amigos y con él nuevamente, tomó una decisión: <span class="highlight">unirse al clan TQ para frenar de una vez por todas toda esta estupidez</span>. Exotic lo aceptó, chatearon por Discord y le mandó el link del servidor del clan TQ.
-                </p>
-
-                <div class="warning-box">
-                    <p><strong>💥 El ataque de Napoleón:</strong> Como siempre, NO DURÓ MUCHO. Napoleón se unió al servidor de Discord del clan TQ con un bot llamado <strong>"Pedro Invasoes"</strong> y lo raideó todo. Tuvieron que recrear otro servidor de Discord para recuperarse de los ataques de los líderes del clan MG.</p>
-                </div>
-
-                <h3 style="margin-top: 50px; font-size: 1.8em; color: #111;">🌅 INICIOS DE 2025: Nuevas alianzas</h3>
-                <p>
-                    En el clan TQ, Enzo conoció a varias personas, incluyendo a una chica llamada <strong>Tq_Pan</strong>. Tuvieron chats, se hicieron buenos amigos y Enzo le mostró las <span class="highlight">evidencias en contra del clan MG</span>. Se conocieron el <strong>18 de Enero del 2025</strong>.
-                </p>
-
-                <h3 style="margin-top: 50px; font-size: 1.8em; color: #111;">🤝 ALIANZA TEMPORAL TQ + MG</h3>
-                <p>
-                    Por un tiempo, el clan TQ se alió con el clan MG. Pero <strong>Hallow</strong> estuvo en desacuerdo y llamó <em>"traidor"</em> a <strong>Gonza</strong> (que era miembro de TQ en ese momento). Esto llevó a Gonza a distanciarse y odiar profundamente a Hallow.
-                </p>
-                <p>
-                    Enzo, sin embargo, estaba bien tanto con Gonza como con Hallow. No tenía problemas con ninguno para discutir.
-                </p>
-
-                <div class="warning-box" style="background: linear-gradient(135deg, #fff5f5 0%, #ffe5e5 100%); border-left-color: #ff4444;">
-                    <p><strong>⚠️ La ruptura definitiva:</strong> Napoleón y Damián comenzaron a enviar insultos, mensajes racistas, creyéndose los mejores, y subiendo contenido +18 en las cuentas de Discord del clan TQ. Esto rompió de forma definitiva la paz. <span class="highlight">El clan TQ declaró oficialmente la GUERRA contra el clan MG</span>. Gracias a todo lo que mandaban en Discord y Roblox, TQ sacó puras evidencias en contra, pero aún necesitaban más para defenderse.</p>
-                </div>
-
-                <h3 style="margin-top: 50px; font-size: 1.8em; color: #111;">🌙 OPERACIÓN: GUARDIA NOCTURNA (Finales de Enero 2025)</h3>
-                <p>
-                    Esta fue una de las misiones más épicas de la historia de TCO. Enzo (<em>enzors19209</em>) y un miembro llamado <strong>Tq_Facu</strong> se infiltraron en el clan MG usando <span class="highlight">multicuentas de Discord</span>.
-                </p>
-                <p>
-                    Enzo creaba cuentas alternativas y Napoleón le mandaba links de invitación por Discord. Enzo luego los mandaba a su alt para que Tq_Facu los usara. Así, pudieron <strong>mostrar evidencias en contra del clan MG por MD</strong> a los miembros que pertenecían a esa "oscuridad profunda", para que se largaran antes de que el clan MG llegara a más de 100 miembros.
-                </p>
-
-                <div class="battle-section">
-                    <h3>⚔️ SEGUNDA GUERRA MUNDIAL DE TCO ⚔️</h3>
-                    <p style="font-size: 1.2em; margin-bottom: 20px;"><strong>Finales de Enero - Inicios de Febrero 2025</strong></p>
-                    <p>
-                        Se declaró <span style="color: #ffd700; font-weight: bold;">oficialmente la GUERRA del CLAN TQ CONTRA EL CLAN MG</span>. Los líderes Napoleón y Damián se enfurecieron debido a la Operación Guardia Nocturna.
-                    </p>
-                    <p style="margin-top: 20px;">
-                        Ellos difamaban al clan TQ diciendo que usaban <em>Exploits</em>, cuando solo los usaban en defensa personal y sin abusar. Los llamaban <em>raiders, griefers</em>, etc.
-                    </p>
-                    <p style="margin-top: 20px; font-size: 1.3em;">
-                        <strong>Pero TQ se defendió:</strong> Pusieron las evidencias en ID (Discord) para que todo el servidor las viera. Cada texto que mandaba MG, TQ le sacaba evidencias. Enzo y Facu siguieron así, hasta que pararon.
-                    </p>
-                </div>
-
-                <h3 style="margin-top: 50px; font-size: 1.8em; color: #111;">💥 FEBRERO 2025: El intento de crash</h3>
-                <p>
-                    En otro servidor de <em>The Chosen One</em>, donde TQ se unía y tenía que defenderse de Napoleón y MG (aunque ya algunos miembros de MG se habían unido a TQ por las evidencias), <strong>Napoleón presionó a un administrador</strong> para tratar de crashear todo el servidor.
-                </p>
-                <p>
-                    Pero <span class="highlight">fracasó</span>. El administrador hizo <em>delcubes all</em> y Enzo logró soportarlo, atrayendo así a los miembros del clan TQ para defenderse con evidencias y, a veces, con Exploits si ellos trataban de hacerles algo.
-                </p>
-
-                <h3 style="margin-top: 50px; font-size: 1.8em; color: #111;">🏆 FINALES DE FEBRERO - INICIOS DE MARZO 2025: La victoria</h3>
-                <p>
-                    Debido a la guerra (la <strong>Segunda Guerra Mundial en The Chosen One</strong>), el clan MG fue cayendo poco a poco. El <span class="highlight">clan TQ ganó oficialmente la guerra</span>, consiguiendo más miembros, beneficios, canales, mejores líderes, etc.
-                </p>
-
-                <div class="victory-box">
-                    <h3>🎉 ¡VICTORIA TOTAL DEL CLAN TQ! 🎉</h3>
-                    <p style="font-size: 1.1em; margin-bottom: 15px;">
-                        <strong>¡El clan MG fue derrotado!</strong> 🥳<br>
-                        La Segunda Guerra Mundial de TCO terminó
-                    </p>
-                    <p style="color: #555;">
-                        El clan TQ emergió como la facción más fuerte y respetada de la comunidad latina de <em>The Chosen One</em>.
-                    </p>
-                </div>
-
-                <h3 style="margin-top: 50px; font-size: 1.8em; color: #111;">📉 MARZO 2025: El declive de TQ</h3>
-                <p>
-                    El clan TQ fue luego convirtiéndose en una comunidad de <em>Dead Rails</em>. Pero como el que controlaba la cuenta principal de Discord de <strong>Tq_Facu</strong> (parece que fue su primo) se encargó de destruir de poco a poco el servidor de Discord, el clan decayó.
-                </p>
-
-                <div class="info-box" style="background: linear-gradient(135deg, #e7f3ff 0%, #cce5ff 100%); border-left-color: #0066cc;">
-                    <p><strong>📊 CONSECUENCIAS DESPUÉS DE LA GUERRA MASIVA:</strong></p>
-                    <p style="margin-top: 15px;">
-                        Debido a la guerra, hubo personas que odiaban al clan TQ y otras al clan MG. Pero el <span class="highlight">clan TQ fue más conocido</span>.
-                    </p>
-                    <p style="margin-top: 15px;">
-                        La razón por la que algunas personas odiaban al clan TQ es porque un día hubo conflictos con <strong>Gonza</strong>, y entonces apoyó al clan MG por cierto tiempo.
-                    </p>
-                    <p style="margin-top: 15px;">
-                        Pero esto paró gracias a que Enzo solía unirse a servidores diferentes de <em>The Chosen One</em> para <span class="highlight">explicarles a las personas que odiaban al clan TQ</span>, poniendo evidencias y chateando. De poco a poco, el odio fue desapareciendo.
-                    </p>
-                </div>
-
-                <div class="timeline-dates">
-                    <span class="date-badge">🕵️ Espionaje con Alts</span>
-                    <span class="date-badge">📅 18/01/2025: Conoce a Pan</span>
-                    <span class="date-badge">🌙 Operación Guardia Nocturna</span>
-                    <span class="date-badge">⚔️ Segunda Guerra Mundial</span>
-                    <span class="date-badge">🏆 Victoria de TQ</span>
-                    <span class="date-badge">📉 Declive de TQ</span>
-                </div>
-
-                <p style="font-size: 1.2em; color: #666; font-style: italic; text-align: center; margin-top: 40px; padding: 30px; background: #f8f9fa; border-radius: 15px;">
-                    <strong>Hay más cosas que normalmente han sucedido en 2025...</strong><br>
-                    <span style="color: #999;">Pero esta parte se centra en la Segunda Guerra Mundial de The Chosen One.<br>
-                    Próximamente: Más sucesos de 2025 y contacto con otros clanes como SH.</span>
-                </p>
-            </div>
-        </div>
-    </section>
-
-     <!-- AÑO 2026 - EL REGRESO DE LA LEYENDA -->
-    <section class="year-section" id="2026">
-        <div class="year-label">Capítulo V - El Regreso</div>
-        <h2 class="year-title">2026</h2>
-        <p class="year-subtitle">El regreso de una leyenda: Nam vuelve a un mundo en ruinas</p>
-        
-        <div class="story-card">
-            <div class="avatar-container">
-                <img src="images/nam.png" 
-                     alt="Avatar de Nam" 
-                     class="player-avatar"
-                     onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'avatar-placeholder\'>Nam</div>'">
-            </div>
-            <div class="story-content">
-                <h3>El regreso de una leyenda</h3>
-                <p>
-                    <span class="highlight">Enero 2026</span>. Después de los sucesos de la Segunda Guerra de TCO, <strong>Nam decidió volver</strong>. La leyenda regresaba al mundo que ayudó a liberar... pero lo que encontró no era el mundo que recordaba.
-                </p>
-                <p>
-                    Al ponerse en contacto con <strong>Enzo</strong>, la respuesta fue escalofriante: <em>"todo es un caos"</em>. Nam no lo quiso creer. Entró a un servidor de <em>The Chosen One</em> para comprobarlo con sus propios ojos... y lo que vio fue <span class="highlight">inexplicable</span>.
-                </p>
-
-                <h3 style="margin-top: 40px; font-size: 1.6em; color: #111;">🧱 El mundo raideado</h3>
-                <p>
-                    <strong>¡LOS BLOQUES DEL JUEGO ESTABAN RAIDEADOS!</strong> No importaba si ponías un bloque, lo eliminabas o lo movías de lugar: <span class="highlight">TODO estaba raideado</span>. Cada bloque llevaba material <em>toxicify</em> + <em>anchor</em> + un link de Discord grabado a fuego. El mapa entero era intocable.
-                </p>
-
-                <div class="info-box">
-                    <p><strong>🧱 ¿Qué era un server raideado?</strong> Bloques con material toxicify + anchor + un link de Discord. No importaba lo que hicieras: el raid permanecía. Era como intentar borrar una cicatriz del mapa.</p>
-                </div>
-
-                <p>
-                    Y eso no era todo. También estaba la <span class="highlight">CRASH MACHINE</span>: ponías un bloque junto a otro y cualquiera que mirara la máquina comenzaba a lagear hasta morir. Y hubo métodos aún más jodidos... como <strong>crashear un servidor entero</strong>.
-                </p>
-
-                <div class="warning-box">
-                    <p>⚠️ <em>"Nam no lo podía creer. Quiso investigar el caso, entender cómo funcionaba. Pero los servers raideados estaban en TODOS lados, y los scripters eran cada vez más jodidos. Era como pelear contra un fantasma."</em></p>
-                </div>
-
-                <p>
-                    Tanto fue el caos que <strong>Pealz</strong> y <strong>Areyoumental</strong> (de la Admin Community) crearon <em>The Chosen One OG</em>, un refugio para la comunidad... pero duró poco: <strong>Roblox lo eliminó por copia y pega</strong>.
-                </p>
-                <p>
-                    Con esto, <span class="highlight">The Chosen One ya era un 2b2t</span>: anarquía total, sin reglas, sin dueños, sin esperanza. Solo ruinas y scripters.
-                </p>
-                <p>
-                    Nam pasó <span class="highlight">más de 20 días</span> intentando descifrar cómo funcionaba todo eso... y no lo logró. Pero ese fracaso sembraría algo mucho más grande.
-                </p>
-
-                <h3 style="margin-top: 50px; font-size: 1.8em; color: #111;">🏴 FEBRERO 2026: Nace el Clan IJC</h3>
-                <p>
-                    Como no podía averiguar nada, Nam tomó la decisión más importante de toda su historia: <span class="highlight">fundar un clan</span>. Su nombre: <strong>IJC — Investigación de Justicia y Corrupción</strong>. ¿El objetivo? Detener todo lo que pasaba, porque todo era caótico.
-                </p>
-                <p>
-                    Lo fundó junto a <strong>Enzo</strong>, su hermano de guerra, como <span class="highlight">Co-Líder</span>. ¿Y qué creen? <strong>¡FUNCIONÓ!</strong>
-                </p>
-
-                <div class="info-box" style="background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%); border-left-color: #28a745; text-align: center;">
-                    <p style="font-size: 1.4em; font-weight: 700; color: #155724;">📈 2 → 5 → 10 → 20 → +30 MIEMBROS</p>
-                    <p style="color: #555; margin-top: 10px;">El clan IJC creció como una llama en la oscuridad de TCO.</p>
-                </div>
-
-                <h3 style="margin-top: 40px; font-size: 1.6em; color: #111;">La prueba de fuego: Radical, Adan y Stumblero</h3>
-                <p>
-                    Todo empezó en un server donde Nam estaba solo, construyendo una zona de juegos. Aparecieron <strong>Radical</strong> y dos amigos (<strong>Stumblero</strong> y <strong>Adan</strong>) e intentaron ganarle una raid. No pudieron: Nam activó la <span class="highlight">crash machine</span> y a todos les lagueó... <strong>menos a Radical</strong>.
-                </p>
-                <p>
-                    Nam los dejó ahí. Los demás se rindieron... menos Radical, que aguantó hasta el final. Al cabo, Radical le pidió perdón y <span class="highlight">se hicieron amigos</span>. Los otros también pidieron perdón. <strong>Adan y Radical</strong> quisieron unirse al clan, y Nam los aceptó.
-                </p>
-                <p>
-                    <strong>Stumblero</strong>, en cambio, decidió tomar otro camino y <span class="highlight">desapareció de TCO</span> para siempre.
-                </p>
-                <p style="font-style: italic; color: #666;">Pero no todo lo que brilla es oro...</p>
-
-                <h3 style="margin-top: 50px; font-size: 1.8em; color: #111;">🧪 MARZO 2026: La guerra de los Hubs</h3>
-                <p>
-                    El clan IJC estaba a full investigación, pero todo estaba muy complicado. Hasta que un día apareció un script muy bueno: <span class="highlight">RomazHUB</span>, que costaba <strong>299 Robux</strong>. Era perfecto: incluso tenía el bloque para raidear. <em>ERA PERFECTO.</em> Pero no tenían Robux.
-                </p>
-                <p>
-                    Fue entonces que Nam conoció a un gran amigo: <strong>Romantco (Roman)</strong>. Estaban en un server de Nam y juntos construyeron una <span class="highlight">ciudad de Roma</span>, con reglas y todo. Roman usaba scripts, pero para el bien. Y no usaba su cuenta principal (se la habían baneado por scripts): usaba una secundaria.
-                </p>
-                <p>
-                    Un día, después de tantos momentos juntos, Roman le contó unas noticias enormes, en secreto absoluto: <span class="highlight">¡SE FILTRÓ ROMAZHUB!</span> Los únicos que lo tenían eran los que lo compraron, Roman... y Nam. <strong>ESTO SERVIRÍA MUCHÍSIMO PARA LA INVESTIGACIÓN.</strong> Incluso tenía una opción nueva: <strong>Autobuild</strong> — ¡un bot que construye por ti! ERA LO MEJOR.
-                </p>
-
-                <div class="warning-box">
-                    <p>💥 <strong>El derrumbe:</strong> Horas más tarde, <strong>romazdev</strong> (el creador del hub) se dio cuenta del leak y puso una <span class="highlight">blacklist</span> a todos los que no lo tenían comprado. Todo se había derrumbado.</p>
-                </div>
-
-                <p>
-                    Pero Nam no se rindió. Creó su propio script: <span class="highlight">NamHUB</span>. Juró que iba a ser mejor que RomazHUB. <strong>Lo prometió.</strong> Salió con errores (obviamente), pero los arregló uno por uno... y <strong>FUNCIONÓ</strong>. Por un momento, era mucho mejor que el de Romaz. Lo lanzó <span class="highlight">GRATIS</span>, con Autobuild, Paint Configuration y más.
-                </p>
-                <p>
-                    Y todo eso fue gracias a un amigo: <strong>System (@igot_KJ8)</strong>, que unas semanas antes había fundado <strong>LS (Legacy Service)</strong>, un hub igual de OP. Nam le pidió el script del Autobuild y el del Paint... y System se los pasó. Sin preguntas. Así son los verdaderos amigos.
-                </p>
-
-                <div class="info-box" style="background: linear-gradient(135deg, #fff3cd 0%, #ffe69c 100%); border-left-color: #ffc107;">
-                    <p><strong>💻 Los Hubs de la época:</strong></p>
-                </div>
-
-                <div class="clans-grid">
-                    <div class="clan-card">
-                        <div class="clan-icon">💰</div>
-                        <h4>RomazHUB</h4>
-                        <p>El hub pago (299 Robux). Perfecto... hasta que se filtró. Su creador, romazdev, aplicó una blacklist a los que no lo tenían comprado.</p>
-                        <span class="clan-tag">299 ROBUX</span>
-                    </div>
-                    <div class="clan-card special">
-                        <div class="clan-icon">🧪</div>
-                        <h4>NamHUB</h4>
-                        <p>El hub creado por Nam. Gratis, con Autobuild, Paint Configuration y más. Por un momento, superó a RomazHUB.</p>
-                        <span class="clan-tag">GRATIS</span>
-                    </div>
-                    <div class="clan-card">
-                        <div class="clan-icon">⚙️</div>
-                        <h4>LS (Legacy Service)</h4>
-                        <p>El hub de System (@igot_KJ8). Muy OP. De ahí salieron el Autobuild y el Paint que potenciaron NamHUB.</p>
-                        <span class="clan-tag">ALIADO</span>
-                    </div>
-                </div>
-
-                <p>
-                    Mientras tanto, <strong>Napoleon</strong> se enteró del clan IJC y empezó a spamear por Discord: que IJC era basura, insultos y más. Nam no le dio importancia: <em>solo era un niño queriendo atención</em>.
-                </p>
-                <p>
-                    Luego de unos días, todo iba bien. Perfecto. Soleado. Divertido.
-                </p>
-
-                <h3 style="margin-top: 50px; font-size: 1.8em; color: #111;">⚔️ El raid de SDZ: la copia fantasma</h3>
-                <p>
-                    Pero un día, en un servidor tranquilo de IJC, todo relajante... se unieron varios jugadores con apodo <strong>SDZ</strong>. Los del IJC preguntaron: <em>"¿quién carajos son esos?"</em>.
-                </p>
-                <p>
-                    Los de SDZ empezaron a <span class="highlight">raidear el server</span>, donándole tiempo a un jugador llamado <strong>Zeen (DARKTHEWHITE2)</strong>: el líder del Clan SDZ. Nam llamó a todos los miembros del IJC. Era hora de defender lo que construyeron.
-                </p>
-
-                <div class="battle-section">
-                    <h3>⚔️ LA DEFENSA DEL SERVER IJC ⚔️</h3>
-                    <p style="font-size: 1.2em; margin-bottom: 20px;"><strong>Raid de SDZ vs. Clan IJC</strong></p>
-                    <p>
-                        SDZ raideaba el server y donaba tiempo a <span style="color: #ffd700; font-weight: bold;">Zeen (DARKTHEWHITE2)</span>, su líder. El IJC entero se unió a defender su casa.
-                    </p>
-                    <p style="margin-top: 20px; font-size: 1.3em;">
-                        <strong>⏱️ Duración: ~30 minutos de batalla</strong><br>
-                        <strong>🏳️ Resultado: SDZ se salió. IJC ganó la raid.</strong>
-                    </p>
-                </div>
-
-                <p>
-                    Después de eso, investigaron al supuesto "SDZ"... y descubrieron algo impactante: <span class="highlight">era una copia del Clan MG</span>. Los fantasmas del pasado, reciclados con otro nombre. La historia se repetía... pero esta vez, el IJC estaba listo.
-                </p>
-
-                <div class="info-box" style="background: linear-gradient(135deg, #fff3cd 0%, #ffe69c 100%); border-left-color: #ffc107; margin-top: 40px;">
-                    <p><strong>👥 Personajes Clave de 2026:</strong></p>
-                </div>
-
-                <div class="character-showcase">
-                    <div class="character-card">
-                        <img src="images/nam.png" alt="Nam" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Crect fill=%22%23667eea%22 width=%22120%22 height=%22120%22 rx=%2260%22/%3E%3Ctext fill=%22white%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2230%22%3EN%3C/text%3E%3C/svg%3E'">
-                        <h4>Nam</h4>
-                        <p class="role-ally">Líder y Fundador</p>
-                        <p style="font-size: 0.85em; margin-top: 5px;">Clan IJC<br> Creador de NamHUB</p>
-                    </div>
-                    
-                    <div class="character-card">
-                        <img src="images/enzo.png" alt="Enzo" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Crect fill=%22%2322c55e%22 width=%22120%22 height=%22120%22 rx=%2260%22/%3E%3Ctext fill=%22white%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2230%22%3EE%3C/text%3E%3C/svg%3E'">
-                        <h4>Enzo (Diego)</h4>
-                        <p class="role-ally">Co-Líder</p>
-                        <p style="font-size: 0.85em; margin-top: 5px;">Clan IJC<br>🤝 Hermano de guerra</p>
-                    </div>
-
-                    <div class="character-card">
-                        <img src="images/radical.png" alt="Radical" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Crect fill=%22%2322c55e%22 width=%22120%22 height=%22120%22 rx=%2260%22/%3E%3Ctext fill=%22white%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2230%22%3ER%3C/text%3E%3C/svg%3E'">
-                        <h4>Radical</h4>
-                        <p class="role-ally">La Mente Brillante</p>
-                        <p style="font-size: 0.85em; margin-top: 5px;">Sobrevivió la crash machine<br>🧠 Muy inteligente</p>
-                    </div>
-
-                    <div class="character-card">
-                        <img src="images/adan.png" alt="Adan" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Crect fill=%22%2322c55e%22 width=%22120%22 height=%22120%22 rx=%2260%22/%3E%3Ctext fill=%22white%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2230%22%3EA%3C/text%3E%3C/svg%3E'">
-                        <h4>Adan</h4>
-                        <p class="role-ally">Miembro del IJC</p>
-                        <p style="font-size: 0.85em; margin-top: 5px;">Amigo de Radical<br>🤝 Se unió al clan</p>
-                    </div>
-
-                    <div class="character-card">
-                        <img src="images/roman.png" alt="Romantco" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Crect fill=%22%2322c55e%22 width=%22120%22 height=%22120%22 rx=%2260%22/%3E%3Ctext fill=%22white%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2230%22%3ER%3C/text%3E%3C/svg%3E'">
-                        <h4>Romantco</h4>
-                        <p class="role-ally">El Aliado del Leak</p>
-                        <p style="font-size: 0.85em; margin-top: 5px;">Filtró RomazHUB<br>🏛️ Constructor de Roma</p>
-                    </div>
-
-                    <div class="character-card">
-                        <img src="images/system.png" alt="System" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Crect fill=%22%2322c55e%22 width=%22120%22 height=%22120%22 rx=%2260%22/%3E%3Ctext fill=%22white%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2230%22%3ES%3C/text%3E%3C/svg%3E'">
-                        <h4>System</h4>
-                        <p class="role-ally">Fundador de LS</p>
-                        <p style="font-size: 0.85em; margin-top: 5px;">@igot_KJ8<br>⚙️ Pasó el Autobuild</p>
-                    </div>
-
-                    <div class="character-card">
-                        <img src="images/zeen.png" alt="Zeen" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Crect fill=%22%23ef4444%22 width=%22120%22 height=%22120%22 rx=%2260%22/%3E%3Ctext fill=%22white%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2230%22%3EZ%3C/text%3E%3C/svg%3E'">
-                        <h4>Zeen</h4>
-                        <p class="role-enemy">Líder de SDZ</p>
-                        <p style="font-size: 0.85em; margin-top: 5px;">DARKTHEWHITE2<br>💀 La copia de MG</p>
-                    </div>
-
-                    <div class="character-card">
-                        <img src="images/stumblero.png" alt="Stumblero" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Crect fill=%22%23f59e0b%22 width=%22120%22 height=%22120%22 rx=%2260%22/%3E%3Ctext fill=%22white%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2230%22%3ES%3C/text%3E%3C/svg%3E'">
-                        <h4>Stumblero</h4>
-                        <p class="role-neutral">El que se fue</p>
-                        <p style="font-size: 0.85em; margin-top: 5px;">Tomó otro camino<br>👋 Desapareció de TCO</p>
-                    </div>
-                </div>
-
-                <div class="timeline-dates">
-                    <span class="date-badge">📅 Enero: El regreso</span>
-                    <span class="date-badge">🧱 Servers raideados</span>
-                    <span class="date-badge">🏴 Febrero: Nace IJC</span>
-                    <span class="date-badge">🧪 Marzo: NamHUB</span>
-                    <span class="date-badge">⚔️ Raid de SDZ</span>
-                    <span class="date-badge">🔮 Junio: Próximamente</span>
-                </div>
-
-                <p style="font-size: 1.2em; color: #666; font-style: italic; text-align: center; margin-top: 40px; padding: 30px; background: #f8f9fa; border-radius: 15px;">
-                    <strong>Junio 2026... Próximamente...</strong><br>
-                    <span style="color: #999;">(se picó todo)</span>
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <p><strong>Archivo Histórico del Clan ZK</strong></p>
-        <p>Documentando la historia de The Chosen One</p>
-        <p style="margin-top: 20px; font-size: 0.85em;">The Chosen One © TomazDev | Creado por la comunidad</p>
-        <p style="font-size: 0.8em; margin-top: 10px;">User ID: 607353710 | Game ID: 11137575513</p>
-    </footer>
-
-    <script>
-        // CONFIGURACIÓN INICIAL
-        let settings = JSON.parse(localStorage.getItem('tcoSettings')) || {
-            darkMode: false,
-            progressBar: true,
-            counter: true
-        };
-
-        // APLICAR CONFIGURACIÓN AL CARGAR
-        window.onload = function() {
-            applySettings();
-            updateCharacterCount();
-        };
-
-        function applySettings() {
-            if (settings.darkMode) {
-                document.body.classList.add('dark-mode');
-                document.getElementById('darkModeToggle').classList.add('active');
-            }
-            if (settings.progressBar) {
-                document.querySelector('.reading-progress').style.display = 'block';
-                document.getElementById('progressToggle').classList.add('active');
-            } else {
-                document.querySelector('.reading-progress').style.display = 'none';
-            }
-            if (settings.counter) {
-                document.getElementById('characterCounter').style.display = 'block';
-                document.getElementById('counterToggle').classList.add('active');
-            } else {
-                document.getElementById('characterCounter').style.display = 'none';
-            }
-        }
-
-        function saveSettings() {
-            localStorage.setItem('tcoSettings', JSON.stringify(settings));
-        }
-
-        // OBSERVER PARA ANIMACIONES
-        // SISTEMA DE APARICIÓN AL SCROLL (a prueba de fallos)
-        function revealOnScroll() {
-            document.querySelectorAll('.year-title, .year-subtitle, .story-card').forEach(el => {
-                const rect = el.getBoundingClientRect();
-                if (rect.top < window.innerHeight - 60) {
-                    el.classList.add('visible');
-                }
-            });
-        }
-        window.addEventListener('scroll', revealOnScroll);
-        window.addEventListener('resize', revealOnScroll);
-        window.addEventListener('load', revealOnScroll);
-        revealOnScroll();
-        // SMOOTH SCROLL
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
-
-        // NAVBAR SCROLL EFFECT + PROGRESS BAR + BACK TO TOP
-        let lastScroll = 0;
-        window.addEventListener('scroll', () => {
-            const nav = document.querySelector('nav');
-            const currentScroll = window.pageYOffset;
-            
-            // Navbar shadow
-            if (currentScroll > 100) {
-                nav.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
-            } else {
-                nav.style.boxShadow = '0 2px 10px rgba(0,0,0,0.05)';
-            }
-            
-            // Progress bar
-            if (settings.progressBar) {
-                const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-                const scrolled = (currentScroll / scrollHeight) * 100;
-                document.getElementById('readingProgress').style.width = scrolled + '%';
-            }
-
-            // Back to top button
-            const backToTop = document.getElementById('backToTop');
-            if (currentScroll > 500) {
-                backToTop.classList.add('visible');
-            } else {
-                backToTop.classList.remove('visible');
-            }
-            
-            lastScroll = currentScroll;
-        });
-
-        function scrollToTop() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        // CONTADOR DE PERSONAJES
-        function updateCharacterCount() {
-            const characters = document.querySelectorAll('.character-card').length;
-            document.getElementById('characterCounter').innerHTML = `👥 Personajes: ${characters}`;
-        }
-
-        // MODALES
-        function openSettings() {
-            document.getElementById('settingsModal').classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeSettings() {
-            document.getElementById('settingsModal').classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-
-        function openExtras() {
-            document.getElementById('extrasModal').classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeExtras() {
-            document.getElementById('extrasModal').classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-
-        // TOGGLES
-        function toggleDarkMode() {
-            settings.darkMode = !settings.darkMode;
-            document.body.classList.toggle('dark-mode');
-            document.getElementById('darkModeToggle').classList.toggle('active');
-            saveSettings();
-        }
-
-        function toggleProgress() {
-            settings.progressBar = !settings.progressBar;
-            document.getElementById('progressToggle').classList.toggle('active');
-            document.querySelector('.reading-progress').style.display = settings.progressBar ? 'block' : 'none';
-            saveSettings();
-        }
-
-        function toggleCounter() {
-            settings.counter = !settings.counter;
-            document.getElementById('counterToggle').classList.toggle('active');
-            document.getElementById('characterCounter').style.display = settings.counter ? 'block' : 'none';
-            saveSettings();
-        }
-
-        // CERRAR MODALES
-        window.onclick = function(event) {
-            const settingsModal = document.getElementById('settingsModal');
-            const extrasModal = document.getElementById('extrasModal');
-            if (event.target === settingsModal) closeSettings();
-            if (event.target === extrasModal) closeExtras();
-        }
-
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                closeSettings();
-                closeExtras();
-            }
-        });
-    </script>
-
+  </div>
+</section>
+
+<!-- 2024 -->
+<section class="chapter" id="c2024">
+  <div class="ch-head"><div class="ch-num" data-i18n="ch3n">Capítulo III · La Gran Guerra</div><h2 class="ch-title">2024</h2><p class="ch-sub" data-i18n="ch3s">La Liberación de TCO Español</p></div>
+  <div class="card">
+    <div class="av"><img src="images/nam.png" alt="Nam" onerror="this.onerror=null;this.outerHTML='<div class=\'av-ph\'>N</div>'"></div>
+    <div>
+      <h3 data-i18n="y24h1">De la amistad a la traición</h3>
+      <p data-i18n="y24p1"><span class="hl">Enero a Junio 2024</span> fueron meses de paz aparente en los servidores latinos. Pero el destino tenía capítulos oscuros preparados.</p>
+      <h3 data-i18n="y24h2">El encuentro con Sam</h3>
+      <p data-i18n="y24p2">Un día Nam entró a TCO y encontró <strong>un server completamente solo</strong>. Solo había un jugador más: el admin, <span class="hl">Sam</span>.</p>
+      <p data-i18n="y24p3">Sam era un jugador <strong>sin Robux</strong>, pero arquitecto en la vida real. Juntos construyeron una ciudad entera, calles, edificios, plazas... una civilización nacida de la nada. Se hicieron amigos.</p>
+      <p data-i18n="y24p4">Pero un día simplemente dejaron de hablar. Sin peleas, sin dramas... solo silencio.</p>
+      <div class="box gold warn"><p>⚠️ <strong data-i18n="y24tw">El giro del destino:</strong> <span data-i18n="y24t">Sam se hizo amigo de Damian (i11rl). Aunque nunca estuvo involucrado en la pelea, su conexión con el antagonista no fue casualidad. ¿Qué papel jugará en 2025? 🔮</span></p></div>
+
+      <div class="box gold"><p><strong data-i18n="chars">👥 Personajes Clave:</strong></p></div>
+      <div class="chars">
+        <div class="char" onclick="charModal('nam')"><img src="images/nam.png" alt="Nam" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2296%22 height=%2296%22%3E%3Crect fill=%22%23d4af37%22 width=%2296%22 height=%2296%22 rx=%2248%22/%3E%3Ctext fill=%22%23000%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2234%22%3EN%3C/text%3E%3C/svg%3E'"><h4>Nam</h4><div class="role ally" data-i18n="rProt">Protagonista</div><div class="meta">elfrancho14<br>ID 607353710</div></div>
+        <div class="char" onclick="charModal('enzo')"><img src="images/enzo.png" alt="Enzo" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2296%22 height=%2296%22%3E%3Crect fill=%22%233ddc84%22 width=%2296%22 height=%2296%22 rx=%2248%22/%3E%3Ctext fill=%22%23000%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2234%22%3EE%3C/text%3E%3C/svg%3E'"><h4>Enzo</h4><div class="role ally" data-i18n="rBest">Mejor Amigo</div><div class="meta" data-i18n="mEnzo">Clan TQ<br>🥹 Abrió los ojos a Nam</div></div>
+        <div class="char" onclick="charModal('sam')"><img src="images/sam.png" alt="Sam" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2296%22 height=%2296%22%3E%3Crect fill=%22%23d4af37%22 width=%2296%22 height=%2296%22 rx=%2248%22/%3E%3Ctext fill=%22%23000%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2234%22%3ES%3C/text%3E%3C/svg%3E'"><h4>Sam</h4><div class="role neutral" data-i18n="rArch">El Arquitecto</div><div class="meta" data-i18n="mSam">Primer amigo<br>🔮 Clave en 2025</div></div>
+        <div class="char" onclick="charModal('damian')"><img src="images/i11rl.png" alt="Damian" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2296%22 height=%2296%22%3E%3Crect fill=%22%23e23b3b%22 width=%2296%22 height=%2296%22 rx=%2248%22/%3E%3Ctext fill=%22%23fff%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2234%22%3ED%3C/text%3E%3C/svg%3E'"><h4>i11rl</h4><div class="role enemy" data-i18n="rAntag">Antagonista</div><div class="meta" data-i18n="mDam">El Manipulador<br>Control total</div></div>
+        <div class="char" onclick="charModal('snoopy')"><img src="images/snoopy.png" alt="Snoopy" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2296%22 height=%2296%22%3E%3Crect fill=%22%23e23b3b%22 width=%2296%22 height=%2296%22 rx=%2248%22/%3E%3Ctext fill=%22%23fff%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2234%22%3ES%3C/text%3E%3C/svg%3E'"><h4>Snoopy</h4><div class="role enemy" data-i18n="rAllyD">Aliado de Damian</div><div class="meta" data-i18n="mSnoop">Amigo de i11rl<br>Parte del enemigo</div></div>
+        <div class="char" onclick="charModal('napoleon')"><img src="images/napoleon.png" alt="Napoleon" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2296%22 height=%2296%22%3E%3Crect fill=%22%23e23b3b%22 width=%2296%22 height=%2296%22 rx=%2248%22/%3E%3Ctext fill=%22%23fff%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2234%22%3EN%3C/text%3E%3C/svg%3E'"><h4>Napoleon</h4><div class="role enemy" data-i18n="rAllyD">Aliado de Damian</div><div class="meta" data-i18n="mNap">Amigo de i11rl<br>Luego liberado</div></div>
+      </div>
+
+      <h3 data-i18n="y24h3">La traición de Damian</h3>
+      <p data-i18n="y24p5">Nam se unió a un server común. El admin era <strong>i11rl (Damian)</strong>. Nam le construyó un <span class="hl">trono épico</span> y pidió bkit. Damian le otorgó <span class="hl">ENLIGHTEN</span>! 😊 Parecía el inicio de una gran amistad.</p>
+      <div class="box red warn"><p><strong data-i18n="y24bet">La Traición:</strong> <span data-i18n="y24be">"Estaba construyendo una máquina con ladrillos. Me acerqué... y de la nada me hizo BLIND, me hizo GLITCH. Empezamos a pelear. Me banearon horas. Y desde ahí... empezó TODO."</span></p></div>
+      <p data-i18n="y24p6">El rencor se instaló. Damian se hizo conocido y poco a poco <span class="hl">tomó el control de todos los servidores latinos</span>. Su método: difamación, mentiras, culpar sin razón.</p>
+      <p data-i18n="y24p7">Pidió perdón y se hicieron amigos (noviembre). Pero era ilusión: <span class="hl">Damian manipulaba a Nam</span>, quien lo ayudaba para que "le crean", sin saber que era parte del juego.</p>
+
+      <h3 data-i18n="y24h4">El Despertar</h3>
+      <p data-i18n="y24p8">Llegó <span class="hl">Enzo 🥹</span> (Diego), del clan <strong>TQ</strong>. Le contó a Nam su propia batalla con Damian. Ese día <strong>Nam abrió los ojos</strong> y <span class="hl">decidió luchar</span>.</p>
+      <p data-i18n="y24p9">Damian tenía control absoluto, pero ahora con dos aliados —<strong>Snoopy</strong> y <strong>Napoleon</strong>— y gracias a él, Enzo conoció a <strong>RaR</strong>.</p>
+
+      <div class="battle">
+        <h3>⚔️ LA BATALLA FINAL ⚔️</h3><p style="font-size:1.15em;margin-bottom:14px"><strong data-i18n="y24obj">Objetivo: LIBERAR TCO ESPAÑOL</strong></p>
+        <p data-i18n="y24bat">Nam y Diego lanzaron ataques de scripts mientras el trío enemigo respondía con difamación y mentiras. Damian usaba scripts maliciosos e intentaba que Nam volviera... pero eso ya no pasaría.</p>
+        <p style="margin-top:16px;font-size:1.2em"><strong>⏱️ +1 hora de batalla · 🏳️ El enemigo hizo RQ</strong></p>
+      </div>
+      <div class="victory"><h3 data-i18n="y24vic">🎉 ¡VICTORIA! 🎉</h3><p data-i18n="y24vict"><strong>¡GANAMOS LA BATALLA!</strong> 🥳 Liberamos medio TCO Español. Gracias a RaR liberamos a Napoleon, aunque tomó otro camino. Para nosotros, éramos los héroes.</p></div>
+      <p data-i18n="y24p10">Todo volvió a la normalidad: <span class="hl">reglas</span>, <span class="hl">ciudades</span>, <span class="hl">juegos</span>... al fin TCO era el buen juego que debió ser.</p>
+      <div class="box blue"><p><strong data-i18n="y24leg">🎮 Legado 2024:</strong> <span data-i18n="y24legt">Tras meses de manipulación, la valentía de Nam y Enzo restauró el orden. Los servidores latinos volvieron a ser un lugar justo y renovado.</span></p></div>
+      <div class="badges"><span class="badge" data-i18n="b1">📅 Ene-Jun: Paz</span><span class="badge" data-i18n="b2">🏗️ Sam</span><span class="badge" data-i18n="b3">💔 Traición</span><span class="badge" data-i18n="b4">🥹 Nam despierta</span><span class="badge" data-i18n="b5">⚔️ Batalla</span><span class="badge" data-i18n="b6">🏆 Victoria</span></div>
+      <div class="teaser"><strong data-i18n="y24te">Pero esto no terminó acá...</strong><br><span data-i18n="y24te2">(Spoiler 2025)</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 2025 -->
+<section class="chapter" id="c2025">
+  <div class="ch-head"><div class="ch-num" data-i18n="ch4n">Capítulo IV · La Segunda Guerra</div><h2 class="ch-title">2025</h2><p class="ch-sub" data-i18n="ch4s">La perspectiva de Enzo: espionaje, traición y guerra total</p></div>
+  <div class="card">
+    <div class="av"><img src="images/enzo.png" alt="Enzo" onerror="this.onerror=null;this.outerHTML='<div class=\'av-ph\'>E</div>'"></div>
+    <div>
+      <h3 data-i18n="y25h1">El espía en las sombras</h3>
+      <p data-i18n="y25p1">Mientras <strong>Nam se alejaba</strong> a fines de 2024, <span class="hl">Enzo no abandonó el juego</span>. Inició una misión secreta: crear <strong>alts</strong> para infiltrarse y observar. Lo que descubriría cambiaría todo...</p>
+      <div class="box gold"><p><strong data-i18n="chars">👥 Nuevos Personajes Clave 2025:</strong></p></div>
+      <div class="chars">
+        <div class="char" onclick="charModal('enzo')"><img src="images/enzo.png" alt="Enzo" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2296%22 height=%2296%22%3E%3Crect fill=%22%233ddc84%22 width=%2296%22 height=%2296%22 rx=%2248%22/%3E%3Ctext fill=%22%23000%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2234%22%3EE%3C/text%3E%3C/svg%3E'"><h4>Enzo</h4><div class="role ally" data-i18n="rSpy25">Protagonista 2025</div><div class="meta">enzors19209<br>🕵️ El Espía</div></div>
+        <div class="char" onclick="charModal('exotic')"><img src="images/exotic.png" alt="Exotic" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2296%22 height=%2296%22%3E%3Crect fill=%22%233ddc84%22 width=%2296%22 height=%2296%22 rx=%2248%22/%3E%3Ctext fill=%22%23000%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2230%22%3EX%3C/text%3E%3C/svg%3E'"><h4>Tq_EX0T1C</h4><div class="role ally" data-i18n="rLead">Líder de TQ</div><div class="meta" data-i18n="mExo">Fundador<br>👑 Líder Principal</div></div>
+        <div class="char" onclick="charModal('fonsi')"><img src="images/fonsi.png" alt="Fonsi" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2296%22 height=%2296%22%3E%3Crect fill=%22%23d4af37%22 width=%2296%22 height=%2296%22 rx=%2248%22/%3E%3Ctext fill=%22%23000%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2234%22%3EF%3C/text%3E%3C/svg%3E'"><h4>Fonsi</h4><div class="role neutral" data-i18n="rTemp">Aliado Temporal</div><div class="meta">@elchiquitin38<br data-i18n="mFon">Amigo de Exotic</div></div>
+        <div class="char" onclick="charModal('facu')"><img src="images/facu.png" alt="Facu" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2296%22 height=%2296%22%3E%3Crect fill=%22%233ddc84%22 width=%2296%22 height=%2296%22 rx=%2248%22/%3E%3Ctext fill=%22%23000%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2234%22%3EF%3C/text%3E%3C/svg%3E'"><h4>Tq_Facu</h4><div class="role ally" data-i18n="rAgent">Compañero</div><div class="meta" data-i18n="mFacu">Guardia Nocturna<br>🕵️ Agente Doble</div></div>
+        <div class="char" onclick="charModal('pan')"><img src="images/pan.png" alt="Pan" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2296%22 height=%2296%22%3E%3Crect fill=%22%233ddc84%22 width=%2296%22 height=%2296%22 rx=%2248%22/%3E%3Ctext fill=%22%23000%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2234%22%3EP%3C/text%3E%3C/svg%3E'"><h4>Tq_Pan</h4><div class="role ally" data-i18n="rFriend">Nueva Amiga</div><div class="meta" data-i18n="mPan">18/01/2025<br>🤝 Aliada</div></div>
+        <div class="char" onclick="charModal('gonza')"><img src="images/gonza.png" alt="Gonza" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2296%22 height=%2296%22%3E%3Crect fill=%22%23d4af37%22 width=%2296%22 height=%2296%22 rx=%2248%22/%3E%3Ctext fill=%22%23000%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2232%22%3EG%3C/text%3E%3C/svg%3E'"><h4>Gonza</h4><div class="role neutral" data-i18n="rConf">Conflictivo</div><div class="meta" data-i18n="mGon">Ex miembro TQ<br>⚠️ Traicionado</div></div>
+        <div class="char" onclick="charModal('hallow')"><img src="images/hallow.png" alt="Hallow" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2296%22 height=%2296%22%3E%3Crect fill=%22%23e23b3b%22 width=%2296%22 height=%2296%22 rx=%2248%22/%3E%3Ctext fill=%22%23fff%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2234%22%3EH%3C/text%3E%3C/svg%3E'"><h4>Hallow</h4><div class="role enemy" data-i18n="rIntAnt">Antagonista Interno</div><div class="meta" data-i18n="mHal">Traidor a Gonza<br>💔 Conflictos</div></div>
+      </div>
+
+      <h3 data-i18n="y25h2">🕵️ ESPIONAJE · Antes de Dic 2024</h3>
+      <p data-i18n="y25p2">Enzo se convirtió en <span class="hl">espía digital</span> con sus alts. Observó a Damián y Napoleón. Descubrió que estaban con el <strong>Clan TQ</strong> (donde Enzo tenía amigos en su cuenta <em>enzors19209</em>, hoy su Discord).</p>
+      <div class="box blue"><p><strong data-i18n="y25fon">🔍 El incidente con Fonsi:</strong> <span data-i18n="y25fon2">Se unió Fonsi (amigo de Tq_EX0T1C, líder de TQ) usando una alt @elchiquitin38. Estaba raideando a Damián por abusar de su admin y torturar el server latino con ciudades y un puente absurdo. Enzo se retiró antes de levantar sospechas.</span></p></div>
+
+      <h3 data-i18n="y25h3">📅 FINES DE DIC 2024 · La confrontación</h3>
+      <p data-i18n="y25p3">En su cuenta original, Enzo estaba con <strong>Exotic, Little</strong> y otros. Apareció <strong>Napoleón</strong> reclamando por qué no le escribía en Discord. Chatearon y <span class="hl">sacaron evidencias cruciales</span>: Napoleón admitió <em>"Manipulé a Gonza"</em>. Esto llevó a Napoleón a <strong>crashear el server</strong>.</p>
+      <p data-i18n="y25p4">Enzo, enfurecido, decidió <span class="hl">unirse al clan TQ para frenar todo de una vez</span>. Exotic lo aceptó y le pasó el link del Discord.</p>
+      <div class="box red warn"><p><strong data-i18n="y25atk">💥 El ataque:</strong> <span data-i18n="y25atk2">NO DURÓ. Napoleón entró al Discord de TQ con un bot "Pedro Invasoes" y lo raideó todo. Tuvieron que recrear el servidor para recuperarse del clan MG.</span></p></div>
+
+      <h3 data-i18n="y25h4">🌅 INICIOS 2025 · Nuevas alianzas</h3>
+      <p data-i18n="y25p5">En TQ, Enzo conoció a <strong>Tq_Pan</strong>. Se hicieron amigos y les mostró las <span class="hl">evidencias contra el clan MG</span>. Se conocieron el <strong>18 de Enero 2025</strong>.</p>
+
+      <h3 data-i18n="y25h5">🤝 ALIANZA TEMPORAL TQ + MG</h3>
+      <p data-i18n="y25p6">Por un tiempo TQ se alió con MG. Pero <strong>Hallow</strong> llamó <em>"traidor"</em> a <strong>Gonza</strong> (miembro de TQ). Gonza se distanció odiando a Hallow. Enzo, en cambio, estaba bien con ambos.</p>
+      <div class="box red warn"><p><strong data-i18n="y25brk">⚠️ Ruptura definitiva:</strong> <span data-i18n="y25brk2">Napoleón y Damián enviaron insultos, racismo y contenido +18 al Discord de TQ. Se rompió la paz. TQ declaró oficialmente la GUERRA al clan MG.</span></p></div>
+
+      <h3 data-i18n="y25h6">🌙 OPERACIÓN: GUARDIA NOCTURNA · Fines Ene 2025</h3>
+      <p data-i18n="y25p7">Una de las misiones más épicas. Enzo y <strong>Tq_Facu</strong> se infiltraron en MG con <span class="hl">multicuentas de Discord</span>. Napoleón les mandaba links; ellos mostraban evidencias por MD a los miembros de MG para que se fueran antes de que llegaran a 100 miembros.</p>
+
+      <div class="battle">
+        <h3>⚔️ SEGUNDA GUERRA MUNDIAL DE TCO ⚔️</h3><p style="font-size:1.1em;margin-bottom:14px"><strong data-i18n="y25war">Fines Ene - Inicios Feb 2025</strong></p>
+        <p data-i18n="y25war2">Se declaró oficialmente la GUERRA TQ vs MG. Difamaban a TQ de usar Exploits, cuando solo eran defensa personal. Los llamaban raiders y griefers.</p>
+        <p style="margin-top:14px"><strong data-i18n="y25def">TQ se defendió:</strong> <span data-i18n="y25def2">evidencias en ID para todo el server. Cada texto de MG, TQ le sacaba pruebas. Enzo y Facu siguieron hasta parar.</span></p>
+      </div>
+
+      <h3 data-i18n="y25h7">💥 FEB 2025 · El intento de crash</h3>
+      <p data-i18n="y25p8"><strong>Napoleón presionó a un admin</strong> para crashear el server. <span class="hl">Fracasó</span>: el admin hizo <em>delcubes all</em> y Enzo lo soportó, atrayendo a TQ para defenderse con evidencias y, a veces, Exploits defensivos.</p>
+
+      <h3 data-i18n="y25h8">🏆 FINES FEB - MAR 2025 · La victoria</h3>
+      <p data-i18n="y25p9">Por la guerra (la <strong>Segunda Guerra Mundial de TCO</strong>), MG cayó poco a poco. El <span class="hl">clan TQ ganó oficialmente</span>: más miembros, beneficios, canales, mejores líderes.</p>
+      <div class="victory"><h3 data-i18n="y25vic">🎉 ¡VICTORIA TOTAL DE TQ! 🎉</h3><p data-i18n="y25vict"><strong>¡El clan MG fue derrotado!</strong> 🥳 La Segunda Guerra Mundial de TCO terminó. TQ emergió como la facción más fuerte de la comunidad latina.</p></div>
+
+      <h3 data-i18n="y25h9">📉 MAR 2025 · El declive</h3>
+      <p data-i18n="y25p10">TQ se volvió una comunidad de <em>Dead Rails</em>. Como quien controlaba el Discord principal de <strong>Tq_Facu</strong> (parece su primo) lo destruyó poco a poco, el clan decayó.</p>
+      <div class="box blue"><p><strong data-i18n="y25cons">📊 CONSECUENCIAS:</strong> <span data-i18n="y25cons2">Hubo quienes odiaban a TQ y otros a MG, pero TQ fue más conocido. Algunos odiaban a TQ por conflictos con Gonza, que apoyó a MG un tiempo. Enzo se unía a servers distintos explicando con evidencias, y el odio fue desapareciendo.</span></p></div>
+      <div class="badges"><span class="badge" data-i18n="b7">🕵️ Espionaje</span><span class="badge" data-i18n="b8">📅 18/01 Pan</span><span class="badge" data-i18n="b9">🌙 Guardia Nocturna</span><span class="badge" data-i18n="b10">⚔️ 2da Guerra</span><span class="badge" data-i18n="b11">🏆 Victoria TQ</span><span class="badge" data-i18n="b12">📉 Declive</span></div>
+      <div class="teaser"><strong data-i18n="y25te">Hay más sucesos en 2025...</strong><br><span data-i18n="y25te2">Próximamente: más contacto con clanes como SH.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 2026 -->
+<section class="chapter" id="c2026">
+  <div class="ch-head"><div class="ch-num" data-i18n="ch5n">Capítulo V · El Regreso</div><h2 class="ch-title">2026</h2><p class="ch-sub" data-i18n="ch5s">El regreso de una leyenda: Nam vuelve a un mundo en ruinas</p></div>
+  <div class="card">
+    <div class="av"><img src="images/nam.png" alt="Nam" onerror="this.onerror=null;this.outerHTML='<div class=\'av-ph\'>N</div>'"></div>
+    <div>
+      <h3 data-i18n="y26h1">El regreso de una leyenda</h3>
+      <p data-i18n="y26p1"><span class="hl">Enero 2026</span>. Tras la Segunda Guerra, <strong>Nam decidió volver</strong>. La leyenda regresaba... pero no al mundo que recordaba.</p>
+      <p data-i18n="y26p2">Al contactar a <strong>Enzo</strong>, la respuesta fue escalofriante: <em>"todo es un caos"</em>. Nam entró a un server para comprobarlo... y lo que vio fue <span class="hl">inexplicable</span>.</p>
+
+      <h3 data-i18n="y26h2">🧱 El mundo raideado</h3>
+      <p data-i18n="y26p3"><strong>¡LOS BLOQUES ESTABAN RAIDEADOS!</strong> Pusieras, eliminaras o movieras un bloque: <span class="hl">TODO estaba raideado</span>. Material <em>toxicify</em> + <em>anchor</em> + un link de Discord. El mapa entero, intocable.</p>
+      <div class="box blue"><p><strong data-i18n="y26rb">🧱 ¿Server raideado?</strong> <span data-i18n="y26rb2">Bloques con toxicify + anchor + link de Discord. Hicieras lo que hicieras, el raid permanecía. Como borrar una cicatriz del mapa.</span></p></div>
+      <p data-i18n="y26p4">Y también la <span class="hl">CRASH MACHINE</span>: un bloque junto a otro y quien la mirara lageaba hasta morir. Y métodos peores... como <strong>crashear un server entero</strong>.</p>
+      <div class="box red warn"><p>⚠️ <em data-i18n="y26q">"Nam no lo podía creer. Quiso investigar cómo funcionaba. Pero los raids estaban en TODOS lados y los scripters eran cada vez peores. Era pelear contra un fantasma."</em></p></div>
+      <p data-i18n="y26p5"><strong>Pealz</strong> y <strong>Areyoumental</strong> (Admin Community) crearon <em>The Chosen One OG</em>... pero duró poco: <strong>Roblox lo eliminó</strong> por copia.</p>
+      <p data-i18n="y26p6">Con esto, <span class="hl">TCO ya era un 2b2t</span>: anarquía total, sin reglas, sin dueños, sin esperanza. Solo ruinas y scripters.</p>
+      <p data-i18n="y26p7">Nam pasó <span class="hl">más de 20 días</span> intentando descifrarlo... y no lo logró. Pero ese fracaso sembraría algo más grande.</p>
+
+      <h3 data-i18n="y26h3">🏴 FEB 2026 · Nace el Clan IJC</h3>
+      <p data-i18n="y26p8">Nam tomó la decisión más importante: <span class="hl">fundar un clan</span>. <strong>IJC — Investigación de Justicia y Corrupción</strong>. ¿El objetivo? Detener el caos.</p>
+      <p data-i18n="y26p9">Lo fundó con <strong>Enzo</strong> como <span class="hl">Co-Líder</span>. ¿Y qué creen? <strong>¡FUNCIONÓ!</strong></p>
+      <div class="box green" style="text-align:center"><p style="font-size:1.4em;font-weight:700;color:var(--green)">📈 2 → 5 → 10 → 20 → +30 MIEMBROS</p><p data-i18n="y26gr" style="margin-top:8px">El clan IJC creció como una llama en la oscuridad de TCO.</p></div>
+
+      <h3 data-i18n="y26h4">La prueba de fuego: Radical, Adan y Stumblero</h3>
+      <p data-i18n="y26p10">Nam construía una zona de juegos solo. Aparecieron <strong>Radical</strong>, <strong>Stumblero</strong> y <strong>Adan</strong> e intentaron ganarle una raid. No pudieron: Nam activó la <span class="hl">crash machine</span> y a todos les lagueó... <strong>menos a Radical</strong>.</p>
+      <p data-i18n="y26p11">Los demás se rindieron, menos Radical. Al final pidió perdón y <span class="hl">se hicieron amigos</span>. <strong>Adan y Radical</strong> se unieron al clan. <strong>Stumblero</strong> tomó otro camino y <span class="hl">desapareció de TCO</span>.</p>
+      <p style="font-style:italic;color:var(--mut)" data-i18n="y26gold">Pero no todo lo que brilla es oro...</p>
+
+      <h3 data-i18n="y26h5">🧪 MAR 2026 · La guerra de los Hubs</h3>
+      <p data-i18n="y26p12">IJC investigaba a full. Hasta que apareció <span class="hl">RomazHUB</span>, por <strong>299 Robux</strong>. Perfecto: hasta tenía el bloque de raid. <em>ERA PERFECTO.</em> Pero no tenían Robux.</p>
+      <p data-i18n="y26p13">Nam conoció a <strong>Romantco (Roman)</strong>. En un server de Nam construyeron juntos una <span class="hl">ciudad de Roma</span> con reglas. Roman usaba scripts para el bien, con cuenta secundaria (la principal baneada).</p>
+      <p data-i18n="y26p14">Un día Roman le contó en secreto: <span class="hl">¡SE FILTRÓ ROMAZHUB!</span> Solo lo tenían los compradores, Roman... y Nam. <strong>SERVIRÍA MUCHÍSIMO.</strong> Tenía <strong>Autobuild</strong> — ¡un bot que construye por ti! LO MEJOR.</p>
+      <div class="box red warn"><p>💥 <strong data-i18n="y26fall">El derrumbe:</strong> <span data-i18n="y26fall2">Horas después, romazdev notó el leak y puso blacklist a quien no lo tuviera comprado. Todo se derrumbó.</span></p></div>
+      <p data-i18n="y26p15">Pero Nam no se rindió. Creó <span class="hl">NamHUB</span>. Juró que sería mejor que RomazHUB. <strong>Lo prometió.</strong> Salió con errores, los arregló uno por uno... y <strong>FUNCIONÓ</strong>. Por un momento superó a Romaz. Lo lanzó <span class="hl">GRATIS</span>, con Autobuild, Paint Configuration y más.</p>
+      <p data-i18n="y26p16">Todo gracias a <strong>System (@igot_KJ8)</strong>, que semanas antes fundó <strong>LS (Legacy Service)</strong>, un hub igual de OP. Nam le pidió el Autobuild y el Paint... y System se los pasó. Sin preguntas.</p>
+
+      <div class="box gold"><p><strong data-i18n="y26hubs">💻 Los Hubs de la época:</strong></p></div>
+      <div class="hubs">
+        <div class="hub"><div class="ic">💰</div><h4>RomazHUB</h4><p data-i18n="hubR">El hub pago (299 Robux). Perfecto... hasta el leak. romazdev aplicó blacklist a quien no lo compró.</p><span class="tag">299 ROBUX</span></div>
+        <div class="hub feat"><div class="ic">🧪</div><h4>NamHUB</h4><p data-i18n="hubN">Creado por Nam. Gratis, con Autobuild, Paint Config y más. Por un momento superó a RomazHUB.</p><span class="tag" data-i18n="hubFree">GRATIS</span></div>
+        <div class="hub"><div class="ic">⚙️</div><h4>LS Legacy</h4><p data-i18n="hubL">El hub de System (@igot_KJ8). Muy OP. De ahí salieron Autobuild y Paint que potenciaron NamHUB.</p><span class="tag" data-i18n="hubAlly">ALIADO</span></div>
+      </div>
+
+      <p data-i18n="y26p17"><strong>Napoleon</strong> se enteró del IJC y spameó en Discord: basura, insultos. Nam no le dio importancia: <em>solo un niño queriendo atención</em>.</p>
+      <p data-i18n="y26p18">Luego todo iba bien. Perfecto. Soleado. Divertido.</p>
+
+      <h3 data-i18n="y26h6">⚔️ El raid de SDZ · La copia fantasma</h3>
+      <p data-i18n="y26p19">En un server tranquilo de IJC... se unieron varios con apodo <strong>SDZ</strong>. <em>"¿Quién carajos son esos?"</em>.</p>
+      <p data-i18n="y26p20">SDZ empezó a <span class="hl">raidear</span>, donando tiempo a <strong>Zeen (DARKTHEWHITE2)</strong>, líder de SDZ. Nam llamó a todo el IJC. Hora de defender lo construido.</p>
+      <div class="battle"><h3>⚔️ DEFENSA DEL SERVER IJC ⚔️</h3><p style="font-size:1.1em;margin-bottom:14px"><strong data-i18n="y26raid">Raid de SDZ vs Clan IJC</strong></p><p data-i18n="y26raid2">SDZ raideaba y donaba tiempo a Zeen (DARKTHEWHITE2). El IJC entero defendió su casa.</p><p style="margin-top:14px;font-size:1.2em"><strong>⏱️ ~30 min · 🏳️ SDZ se salió. IJC ganó.</strong></p></div>
+      <p data-i18n="y26p21">Investigaron al supuesto "SDZ"... y descubrieron algo impactante: <span class="hl">era una copia del Clan MG</span>. Los fantasmas del pasado, reciclados. La historia se repetía... pero el IJC estaba listo.</p>
+
+      <div class="box gold"><p><strong data-i18n="chars">👥 Personajes Clave 2026:</strong></p></div>
+      <div class="chars">
+        <div class="char" onclick="charModal('nam')"><img src="images/nam.png" alt="Nam" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2296%22 height=%2296%22%3E%3Crect fill=%22%23d4af37%22 width=%2296%22 height=%2296%22 rx=%2248%22/%3E%3Ctext fill=%22%23000%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2234%22%3EN%3C/text%3E%3C/svg%3E'"><h4>Nam</h4><div class="role ally" data-i18n="rFounder">Líder y Fundador</div><div class="meta" data-i18n="mNam26">Clan IJC<br>🧪 Creador NamHUB</div></div>
+        <div class="char" onclick="charModal('enzo')"><img src="images/enzo.png" alt="Enzo" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2296%22 height=%2296%22%3E%3Crect fill=%22%233ddc84%22 width=%2296%22 height=%2296%22 rx=%2248%22/%3E%3Ctext fill=%22%23000%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2234%22%3EE%3C/text%3E%3C/svg%3E'"><h4>Enzo</h4><div class="role ally" data-i18n="rCo">Co-Líder</div><div class="meta" data-i18n="mEnzo26">Clan IJC<br>🤝 Hermano de guerra</div></div>
+        <div class="char" onclick="charModal('radical')"><img src="images/radical.png" alt="Radical" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2296%22 height=%2296%22%3E%3Crect fill=%22%233ddc84%22 width=%2296%22 height=%2296%22 rx=%2248%22/%3E%3Ctext fill=%22%23000%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2234%22%3ER%3C/text%3E%3C/svg%3E'"><h4>Radical</h4><div class="role ally" data-i18n="rBrain">La Mente Brillante</div><div class="meta" data-i18n="mRad">Sobrevivió crash machine<br>🧠 Muy inteligente</div></div>
+        <div class="char" onclick="charModal('adan')"><img src="images/adan.png" alt="Adan" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2296%22 height=%2296%22%3E%3Crect fill=%22%233ddc84%22 width=%2296%22 height=%2296%22 rx=%2248%22/%3E%3Ctext fill=%22%23000%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2234%22%3EA%3C/text%3E%3C/svg%3E'"><h4>Adan</h4><div class="role ally" data-i18n="rMember">Miembro IJC</div><div class="meta" data-i18n="mAda">Amigo de Radical<br>🤝 Se unió</div></div>
+        <div class="char" onclick="charModal('roman')"><img src="images/roman.png" alt="Roman" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2296%22 height=%2296%22%3E%3Crect fill=%22%233ddc84%22 width=%2296%22 height=%2296%22 rx=%2248%22/%3E%3Ctext fill=%22%23000%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2234%22%3ER%3C/text%3E%3C/svg%3E'"><h4>Romantco</h4><div class="role ally" data-i18n="rLeak">Aliado del Leak</div><div class="meta" data-i18n="mRom">Filtró RomazHUB<br>🏛️ Constructor de Roma</div></div>
+        <div class="char" onclick="charModal('system')"><img src="images/system.png" alt="System" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2296%22 height=%2296%22%3E%3Crect fill=%22%233ddc84%22 width=%2296%22 height=%2296%22 rx=%2248%22/%3E%3Ctext fill=%22%23000%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2234%22%3ES%3C/text%3E%3C/svg%3E'"><h4>System</h4><div class="role ally" data-i18n="rLS">Fundador de LS</div><div class="meta">@igot_KJ8<br>⚙️ Pasó el Autobuild</div></div>
+        <div class="char" onclick="charModal('zeen')"><img src="images/zeen.png" alt="Zeen" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2296%22 height=%2296%22%3E%3Crect fill=%22%23e23b3b%22 width=%2296%22 height=%2296%22 rx=%2248%22/%3E%3Ctext fill=%22%23fff%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2234%22%3EZ%3C/text%3E%3C/svg%3E'"><h4>Zeen</h4><div class="role enemy" data-i18n="rSDZ">Líder de SDZ</div><div class="meta">DARKTHEWHITE2<br>💀 Copia de MG</div></div>
+        <div class="char" onclick="charModal('stumblero')"><img src="images/stumblero.png" alt="Stumblero" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2296%22 height=%2296%22%3E%3Crect fill=%22%23d4af37%22 width=%2296%22 height=%2296%22 rx=%2248%22/%3E%3Ctext fill=%22%23000%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2234%22%3ES%3C/text%3E%3C/svg%3E'"><h4>Stumblero</h4><div class="role neutral" data-i18n="rLeft">El que se fue</div><div class="meta" data-i18n="mStum">Otro camino<br>👋 Desapareció</div></div>
+      </div>
+      <div class="badges"><span class="badge" data-i18n="b13">📅 Ene: Regreso</span><span class="badge" data-i18n="b14">🧱 Raids</span><span class="badge" data-i18n="b15">🏴 Feb: IJC</span><span class="badge" data-i18n="b16">🧪 Mar: NamHUB</span><span class="badge" data-i18n="b17">⚔️ Raid SDZ</span><span class="badge" data-i18n="b18">🔮 Jun: Próximamente</span></div>
+      <div class="teaser"><strong data-i18n="y26te">Junio 2026... Próximamente...</strong><br><span data-i18n="y26te2">(se picó todo)</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- HALL OF FAME -->
+<section class="special" id="hof">
+  <div class="special-inner">
+    <h2 class="sec-title" data-i18n="hofT">HALL DE LA <em>FAMA</em></h2>
+    <p class="sec-sub" data-i18n="hofS">Los logros que forjaron la leyenda</p>
+    <div class="hof">
+      <div class="medal"><div class="em">️</div><h4 data-i18n="m1t">Libertador</h4><div class="yr">2024</div><p data-i18n="m1d">Liberó medio TCO Español del control de Damian.</p></div>
+      <div class="medal"><div class="em">🕵️</div><h4 data-i18n="m2t">Maestro Espía</h4><div class="yr">2025</div><p data-i18n="m2d">Operación Guardia Nocturna: infiltración perfecta.</p></div>
+      <div class="medal"><div class="em">🏴</div><h4 data-i18n="m3t">Fundador</h4><div class="yr">2026</div><p data-i18n="m3d">Creó el Clan IJC, de 2 a +30 miembros.</p></div>
+      <div class="medal"><div class="em">🧪</div><h4 data-i18n="m4t">Ingeniero</h4><div class="yr">2026</div><p data-i18n="m4d">Creador de NamHUB, gratis y superior a RomazHUB.</p></div>
+      <div class="medal"><div class="em">⚔️</div><h4 data-i18n="m5t">Veterano</h4><div class="yr">2025</div><p data-i18n="m5d">Victorioso en la Segunda Guerra Mundial de TCO.</p></div>
+      <div class="medal"><div class="em">🛡️</div><h4 data-i18n="m6t">Defensor</h4><div class="yr">2026</div><p data-i18n="m6d">Repelió el raid de SDZ y desenmascaró la copia de MG.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- MAPA -->
+<section class="special" id="map" style="background:linear-gradient(180deg,transparent,rgba(226,59,59,.04),transparent)">
+  <div class="special-inner">
+    <h2 class="sec-title" data-i18n="mapT">MAPA DE <em>ALIANZAS</em></h2>
+    <p class="sec-sub" data-i18n="mapS">Quién era quién en el campo de batalla</p>
+    <div class="map-grid">
+      <div class="rel ally"><div class="who">Nam <span class="arrow">↔</span> Enzo</div><div class="what" data-i18n="rel1">Hermanos de guerra. Co-líderes del IJC. Inseparables desde 2024.</div></div>
+      <div class="rel enemy"><div class="who">Damian <span class="arrow">→</span> Nam</div><div class="what" data-i18n="rel2">Manipuló a Nam haciéndose pasar por amigo. El gran antagonista.</div></div>
+      <div class="rel"><div class="who">Sam <span class="arrow">→</span> Damian</div><div class="what" data-i18n="rel3">Primer amigo de Nam, luego se acercó a Damian. Pieza clave futura.</div></div>
+      <div class="rel ally"><div class="who">Enzo <span class="arrow">∈</span> Clan TQ</div><div class="what" data-i18n="rel4">Se unió a TQ bajo Exotic para combatir al clan MG.</div></div>
+      <div class="rel enemy"><div class="who">Clan TQ <span class="arrow">⚔</span> Clan MG</div><div class="what" data-i18n="rel5">Segunda Guerra Mundial de TCO. TQ victorioso (2025).</div></div>
+      <div class="rel enemy"><div class="who">Clan SDZ <span class="arrow">=</span> Clan MG</div><div class="what" data-i18n="rel6">SDZ resultó ser una copia reciclada de MG. Derrotados 2 veces.</div></div>
+      <div class="rel ally"><div class="who">Nam <span class="arrow">↔</span> System</div><div class="what" data-i18n="rel7">System (LS) le pasó Autobuild y Paint para NamHUB. Aliado clave.</div></div>
+      <div class="rel ally"><div class="who">Nam <span class="arrow">↔</span> Romantco</div><div class="what" data-i18n="rel8">Roman filtró RomazHUB en secreto. Construyeron Roma juntos.</div></div>
+      <div class="rel"><div class="who">Pealz + Areyoumental</div><div class="what" data-i18n="rel9">Admin Community. Crearon TCO OG (eliminado por Roblox).</div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <strong>ARCHIVO HISTÓRICO · CLAN ZK</strong>
+  <p style="margin-top:10px" data-i18n="foot">Documentando la historia de The Chosen One</p>
+  <p style="margin-top:14px;font-size:.8em">The Chosen One © TomazDev · User ID 607353710 · Game ID 11137575513</p>
+</footer>
+
+<!-- SETTINGS MODAL -->
+<div class="modal" id="settingsModal">
+  <div class="modal-c">
+    <button class="modal-x" onclick="closeModal('settingsModal')">×</button>
+    <h2 data-i18n="setT">AJUSTES</h2>
+    <p data-i18n="setS">Personalizá tu experiencia</p>
+    <div class="setting"><div><h4 data-i18n="set1">🎬 Modo Cine</h4><p data-i18n="set1d">Color intenso + música épica de fondo</p></div><div class="tog" id="togCinema" onclick="toggleCinema()"><i></i></div></div>
+    <div class="setting"><div><h4 data-i18n="set2">🔊 Sonidos</h4><p data-i18n="set2d">Clicks sutiles al interactuar</p></div><div class="tog on" id="togSound" onclick="toggleSound()"><i></i></div></div>
+    <div class="setting"><div><h4 data-i18n="set3">🌐 Idioma / Language</h4><p data-i18n="set3d">Español or English</p></div></div>
+    <div class="lang-row"><button class="lang-btn active" id="langEs" onclick="setLang('es')">🇪 Español</button><button class="lang-btn" id="langEn" onclick="setLang('en')">🇬🇧 English</button></div>
+  </div>
+</div>
+
+<!-- CHARACTER MODAL -->
+<div class="modal" id="charModal">
+  <div class="modal-c big">
+    <button class="modal-x" onclick="closeModal('charModal')">×</button>
+    <img class="char-modal-img" id="cmImg" src="" alt="">
+    <div class="char-modal-name" id="cmName"></div>
+    <div class="char-modal-role" id="cmRole"></div>
+    <p id="cmDesc" style="color:var(--mut)"></p>
+  </div>
+</div>
+
+<button class="top-btn" id="topBtn" onclick="go('#hero')">↑</button>
+
+<script>
+/* ============ DATA ============ */
+const CHARS={
+ nam:{name:"Nam",role:"Protagonista · Líder IJC",color:"#d4af37",img:"images/nam.png",desc:"elfrancho14 (ID 607353710). El corazón de la historia. De jugador +1 a fundador del Clan IJC y creador de NamHUB."},
+ enzo:{name:"Enzo (Diego)",role:"Co-Líder · El Espía",color:"#3ddc84",img:"images/enzo.png",desc:"enzors19209. Abrió los ojos a Nam en 2024, lideró el espionaje y la Operación Guardia Nocturna en 2025. Hermano de guerra."},
+ sam:{name:"Sam",role:"El Arquitecto",color:"#d4af37",img:"images/sam.png",desc:"Primer amigo de Nam en TCO. Sin Robux, arquitecto real. Construyeron una ciudad juntos. Luego se acercó a Damian..."},
+ damian:{name:"i11rl (Damian)",role:"Antagonista",color:"#e23b3b",img:"images/i11rl.png",desc:"El Manipulador. Tomó control de los servers latinos, traicionó a Nam y lideró el clan MG."},
+ snoopy:{name:"Snoopy",role:"Aliado de Damian",color:"#e23b3b",img:"images/snoopy.png",desc:"Nuevo amigo de i11rl. Parte del trío enemigo en la batalla de 2024."},
+ napoleon:{name:"Napoleon",role:"Aliado de Damian",color:"#e23b3b",img:"images/napoleon.png",desc:"Amigo de i11rl. Admitió 'manipulé a Gonza'. Liberado tras la batalla, luego spameó contra el IJC."},
+ exotic:{name:"Tq_EX0T1C",role:"Líder de TQ",color:"#3ddc84",img:"images/exotic.png",desc:"Fundador y líder principal del clan TQ. Aceptó a Enzo para la guerra contra MG."},
+ fonsi:{name:"Fonsi",role:"Aliado Temporal",color:"#d4af37",img:"images/fonsi.png",desc:"@elchiquitin38. Amigo de Exotic. Raideó a Damian por abusar del server latino."},
+ facu:{name:"Tq_Facu",role:"Agente Doble",color:"#3ddc84",img:"images/facu.png",desc:"Compañero de Enzo en la Operación Guardia Nocturna. Infiltraron MG con multicuentas."},
+ pan:{name:"Tq_Pan",role:"Nueva Amiga",color:"#3ddc84",img:"images/pan.png",desc:"Conocida el 18/01/2025. Enzo le mostró las evidencias contra MG. Aliada."},
+ gonza:{name:"Gonza",role:"Conflictivo",color:"#d4af37",img:"images/gonza.png",desc:"Ex miembro de TQ. Hallow lo llamó traidor. Apoyó a MG un tiempo hasta que Enzo calmó las aguas."},
+ hallow:{name:"Hallow",role:"Antagonista Interno",color:"#e23b3b",img:"images/hallow.png",desc:"Llamó traidor a Gonza, generando conflictos dentro de TQ durante la alianza con MG."},
+ radical:{name:"Radical",role:"La Mente Brillante",color:"#3ddc84",img:"images/radical.png",desc:"Sobrevivió la crash machine cuando todos lagearon. Muy inteligente. Se unió al IJC."},
+ adan:{name:"Adan",role:"Miembro IJC",color:"#3ddc84",img:"images/adan.png",desc:"Amigo de Radical. Intentó raidear a Nam, pidió perdón y se unió al clan."},
+ roman:{name:"Romantco",role:"Aliado del Leak",color:"#3ddc84",img:"images/roman.png",desc:"Filtró RomazHUB en secreto a Nam. Construyeron la ciudad de Roma juntos. Scripts para el bien."},
+ system:{name:"System",role:"Fundador de LS",color:"#3ddc84",img:"images/system.png",desc:"@igot_KJ8. Fundó Legacy Service. Le pasó Autobuild y Paint a Nam para NamHUB. Sin preguntas."},
+ zeen:{name:"Zeen",role:"Líder de SDZ",color:"#e23b3b",img:"images/zeen.png",desc:"DARKTHEWHITE2. Líder del clan SDZ, que resultó ser una copia del clan MG. Derrotado en el raid."},
+ stumblero:{name:"Stumblero",role:"El que se fue",color:"#d4af37",img:"images/stumblero.png",desc:"Amigo de Radical. Intentó raidear a Nam, se rindió y decidió desaparecer de TCO."}
+};
+
+/* ============ I18N ============ */
+const I18N={
+ es:{}, // español is the default inline text; we only override for EN
+ en:{
+  badge:"Classified Archive · The Chosen One",
+  heroTitle:'THE STORY OF <em>CLAN ZK</em>',
+  heroSub:"Formerly IJC. An archive dedicated to the moments, players and legends that forged The Chosen One's legacy.",
+  scroll:"↓ SCROLL TO BEGIN",
+  stVisits:"M visits",stMembers:"IJC Members",stChars:"Characters",stYears:"Years",
+  navHof:"🏆 Hall",navMap:"🗺️ Map",navHome:"Home",searchPh:"Search character...",
+  ch1n:"Chapter I · The Beginning",ch1t:"The Origins",ch1s:"The story of Nam (elfrancho14)",
+  y22h1:"The first step",
+  y22p1:'Every great empire has a humble start. On <span class="hl">November 12, 2022</span>, Nam (known as <em>elfrancho14</em>) took his first steps in The Chosen One.',
+  y22p2:"At first glance just another player, a statistic in a ending year. Just the curiosity to learn a game about to explode.",
+  y22b:"Key fact:",y22p3:'But that click wasn\'t the end of a match, it was <span class="hl">the first heartbeat of a legend</span>. The stage was set and Clan ZK\'s story began in the shadows...',
+  ch2n:"Chapter II · The Chaos",ch2t:"The Expansion",ch2s:"The chaos that forged legends",
+  y23h1:"The digital anarchy era",
+  y23p1:'<span class="hl">2023</span> marked the year The Chosen One stopped being a game to become a <strong>ruleless digital battlefield</strong>. Popularity soared and so did those seeking to break its limits.',
+  y23p2:'Scripts spread like gunpowder. The legendary <span class="hl">";bkit others"</span> became the ultimate weapon: crashing everyone around, sowing absolute chaos. Law of the strongest... or the best script.',
+  y23q:'"Giving Enlighten wasn\'t just power: it was being willing to lose everything. A risk separating true leaders from mere spectators."',
+  y23p3:'Amid chaos, unique rituals emerged: <em>"Simon Says"</em>, impossible building battles and votes deciding entire servers\' fate.',
+  y23p4:'The Chosen One was brilliant, yes, but its <strong>insecurities</strong> made it a wild territory. Nam watched, learned and prepared. Because after chaos... the real war would come.',
+  ch3n:"Chapter III · The Great War",ch3s:"The Liberation of Spanish TCO",
+  y24h1:"From friendship to betrayal",y24p1:'<span class="hl">January to June 2024</span> were months of apparent peace in the latin servers. But destiny had dark chapters ready.',
+  y24h2:"The meeting with Sam",y24p2:'One day Nam entered TCO and found <strong>a completely empty server</strong>. Only one more player: the admin, <span class="hl">Sam</span>.',
+  y24p3:'Sam had <strong>no Robux</strong>, but was an architect in real life. Together they built a whole city, streets, buildings, plazas... a civilization from nothing. They became friends.',
+  y24p4:"But one day they simply stopped talking. No fights, no drama... just silence.",
+  y24tw:"The twist:",y24t:"Sam befriended Damian (i11rl). Though never involved in the fight, his connection to the antagonist wasn\'t random. What role in 2025? 🔮",
+  chars:"👥 Key Characters:",rProt:"Protagonist",rBest:"Best Friend",mEnzo:"Clan TQ<br>🥹 Opened Nam\'s eyes",rArch:"The Architect",mSam:"First friend<br>🔮 Key in 2025",rAntag:"Antagonist",mDam:"The Manipulator<br>Total control",rAllyD:"Damian\'s Ally",mSnoop:"i11rl\'s friend<br>Enemy side",mNap:"i11rl\'s friend<br>Later freed",
+  y24h3:"Damian\'s betrayal",y24p5:'Nam joined a common server. Admin was <strong>i11rl (Damian)</strong>. Nam built him an <span class="hl">epic throne</span> and asked for bkit. Damian granted <span class="hl">ENLIGHTEN</span>! 😊 Seemed like a great friendship.',
+  y24bet:"The Betrayal:",y24be:'"He was building a brick machine. I approached... and out of nowhere he BLINDED me, GLITCHED me. We fought. Banned for hours. And from there... it ALL began."',
+  y24p6:'Resentment settled. Damian got known and slowly <span class="hl">took control of all latin servers</span>. His method: defamation, lies, baseless blame.',
+  y24p7:'He apologized and they became friends (November). But it was illusion: <span class="hl">Damian manipulated Nam</span>, who helped him so "they\'d believe him", unaware it was part of the game.',
+  y24h4:"The Awakening",y24p8:'Then came <span class="hl">Enzo 🥹</span> (Diego), from clan <strong>TQ</strong>. He told Nam his own battle with Damian. That day <strong>Nam opened his eyes</strong> and <span class="hl">decided to fight</span>.',
+  y24p9:'Damian had absolute control, now with two allies —<strong>Snoopy</strong> and <strong>Napoleon</strong>— and through him, Enzo met <strong>RaR</strong>.',
+  y24obj:"Objective: FREE SPANISH TCO",y24bat:"Nam and Diego launched script attacks while the enemy trio answered with defamation. Damian used malicious scripts trying to pull Nam back... but that wouldn\'t happen.",
+  y24vic:"🎉 VICTORY! 🎉",y24vict:"<strong>WE WON THE BATTLE!</strong> 🥳 We freed half of Spanish TCO. Thanks to RaR we freed Napoleon, though he took another path. To us, we were the heroes.",
+  y24p10:'All returned to normal: <span class="hl">rules</span>, <span class="hl">cities</span>, <span class="hl">games</span>... at last TCO was the good game it should\'ve been.',
+  y24leg:"🎮 2024 Legacy:",y24legt:"After months of manipulation, Nam and Enzo\'s bravery restored order. Latin servers became a fair, renewed place again.",
+  b1:"📅 Jan-Jun: Peace",b2:"🏗️ Sam",b3:"💔 Betrayal",b4:"🥹 Nam awakens",b5:"⚔️ Battle",b6:"🏆 Victory",y24te:"But this didn\'t end here...",y24te2:"(2025 Spoiler)",
+  ch4n:"Chapter IV · The Second War",ch4s:"Enzo\'s perspective: espionage, betrayal and total war",
+  y25h1:"The spy in the shadows",y25p1:'While <strong>Nam stepped away</strong> in late 2024, <span class="hl">Enzo didn\'t quit</span>. He started a secret mission: create <strong>alts</strong> to infiltrate and watch. What he\'d find would change everything...',
+  y25h2:"🕵️ ESPIONAGE · Before Dec 2024",y25p2:'Enzo became a <span class="hl">digital spy</span> with his alts. He watched Damián and Napoleón. Found them with <strong>Clan TQ</strong> (where Enzo had friends on <em>enzors19209</em>, now his Discord).',
+  y25fon:"🔍 The Fonsi incident:",y25fon2:"Fonsi (friend of Tq_EX0T1C, TQ leader) joined using alt @elchiquitin38. He was raiding Damián for abusing his admin and torturing the latin server with cities and an absurd bridge. Enzo left before raising suspicion.",
+  y25h3:"📅 LATE DEC 2024 · The confrontation",y25p3:'On his main account, Enzo was with <strong>Exotic, Little</strong> and others. <strong>Napoleón</strong> appeared complaining why no Discord messages. They chatted and <span class="hl">got crucial evidence</span>: Napoleón admitted <em>"I manipulated Gonza"</em>. This led him to <strong>crash the server</strong>.',
+  y25p4:'Enzo, furious, decided to <span class="hl">join clan TQ to stop it all once and for all</span>. Exotic accepted and sent the Discord link.',
+  y25atk:"💥 The attack:",y25atk2:'DIDN\'T LAST. Napoleón joined TQ\'s Discord with bot "Pedro Invasoes" and raided everything. They had to remake the server to recover from clan MG.',
+  y25h4:"🌅 EARLY 2025 · New alliances",y25p5:'In TQ, Enzo met <strong>Tq_Pan</strong>. They became friends and he showed her the <span class="hl">evidence against clan MG</span>. They met on <strong>January 18, 2025</strong>.',
+  y25h5:"🤝 TEMPORARY ALLIANCE TQ + MG",y25p6:'For a while TQ allied with MG. But <strong>Hallow</strong> called <strong>Gonza</strong> (TQ member) a <em>"traitor"</em>. Gonza pulled away hating Hallow. Enzo, however, was fine with both.',
+  y25brk:"⚠️ Definitive break:",y25brk2:"Napoleón and Damián sent insults, racism and +18 content to TQ\'s Discord. Peace broke. TQ officially declared WAR on clan MG.",
+  y25h6:"🌙 OPERATION: NIGHT WATCH · Late Jan 2025",y25p7:'One of the most epic missions. Enzo and <strong>Tq_Facu</strong> infiltrated MG with <span class="hl">Discord multicounts</span>. Napoleón sent them links; they DM\'d evidence to MG members so they\'d leave before hitting 100 members.',
+  y25war:"Late Jan - Early Feb 2025",y25war2:"WAR TQ vs MG officially declared. They smeared TQ for using Exploits, when it was just self-defense. Called them raiders and griefers.",
+  y25def:"TQ defended:",y25def2:"evidence in ID for the whole server. Every MG text, TQ gathered proof. Enzo and Facu kept going until stopping.",
+  y25h7:"💥 FEB 2025 · The crash attempt",y25p8:'<strong>Napoleón pressured an admin</strong> to crash the server. <span class="hl">Failed</span>: the admin did <em>delcubes all</em> and Enzo endured it, rallying TQ to defend with evidence and sometimes defensive Exploits.',
+  y25h8:"🏆 LATE FEB - MAR 2025 · Victory",y25p9:'Through the war (the <strong>Second World War of TCO</strong>), MG fell gradually. <span class="hl">Clan TQ officially won</span>: more members, perks, channels, better leaders.',
+  y25vic:"🎉 TOTAL TQ VICTORY! 🎉",y25vict:"<strong>Clan MG was defeated!</strong> 🥳 The Second World War of TCO ended. TQ emerged as the strongest faction in the latin community.",
+  y25h9:"📉 MAR 2025 · The decline",y25p10:'TQ became a <em>Dead Rails</em> community. Since whoever controlled <strong>Tq_Facu</strong>\'s main Discord (seems his cousin) destroyed it gradually, the clan declined.',
+  y25cons:"📊 AFTERMATH:",y25cons2:"Some hated TQ, others MG, but TQ was more known. Some hated TQ over conflicts with Gonza, who backed MG for a while. Enzo joined different servers explaining with evidence, and the hate faded.",
+  b7:"🕵️ Espionage",b8:"📅 18/01 Pan",b9:"🌙 Night Watch",b10:"⚔️ 2nd War",b11:"🏆 TQ Victory",b12:"📉 Decline",y25te:"More events in 2025...",y25te2:"Coming soon: more contact with clans like SH.",
+  ch5n:"Chapter V · The Return",ch5s:"Return of a legend: Nam comes back to a world in ruins",
+  y26h1:"Return of a legend",y26p1:'<span class="hl">January 2026</span>. After the Second War, <strong>Nam decided to return</strong>. The legend was back... but not to the world he remembered.',
+  y26p2:'Contacting <strong>Enzo</strong>, the answer was chilling: <em>"everything is chaos"</em>. Nam entered a server to check... and what he saw was <span class="hl">inexplicable</span>.',
+  y26h2:"🧱 The raided world",y26p3:'<strong>BLOCKS WERE RAIDED!</strong> Place, delete or move a block: <span class="hl">EVERYTHING was raided</span>. <em>toxicify</em> + <em>anchor</em> + a Discord link. The whole map, untouchable.',
+  y26rb:"🧱 Railed server?",y26rb2:"Blocks with toxicify + anchor + Discord link. Whatever you did, the raid stayed. Like erasing a scar from the map.",
+  y26p4:'And the <span class="hl">CRASH MACHINE</span>: a block next to another and whoever looked at it lagged to death. And worse methods... like <strong>crashing a whole server</strong>.',
+  y26q:'"Nam couldn\'t believe it. He wanted to investigate how it worked. But raids were EVERYWHERE and scripters kept getting worse. Fighting a ghost."',
+  y26p5:'<strong>Pealz</strong> and <strong>Areyoumental</strong> (Admin Community) created <em>The Chosen One OG</em>... short-lived: <strong>Roblox removed it</strong> for copying.',
+  y26p6:'With this, <span class="hl">TCO was now a 2b2t</span>: total anarchy, no rules, no owners, no hope. Just ruins and scripters.',
+  y26p7:'Nam spent <span class="hl">over 20 days</span> trying to crack it... and couldn\'t. But that failure would seed something bigger.',
+  y26h3:"🏴 FEB 2026 · Clan IJC is born",y26p8:'Nam made the biggest decision: <span class="hl">found a clan</span>. <strong>IJC — Investigation of Justice and Corruption</strong>. Goal? Stop the chaos.',
+  y26p9:'Founded with <strong>Enzo</strong> as <span class="hl">Co-Leader</span>. And guess what? <strong>IT WORKED!</strong>',
+  y26gr:"Clan IJC grew like a flame in TCO\'s darkness.",
+  y26h4:"Trial by fire: Radical, Adan and Stumblero",y26p10:'Nam was building a game zone alone. <strong>Radical</strong>, <strong>Stumblero</strong> and <strong>Adan</strong> appeared trying to win a raid. Couldn\'t: Nam activated the <span class="hl">crash machine</span> and everyone lagged... <strong>except Radical</strong>.',
+  y26p11:'Others surrendered, not Radical. He finally apologized and <span class="hl">they became friends</span>. <strong>Adan and Radical</strong> joined. <strong>Stumblero</strong> took another path and <span class="hl">vanished from TCO</span>.',
+  y26gold:"But not all that glitters is gold...",
+  y26h5:"🧪 MAR 2026 · The Hub war",y26p12:'IJC investigated hard. Until <span class="hl">RomazHUB</span> appeared, for <strong>299 Robux</strong>. Perfect: even had the raid block. <em>PERFECT.</em> But no Robux.',
+  y26p13:'Nam met <strong>Romantco (Roman)</strong>. On Nam\'s server they built a <span class="hl">city of Rome</span> together with rules. Roman used scripts for good, on a secondary account (main banned).',
+  y26p14:'One day Roman told him in secret: <span class="hl">ROMAZHUB LEAKED!</span> Only buyers, Roman... and Nam had it. <strong>HUGELY USEFUL.</strong> It had <strong>Autobuild</strong> — a bot that builds for you! THE BEST.',
+  y26fall:"The collapse:",y26fall2:"Hours later, romazdev noticed the leak and blacklisted anyone without a purchase. Everything collapsed.",
+  y26p15:'But Nam didn\'t give up. He built <span class="hl">NamHUB</span>. Swore it\'d beat RomazHUB. <strong>He promised.</strong> Bugs came, he fixed them one by one... and <strong>IT WORKED</strong>. For a moment it topped Romaz. Released <span class="hl">FREE</span>, with Autobuild, Paint Config and more.',
+  y26p16:'All thanks to <strong>System (@igot_KJ8)</strong>, who weeks earlier founded <strong>LS (Legacy Service)</strong>, an equally OP hub. Nam asked for Autobuild and Paint... and System handed them over. No questions.',
+  y26hubs:"💻 The Hubs of the era:",hubR:"The paid hub (299 Robux). Perfect... until the leak. romazdev blacklisted non-buyers.",hubN:"Built by Nam. Free, with Autobuild, Paint Config and more. For a moment topped RomazHUB.",hubFree:"FREE",hubL:"System\'s hub (@igot_KJ8). Very OP. Autobuild and Paint that powered NamHUB came from here.",hubAlly:"ALLY",
+  y26p17:'<strong>Napoleon</strong> learned of IJC and spammed Discord: trash, insults. Nam didn\'t care: <em>just a kid wanting attention</em>.',
+  y26p18:"Then all was well. Perfect. Sunny. Fun.",
+  y26h6:"⚔️ The SDZ raid · The ghost copy",y26p19:'On a quiet IJC server... several joined with tag <strong>SDZ</strong>. <em>"Who the hell are those?"</em>.',
+  y26p20:'SDZ started <span class="hl">raiding</span>, donating time to <strong>Zeen (DARKTHEWHITE2)</strong>, SDZ leader. Nam called the whole IJC. Time to defend what they built.',
+  y26raid:"SDZ Raid vs Clan IJC",y26raid2:"SDZ raided and donated time to Zeen (DARKTHEWHITE2). The whole IJC defended their home.",
+  y26p21:'They investigated the supposed "SDZ"... and found something shocking: <span class="hl">it was a copy of Clan MG</span>. Ghosts of the past, recycled. History repeated... but IJC was ready.',
+  rFounder:"Leader & Founder",mNam26:"Clan IJC<br>🧪 NamHUB creator",rCo:"Co-Leader",mEnzo26:"Clan IJC<br>🤝 War brother",rBrain:"The Brilliant Mind",mRad:"Survived crash machine<br>🧠 Very smart",rMember:"IJC Member",mAda:"Radical\'s friend<br>🤝 Joined",rLeak:"Leak Ally",mRom:"Leaked RomazHUB<br>🏛️ Built Rome",rLS:"LS Founder",rSDZ:"SDZ Leader",mStum:"Another path<br>👋 Vanished",rLeft:"The one who left",
+  b13:"📅 Jan: Return",b14:"🧱 Raids",b15:" Feb: IJC",b16:"🧪 Mar: NamHUB",b17:"⚔️ SDZ Raid",b18:"🔮 Jun: Soon",y26te:"June 2026... Coming soon...",y26te2:"(it all blew up)",
+  hofT:'HALL OF <em>FAME</em>',hofS:"The achievements that forged the legend",
+  m1t:"Liberator",m1d:"Freed half of Spanish TCO from Damian\'s control.",m2t:"Master Spy",m2d:"Operation Night Watch: perfect infiltration.",m3t:"Founder",m3d:"Created Clan IJC, from 2 to +30 members.",m4t:"Engineer",m4d:"Creator of NamHUB, free and superior to RomazHUB.",m5t:"Veteran",m5d:"Victorious in the Second World War of TCO.",m6t:"Defender",m6d:"Repelled the SDZ raid and unmasked the MG copy.",
+  mapT:'ALLIANCE <em>MAP</em>',mapS:"Who was who on the battlefield",
+  rel1:"War brothers. IJC co-leaders. Inseparable since 2024.",rel2:"Manipulated Nam posing as a friend. The great antagonist.",rel3:"Nam\'s first friend, then got close to Damian. Future key piece.",rel4:"Joined TQ under Exotic to fight clan MG.",rel5:"Second World War of TCO. TQ victorious (2025).",rel6:"SDZ turned out to be a recycled MG copy. Defeated twice.",rel7:"System (LS) gave Autobuild and Paint for NamHUB. Key ally.",rel8:"Roman leaked RomazHUB in secret. They built Rome together.",rel9:"Admin Community. Created TCO OG (removed by Roblox).",
+  foot:"Documenting the history of The Chosen One",
+  setT:"SETTINGS",setS:"Customize your experience",set1:"🎬 Cinema Mode",set1d:"Intense color + epic background music",set2:"🔊 Sounds",set2d:"Subtle clicks on interaction",set3:"🌐 Language",set3d:"Español or English"
+ }
+};
+let LANG='es';
+function setLang(l){
+ LANG=l;
+ document.documentElement.lang=l;
+ document.getElementById('langEs').classList.toggle('active',l==='es');
+ document.getElementById('langEn').classList.toggle('active',l==='en');
+ const dict=I18N[l]||{};
+ document.querySelectorAll('[data-i18n]').forEach(el=>{
+   const k=el.getAttribute('data-i18n');
+   if(l==='en'&&dict[k]!==undefined) el.innerHTML=dict[k];
+   else if(l==='es'&&DEFAULTS[k]!==undefined) el.innerHTML=DEFAULTS[k];
+ });
+ document.querySelectorAll('[data-i18n-ph]').forEach(el=>{
+   const k=el.getAttribute('data-i18n-ph');
+   if(l==='en'&&dict[k]) el.placeholder=dict[k];
+   else if(l==='es'&&DEFAULTS[k]) el.placeholder=DEFAULTS[k];
+ });
+ beep();
+}
+// capture spanish defaults
+const DEFAULTS={};
+document.querySelectorAll('[data-i18n]').forEach(el=>{DEFAULTS[el.getAttribute('data-i18n')]=el.innerHTML;});
+document.querySelectorAll('[data-i18n-ph]').forEach(el=>{DEFAULTS[el.getAttribute('data-i18n-ph')]=el.placeholder;});
+
+/* ============ SOUND ============ */
+let SOUND=true, audioCtx=null, cinemaAudio=null;
+function ctx(){ if(!audioCtx) audioCtx=new (window.AudioContext||window.webkitAudioContext)(); return audioCtx; }
+function beep(freq=660,dur=0.06,type='sine',vol=0.04){
+ if(!SOUND) return;
+ try{ const c=ctx(), o=c.createOscillator(), g=c.createGain();
+   o.type=type; o.frequency.value=freq; g.gain.value=vol;
+   o.connect(g); g.connect(c.destination); o.start();
+   g.gain.exponentialRampToValueAtTime(0.0001,c.currentTime+dur); o.stop(c.currentTime+dur);
+ }catch(e){}
+}
+function toggleSound(){ SOUND=!SOUND; document.getElementById('togSound').classList.toggle('on',SOUND); if(SOUND) beep(880,0.08); }
+
+/* ============ CINEMA ============ */
+let CINEMA=false;
+function toggleCinema(){
+ CINEMA=!CINEMA;
+ document.getElementById('togCinema').classList.toggle('on',CINEMA);
+ document.body.classList.toggle('cinema',CINEMA);
+ if(CINEMA){ startCinemaMusic(); } else { stopCinemaMusic(); }
+ beep(CINEMA?440:330,0.12,'triangle',0.05);
+}
+function startCinemaMusic(){
+ try{ const c=ctx();
+   cinemaAudio={nodes:[]};
+   // deep ambient drone
+   [55,82.5,110].forEach((f,i)=>{ const o=c.createOscillator(), g=c.createGain();
+     o.type='sine'; o.frequency.value=f; g.gain.value=0.012/(i+1);
+     o.connect(g); g.connect(c.destination); o.start(); cinemaAudio.nodes.push(o,g); });
+   // slow LFO swell
+   const lfo=c.createOscillator(), lg=c.createGain(); lfo.frequency.value=0.08; lg.gain.value=0.008;
+   lfo.connect(lg); lg.connect(cinemaAudio.nodes[1]); lfo.start(); cinemaAudio.nodes.push(lfo,lg);
+ }catch(e){}
+}
+function stopCinemaMusic(){ if(cinemaAudio){ cinemaAudio.nodes.forEach(n=>{try{n.stop&&n.stop()}catch(e){} try{n.disconnect()}catch(e){}}); cinemaAudio=null; } }
+
+/* ============ REVEAL ON SCROLL ============ */
+function reveal(){
+ document.querySelectorAll('.card').forEach(el=>{ if(el.getBoundingClientRect().top<window.innerHeight-60) el.classList.add('visible'); });
+ // rail + nav active
+ let cur='hero';
+ document.querySelectorAll('section[id]').forEach(s=>{ if(s.getBoundingClientRect().top<window.innerHeight/2) cur=s.id; });
+ document.querySelectorAll('.rail-dot').forEach(d=>d.classList.toggle('active',d.dataset.target===cur));
+ document.querySelectorAll('.nav-links a').forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+cur));
+ // rail fill
+ const dots=[...document.querySelectorAll('.rail-dot')]; const ai=dots.findIndex(d=>d.classList.contains('active'));
+ const fill=document.getElementById('railFill'); if(fill&&dots.length) fill.style.height=(ai/(dots.length-1)*100)+'%';
+ // top btn
+ document.getElementById('topBtn').classList.toggle('show',window.pageYOffset>500);
+}
+window.addEventListener('scroll',reveal); window.addEventListener('load',reveal); reveal();
+
+/* ============ COUNTERS ============ */
+let counted=false;
+function runCounters(){
+ if(counted) return; const first=document.querySelector('.stat'); if(!first) return;
+ if(first.getBoundingClientRect().top>window.innerHeight) return; counted=true;
+ document.querySelectorAll('[data-count]').forEach(el=>{
+   const target=+el.dataset.count; let n=0; const step=Math.max(1,Math.round(target/40));
+   const t=setInterval(()=>{ n+=step; if(n>=target){n=target;clearInterval(t);} el.textContent=n+(target===218?'M':target===30?'+':''); },25);
+ });
+}
+window.addEventListener('scroll',runCounters); window.addEventListener('load',runCounters);
+
+/* ============ SEARCH ============ */
+function doSearch(q){
+ q=q.trim().toLowerCase();
+ if(!q){ document.querySelectorAll('.char').forEach(c=>c.style.display=''); removeNoResult(); return; }
+ let any=false;
+ document.querySelectorAll('.char').forEach(c=>{
+   const name=c.querySelector('h4').textContent.toLowerCase();
+   const match=name.includes(q); c.style.display=match?'':'none'; if(match) any=true;
+ });
+ // also jump to first match section
+ if(any){ const firstVisible=[...document.querySelectorAll('.char')].find(c=>c.style.display!=='none');
+   if(firstVisible){ const sec=firstVisible.closest('section'); /* subtle highlight */ } }
+ toggleNoResult(!any,q);
+}
+function toggleNoResult(show,q){ removeNoResult(); if(show){ const d=document.createElement('div'); d.className='no-result'; d.id='noResult'; d.textContent=(LANG==='en'?'No characters found for ':'No se encontraron personajes para ')+'"'+q+'"'; document.querySelector('#hof').before(d); } }
+function removeNoResult(){ const n=document.getElementById('noResult'); if(n) n.remove(); }
+
+/* ============ CHAR MODAL ============ */
+function charModal(id){
+ const c=CHARS[id]; if(!c) return;
+ document.getElementById('cmImg').src=c.img;
+ document.getElementById('cmImg').onerror=function(){this.src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22150%22 height=%22150%22%3E%3Crect fill=%22"+encodeURIComponent(c.color)+"%22 width=%22150%22 height=%22150%22 rx=%2275%22/%3E%3Ctext fill=%22%23000%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2254%22%3E"+c.name[0]+"%3C/text%3E%3C/svg%3E";};
+ document.getElementById('cmName').textContent=c.name;
+ const r=document.getElementById('cmRole'); r.textContent=c.role; r.style.color=c.color;
+ document.getElementById('cmDesc').textContent=c.desc;
+ openModal('charModal'); beep(720,0.07);
+}
+
+/* ============ MODALS ============ */
+function openModal(id){ document.getElementById(id).classList.add('active'); document.body.style.overflow='hidden'; beep(); }
+function closeModal(id){ document.getElementById(id).classList.remove('active'); document.body.style.overflow=''; if(id==='settingsModal'&&CINEMA){} }
+window.onclick=e=>{ if(e.target.classList.contains('modal')){ e.target.classList.remove('active'); document.body.style.overflow=''; } };
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ document.querySelectorAll('.modal.active').forEach(m=>m.classList.remove('active')); document.body.style.overflow=''; } });
+
+/* ============ NAV ============ */
+function go(sel){ const t=document.querySelector(sel); if(t){ t.scrollIntoView({behavior:'smooth'}); beep(520,0.05); } }
+document.querySelectorAll('.nav-links a, .rail-dot').forEach(el=>el.addEventListener('click',()=>beep(600,0.04)));
+
+/* init */
+reveal(); runCounters();
+</script>
 </body>
 </html>

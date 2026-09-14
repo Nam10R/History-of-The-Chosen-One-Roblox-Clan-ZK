@@ -64,9 +64,7 @@ button{font-family:inherit}
 img{max-width:100%}
 html.rm *,html.rm *::before,html.rm *::after{animation-duration:.001s !important;transition-duration:.001s !important}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001s !important;transition-duration:.001s !important}}
-body.cinema{filter:saturate(1.18) contrast(1.06)}
-body.cinema::after{content:'';position:fixed;left:0;right:0;top:0;height:34px;background:#000;z-index:1400;pointer-events:none;box-shadow:0 2px 14px rgba(0,0,0,.8)}
-body.cinema .cinema-bar-b{position:fixed;left:0;right:0;bottom:0;height:34px;background:#000;z-index:1400;pointer-events:none;box-shadow:0 -2px 14px rgba(0,0,0,.8)}
+
 
 /* ============ PROGRESO DE LECTURA ============ */
 .read-progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--gold),var(--gold2));z-index:1450;box-shadow:0 0 10px rgba(var(--gold-rgb),.7);transition:width .1s linear}
@@ -151,8 +149,16 @@ main{position:relative;z-index:1;padding-top:76px}
 .hero > *:not(.hero-bg):not(#particles){position:relative;z-index:2}
 .hero-badge{font-size:.72em;letter-spacing:5px;color:var(--gold);text-transform:uppercase;margin-bottom:22px;border:1px solid rgba(var(--gold-rgb),.6);padding:7px 18px;border-radius:30px;background:rgba(var(--gold-rgb),.06);animation:badgePulse 3s infinite}
 @keyframes badgePulse{0%,100%{box-shadow:0 0 0 0 rgba(var(--gold-rgb),.35)}50%{box-shadow:0 0 0 8px rgba(var(--gold-rgb),0)}}
-.emblem{width:132px;height:132px;margin-bottom:26px;filter:drop-shadow(0 18px 40px rgba(var(--gold-rgb),.35));animation:emblemFloat 5s ease-in-out infinite;transition:.4s}
+.emblem{width:132px;height:132px;margin-bottom:26px;filter:drop-shadow(0 18px 40px rgba(var(--gold-rgb),.35));animation:emblemFloat 5s ease-in-out infinite;transition:.4s;object-fit:cover;border-radius:28px;background:rgba(22,22,26,.6)}
 .emblem:hover{transform:scale(1.07) rotate(-3deg)}
+.logo-img{width:28px;height:28px;border-radius:8px;object-fit:cover;filter:drop-shadow(0 0 6px rgba(var(--gold-rgb),.6))}
+.onboard-emblem{object-fit:cover;border-radius:22px}
+.game-chip{display:flex;align-items:center;gap:12px;margin-top:28px;background:rgba(22,22,26,.85);border:1px solid var(--line);border-radius:14px;padding:9px 20px 9px 9px;backdrop-filter:blur(8px);transition:.3s;cursor:default}
+.game-chip:hover{border-color:var(--gold);transform:translateY(-3px)}
+.game-chip img{width:46px;height:46px;border-radius:10px;object-fit:cover;border:1px solid var(--line)}
+.gc-txt{text-align:left}
+.gc-txt strong{display:block;font-size:.9em;letter-spacing:.3px}
+.gc-txt small{color:var(--mut);font-size:.72em}
 .hero h1{font-family:'Bebas Neue';font-size:clamp(3em,9vw,6.4em);line-height:.95;letter-spacing:1px;margin-bottom:16px;text-shadow:0 8px 40px rgba(0,0,0,.7)}
 .hero h1 em{color:var(--gold);font-style:normal;position:relative}
 .hero h1 em::after{content:'';position:absolute;left:0;right:0;bottom:6px;height:8px;background:rgba(var(--gold-rgb),.25);z-index:-1;transform:skewX(-12deg)}
@@ -515,7 +521,7 @@ footer .foot-links a:hover{color:var(--gold)}
 <!-- ONBOARDING -->
 <div class="onboard" id="onboardScreen">
 <div class="onboard-box">
-<svg class="onboard-emblem"><use href="#zk-emblem"/></svg>
+<img class="onboard-emblem" src="images/clanzk.png" alt="Clan ZK" onerror="emblemFail(this)">
 <h2>BIENVENIDO AL <em>ARCHIVO</em></h2>
 <p>Elegí tu identidad. El apodo es único y no se puede repetir.</p>
 <div class="auth-error" id="onboardError"></div>
@@ -539,7 +545,7 @@ footer .foot-links a:hover{color:var(--gold)}
 <!-- NAV -->
 <nav id="mainNav">
 <div class="nav-inner">
-<div class="logo" data-action="tab" data-tab="home"><svg><use href="#zk-emblem"/></svg>CLAN <span>ZK</span></div>
+<div class="logo" data-action="tab" data-tab="home"><img class="logo-img" src="images/clanzk.png" alt="" onerror="emblemFail(this)">CLAN <span>ZK</span></div>
 <div class="tabbar" id="tabbar">
 <div class="tab-ind" id="tabInd"></div>
 <button data-action="tab" data-tab="home" class="active">🏠 Inicio</button>
@@ -578,9 +584,10 @@ footer .foot-links a:hover{color:var(--gold)}
 <div class="hero-bg"></div>
 <canvas id="particles"></canvas>
 <div class="hero-badge">Archivo Clasificado · The Chosen One</div>
-<svg class="emblem"><use href="#zk-emblem"/></svg>
+<img class="emblem" src="images/clanzk.png" alt="Clan ZK" onerror="emblemFail(this)">
 <h1>LA HISTORIA DEL <em>CLAN ZK</em></h1>
 <p class="sub">Anteriormente IJC. Un archivo vivo dedicado a los momentos, jugadores y leyendas que forjaron el legado de The Chosen One.</p>
+<div class="game-chip"><img src="images/tco.png" alt="The Chosen One" onerror="this.style.display='none'"><div class="gc-txt"><strong>The Chosen One</strong><small>Game ID 11137575513 · por TomazDev</small></div></div>
 <div class="hero-cta">
 <button class="cta-btn" data-action="tab" data-tab="historia">📖 LEER LA HISTORIA</button>
 <button class="cta-btn ghost" data-action="tab" data-tab="personajes">👥 EXPLORAR PERSONAJES</button>
@@ -997,7 +1004,6 @@ footer .foot-links a:hover{color:var(--gold)}
 <button class="modal-x" data-action="close-modal" data-modal="settingsModal">×</button>
 <h2>AJUSTES</h2>
 <p>Personalizá tu experiencia en el archivo</p>
-<div class="setting"><div><h4>🎬 Modo Cine</h4><p>Color intenso, letterbox y drone épico de fondo</p></div><div class="tog" id="togCinema" data-action="toggle" data-setting="cinema"><i></i></div></div>
 <div class="setting"><div><h4>🔊 Sonidos</h4><p>Clicks sutiles y música ambiental por capítulo</p></div><div class="tog on" id="togSound" data-action="toggle" data-setting="sound"><i></i></div></div>
 <div class="setting"><div><h4>🐢 Movimiento reducido</h4><p>Desactiva animaciones y partículas</p></div><div class="tog" id="togMotion" data-action="toggle" data-setting="motion"><i></i></div></div>
 <div class="setting"><div><h4>🎨 Tema de color</h4><p>Oro clásico, veneno, fantasma o brasa</p></div>
@@ -1103,7 +1109,6 @@ footer .foot-links a:hover{color:var(--gold)}
 <div class="music-indicator" id="musicIndicator"><span class="eq"><i></i><i></i><i></i></span><span id="musicChapterName"></span></div>
 <div class="toasts" id="toasts"></div>
 <canvas id="confettiCanvas"></canvas>
-<div class="cinema-bar-b"></div>
 <button class="top-btn" id="topBtn" data-action="tab" data-tab="home">↑</button>
 <noscript><div style="padding:120px 20px;text-align:center">Este archivo necesita JavaScript para funcionar.</div></noscript>
 <script>
@@ -1163,28 +1168,49 @@ function avaUrl(id,size){
     "<text x='48' y='48' dy='.36em' font-family='Arial Black,Arial,sans-serif' font-weight='900' font-size='42' fill='"+txt+"' text-anchor='middle'>"+L+"</text></svg>";
   return 'data:image/svg+xml,'+encodeURIComponent(svg);
 }
-function paintAvatars(){ $$('img[data-ava]').forEach(im=>{ im.src=avaUrl(im.dataset.ava, 64); im.onerror=null; }); }
+function paintAvatars(){
+  $$('img[data-ava]').forEach(im=>{
+    const id=im.dataset.ava;
+    im.onerror=function(){ avaFail(im); };
+    im.src=(CHARS[id]?'images/'+CHARS[id].file:avaUrl(id,64));
+  });
+}
+function avaFail(img){
+  const id=img.dataset.ava;
+  img.onerror=null;
+  if(id&&CHARS[id]) img.src=avaUrl(id,128);
+  else img.style.visibility='hidden';
+}
+function emblemFail(img){
+  const ns='http://www.w3.org/2000/svg';
+  const s=document.createElementNS(ns,'svg');
+  s.setAttribute('class',img.className);
+  const u=document.createElementNS(ns,'use');
+  u.setAttribute('href','#zk-emblem');
+  s.appendChild(u);
+  img.replaceWith(s);
+}
 
 /* ---------- personajes ---------- */
 const CHARS={
-nam:{name:"Nam",role:"Protagonista · Líder IJC",align:"ally",years:[2022,2023,2024,2026],clan:"IJC/ZK",meta:"elfrancho14<br>ID 607353710",desc:"elfrancho14 (ID 607353710). El corazón de la historia. De jugador +1 a fundador del Clan IJC y creador de NamHUB.",c1:"#f5d76e",c2:"#a8842c",letter:"N"},
-enzo:{name:"Enzo (Diego)",role:"Co-Líder · El Espía",align:"ally",years:[2024,2025,2026],clan:"TQ → IJC/ZK",meta:"enzors19209<br>🕵️ Maestro del alt",desc:"enzors19209. Abrió los ojos a Nam en 2024, lideró el espionaje y la Operación Guardia Nocturna en 2025.",c1:"#3ddc84",c2:"#1c7a4a",letter:"E"},
-sam:{name:"Sam",role:"El Arquitecto",align:"neutral",years:[2024],clan:"—",meta:"Primer amigo<br>🔮 Clave en 2025",desc:"Primer amigo de Nam en TCO. Sin Robux, arquitecto real. Construyeron una ciudad juntos.",c1:"#f5d76e",c2:"#a8842c",letter:"S"},
-damian:{name:"i11rl (Damian)",role:"Antagonista",align:"enemy",years:[2024,2025],clan:"MG",meta:"El Manipulador<br>Control total",desc:"El Manipulador. Tomó control de los servers latinos, traicionó a Nam y lideró el clan MG.",c1:"#e23b3b",c2:"#7a1414",letter:"D",light:1},
-snoopy:{name:"Snoopy",role:"Aliado de Damian",align:"enemy",years:[2024],clan:"MG",meta:"Amigo de i11rl<br>Parte del enemigo",desc:"Nuevo amigo de i11rl. Parte del trío enemigo en la batalla de 2024.",c1:"#e23b3b",c2:"#7a1414",letter:"S",light:1},
-napoleon:{name:"Napoleon",role:"Aliado de Damian",align:"enemy",years:[2024,2025,2026],clan:"MG",meta:"Amigo de i11rl<br>'Manipulé a Gonza'",desc:"Amigo de i11rl. Admitió 'manipulé a Gonza'. Liberado tras la batalla, pero volvió como fantasma en 2026.",c1:"#e23b3b",c2:"#7a1414",letter:"N",light:1},
-exotic:{name:"Tq_EX0T1C",role:"Líder de TQ",align:"ally",years:[2025],clan:"TQ",meta:"Fundador<br>👑 Líder Principal",desc:"Fundador y líder principal del clan TQ.",c1:"#3ddc84",c2:"#1c7a4a",letter:"X"},
-fonsi:{name:"Fonsi",role:"Aliado Temporal",align:"neutral",years:[2025],clan:"—",meta:"@elchiquitin38<br>Amigo de Exotic",desc:"@elchiquitin38. Amigo de Exotic. Raideó a Damian por abusar del server latino.",c1:"#f5d76e",c2:"#a8842c",letter:"F"},
-facu:{name:"Tq_Facu",role:"Agente Doble",align:"ally",years:[2025],clan:"TQ",meta:"Guardia Nocturna<br>🕵️ Infiltración",desc:"Compañero de Enzo en la Operación Guardia Nocturna.",c1:"#3ddc84",c2:"#1c7a4a",letter:"F"},
-pan:{name:"Tq_Pan",role:"Nueva Amiga",align:"ally",years:[2025],clan:"TQ",meta:"18/01/2025<br>🤝 Aliada",desc:"Conocida el 18/01/2025. Aliada de Enzo.",c1:"#3ddc84",c2:"#1c7a4a",letter:"P"},
-gonza:{name:"Gonza",role:"Conflictivo",align:"neutral",years:[2025],clan:"TQ (ex)",meta:"Ex miembro TQ<br>⚠️ Traicionado",desc:"Ex miembro de TQ. Hallow lo llamó traidor.",c1:"#f5d76e",c2:"#a8842c",letter:"G"},
-hallow:{name:"Hallow",role:"Antagonista Interno",align:"enemy",years:[2025],clan:"TQ",meta:"Traidor a Gonza<br>💔 Conflictos",desc:"Llamó traidor a Gonza, generando conflictos dentro de TQ.",c1:"#e23b3b",c2:"#7a1414",letter:"H",light:1},
-radical:{name:"Radical",role:"La Mente Brillante",align:"ally",years:[2026],clan:"IJC/ZK",meta:"Sobrevivió crash machine<br>🧠 Muy inteligente",desc:"Sobrevivió la crash machine cuando todos lagearon. Se unió al IJC.",c1:"#3ddc84",c2:"#1c7a4a",letter:"R"},
-adan:{name:"Adan",role:"Miembro IJC",align:"ally",years:[2026],clan:"IJC/ZK",meta:"Amigo de Radical<br>🤝 Se unió",desc:"Amigo de Radical. Se unió al clan.",c1:"#3ddc84",c2:"#1c7a4a",letter:"A"},
-roman:{name:"Romantco",role:"Aliado del Leak",align:"ally",years:[2026],clan:"—",meta:"Filtró RomazHUB<br>🏛️ Constructor de Roma",desc:"Filtró RomazHUB en secreto a Nam. Constructor de Roma.",c1:"#3ddc84",c2:"#1c7a4a",letter:"R"},
-system:{name:"System",role:"Fundador de LS",align:"ally",years:[2026],clan:"LS",meta:"@igot_KJ8<br>⚙️ Pasó el Autobuild",desc:"@igot_KJ8. Fundó Legacy Service. Le pasó Autobuild y Paint a Nam.",c1:"#3ddc84",c2:"#1c7a4a",letter:"S"},
-zeen:{name:"Zeen",role:"Líder de SDZ",align:"enemy",years:[2026],clan:"SDZ",meta:"DARKTHEWHITE2<br>💀 Copia de MG",desc:"DARKTHEWHITE2. Líder del clan SDZ, copia del clan MG.",c1:"#e23b3b",c2:"#7a1414",letter:"Z",light:1},
-stumblero:{name:"Stumblero",role:"El que se fue",align:"neutral",years:[2026],clan:"—",meta:"Otro camino<br>👋 Desapareció",desc:"Amigo de Radical. Desapareció de TCO.",c1:"#f5d76e",c2:"#a8842c",letter:"S"}
+nam:{file:"nam.png",name:"Nam",role:"Protagonista · Líder IJC",align:"ally",years:[2022,2023,2024,2026],clan:"IJC/ZK",meta:"elfrancho14<br>ID 607353710",desc:"elfrancho14 (ID 607353710). El corazón de la historia. De jugador +1 a fundador del Clan IJC y creador de NamHUB.",c1:"#f5d76e",c2:"#a8842c",letter:"N"},
+enzo:{file:"enzo.png",name:"Enzo (Diego)",role:"Co-Líder · El Espía",align:"ally",years:[2024,2025,2026],clan:"TQ → IJC/ZK",meta:"enzors19209<br>🕵️ Maestro del alt",desc:"enzors19209. Abrió los ojos a Nam en 2024, lideró el espionaje y la Operación Guardia Nocturna en 2025.",c1:"#3ddc84",c2:"#1c7a4a",letter:"E"},
+sam:{file:"sam.png",name:"Sam",role:"El Arquitecto",align:"neutral",years:[2024],clan:"—",meta:"Primer amigo<br>🔮 Clave en 2025",desc:"Primer amigo de Nam en TCO. Sin Robux, arquitecto real. Construyeron una ciudad juntos.",c1:"#f5d76e",c2:"#a8842c",letter:"S"},
+damian:{file:"i11rl.png",name:"i11rl (Damian)",role:"Antagonista",align:"enemy",years:[2024,2025],clan:"MG",meta:"El Manipulador<br>Control total",desc:"El Manipulador. Tomó control de los servers latinos, traicionó a Nam y lideró el clan MG.",c1:"#e23b3b",c2:"#7a1414",letter:"D",light:1},
+snoopy:{file:"snoopy.png",name:"Snoopy",role:"Aliado de Damian",align:"enemy",years:[2024],clan:"MG",meta:"Amigo de i11rl<br>Parte del enemigo",desc:"Nuevo amigo de i11rl. Parte del trío enemigo en la batalla de 2024.",c1:"#e23b3b",c2:"#7a1414",letter:"S",light:1},
+napoleon:{file:"napoleon.png",name:"Napoleon",role:"Aliado de Damian",align:"enemy",years:[2024,2025,2026],clan:"MG",meta:"Amigo de i11rl<br>'Manipulé a Gonza'",desc:"Amigo de i11rl. Admitió 'manipulé a Gonza'. Liberado tras la batalla, pero volvió como fantasma en 2026.",c1:"#e23b3b",c2:"#7a1414",letter:"N",light:1},
+exotic:{file:"exotic.png",name:"Tq_EX0T1C",role:"Líder de TQ",align:"ally",years:[2025],clan:"TQ",meta:"Fundador<br>👑 Líder Principal",desc:"Fundador y líder principal del clan TQ.",c1:"#3ddc84",c2:"#1c7a4a",letter:"X"},
+fonsi:{file:"fonsi.png",name:"Fonsi",role:"Aliado Temporal",align:"neutral",years:[2025],clan:"—",meta:"@elchiquitin38<br>Amigo de Exotic",desc:"@elchiquitin38. Amigo de Exotic. Raideó a Damian por abusar del server latino.",c1:"#f5d76e",c2:"#a8842c",letter:"F"},
+facu:{file:"facu.png",name:"Tq_Facu",role:"Agente Doble",align:"ally",years:[2025],clan:"TQ",meta:"Guardia Nocturna<br>🕵️ Infiltración",desc:"Compañero de Enzo en la Operación Guardia Nocturna.",c1:"#3ddc84",c2:"#1c7a4a",letter:"F"},
+pan:{file:"pan.png",name:"Tq_Pan",role:"Nueva Amiga",align:"ally",years:[2025],clan:"TQ",meta:"18/01/2025<br>🤝 Aliada",desc:"Conocida el 18/01/2025. Aliada de Enzo.",c1:"#3ddc84",c2:"#1c7a4a",letter:"P"},
+gonza:{file:"gonza.png",name:"Gonza",role:"Conflictivo",align:"neutral",years:[2025],clan:"TQ (ex)",meta:"Ex miembro TQ<br>⚠️ Traicionado",desc:"Ex miembro de TQ. Hallow lo llamó traidor.",c1:"#f5d76e",c2:"#a8842c",letter:"G"},
+hallow:{file:"hallow.png",name:"Hallow",role:"Antagonista Interno",align:"enemy",years:[2025],clan:"TQ",meta:"Traidor a Gonza<br>💔 Conflictos",desc:"Llamó traidor a Gonza, generando conflictos dentro de TQ.",c1:"#e23b3b",c2:"#7a1414",letter:"H",light:1},
+radical:{file:"radical.png",name:"Radical",role:"La Mente Brillante",align:"ally",years:[2026],clan:"IJC/ZK",meta:"Sobrevivió crash machine<br>🧠 Muy inteligente",desc:"Sobrevivió la crash machine cuando todos lagearon. Se unió al IJC.",c1:"#3ddc84",c2:"#1c7a4a",letter:"R"},
+adan:{file:"adan.png",name:"Adan",role:"Miembro IJC",align:"ally",years:[2026],clan:"IJC/ZK",meta:"Amigo de Radical<br>🤝 Se unió",desc:"Amigo de Radical. Se unió al clan.",c1:"#3ddc84",c2:"#1c7a4a",letter:"A"},
+roman:{file:"roman.png",name:"Romantco",role:"Aliado del Leak",align:"ally",years:[2026],clan:"—",meta:"Filtró RomazHUB<br>🏛️ Constructor de Roma",desc:"Filtró RomazHUB en secreto a Nam. Constructor de Roma.",c1:"#3ddc84",c2:"#1c7a4a",letter:"R"},
+system:{file:"system.png",name:"System",role:"Fundador de LS",align:"ally",years:[2026],clan:"LS",meta:"@igot_KJ8<br>⚙️ Pasó el Autobuild",desc:"@igot_KJ8. Fundó Legacy Service. Le pasó Autobuild y Paint a Nam.",c1:"#3ddc84",c2:"#1c7a4a",letter:"S"},
+zeen:{file:"zeen.png",name:"Zeen",role:"Líder de SDZ",align:"enemy",years:[2026],clan:"SDZ",meta:"DARKTHEWHITE2<br>💀 Copia de MG",desc:"DARKTHEWHITE2. Líder del clan SDZ, copia del clan MG.",c1:"#e23b3b",c2:"#7a1414",letter:"Z",light:1},
+stumblero:{file:"stumblero.png",name:"Stumblero",role:"El que se fue",align:"neutral",years:[2026],clan:"—",meta:"Otro camino<br>👋 Desapareció",desc:"Amigo de Radical. Desapareció de TCO.",c1:"#f5d76e",c2:"#a8842c",letter:"S"}
 };
 let codexFilter='all';
 function renderCodex(){
@@ -1198,7 +1224,7 @@ function renderCodex(){
   grid.innerHTML=ids.map((id,i)=>{ const c=CHARS[id];
     return '<div class="codex-card" style="--ccol:'+c.c1+';animation-delay:'+(i*0.04)+'s" data-action="char" data-char="'+id+'">'+
       '<span class="years">'+c.years.join(' · ')+'</span>'+
-      '<img src="'+avaUrl(id,96)+'" alt="'+escAttr(c.name)+'">'+
+      '<img src="images/'+c.file+'" data-ava="'+id+'" onerror="avaFail(this)" alt="'+escAttr(c.name)+'">'+
       '<h4>'+escapeHtml(c.name)+'</h4>'+
       '<div class="role '+c.align+'">'+escapeHtml(c.role)+'</div>'+
       '<div class="meta">'+c.meta+'</div></div>';
@@ -1206,7 +1232,9 @@ function renderCodex(){
 }
 function charModal(id){
   const c=CHARS[id]; if(!c) return;
-  $('#cmImg').src=avaUrl(id,150);
+  const cmIm=$('#cmImg');
+  cmIm.onerror=function(){ cmIm.onerror=null; cmIm.src=avaUrl(id,150); };
+  cmIm.src='images/'+c.file;
   $('#cmName').textContent=c.name;
   const r=$('#cmRole'); r.textContent=c.role; r.style.color=c.align==='ally'?'var(--green)':c.align==='enemy'?'var(--red)':'var(--gold)';
   $('#cmMeta').innerHTML='<span>🏴 '+escapeHtml(c.clan)+'</span><span>📅 '+c.years.join(', ')+'</span><span>'+(c.align==='ally'?'🛡️ Aliado':c.align==='enemy'?'💀 Enemigo':'⚖️ Neutral')+'</span>';
@@ -1328,24 +1356,21 @@ function buildMap(){
 }
 
 /* ---------- ajustes ---------- */
-let settings={sound:true,cinema:false,motion:false,theme:'gold'};
+let settings={sound:true,motion:false,theme:'gold'};
 function loadSettings(){ try{ Object.assign(settings, JSON.parse(localStorage.getItem(LS_SET)||'{}')); }catch(e){} }
 function saveSettings(){ localStorage.setItem(LS_SET, JSON.stringify(settings)); }
 function applySettings(){
   document.documentElement.dataset.theme=settings.theme;
   document.documentElement.classList.toggle('rm',settings.motion);
   $('#togSound').classList.toggle('on',settings.sound);
-  $('#togCinema').classList.toggle('on',settings.cinema);
   $('#togMotion').classList.toggle('on',settings.motion);
   $$('#themePicker .theme-dot').forEach(d=>d.classList.toggle('active',d.dataset.theme===settings.theme));
-  document.body.classList.toggle('cinema',settings.cinema);
-  if(settings.cinema) startCinemaMusic(); else stopCinemaMusic();
   if(!settings.sound) stopChapterMusic();
   SOUND=settings.sound;
 }
 
 /* ---------- audio con gate de gesto (fix AudioContext) ---------- */
-let SOUND=true, audioCtx=null, audioUnlocked=false, cinemaAudio=null, currentChapterAudio=null, currentChapterId=null;
+let SOUND=true, audioCtx=null, audioUnlocked=false, currentChapterAudio=null, currentChapterId=null;
 function ctx(){
   if(!audioUnlocked) return null;
   try{
@@ -1358,7 +1383,6 @@ function unlockAudio(){
   if(audioUnlocked) return;
   audioUnlocked=true;
   try{ ctx(); }catch(e){}
-  if(settings.cinema) startCinemaMusic();
   if(SOUND && currentChapterId) playChapterAudio(currentChapterId);
 }
 ['pointerdown','keydown','touchend'].forEach(ev=>window.addEventListener(ev,unlockAudio,{once:true,passive:true}));
@@ -1378,24 +1402,6 @@ function toggleSound(){
   if(SOUND){ beep(880,0.08); if(currentChapterId) playChapterAudio(currentChapterId); }
   else stopChapterMusic();
 }
-function toggleCinema(){
-  settings.cinema=!settings.cinema; saveSettings();
-  $('#togCinema').classList.toggle('on',settings.cinema);
-  document.body.classList.toggle('cinema',settings.cinema);
-  if(settings.cinema){ startCinemaMusic(); toast('Modo cine activado 🎬','🎬'); } else stopCinemaMusic();
-  beep(settings.cinema?440:330,0.12,'triangle',0.05);
-}
-function startCinemaMusic(){
-  if(!audioUnlocked||cinemaAudio) return;
-  try{ const c=ctx(); if(!c) return; cinemaAudio={nodes:[]};
-    [55,82.5,110].forEach((f,i)=>{ const o=c.createOscillator(), g=c.createGain();
-      o.type='sine'; o.frequency.value=f; g.gain.value=0.012/(i+1);
-      o.connect(g); g.connect(c.destination); o.start(); cinemaAudio.nodes.push(o,g); });
-    const lfo=c.createOscillator(), lg=c.createGain(); lfo.frequency.value=0.08; lg.gain.value=0.008;
-    lfo.connect(lg); lg.connect(cinemaAudio.nodes[1]); lfo.start(); cinemaAudio.nodes.push(lfo,lg);
-  }catch(e){}
-}
-function stopCinemaMusic(){ if(cinemaAudio){ cinemaAudio.nodes.forEach(n=>{try{if(n.stop)n.stop();}catch(e){} try{n.disconnect();}catch(e){}}); cinemaAudio=null; } }
 const CHAPTER_MUSIC={
 '2022':{freq:[220,330],type:'sine',gain:0.008,name:'2022 · Orígenes'},
 '2023':{freq:[196,294],type:'triangle',gain:0.010,name:'2023 · Caos'},
@@ -1545,7 +1551,6 @@ function buildPalette(){
   Object.keys(CHARS).forEach(id=>paletteIndex.push({ic:'👤',label:'Expediente: '+CHARS[id].name,group:'Personaje',run:()=>charModal(id)}));
   paletteIndex.push({ic:'✍️',label:'Crear mi historia',group:'Acción',run:()=>openStoryCreator()});
   paletteIndex.push({ic:'⚙️',label:'Abrir ajustes',group:'Acción',run:()=>openModal('settingsModal')});
-  paletteIndex.push({ic:'🎬',label:'Alternar modo cine',group:'Acción',run:()=>toggleCinema()});
   paletteIndex.push({ic:'🎨',label:'Cambiar tema de color',group:'Acción',run:()=>{ const t=['gold','venom','phantom','ember']; settings.theme=t[(t.indexOf(settings.theme)+1)%t.length]; saveSettings(); applySettings(); toast('Tema: '+settings.theme,'🎨'); }});
   paletteIndex.push({ic:'🎉',label:'Lanzar confeti',group:'Acción',run:()=>fireConfetti()});
   paletteIndex.push({ic:'🔗',label:'Copiar link del archivo',group:'Acción',run:()=>{ try{ navigator.clipboard.writeText(location.href); toast('Link copiado','🔗'); }catch(e){ toast('No se pudo copiar','⚠️'); } }});
@@ -1972,7 +1977,6 @@ document.addEventListener('click',e=>{
     case 'toggle': {
       const s=el.dataset.setting;
       if(s==='sound') toggleSound();
-      else if(s==='cinema') toggleCinema();
       else if(s==='motion'){ settings.motion=!settings.motion; saveSettings(); applySettings(); toast(settings.motion?'Movimiento reducido':'Animaciones activadas',settings.motion?'🐢':'✨'); }
       break;
     }

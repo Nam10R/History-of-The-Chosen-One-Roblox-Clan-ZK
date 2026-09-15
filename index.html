@@ -562,6 +562,93 @@ footer .foot-links a:hover{color:var(--gold)}
 .adm-row{display:flex;gap:10px;align-items:center;background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-bottom:8px;font-size:.85em}
 .adm-row .adm-txt{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#c4c4cc}
 .adm-h{font-family:'Bebas Neue';font-size:1.25em;letter-spacing:.5px;color:var(--gold);margin:20px 0 10px}
+
+/* ============ CREDENCIAL ============ */
+#credCanvas{width:100%;max-width:420px;border-radius:14px;display:block;margin:0 auto;box-shadow:0 20px 50px rgba(0,0,0,.6)}
+.cred-actions{display:flex;gap:10px;justify-content:center;margin-top:16px;flex-wrap:wrap}
+
+/* ============ PERIÓDICO ============ */
+.news-editions{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:0 0 26px}
+.news-editions button{background:var(--card);border:1px solid var(--line);color:var(--mut);padding:8px 18px;border-radius:30px;cursor:pointer;font-size:.82em;font-weight:700;transition:.25s}
+.news-editions button.active{background:var(--gold);color:#000;border-color:var(--gold)}
+.news-editions button:hover:not(.active){color:var(--gold);border-color:var(--gold)}
+.news-paper{background:#f3ead7;background-image:repeating-linear-gradient(0deg,rgba(120,90,40,.035) 0 2px,transparent 2px 4px),radial-gradient(circle at 20% 10%,rgba(120,90,40,.08),transparent 50%);color:#221a10;font-family:Georgia,'Times New Roman',serif;border-radius:4px;padding:36px 34px;max-width:960px;margin:0 auto;box-shadow:0 30px 80px rgba(0,0,0,.65);animation:cardIn .6s var(--ease)}
+.news-masthead{text-align:center;border-bottom:4px double #221a10;padding-bottom:14px;margin-bottom:8px}
+.news-masthead h2{font-family:'Bebas Neue',Impact,sans-serif;font-size:clamp(2.4em,6vw,4em);letter-spacing:2px;line-height:1;margin:0}
+.news-masthead .news-line{display:flex;justify-content:space-between;gap:12px;font-size:.72em;text-transform:uppercase;letter-spacing:1.5px;margin-top:8px;flex-wrap:wrap}
+.news-head{font-size:clamp(1.6em,4vw,2.5em);font-weight:900;text-transform:uppercase;line-height:1.1;text-align:center;margin:18px 0 6px;letter-spacing:.5px}
+.news-deck{text-align:center;font-style:italic;font-size:1.02em;color:#4a3c28;margin:0 auto 18px;max-width:640px}
+.news-cols{column-count:2;column-gap:30px;column-rule:1px solid rgba(34,26,16,.3)}
+@media(max-width:760px){.news-cols{column-count:1}}
+.news-art{break-inside:avoid;margin-bottom:18px}
+.news-art h4{font-size:1.12em;font-weight:900;text-transform:uppercase;line-height:1.2;margin-bottom:6px;border-top:2px solid #221a10;padding-top:8px}
+.news-art p{font-size:.88em;line-height:1.55;text-align:justify;margin-bottom:6px}
+.news-art .lead::first-letter{font-size:2.6em;float:left;line-height:.9;padding-right:6px;font-weight:900}
+.news-photo{filter:grayscale(1) contrast(1.15) sepia(.25);width:100%;border:1px solid #221a10;padding:5px;background:#fffdf6;margin:8px 0;object-fit:cover;max-height:190px}
+.news-cap{font-size:.7em;font-style:italic;color:#4a3c28;margin-bottom:8px;text-align:center}
+.news-tag{display:inline-block;background:#221a10;color:#f3ead7;font-size:.66em;letter-spacing:1.5px;text-transform:uppercase;padding:3px 9px;border-radius:3px;margin-bottom:6px}
+.news-link{font-size:.75em;font-weight:700;color:#7a2e1d;cursor:pointer;text-decoration:underline}
+.news-extra{background:#221a10;color:#f3ead7;text-align:center;font-family:'Bebas Neue',Impact,sans-serif;letter-spacing:3px;font-size:1.1em;padding:6px;margin-bottom:12px;animation:lpulse 2s infinite}
+.news-print{display:flex;justify-content:center;margin:18px 0 0}
+@media print{
+  body *{visibility:hidden}
+  .news-paper,.news-paper *{visibility:visible}
+  .news-paper{position:absolute;left:0;top:0;width:100%;box-shadow:none;margin:0}
+  .news-print,.news-editions{display:none !important}
+}
+
+/* ============ CALENDARIO ============ */
+.cal-years{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:20px}
+.cal-years button{background:var(--card);border:1px solid var(--line);color:var(--mut);padding:8px 20px;border-radius:30px;cursor:pointer;font-weight:800;font-family:'Bebas Neue';font-size:1.05em;letter-spacing:1px;transition:.25s}
+.cal-years button.active{background:var(--gold);color:#000;border-color:var(--gold)}
+.cal-strip{background:var(--card);border:1px dashed rgba(var(--gold-rgb),.5);border-radius:12px;padding:14px 18px;margin-bottom:18px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.cal-strip .lbl{font-size:.75em;color:var(--mut);letter-spacing:1px;text-transform:uppercase;font-weight:700}
+.cal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:860px){.cal-grid{grid-template-columns:repeat(2,1fr)}}
+.cal-month{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;min-height:96px;transition:.25s}
+.cal-month:hover{border-color:rgba(var(--gold-rgb),.5)}
+.cal-month.has{border-color:rgba(var(--gold-rgb),.45);background:rgba(var(--gold-rgb),.04)}
+.cal-month h5{font-family:'Bebas Neue';color:var(--mut);letter-spacing:2px;margin-bottom:9px;font-size:1em}
+.cal-month.has h5{color:var(--gold)}
+.cal-ev{display:block;background:var(--bg2);border-left:3px solid var(--gold);border-radius:8px;padding:6px 9px;font-size:.74em;margin-bottom:6px;cursor:pointer;transition:.2s;color:#c4c4cc;text-align:left;width:100%;border-top:none;border-right:none;border-bottom:none;font-family:inherit}
+.cal-ev:hover{transform:translateX(3px);border-left-color:var(--gold2);color:var(--txt)}
+.cal-ev .d{color:var(--gold);font-weight:800}
+
+/* ============ LINAJE ============ */
+.lin-wrap{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:10px;overflow:auto}
+.lin-wrap svg{width:100%;min-width:720px;display:block}
+.lin-node{cursor:pointer}
+.lin-node circle{transition:.25s}
+.lin-node:hover circle{filter:brightness(1.35);stroke-width:3.5}
+.lin-node text{font-family:'Inter',sans-serif;fill:var(--txt);pointer-events:none}
+.lin-edge{fill:none;stroke-width:2.5;stroke-dasharray:400;stroke-dashoffset:400;animation:linDraw 1.4s var(--ease) forwards}
+@keyframes linDraw{to{stroke-dashoffset:0}}
+.lin-edge.ally{stroke:rgba(61,220,132,.6)}
+.lin-edge.war{stroke:rgba(226,59,59,.65);stroke-dasharray:8 6;animation:none;stroke-dashoffset:0}
+.lin-edge.copy{stroke:rgba(226,59,59,.8);stroke-dasharray:3 7}
+.lin-edge.root{stroke:rgba(var(--gold-rgb),.55)}
+.lin-edge.mig{stroke:rgba(0,207,255,.55);stroke-dasharray:2 6;stroke-width:2}
+.lin-lbl{font-size:10px;fill:var(--mut);font-family:'Inter',sans-serif}
+.lin-node{opacity:0;animation:linPop .5s var(--ease) forwards}
+@keyframes linPop{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+/* ============ CONFESIONES ============ */
+.conf-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px;margin-top:24px}
+.conf-card{background:linear-gradient(180deg,rgba(var(--gold-rgb),.06),transparent 40%),var(--card);border:1px solid var(--line);border-radius:14px;padding:26px 20px 16px;position:relative;animation:cardIn .5s var(--ease);font-size:.92em;color:#c9c9d1;font-style:italic;line-height:1.6}
+.conf-card::before{content:'🕯️';position:absolute;top:-13px;left:16px;font-size:1.25em;animation:candle 2.2s ease-in-out infinite}
+@keyframes candle{0%,100%{transform:rotate(-4deg) scale(1);filter:drop-shadow(0 0 4px rgba(255,180,60,.7))}50%{transform:rotate(4deg) scale(1.06);filter:drop-shadow(0 0 9px rgba(255,190,70,.95))}}
+.conf-meta{display:flex;justify-content:space-between;align-items:center;margin-top:12px;font-size:.72em;color:var(--mut);font-style:normal}
+.conf-form{max-width:640px;margin:26px auto 0}
+.conf-form textarea{width:100%;background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:14px;color:var(--txt);font-family:inherit;font-size:.95em;resize:vertical;min-height:90px}
+.conf-form textarea:focus{outline:none;border-color:var(--gold)}
+
+/* ============ CRÉDITOS ============ */
+.credit-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:26px}
+.credit-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;transition:.3s}
+.credit-card:hover{transform:translateY(-4px);border-color:var(--gold)}
+.credit-card .cic{font-size:2.2em;margin-bottom:8px;display:inline-block}
+.credit-card h4{font-family:'Bebas Neue';font-size:1.3em;letter-spacing:.5px;color:var(--gold);margin-bottom:6px}
+.credit-card p{font-size:.87em;color:var(--mut);line-height:1.55}
 </style>
 </head>
 <body>
@@ -930,6 +1017,10 @@ footer .foot-links a:hover{color:var(--gold)}
 <button data-action="sub" data-tab="archivo" data-sub="mapa">🗺️ Mapa</button>
 <button data-action="sub" data-tab="archivo" data-sub="clanes">🏴 Clanes</button>
 <button data-action="sub" data-tab="archivo" data-sub="wiki">📚 Wiki</button>
+<button data-action="sub" data-tab="archivo" data-sub="periodico">📰 Periódico</button>
+<button data-action="sub" data-tab="archivo" data-sub="calendario">📅 Calendario</button>
+<button data-action="sub" data-tab="archivo" data-sub="linaje">🌳 Linaje</button>
+<button data-action="sub" data-tab="archivo" data-sub="creditos">ℹ️ Créditos</button>
 <button data-action="sub" data-tab="archivo" data-sub="novedades">📰 Novedades</button>
 </div>
 
@@ -1017,11 +1108,155 @@ footer .foot-links a:hover{color:var(--gold)}
 </section>
 </div>
 
+<div class="subpanel" data-sub="periodico">
+<section class="special">
+<div class="special-inner" style="max-width:1020px">
+<h2 class="sec-title">THE TCO <em>TIMES</em></h2>
+<p class="sec-sub">El periódico de guerra del archivo · elegí una edición · imprimible con el botón de abajo</p>
+<div class="news-editions" id="newsEditions">
+<button data-action="news-ed" data-ed="2022">Nº1 · 2022</button>
+<button data-action="news-ed" data-ed="2023">Nº2 · 2023</button>
+<button data-action="news-ed" data-ed="2024" class="active">Nº3 · 2024</button>
+<button data-action="news-ed" data-ed="2025">Nº4 · 2025</button>
+<button data-action="news-ed" data-ed="2026">Nº5 · 2026</button>
+<button data-action="news-ed" data-ed="extra">EXTRA</button>
+</div>
+
+<div class="news-ed" data-ed="2022" style="display:none"><div class="news-paper">
+<div class="news-masthead"><h2>THE TCO TIMES</h2><div class="news-line"><span>Edición Nº 1</span><span>Noviembre de 2022</span><span>Precio: 0 Robux</span></div></div>
+<div class="news-head">Un nuevo jugador entra en escena</div>
+<p class="news-deck">elfrancho14 se registra en The Chosen One: nadie apostó nada por él. El tiempo hará que todos nos equivoquemos.</p>
+<div class="news-cols">
+<div class="news-art"><span class="news-tag">Crónica social</span><h4>El clic que nadie escuchó</h4><p class="lead">La noche del 12 de noviembre, un User ID nuevo apareció en los registros: 607353710. Nuestros corresponsales no le prestaron atención. Error histórico.</p><p>Ni fanfarrias ni testigos: solo curiosidad por aprender las mecánicas de un juego a punto de explotar. Esta redacción ya reserva una página entera para lo que viene.</p><span class="news-link" data-action="goto-chapter" data-sub="2022">Leer el capítulo completo →</span></div>
+<div class="news-art"><span class="news-tag">Datos</span><h4>¿Quién es elfrancho14?</h4><img class="news-photo" data-ava="nam" loading="lazy" onerror="avaFail(this)" alt="Nam"><div class="news-cap">Retrato del archivo: Nam, día cero.</div><p>Fuentes cercanas afirman que "solo quería aprender". Las mismas fuentes confirman que hoy lidera un clan de más de 30 miembros. Ambas declaraciones son ciertas.</p></div>
+</div>
+</div></div>
+
+<div class="news-ed" data-ed="2023" style="display:none"><div class="news-paper">
+<div class="news-masthead"><h2>THE TCO TIMES</h2><div class="news-line"><span>Edición Nº 2</span><span>Año 2023</span><span>Precio: 0 Robux</span></div></div>
+<div class="news-head">El caos tiene nombre: ;bkit others</div>
+<p class="news-deck">Los servers caen como fichas: un comando y todo el alrededor se apaga. La ley del más fuerte llegó a TCO.</p>
+<div class="news-cols">
+<div class="news-art"><span class="news-tag">Sucesos</span><h4>La plaga de los scripts</h4><p class="lead">Circularon como pólvora por cada server latino. Un ";bkit others" y el mundo se caía a pedazos alrededor: crasheaba a todos, todos, sin excepción.</p><p>Los admins piden calma. Los scripters piden audiencia. Los jugadores piden un server que aguante en pie más de una hora.</p><span class="news-link" data-action="goto-chapter" data-sub="2023">Leer el capítulo completo →</span></div>
+<div class="news-art"><span class="news-tag">Cultura</span><h4>Simón Dice: el ritual que unió servers</h4><p>En medio del caos, la comunidad inventó sus propias liturgias: Simón Dice a medianoche, batallas de construcciones imposibles y votaciones que decidían el destino de servers enteros como si fueran reinos.</p></div>
+<div class="news-art"><span class="news-tag">Opinión</span><h4>Enlighten, o jugar con fuego</h4><p><em>"Dar Enlighten a un jugador no era solo poder: era estar dispuesto a perderlo todo."</em> Esta redacción recomienda no otorgarlo ni aceptarlo de extraños. Ni de amigos. De nadie.</p></div>
+</div>
+</div></div>
+
+<div class="news-ed" data-ed="2024"><div class="news-paper">
+<div class="news-masthead"><h2>THE TCO TIMES</h2><div class="news-line"><span>Edición Nº 3</span><span>Año 2024</span><span>Precio: 0 Robux</span></div></div>
+<div class="news-head">¡Liberado medio TCO Español!</div>
+<p class="news-deck">Tras más de una hora de batalla sin tregua, el enemigo hizo RQ. Nam y Enzo: los nombres que hoy escribe la historia.</p>
+<div class="news-cols">
+<div class="news-art"><span class="news-tag">Guerra</span><h4>La Batalla Final</h4><p class="lead">Scripts contra difamación. Evidencias contra mentiras. El trío de Damian aguantó lo que pudo y luego se rindió: medio TCO Español volvió a respirar reglas, ciudades y juegos.</p><img class="news-photo" data-ava="enzo" loading="lazy" onerror="avaFail(this)" alt="Enzo"><div class="news-cap">Enzo, el que abrió los ojos de una leyenda.</div><span class="news-link" data-action="goto-chapter" data-sub="2024">Leer el capítulo completo →</span></div>
+<div class="news-art"><span class="news-tag">Sociedad</span><h4>El arquitecto del server vacío</h4><p>Sam, sin un solo Robux, construyó junto a Nam una civilización entera: calles, edificios, plazas. Hoy su silencio es el misterio mejor guardado del año.</p><img class="news-photo" data-ava="sam" loading="lazy" onerror="avaFail(this)" alt="Sam"><div class="news-cap">Sam, manos de gigante.</div></div>
+<div class="news-art"><span class="news-tag">Tribunales</span><h4>BLIND y GLITCH: la puñalada del trono</h4><p>Nam le construyó un trono épico; Damian respondió con un baneo por horas. La traición que encendió la mecha de todo lo que vino después.</p><img class="news-photo" data-ava="damian" loading="lazy" onerror="avaFail(this)" alt="Damian"><div class="news-cap">i11rl: la sonrisa del lobo.</div></div>
+</div>
+</div></div>
+
+<div class="news-ed" data-ed="2025" style="display:none"><div class="news-paper">
+<div class="news-masthead"><h2>THE TCO TIMES</h2><div class="news-line"><span>Edición Nº 4</span><span>Año 2025</span><span>Precio: 0 Robux</span></div></div>
+<div class="news-head">Se declara la Segunda Guerra Mundial de TCO</div>
+<p class="news-deck">TQ contra MG: evidencias en ID contra difamación de closet. El mundo latino contiene la respiración.</p>
+<div class="news-cols">
+<div class="news-art"><span class="news-tag">Internacional</span><h4>Guerra total desde fines de enero</h4><p class="lead">Difamaban a TQ de usar Exploits cuando solo era defensa personal. Los llamaban raiders y griefers. TQ respondió con la verdad en la mano: pruebas en ID para todo el server.</p><span class="news-link" data-action="goto-chapter" data-sub="2025">Leer el capítulo completo →</span></div>
+<div class="news-art"><span class="news-tag">Espionaje</span><h4>Guardia Nocturna: los espías que no duermen</h4><p>De 1:00 a 4:00 AM, alts de Discord susurran evidencias por MD a miembros de MG. Objetivo: vaciar al clan antes de que llegue a los 100 miembros.</p><img class="news-photo" data-ava="facu" loading="lazy" onerror="avaFail(this)" alt="Facu"><div class="news-cap">Tq_Facu, agente doble de la madrugada.</div></div>
+<div class="news-art"><span class="news-tag">Tecnología</span><h4>El bot "Pedro Invasoes" arrasa el Discord de TQ</h4><p>Napoleón golpeó primero y sin aviso: raid total al servidor de Discord. TQ tuvo que reconstruirlo desde cero, ladrillo por ladrillo.</p></div>
+<div class="news-art"><span class="news-tag">Victoria</span><h4>MG cae pieza por pieza</h4><p>Fines de febrero: el veredicto está escrito. TQ gana la Segunda Guerra y emerge como la facción más fuerte de la comunidad latina. Nadie imaginó que Dead Rails lo apagaría desde adentro.</p><img class="news-photo" data-ava="pan" loading="lazy" onerror="avaFail(this)" alt="Pan"><div class="news-cap">Tq_Pan, la luz del 18 de enero.</div></div>
+</div>
+</div></div>
+
+<div class="news-ed" data-ed="2026" style="display:none"><div class="news-paper">
+<div class="news-masthead"><h2>THE TCO TIMES</h2><div class="news-line"><span>Edición Nº 5</span><span>Año 2026</span><span>Precio: 0 Robux</span></div></div>
+<div class="news-head">TCO, el 2b2t latino: anarquía total</div>
+<p class="news-deck">Raids con toxicify + anchor y crash machines en cada esquina. Nam volvió a un cementerio... y decidió fundar esperanza.</p>
+<div class="news-cols">
+<div class="news-art"><span class="news-tag">Sucesos</span><h4>El mundo raideado</h4><p class="lead">Pusieras, eliminaras o movieras un bloque: TODO estaba raideado. El mapa entero, intocable, burlándose. TCO ya no tiene dueños: tiene fantasmas.</p><span class="news-link" data-action="goto-chapter" data-sub="2026">Leer el capítulo completo →</span></div>
+<div class="news-art"><span class="news-tag">Local</span><h4>Nace el IJC: de 2 a +30 almas</h4><p>Investigación de Justicia y Corrupción. Fundado en febrero por Nam con Enzo de Co-Líder. Creció como una llama en la oscuridad de TCO.</p><img class="news-photo" data-ava="nam" loading="lazy" onerror="avaFail(this)" alt="Nam"><div class="news-cap">Nam firma el acta de fundación.</div></div>
+<div class="news-art"><span class="news-tag">Economía</span><h4>NamHUB gratis supera a RomazHUB</h4><p>299 Robux contra 0: ganó el corazón. Autobuild y Paint Configuration, cortesía de System y su LS Legacy. Por un momento, el hub gratuito fue el rey.</p><img class="news-photo" data-ava="system" loading="lazy" onerror="avaFail(this)" alt="System"><div class="news-cap">System, el aliado que no preguntó nada.</div></div>
+<div class="news-art"><span class="news-tag">Guerra</span><h4>SDZ: la copia zombi, derrotada</h4><p>Treinta minutos de defensa casa por casa, bloque por bloque. La investigación confirmó lo impensado: SDZ era MG reciclado. Los fantasmas volvieron a perder.</p><img class="news-photo" data-ava="zeen" loading="lazy" onerror="avaFail(this)" alt="Zeen"><div class="news-cap">Zeen, líder de la copia fantasma.</div></div>
+</div>
+</div></div>
+
+<div class="news-ed" data-ed="extra" style="display:none"><div class="news-paper">
+<div class="news-masthead"><h2>THE TCO TIMES</h2><div class="news-line"><span>Edición EXTRAORDINARIA</span><span>Fines de 2026</span><span>Precio: 0 Robux</span></div></div>
+<div class="news-extra">★ EDICIÓN EXTRAORDINARIA ★</div>
+<div class="news-head">El IJC renace: nace el Clan ZK</div>
+<p class="news-deck">De Investigación de Justicia y Corrupción a las tres letras que hoy brillan: ZK. Este archivo es su monumento.</p>
+<div class="news-cols">
+<div class="news-art"><span class="news-tag">Institucional</span><h4>Las tres letras</h4><p class="lead">Fines de 2026: el clan evoluciona. Misma alma, nuevo nombre, mismo oro. Los fundadores prometen que lo mejor está por escribirse.</p></div>
+<div class="news-art"><span class="news-tag">Cultura</span><h4>Este archivo abre sus puertas</h4><p>Historias, credenciales de miembro, periódicos, calendarios de guerra y confesiones anónimas: la comunidad entera ahora es parte del museo.</p></div>
+<div class="news-art"><span class="news-tag">Última hora</span><h4>Junio 2026... se picó todo</h4><p>Próxima edición: lo que venga. Y si algo nos enseñó The Chosen One es que siempre, siempre viene algo.</p></div>
+</div>
+</div></div>
+
+<div class="news-print"><button class="cta-btn ghost" onclick="window.print()">🖨️ Imprimir esta edición</button></div>
+</div>
+</section>
+</div>
+
+<div class="subpanel" data-sub="calendario">
+<section class="special">
+<div class="special-inner">
+<h2 class="sec-title">CALENDARIO DE <em>GUERRA</em></h2>
+<p class="sec-sub">Mes a mes, los eventos que movieron la historia · tocá un evento para viajar al capítulo</p>
+<div class="cal-years" id="calYears"></div>
+<div class="cal-strip" id="calStrip" style="display:none"></div>
+<div class="cal-grid" id="calGrid"></div>
+</div>
+</section>
+</div>
+
+<div class="subpanel" data-sub="linaje">
+<section class="special">
+<div class="special-inner">
+<h2 class="sec-title">LINAJE DE <em>CLANES</em></h2>
+<p class="sec-sub">El árbol de sangre de TCO: quién nació de quién, quién traicionó a quién y quién migró a dónde</p>
+<div class="lin-wrap"><svg id="linTree" viewBox="0 0 900 520"></svg></div>
+<div class="map-legend">
+<span><i style="background:rgba(212,175,55,.8)"></i>Origen</span>
+<span><i style="background:rgba(61,220,132,.8)"></i>Herencia / fundación</span>
+<span><i style="background:rgba(226,59,59,.8)"></i>Guerra / copia zombi</span>
+<span><i style="background:rgba(0,207,255,.8)"></i>Migración de miembros</span>
+</div>
+</div>
+</section>
+</div>
+
+<div class="subpanel" data-sub="creditos">
+<section class="special">
+<div class="special-inner">
+<h2 class="sec-title">CRÉDITOS DEL <em>ARCHIVO</em></h2>
+<p class="sec-sub">Quién hizo posible que esta leyenda quede escrita para siempre</p>
+<div class="credit-grid">
+<div class="credit-card"><span class="cic">📜</span><h4>Fuentes primarias</h4><p>Nam y Enzo, protagonistas y narradores de cada crónica. Sin su memoria, este archivo no existiría.</p></div>
+<div class="credit-card"><span class="cic">🧪</span><h4>Aliados del leak</h4><p>System (@igot_KJ8) y Romantco: el Autobuild, el Paint y el secreto mejor guardado de 2026.</p></div>
+<div class="credit-card"><span class="cic">🛡️</span><h4>La comunidad</h4><p>Cada miembro que se registró, comentó, votó, confesó y publicó su historia. El museo es de todos.</p></div>
+<div class="credit-card"><span class="cic">⚙️</span><h4>Tecnología</h4><p>Firebase Firestore, JavaScript vanilla, SVG y canvas. Cero frameworks, cero excusas.</p></div>
+<div class="credit-card"><span class="cic">🎨</span><h4>Diseño</h4><p>Oro fundido, Bebas Neue, partículas de brasa y noches sin dormir. Todo en un solo archivo HTML.</p></div>
+<div class="credit-card"><span class="cic">🏴</span><h4>Clan ZK</h4><p>Por y para la leyenda. User ID 607353710 · Game ID 11137575513 · The Chosen One © TomazDev.</p></div>
+</div>
+</div>
+</section>
+</div>
+
 <div class="subpanel" data-sub="novedades">
 <section class="special">
 <div class="special-inner" style="max-width:860px">
 <h2 class="sec-title">NOVEDADES DEL <em>ARCHIVO</em></h2>
 <p class="sec-sub">Changelog público: cada era de esta página</p>
+<div class="cl-entry">
+<div class="cl-ver">v2.3 · "LA ERA DE LOS TESOROS"</div><div class="cl-date">15 de septiembre de 2026</div>
+<ul>
+<li>🪪 Credencial de miembro: carnet digital descargable en PNG con rango, número de socio y código de barras.</li>
+<li>📰 The TCO Times: periódico de guerra con 6 ediciones imprimibles y fotos en blanco y negro.</li>
+<li>📅 Calendario de Guerra: mes a mes con todos los eventos fechados de la saga.</li>
+<li>🌳 Linaje de Clanes: árbol genealógico animado con traiciones, copias y migraciones.</li>
+<li>🕯️ Confesiones Anónimas: muro sin apodos con moderación admin.</li>
+<li>ℹ️ Página de Créditos del archivo.</li>
+<li>🏅 Dos logros nuevos: Alma Anónima y Certificado.</li>
+</ul>
+</div>
 <div class="cl-entry">
 <div class="cl-ver">v2.1 · "LA ERA DORADA"</div><div class="cl-date">15 de septiembre de 2026</div>
 <ul>
@@ -1064,6 +1299,7 @@ footer .foot-links a:hover{color:var(--gold)}
 <button data-action="sub" data-tab="comunidad" data-sub="muro">🧱 Muro</button>
 <button data-action="sub" data-tab="comunidad" data-sub="quiz">🧩 Quiz</button>
 <button data-action="sub" data-tab="comunidad" data-sub="encuestas">🗳️ Encuestas</button>
+<button data-action="sub" data-tab="comunidad" data-sub="confesiones">🕯️ Confesiones</button>
 </div>
 
 <div class="subpanel active" data-sub="historias">
@@ -1108,6 +1344,21 @@ footer .foot-links a:hover{color:var(--gold)}
 <h2 class="sec-title">ENCUESTAS DEL <em>CLAN</em></h2>
 <p class="sec-sub">Un voto por miembro y encuesta · resultados en vivo</p>
 <div id="pollsBox"><div class="no-stories">Cargando encuestas...</div></div>
+</div>
+</section>
+</div>
+
+<div class="subpanel" data-sub="confesiones">
+<section class="special">
+<div class="special-inner">
+<h2 class="sec-title">CONFESIONES <em>ANÓNIMAS</em></h2>
+<p class="sec-sub">El lado humano del archivo: sin apodos, sin juzgamientos · solo la verdad y una vela</p>
+<div class="conf-form">
+<textarea id="confInput" maxlength="400" placeholder="Escribí tu confesión anónima... (un secreto, un arrepentimiento, un homenaje)"></textarea>
+<div class="char-count"><span id="confCount">0</span>/400 · se publica sin tu apodo</div>
+<button class="cta-btn" data-action="post-conf">🕯️ Confesar anónimamente</button>
+</div>
+<div class="conf-grid" id="confGrid"><div class="no-stories">Cargando confesiones...</div></div>
 </div>
 </section>
 </div>
@@ -1183,8 +1434,24 @@ footer .foot-links a:hover{color:var(--gold)}
 <p>Moderación rápida del archivo · exclusivo de Nam y Enzo</p>
 <div class="adm-h">💬 Últimos comentarios</div>
 <div id="admComments"><div class="no-stories">Cargando...</div></div>
+<div class="adm-h">🕯️ Últimas confesiones</div>
+<div id="admConfs"><div class="no-stories">Cargando...</div></div>
 <div class="adm-h">📖 Últimas historias</div>
 <div id="admStories"><div class="no-stories">Cargando...</div></div>
+</div>
+</div>
+
+<!-- CRED MODAL -->
+<div class="modal" id="credModal">
+<div class="modal-c big">
+<button class="modal-x" data-action="close-modal" data-modal="credModal">×</button>
+<h2>TU <em>CREDENCIAL</em></h2>
+<p>Carnet oficial de miembro del archivo · descargala y presumila en Discord</p>
+<canvas id="credCanvas" width="1360" height="840"></canvas>
+<div class="cred-actions">
+<button class="cta-btn" data-action="cred-download">⬇️ Descargar PNG</button>
+<button class="cta-btn ghost" data-action="cred-open">🔄 Regenerar</button>
+</div>
 </div>
 </div>
 
@@ -1204,6 +1471,7 @@ footer .foot-links a:hover{color:var(--gold)}
 <div class="ach-grid" id="achGrid"></div>
 </div>
 <button class="auth-btn" data-action="save-profile">GUARDAR CAMBIOS</button>
+<button class="cta-btn ghost" data-action="cred-open" style="margin-top:12px">🪪 Ver mi credencial</button>
 <button class="share-btn" id="adminProfileBtn" style="display:none;margin-top:12px" data-action="admin-open">🛡️ Abrir panel admin</button>
 </div>
 </div>
@@ -1254,6 +1522,10 @@ footer .foot-links a:hover{color:var(--gold)}
 <a class="drawer-link" data-action="sub" data-tab="archivo" data-sub="mapa">Mapa de Alianzas<small>Red interactiva de relaciones</small></a>
 <a class="drawer-link" data-action="sub" data-tab="archivo" data-sub="clanes">Clanes y su historia<small>MG, SDZ, TQ, IJC, NamHUB...</small></a>
 <a class="drawer-link" data-action="sub" data-tab="archivo" data-sub="wiki">Wiki de Términos<small>El diccionario de TCO</small></a>
+<a class="drawer-link" data-action="sub" data-tab="archivo" data-sub="periodico">The TCO Times<small>Periódico de guerra imprimible</small></a>
+<a class="drawer-link" data-action="sub" data-tab="archivo" data-sub="calendario">Calendario de Guerra<small>Mes a mes, evento por evento</small></a>
+<a class="drawer-link" data-action="sub" data-tab="archivo" data-sub="linaje">Linaje de Clanes<small>El árbol de sangre de TCO</small></a>
+<a class="drawer-link" data-action="sub" data-tab="archivo" data-sub="creditos">Créditos<small>Quiénes hicieron posible el archivo</small></a>
 <a class="drawer-link" data-action="sub" data-tab="archivo" data-sub="novedades">Novedades del archivo<small>Changelog público</small></a>
 <div class="drawer-sec">💬 Comunidad</div>
 <a class="drawer-link" data-action="sub" data-tab="comunidad" data-sub="historias">Historias<small>Experiencias de la comunidad</small></a>
@@ -1261,6 +1533,7 @@ footer .foot-links a:hover{color:var(--gold)}
 <a class="drawer-link" data-action="sub" data-tab="comunidad" data-sub="muro">Muro del Clan<small>Tablón público</small></a>
 <a class="drawer-link" data-action="sub" data-tab="comunidad" data-sub="quiz">Quiz del Lore<small>12 preguntas sin piedad</small></a>
 <a class="drawer-link" data-action="sub" data-tab="comunidad" data-sub="encuestas">Encuestas<small>Votá y mirá resultados en vivo</small></a>
+<a class="drawer-link" data-action="sub" data-tab="comunidad" data-sub="confesiones">Confesiones Anónimas<small>El lado humano del archivo</small></a>
 <div class="drawer-sec">👤 Mi cuenta</div>
 <a class="drawer-link" data-action="profile">Mi Perfil<small>Apodo, imagen y logros</small></a>
 <a class="drawer-link" id="adminDrawerLink" style="display:none" data-action="admin-open">🛡️ Panel Admin<small>Moderación rápida</small></a>
@@ -1625,6 +1898,9 @@ function setSub(tab,sub){
   if(tab==='archivo'&&sub==='cronologia') setTimeout(tlReveal,60);
   if(tab==='comunidad'&&sub==='encuestas') renderPolls();
   if(tab==='comunidad'&&sub==='quiz') renderQuiz();
+  if(tab==='comunidad'&&sub==='confesiones') loadConfessions();
+  if(tab==='archivo'&&sub==='calendario') renderCalendar();
+  if(tab==='archivo'&&sub==='linaje') buildLinaje();
   if(tab==='historia') visitChapter(sub);
   try{ localStorage.setItem(LS_TAB, JSON.stringify(state)); }catch(e){}
   beep(600,0.04);
@@ -1717,7 +1993,9 @@ function buildPalette(){
   T.forEach(t=>paletteIndex.push({ic:t[1],label:t[2],group:'Sección',run:()=>setTab(t[0])}));
   ['2022','2023','2024','2025','2026'].forEach(y=>paletteIndex.push({ic:'📖',label:'Capítulo '+y,group:'Capítulo',run:()=>goChapter(y)}));
   [['cronologia','📅 Cronología'],['hall','🏆 Hall de la Fama'],['mapa','🗺️ Mapa de Alianzas'],['clanes','🏴 Clanes y Hubs'],['wiki','📚 Wiki']].forEach(s=>paletteIndex.push({ic:s[0]==='mapa'?'🗺️':'🗄️',label:s[1],group:'Archivo',run:()=>{setTab('archivo',true);setSub('archivo',s[0]);}}));
-  [['historias','📖 Historias de la comunidad'],['ranking','🏆 Leaderboard'],['muro','🧱 Muro del Clan'],['quiz','🧩 Quiz del Lore'],['encuestas','🗳️ Encuestas del clan']].forEach(s=>paletteIndex.push({ic:'💬',label:s[1],group:'Comunidad',run:()=>{setTab('comunidad',true);setSub('comunidad',s[0]);}}));
+  [['historias','📖 Historias de la comunidad'],['ranking','🏆 Leaderboard'],['muro','🧱 Muro del Clan'],['quiz','🧩 Quiz del Lore'],['encuestas','🗳️ Encuestas del clan'],['confesiones','🕯️ Confesiones anónimas']].forEach(s=>paletteIndex.push({ic:'💬',label:s[1],group:'Comunidad',run:()=>{setTab('comunidad',true);setSub('comunidad',s[0]);}}));
+  [['periodico','📰 The TCO Times'],['calendario','📅 Calendario de Guerra'],['linaje','🌳 Linaje de Clanes'],['creditos','ℹ️ Créditos del archivo']].forEach(s=>paletteIndex.push({ic:'🗄️',label:s[1],group:'Archivo',run:()=>{setTab('archivo',true);setSub('archivo',s[0]);}}));
+  paletteIndex.push({ic:'🪪',label:'Ver mi credencial',group:'Acción',run:()=>openCredModal()});
   paletteIndex.push({ic:'📰',label:'Novedades del archivo',group:'Archivo',run:()=>{setTab('archivo',true);setSub('archivo','novedades');}});
   if(isAdminUser()) paletteIndex.push({ic:'🛡️',label:'Panel de administración',group:'Acción',run:()=>openAdminPanel()});
   Object.keys(CHARS).forEach(id=>paletteIndex.push({ic:'👤',label:'Expediente: '+CHARS[id].name,group:'Personaje',run:()=>charModal(id)}));
@@ -2138,6 +2416,12 @@ document.addEventListener('click',e=>{
     case 'vote': castVote(el.dataset.poll,el.dataset.opt,el); break;
     case 'quiz-opt': quizAnswer(+el.dataset.opt,el); break;
     case 'quiz-retry': quizState={i:0,score:0,done:false,lock:false}; renderQuiz(); beep(600,0.05); break;
+    case 'news-ed': setNewsEdition(el.dataset.ed); break;
+    case 'cal-year': calYear=+el.dataset.y; renderCalendar(); beep(560,0.04); break;
+    case 'cred-open': openCredModal(); break;
+    case 'cred-download': downloadCred(); break;
+    case 'post-conf': postConfession(); break;
+    case 'del-conf': deleteConfession(el.dataset.id); break;
     case 'modal': openModal(el.dataset.modal); break;
     case 'close-modal': closeModal(el.dataset.modal); break;
     case 'drawer': toggleMenu(); break;
@@ -2319,7 +2603,9 @@ const ACH=[
 {id:'erudito',ic:'🧩',n:'Erudito',d:'Completar el quiz'},
 {id:'leyenda',ic:'👑',n:'Leyenda del Lore',d:'Quiz perfecto 12/12'},
 {id:'ciudadano',ic:'🗳️',n:'Ciudadano',d:'Votar en una encuesta'},
-{id:'estilista',ic:'🎨',n:'Estilista',d:'Cambiar el tema'}
+{id:'estilista',ic:'🎨',n:'Estilista',d:'Cambiar el tema'},
+{id:'anon',ic:'🕯️',n:'Alma Anónima',d:'Publicar una confesión'},
+{id:'cred',ic:'🪪',n:'Certificado',d:'Descargar tu credencial'}
 ];
 function achData(){ try{ return JSON.parse(localStorage.getItem('zk_ach')||'{}'); }catch(e){ return {}; } }
 function unlockAch(id){
@@ -2483,6 +2769,7 @@ async function castVote(pollId,opt){
 async function openAdminPanel(){
   if(!isAdminUser()){ toast('Solo admins del clan','🛡️'); return; }
   openModal('adminModal');
+  loadAdminConfs();
   const F=window.firebaseFunctions;
   const cw=$('#admComments'), sw=$('#admStories');
   cw.innerHTML='<div class="no-stories">Cargando...</div>'; sw.innerHTML='<div class="no-stories">Cargando...</div>';
@@ -2510,6 +2797,219 @@ async function openAdminPanel(){
 if('serviceWorker' in navigator){
   window.addEventListener('load',()=>{ try{ navigator.serviceWorker.register('sw.js').catch(()=>{}); }catch(e){} });
 }
+
+/* ================================================================
+   v2.3 · PERIÓDICO / CREDENCIAL / CALENDARIO / LINAJE / CONFESIONES
+   ================================================================ */
+/* ---------- periódico ---------- */
+function setNewsEdition(ed){
+  $$('#newsEditions button').forEach(b=>b.classList.toggle('active',b.dataset.ed===ed));
+  $$('.news-ed').forEach(e=>{ e.style.display=(e.dataset.ed===ed)?'':'none'; });
+  beep(640,0.05);
+}
+
+/* ---------- credencial ---------- */
+function memberNumber(){ let h=0; const s=(me?me.id:'zk')+'zk'; for(let i=0;i<s.length;i++){ h=(h*31+s.charCodeAt(i))>>>0; } return (h%9000)+1000; }
+function rankInfo(){
+  const n=Object.keys(achData()).length;
+  let best=0; try{ best=+localStorage.getItem('zk_quiz_best')||0; }catch(e){}
+  const pts=n*2+(best>=12?4:best>=9?3:best>=6?2:0);
+  return pts>=18?{r:'LEYENDA',c:'#f5d76e'}:pts>=13?{r:'ÉLITE',c:'#a78bfa'}:pts>=9?{r:'VETERANO',c:'#3ddc84'}:pts>=5?{r:'SOLDADO',c:'#508cff'}:{r:'RECLUTA',c:'#8a8a93'};
+}
+function openCredModal(){
+  if(!me){ toast('Primero elegí tu apodo','👤'); return; }
+  openModal('credModal');
+  drawCred();
+}
+function drawCred(){
+  const cv=$('#credCanvas'); if(!cv||!cv.getContext) return;
+  const x=cv.getContext('2d'); if(!x) return;
+  const W=680,H=420;
+  x.setTransform(2,0,0,2,0,0);
+  const g=x.createLinearGradient(0,0,W,H);
+  g.addColorStop(0,'#17171c'); g.addColorStop(1,'#0d0d11');
+  x.fillStyle=g; x.fillRect(0,0,W,H);
+  x.strokeStyle='#d4af37'; x.lineWidth=4; x.strokeRect(10,10,W-20,H-20);
+  x.strokeStyle='rgba(212,175,55,.35)'; x.lineWidth=1; x.strokeRect(18,18,W-36,H-36);
+  x.save(); x.translate(38,34); x.scale(0.62,0.62);
+  x.beginPath(); x.moveTo(60,6); x.lineTo(106,22); x.lineTo(106,58); x.bezierCurveTo(106,86,87,103,60,112); x.bezierCurveTo(33,103,14,86,14,58); x.lineTo(14,22); x.closePath();
+  x.fillStyle='#101014'; x.fill(); x.strokeStyle='#f5d76e'; x.lineWidth=5; x.stroke();
+  x.fillStyle='#f5d76e'; x.font='900 40px "Arial Black",Arial'; x.textAlign='center'; x.fillText('ZK',60,74);
+  x.restore();
+  x.fillStyle='#f5d76e'; x.font='900 30px "Bebas Neue","Arial Black",Arial'; x.textAlign='left';
+  x.fillText('CLAN ZK · CREDENCIAL OFICIAL',130,66);
+  x.fillStyle='#8a8a93'; x.font='600 13px Inter,Arial'; x.fillText('ARCHIVO HISTÓRICO · THE CHOSEN ONE',130,88);
+  const ax=W-92, ay=150, ar=46;
+  function ring(){ x.beginPath(); x.arc(ax,ay,ar+3,0,7); x.strokeStyle='#f5d76e'; x.lineWidth=3; x.stroke(); }
+  x.save(); x.beginPath(); x.arc(ax,ay,ar,0,7); x.closePath(); x.clip();
+  x.fillStyle='#d4af37'; x.fillRect(ax-ar,ay-ar,ar*2,ar*2);
+  if(me&&me.avatar){
+    const im=new Image();
+    im.onload=function(){ x.save(); x.beginPath(); x.arc(ax,ay,ar,0,7); x.clip(); x.drawImage(im,ax-ar,ay-ar,ar*2,ar*2); x.restore(); ring(); };
+    im.src=me.avatar;
+    x.fillStyle='#0b0b0d'; x.font='900 44px "Arial Black",Arial'; x.textAlign='center'; x.fillText((me.nickname[0]||'Z').toUpperCase(),ax,ay+16);
+  } else {
+    x.fillStyle='#0b0b0d'; x.font='900 44px "Arial Black",Arial'; x.textAlign='center'; x.fillText((me?me.nickname[0]:'Z').toUpperCase(),ax,ay+16);
+  }
+  x.restore(); ring();
+  const rk=rankInfo();
+  x.textAlign='left';
+  x.fillStyle='#ececec'; x.font='900 40px "Bebas Neue","Arial Black",Arial';
+  x.fillText(String((me?me.nickname:'MIEMBRO')).toUpperCase(),40,170);
+  x.fillStyle=rk.c; x.font='800 16px Inter,Arial'; x.fillText('RANGO: '+rk.r,40,196);
+  x.fillStyle='#8a8a93'; x.font='600 13px Inter,Arial';
+  const since=(me&&me.createdAt)?new Date(me.createdAt).toLocaleDateString('es-AR',{day:'2-digit',month:'long',year:'numeric'}):'—';
+  x.fillText('MIEMBRO DESDE: '+since.toUpperCase(),40,224);
+  x.fillText('N° DE SOCIO: #'+memberNumber(),40,246);
+  x.fillText('ID: '+String((me?me.id:'zk-000')).slice(0,14),40,268);
+  x.fillStyle='rgba(212,175,55,.85)'; x.font='italic 600 13px Georgia,serif';
+  x.fillText('"La historia no se borra. Se archiva."',40,300);
+  const id=String(me?me.id:'zk000');
+  let bx=40; x.fillStyle='#ececec';
+  for(let i=0;i<id.length;i++){ const c=id.charCodeAt(i); const w=(c%4)+1; x.fillRect(bx,330,w,52); bx+=w+((c%3)+2); }
+  x.fillStyle='#8a8a93'; x.font='600 11px Inter,Arial'; x.fillText(id.toUpperCase(),40,398);
+  x.textAlign='right'; x.fillText('v2.3 · zk-archivo',W-40,398);
+}
+function downloadCred(){
+  const cv=$('#credCanvas'); if(!cv) return;
+  try{
+    const a=document.createElement('a');
+    a.href=cv.toDataURL('image/png');
+    a.download='credencial-zk-'+String((me?me.nickname:'miembro')).toLowerCase().replace(/[^a-z0-9]+/g,'-')+'.png';
+    document.body.appendChild(a); a.click(); a.remove();
+    unlockAch('cred'); toast('Credencial descargada','🪪');
+  }catch(e){ toast('Tu navegador bloqueó la descarga','⚠️'); }
+}
+
+/* ---------- calendario de guerra ---------- */
+const CAL_EVENTS=[
+{y:2022,m:11,d:12,t:'Nam entra a TCO',ic:'🌱',sub:'2022'},
+{y:2023,m:null,t:'Era de ;bkit others',ic:'💥',sub:'2023'},
+{y:2023,m:null,t:'Rituales: Simón Dice',ic:'🎲',sub:'2023'},
+{y:2024,m:1,t:'Paz aparente en servers latinos',ic:'🕊️',sub:'2024'},
+{y:2024,m:null,t:'Sam y la ciudad del server vacío',ic:'🏗️',sub:'2024'},
+{y:2024,m:null,t:'Traición: BLIND y GLITCH',ic:'💔',sub:'2024'},
+{y:2024,m:11,t:'Falsa reconciliación con Damian',ic:'🎭',sub:'2024'},
+{y:2024,m:null,t:'Enzo despierta a Nam',ic:'🥹',sub:'2024'},
+{y:2024,m:null,t:'Batalla Final: medio TCO libre',ic:'⚔️',sub:'2024'},
+{y:2025,m:1,d:18,t:'Enzo conoce a Tq_Pan',ic:'🤝',sub:'2025'},
+{y:2025,m:1,t:'Alianza TQ+MG y ruptura',ic:'⚡',sub:'2025'},
+{y:2025,m:1,t:'Operación Guardia Nocturna',ic:'🌙',sub:'2025'},
+{y:2025,m:2,t:'2da Guerra Mundial de TCO',ic:'🌍',sub:'2025'},
+{y:2025,m:2,t:'El crash fallido de Napoleón',ic:'💥',sub:'2025'},
+{y:2025,m:3,t:'Victoria total de TQ',ic:'🏆',sub:'2025'},
+{y:2025,m:3,t:'Declive: era Dead Rails',ic:'📉',sub:'2025'},
+{y:2026,m:1,t:'Nam vuelve al mundo raideado',ic:'🧱',sub:'2026'},
+{y:2026,m:2,t:'Nace el Clan IJC',ic:'🏴',sub:'2026'},
+{y:2026,m:2,t:'Prueba de fuego: Radical',ic:'🧠',sub:'2026'},
+{y:2026,m:3,t:'Leak RomazHUB y NamHUB gratis',ic:'🧪',sub:'2026'},
+{y:2026,m:3,t:'Defensa vs SDZ (copia de MG)',ic:'🛡️',sub:'2026'},
+{y:2026,m:12,t:'IJC renace como Clan ZK',ic:'👑',sub:'2026'}
+];
+let calYear=2026;
+const MESES=['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'];
+function renderCalendar(){
+  const yrs=$('#calYears'), grid=$('#calGrid'), strip=$('#calStrip');
+  if(!yrs||!grid) return;
+  yrs.innerHTML=[2022,2023,2024,2025,2026].map(y=>'<button data-action="cal-year" data-y="'+y+'" class="'+(y===calYear?'active':'')+'">'+y+'</button>').join('');
+  const evs=CAL_EVENTS.filter(e=>e.y===calYear);
+  const und=evs.filter(e=>!e.m);
+  if(und.length){ strip.style.display='flex'; strip.innerHTML='<span class="lbl">Sin mes exacto:</span>'+und.map(e=>'<button class="cal-ev" style="width:auto;margin:0" data-action="goto-chapter" data-sub="'+e.sub+'">'+e.ic+' '+escapeHtml(e.t)+'</button>').join(''); }
+  else strip.style.display='none';
+  grid.innerHTML=MESES.map((mn,i)=>{
+    const mev=evs.filter(e=>e.m===i+1);
+    return '<div class="cal-month'+(mev.length?' has':'')+'"><h5>'+mn+' '+calYear+'</h5>'+mev.map(e=>'<button class="cal-ev" data-action="goto-chapter" data-sub="'+e.sub+'"><span class="d">'+(e.d?e.d+' · ':'')+'</span>'+e.ic+' '+escapeHtml(e.t)+'</button>').join('')+'</div>';
+  }).join('');
+}
+
+/* ---------- linaje de clanes ---------- */
+let linBuilt=false;
+function buildLinaje(){
+  if(linBuilt) return; linBuilt=true;
+  const svg=$('#linTree'); if(!svg) return;
+  const N=[
+    {id:'tco',x:450,y:70,r:26,label:'THE CHOSEN ONE',sub:'2022 · el juego',col:'#d4af37',clan:null},
+    {id:'tq',x:230,y:210,r:22,label:'Clan TQ',sub:'2024 · Exotic',col:'#3ddc84',clan:'tq'},
+    {id:'ac',x:450,y:210,r:20,label:'Admin Community',sub:'los guardianes',col:'#d4af37',clan:'admin'},
+    {id:'mg',x:670,y:210,r:22,label:'Clan MG',sub:'fines 2024 · Damian',col:'#e23b3b',clan:'mg'},
+    {id:'ijc',x:230,y:380,r:24,label:'IJC → ZK',sub:'feb 2026 · Nam+Enzo',col:'#d4af37',clan:'ijc'},
+    {id:'sdz',x:670,y:380,r:20,label:'Clan SDZ',sub:'2026 · copia zombi',col:'#e23b3b',clan:'sdz'}
+  ];
+  const pos={}; N.forEach(n=>pos[n.id]=n);
+  let html='';
+  const edge=(a,b,k,delay)=>{ const A=pos[a],B=pos[b]; return '<path class="lin-edge '+k+'" style="animation-delay:'+delay+'s" d="M '+A.x+' '+(A.y+A.r)+' C '+A.x+' '+(A.y+A.r+45)+', '+B.x+' '+(B.y-B.r-45)+', '+B.x+' '+(B.y-B.r)+'"/>'; };
+  html+=edge('tco','tq','root',0)+edge('tco','ac','root',0.15)+edge('tco','mg','root',0.3)+edge('tq','ijc','ally',0.5);
+  html+='<text class="lin-lbl" x="245" y="300">Enzo trae la escuela</text>';
+  html+=edge('mg','sdz','copy',0.7)+'<text class="lin-lbl" x="685" y="300">copia reciclada</text>';
+  const T=pos.tq, M=pos.mg;
+  html+='<line class="lin-edge war" x1="'+(T.x+30)+'" y1="'+T.y+'" x2="'+(M.x-30)+'" y2="'+M.y+'"/>';
+  html+='<text class="lin-lbl" x="450" y="'+(T.y-16)+'" text-anchor="middle" style="fill:#e23b3b">⚔️ GUERRA 2025</text>';
+  html+='<path class="lin-edge mig" style="animation-delay:.9s" d="M '+(T.x+42)+' '+(T.y+12)+' C 330 270, 330 320, '+(pos.ijc.x+44)+' '+(pos.ijc.y-16)+'"/>';
+  html+='<text class="lin-lbl" x="345" y="292" style="fill:#00cfff">👥 Elías · Facundo · Zea</text>';
+  N.forEach((n,i)=>{
+    html+='<g transform="translate('+n.x+','+n.y+')"><g class="lin-node" style="animation-delay:'+(0.12*i)+'s" '+(n.clan?'data-action="clan" data-clan="'+n.clan+'"':'')+'>'+
+      '<circle r="'+n.r+'" fill="#141419" stroke="'+n.col+'" stroke-width="2.5"/>'+
+      '<text y="-'+(n.r+12)+'" text-anchor="middle" style="font-size:13px;font-weight:800;fill:'+n.col+'">'+n.label+'</text>'+
+      '<text y="'+(n.r+20)+'" text-anchor="middle" class="lin-lbl">'+n.sub+'</text>'+
+      '</g></g>';
+  });
+  svg.innerHTML=html;
+}
+
+/* ---------- confesiones anónimas ---------- */
+async function loadConfessions(){
+  const grid=$('#confGrid'); if(!grid) return;
+  const F=window.firebaseFunctions;
+  if(!F||!window.firebaseDb){ grid.innerHTML='<div class="no-stories">Sin conexión con la base del clan</div>'; return; }
+  try{
+    const snap=await F.getDocs(F.query(F.collection(window.firebaseDb,'confessions'),F.orderBy('createdAt','desc'),F.limit(60)));
+    if(snap.empty){ grid.innerHTML='<div class="no-stories">Todavía no hay confesiones. La primera vela está esperando...</div>'; return; }
+    grid.innerHTML='';
+    snap.forEach(d=>{
+      const c=d.data();
+      const div=document.createElement('div'); div.className='conf-card';
+      div.innerHTML=escapeHtml(c.text)+
+        '<div class="conf-meta"><span>🕯️ anónimo · '+timeSince(typeof c.createdAt==='number'?c.createdAt:Date.now())+'</span>'+
+        (isAdminUser()?'<button class="comment-admin-btn" data-action="del-conf" data-id="'+d.id+'">🗑️</button>':'')+'</div>';
+      grid.appendChild(div);
+    });
+  }catch(e){ grid.innerHTML='<div class="no-stories">Error al cargar confesiones</div>'; }
+}
+async function postConfession(){
+  if(!me){ toast('Primero elegí tu apodo (aunque la confesión sea anónima)','👤'); return; }
+  const inp=$('#confInput'); if(!inp) return;
+  const text=inp.value.trim();
+  if(!text){ toast('Escribí algo primero','🕯️'); return; }
+  if(text.length>400){ toast('Máximo 400 caracteres','⚠️'); return; }
+  if(containsBadWords(text)){ toast('El muro es anónimo, no un basurero','⚠️'); return; }
+  const F=window.firebaseFunctions;
+  if(!F||!window.firebaseDb){ toast('Firebase no disponible','❌'); return; }
+  try{
+    await F.addDoc(F.collection(window.firebaseDb,'confessions'),{ text:text, createdAt:Date.now() });
+    inp.value=''; const cc=$('#confCount'); if(cc) cc.textContent='0';
+    unlockAch('anon'); loadConfessions(); beep(520,0.1,'sine',0.05); toast('Confesión publicada en el muro','🕯️');
+  }catch(e){ toast('Error: '+e.message,'❌'); }
+}
+async function deleteConfession(id){
+  const F=window.firebaseFunctions; if(!F) return;
+  if(!confirm('¿Borrar esta confesión anónima?')) return;
+  try{ await F.deleteDoc(F.doc(window.firebaseDb,'confessions',id)); loadConfessions(); loadAdminConfs(); toast('Confesión borrada','🗑️'); }
+  catch(e){ toast('Error: '+e.message,'❌'); }
+}
+async function loadAdminConfs(){
+  const box=$('#admConfs'); if(!box) return;
+  const F=window.firebaseFunctions;
+  if(!F||!window.firebaseDb){ box.innerHTML='<div class="no-stories">Sin conexión</div>'; return; }
+  try{
+    const snap=await F.getDocs(F.query(F.collection(window.firebaseDb,'confessions'),F.orderBy('createdAt','desc'),F.limit(15)));
+    let html='',n=0;
+    snap.forEach(d=>{ const c=d.data(); n++;
+      html+='<div class="adm-row"><span>🕯️</span><span class="adm-txt">'+escapeHtml(String(c.text||'').slice(0,70))+'</span><button class="delete-btn" data-action="del-conf" data-id="'+d.id+'">🗑️</button></div>';
+    });
+    box.innerHTML=n?html:'<div class="no-stories">Sin confesiones</div>';
+  }catch(e){ box.innerHTML='<div class="no-stories">Error al cargar</div>'; }
+}
+if($('#confInput')) $('#confInput').addEventListener('input',e=>{ const c=$('#confCount'); if(c) c.textContent=e.target.value.length; });
 
 </script>
 </body>

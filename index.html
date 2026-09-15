@@ -89,6 +89,10 @@ html.rm *,html.rm *::before,html.rm *::after{animation-duration:.001s !important
 .auth-btn{width:100%;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000;border:none;padding:14px;border-radius:10px;font-weight:800;font-size:1em;cursor:pointer;transition:.25s;font-family:inherit;letter-spacing:.5px}
 .auth-btn:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(var(--gold-rgb),.35);filter:brightness(1.08)}
 .auth-btn:active{transform:translateY(0)}
+.discord-btn{background:#5865F2;color:#fff;display:flex;align-items:center;justify-content:center;gap:10px;letter-spacing:1px;box-shadow:0 10px 30px rgba(88,101,242,.35)}
+.discord-btn:hover{background:#4752c4;box-shadow:0 14px 36px rgba(88,101,242,.5);transform:translateY(-2px);filter:none}
+.onboard-divider{display:flex;align-items:center;gap:12px;color:var(--mut);font-size:.7em;letter-spacing:2px;margin:18px 0 14px;font-weight:700}
+.onboard-divider::before,.onboard-divider::after{content:'';flex:1;height:1px;background:var(--line)}
 .auth-error{background:rgba(226,59,59,.1);border:1px solid var(--red);color:var(--red);padding:12px;border-radius:8px;margin-bottom:16px;font-size:.88em;display:none;text-align:left}
 .auth-error.show{display:block;animation:shake .4s}
 @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
@@ -690,6 +694,8 @@ footer .foot-links a:hover{color:var(--gold)}
 <img class="onboard-emblem" src="images/clanzk.png" alt="Clan ZK" onerror="emblemFail(this)">
 <h2>BIENVENIDO AL <em>ARCHIVO</em></h2>
 <p>Elegí tu identidad. El apodo es único y no se puede repetir.</p>
+<button class="auth-btn discord-btn" data-action="discord-login">🎮 INICIAR SESIÓN CON DISCORD</button>
+<div class="onboard-divider"><span>O ENTRÁ CON APODO</span></div>
 <div class="auth-error" id="onboardError"></div>
 <input type="text" class="auth-input" id="onboardNick" placeholder="Tu apodo (3-20 caracteres)" maxlength="20">
 <img class="onboard-preview" id="onboardPreview" alt="" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='110' height='110'%3E%3Crect fill='%2316161a' width='110' height='110' rx='55'/%3E%3Ctext fill='%238a8a93' x='50%25' y='50%25' text-anchor='middle' dy='.3em' font-size='14'%3ETu foto%3C/text%3E%3C/svg%3E">
@@ -1317,6 +1323,14 @@ footer .foot-links a:hover{color:var(--gold)}
 <h2 class="sec-title">NOVEDADES DEL <em>ARCHIVO</em></h2>
 <p class="sec-sub">Changelog público: cada era de esta página</p>
 <div class="cl-entry">
+<div class="cl-ver">v2.4 · "IDENTIDAD REAL"</div><div class="cl-date">15 de septiembre de 2026</div>
+<ul>
+<li>🎮 Inicio de sesión con Discord (OAuth2 implicit grant, sin backend): ID real, username y avatar de Discord.</li>
+<li>🔗 Vinculación de perfiles: si ya tenías apodo, tu cuenta se liga a tu Discord sin perder nada.</li>
+<li>🛡️ Base lista para seguridad real: tope de historias y admins por ID de Discord en la próxima update.</li>
+</ul>
+</div>
+<div class="cl-entry">
 <div class="cl-ver">v2.3.1 · "HOTFIX + CRÓNICA TQ"</div><div class="cl-date">15 de septiembre de 2026</div>
 <ul>
 <li>🐛 Fix crítico: <code>limit</code> de Firebase no estaba importado → panel admin y confesiones crasheaban.</li>
@@ -1549,6 +1563,7 @@ footer .foot-links a:hover{color:var(--gold)}
 <input type="file" class="onboard-file" id="profileImg" accept="image/*">
 <input type="text" class="auth-input" id="profileNick" placeholder="Apodo" maxlength="20">
 <div id="nicknameCooldown" style="color:var(--mut);font-size:.8em;margin-top:-10px;margin-bottom:12px;display:none"></div>
+<div id="dcLinkInfo" style="color:var(--mut);font-size:.8em;margin-bottom:12px;display:none"></div>
 <div style="text-align:left;margin:4px 0 14px">
 <h4 style="font-family:'Bebas Neue';letter-spacing:.5px;color:var(--gold);font-size:1.15em">🏅 MIS LOGROS <span id="achCount" style="color:var(--mut);font-size:.65em"></span></h4>
 <div class="ach-grid" id="achGrid"></div>
@@ -2111,6 +2126,7 @@ function buildPalette(){
   paletteIndex.push({ic:'🪪',label:'Ver mi credencial',group:'Acción',run:()=>openCredModal()});
   paletteIndex.push({ic:'🛡️',label:'Crónica del Clan TQ',group:'Archivo',run:()=>{setTab('archivo',true);setSub('archivo','tq');}});
   paletteIndex.push({ic:'🐞',label:'Enviar feedback / reportar bug',group:'Acción',run:()=>openModal('feedbackModal')});
+  paletteIndex.push({ic:'🎮',label:'Iniciar sesión / vincular Discord',group:'Acción',run:()=>discordLogin()});
   paletteIndex.push({ic:'📰',label:'Novedades del archivo',group:'Archivo',run:()=>{setTab('archivo',true);setSub('archivo','novedades');}});
   if(isAdminUser()) paletteIndex.push({ic:'🛡️',label:'Panel de administración',group:'Acción',run:()=>openAdminPanel()});
   Object.keys(CHARS).forEach(id=>paletteIndex.push({ic:'👤',label:'Expediente: '+CHARS[id].name,group:'Personaje',run:()=>charModal(id)}));
@@ -2224,6 +2240,12 @@ async function openProfileModal(){
     if(days<7){ const left=Math.ceil(7-days); cd.style.display='block'; cd.textContent='⏱️ Podés cambiar tu apodo en '+left+' día'+(left!==1?'s':''); inp.disabled=true; }
     else { cd.style.display='none'; inp.disabled=false; }
   }else{ cd.style.display='none'; inp.disabled=false; }
+  const dci=$('#dcLinkInfo');
+  if(dci){
+    dci.style.display='block';
+    if(me.discordTag) dci.textContent='🎮 Vinculado: '+me.discordTag;
+    else dci.innerHTML='Sin Discord vinculado · <span style="color:var(--gold);cursor:pointer;font-weight:700" data-action="discord-login">vincular ahora</span>';
+  }
   renderAch();
   openModal('profileModal');
 }
@@ -2548,6 +2570,7 @@ document.addEventListener('click',e=>{
     case 'palette': openPalette(); break;
     case 'profile': openProfileModal(); break;
     case 'reset-profile': resetDeviceProfile(); break;
+    case 'discord-login': discordLogin(); break;
     case 'onboard': completeOnboarding(); break;
     case 'save-profile': saveProfile(); break;
     case 'new-story': openStoryCreator(); break;
@@ -2699,6 +2722,9 @@ function hideLoader(){
 }
 function boot(){
   if(booted) return; booted=true;
+  bootAsync();
+}
+async function bootAsync(){
   hideLoader();
   loadSettings(); applySettings();
   paintAvatars(); renderCodex(); renderTimeline(); buildMap(); buildPalette(); initParticles();
@@ -2710,6 +2736,11 @@ function boot(){
   if(state.tab==='historia') setSubVisual('historia',state.subs.historia);
   if(state.tab==='archivo') setSubVisual('archivo',state.subs.archivo);
   if(state.tab==='comunidad') setSubVisual('comunidad',state.subs.comunidad);
+  await dcPromise;
+  if(dcUser){
+    try{ await linkDiscordProfile(dcUser); toast('Sesión de Discord activa: '+(dcUser.global_name||dcUser.username),'🎮'); }
+    catch(e){ console.warn(e); }
+  }
   me=loadLocalProfile();
   if(me){
     applyMe();
@@ -3211,6 +3242,81 @@ function autoReport(msg,src,line){
 window.addEventListener('error',e=>{ autoReport(e.message,e.filename,e.lineno); });
 window.addEventListener('unhandledrejection',e=>{ autoReport('Promesa rechazada: '+((e.reason&&e.reason.message)?e.reason.message:e.reason),'',0); });
 if($('#fbText')) $('#fbText').addEventListener('input',e=>{ const c=$('#fbCount'); if(c) c.textContent=e.target.value.length; });
+
+/* ================================================================
+   v2.4 · LOGIN DE DISCORD (OAuth2 implicit grant, sin backend)
+   ================================================================ */
+const DISCORD_CLIENT_ID='1549249161721937961';
+function dcRedirectUri(){ return location.origin+location.pathname; }
+function discordLogin(){
+  location.href='https://discord.com/oauth2/authorize?client_id='+DISCORD_CLIENT_ID+
+    '&response_type=token&redirect_uri='+encodeURIComponent(dcRedirectUri())+'&scope=identify';
+}
+function dcGrabHash(){
+  if(!location.hash||location.hash.indexOf('access_token=')<0) return null;
+  const p=new URLSearchParams(location.hash.slice(1));
+  const t=p.get('access_token'); if(!t) return null;
+  const exp=+(p.get('expires_in')||604800);
+  try{ localStorage.setItem('zk_dc',JSON.stringify({token:t,exp:Date.now()+exp*1000-60000})); }catch(e){}
+  try{ history.replaceState(null,'',location.pathname+location.search); }catch(e){}
+  return t;
+}
+function dcStoredToken(){ try{ const o=JSON.parse(localStorage.getItem('zk_dc')||'null'); if(o&&o.token&&o.exp>Date.now()) return o.token; }catch(e){} return null; }
+function dcClearToken(){ try{ localStorage.removeItem('zk_dc'); }catch(e){} }
+async function dcFetchMe(token){
+  const r=await fetch('https://discord.com/api/v10/users/@me',{headers:{Authorization:'Bearer '+token}});
+  if(!r.ok) throw new Error('Discord respondió '+r.status);
+  return r.json();
+}
+function dcAvatarUrl(u){
+  if(u.avatar) return 'https://cdn.discordapp.com/avatars/'+u.id+'/'+u.avatar+'.png?size=128';
+  let idx=0; try{ idx=Number(BigInt(u.id)>>22n)%6; }catch(e){ idx=0; }
+  return 'https://cdn.discordapp.com/embed/avatars/'+idx+'.png';
+}
+let dcUser=null, dcDone=false;
+const dcPromise=(async()=>{
+  const token=dcGrabHash()||dcStoredToken();
+  if(!token){ dcDone=true; return; }
+  try{ dcUser=await dcFetchMe(token); }
+  catch(e){ console.warn('Sesión de Discord inválida o expirada:',e); dcClearToken(); }
+  dcDone=true;
+})();
+async function linkDiscordProfile(du){
+  const F=window.firebaseFunctions;
+  const dAvatar=dcAvatarUrl(du);
+  const dTag=String(du.username||'')+((du.discriminator&&du.discriminator!=='0')?'#'+du.discriminator:'');
+  let adopted=null;
+  if(F&&window.firebaseDb){
+    try{
+      const q=F.query(F.collection(window.firebaseDb,'users'),F.where('discordId','==',du.id));
+      const snap=await F.getDocs(q);
+      if(!snap.empty){ const d=snap.docs[0]; adopted=Object.assign({docId:d.id},d.data()); }
+    }catch(e){ console.warn(e); }
+  }
+  if(adopted){
+    me={ id:adopted.userId, nickname:adopted.nickname, nicknameLower:adopted.nicknameLower, avatar:adopted.avatar||dAvatar, bio:adopted.bio||'', createdAt:adopted.createdAt||Date.now(), nicknameChangedAt:adopted.nicknameChangedAt||0, docId:adopted.docId, discordId:du.id, discordTag:dTag };
+    saveLocalProfile(me); return;
+  }
+  const local=loadLocalProfile();
+  if(local){
+    me=local; me.discordId=du.id; me.discordTag=dTag; if(!me.avatar) me.avatar=dAvatar;
+    saveLocalProfile(me);
+    if(F&&window.firebaseDb&&me.docId){
+      try{ await F.updateDoc(F.doc(window.firebaseDb,'users',me.docId),{ discordId:du.id, discordTag:dTag, avatar:me.avatar }); }catch(e){}
+    }
+    return;
+  }
+  const nick=String(du.global_name||du.username||'miembro').slice(0,20);
+  const profile={ id:'u_'+Date.now().toString(36)+Math.random().toString(36).slice(2,7), nickname:nick, nicknameLower:nick.toLowerCase(), avatar:dAvatar, bio:'', createdAt:Date.now(), nicknameChangedAt:0, docId:null, discordId:du.id, discordTag:dTag };
+  if(F&&window.firebaseDb){
+    try{
+      if(await nicknameTaken(profile.nicknameLower,null)){ profile.nickname=nick.slice(0,16)+'_'+Math.floor(Math.random()*90+10); profile.nicknameLower=profile.nickname.toLowerCase(); }
+      const ref=await F.addDoc(F.collection(window.firebaseDb,'users'),{ userId:profile.id, nickname:profile.nickname, nicknameLower:profile.nicknameLower, avatar:profile.avatar, bio:'', createdAt:profile.createdAt, nicknameChangedAt:0, discordId:du.id, discordTag:dTag });
+      profile.docId=ref.id;
+    }catch(e){ console.warn(e); }
+  }
+  saveLocalProfile(profile); me=profile;
+}
 
 </script>
 </body>

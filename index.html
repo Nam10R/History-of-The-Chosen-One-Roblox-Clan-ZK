@@ -22,7 +22,7 @@
 <!-- FIREBASE -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
-import { getFirestore, collection, addDoc, getDocs, query, where, orderBy, serverTimestamp, onSnapshot, doc, deleteDoc, updateDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc, getDocs, query, where, orderBy, limit, serverTimestamp, onSnapshot, doc, deleteDoc, updateDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 const firebaseConfig = {
 apiKey: "AIzaSyAVudNUtJVqmctaYrkdFoBaRfS5EQscxn0",
 authDomain: "the-chosen-one-roblox.firebaseapp.com",
@@ -35,7 +35,7 @@ measurementId: "G-ME50QF8K1Y"
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 window.firebaseDb = db;
-window.firebaseFunctions = { collection, addDoc, getDocs, query, where, orderBy, serverTimestamp, onSnapshot, doc, deleteDoc, updateDoc };
+window.firebaseFunctions = { collection, addDoc, getDocs, query, where, orderBy, limit, serverTimestamp, onSnapshot, doc, deleteDoc, updateDoc };
 window.firebaseReady = true;
 window.dispatchEvent(new Event('firebaseReady'));
 </script>
@@ -649,6 +649,21 @@ footer .foot-links a:hover{color:var(--gold)}
 .credit-card .cic{font-size:2.2em;margin-bottom:8px;display:inline-block}
 .credit-card h4{font-family:'Bebas Neue';font-size:1.3em;letter-spacing:.5px;color:var(--gold);margin-bottom:6px}
 .credit-card p{font-size:.87em;color:var(--mut);line-height:1.55}
+
+/* ============ DOSSIERS (CRÓNICA TQ) ============ */
+.dos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:20px;margin-top:30px}
+.dos-card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px;transition:.3s;animation:cardIn .5s var(--ease)}
+.dos-card:hover{transform:translateY(-4px);border-color:var(--gold);box-shadow:0 16px 40px rgba(0,0,0,.45)}
+.dos-head{display:flex;gap:14px;align-items:center;margin-bottom:10px}
+.dos-head img{width:70px;height:70px;border-radius:50%;object-fit:cover;border:3px solid var(--gold);flex-shrink:0;box-shadow:0 8px 22px rgba(0,0,0,.5)}
+.dos-head h4{font-family:'Bebas Neue';font-size:1.5em;letter-spacing:.5px;color:var(--gold2);line-height:1.1}
+.dos-role{font-size:.74em;font-weight:800;letter-spacing:.5px;text-transform:uppercase}
+.dos-meta{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 10px}
+.dos-meta span{background:var(--bg2);border:1px solid var(--line);border-radius:20px;padding:3px 10px;font-size:.7em;color:var(--mut)}
+.dos-card p{font-size:.88em;color:#c4c4cc;line-height:1.6;margin-bottom:8px}
+.dos-hitos{margin:6px 0 0 16px;font-size:.82em;color:var(--mut)}
+.dos-hitos li{margin-bottom:4px}
+.notif-item.feedback .notif-type{color:#ff9f1a}
 </style>
 </head>
 <body>
@@ -712,6 +727,7 @@ footer .foot-links a:hover{color:var(--gold)}
 <span id="userNickname" data-action="profile">Usuario</span>
 <button class="logout-btn" data-action="reset-profile" title="Cambiar de perfil en este dispositivo">✕</button>
 </div>
+<button class="icon-btn" data-action="modal" data-modal="feedbackModal" title="Feedback / reportar bug">🐞</button>
 <button class="icon-btn notif-bell" id="notifBell" data-action="notif-panel" data-count="0" title="Notificaciones">🔔</button>
 <button class="icon-btn" data-action="modal" data-modal="settingsModal" title="Ajustes">⚙️</button>
 <button class="icon-btn" data-action="drawer" title="Menú">☰</button>
@@ -997,7 +1013,7 @@ footer .foot-links a:hover{color:var(--gold)}
 <h2 class="sec-title">CÓDICE DE <em>PERSONAJES</em></h2>
 <p class="sec-sub">Expedientes clasificados de todos los actores de la historia · tocá una tarjeta para abrir su expediente</p>
 <div class="codex-filters" id="codexFilters">
-<button class="active" data-filter="all">Todos (18)</button>
+<button class="active" data-filter="all">Todos (24)</button>
 <button data-filter="ally">🛡️ Aliados</button>
 <button data-filter="neutral">⚖️ Neutrales</button>
 <button data-filter="enemy">💀 Enemigos</button>
@@ -1016,6 +1032,7 @@ footer .foot-links a:hover{color:var(--gold)}
 <button data-action="sub" data-tab="archivo" data-sub="hall">🏆 Hall</button>
 <button data-action="sub" data-tab="archivo" data-sub="mapa">🗺️ Mapa</button>
 <button data-action="sub" data-tab="archivo" data-sub="clanes">🏴 Clanes</button>
+<button data-action="sub" data-tab="archivo" data-sub="tq">🛡️ Crónica TQ</button>
 <button data-action="sub" data-tab="archivo" data-sub="wiki">📚 Wiki</button>
 <button data-action="sub" data-tab="archivo" data-sub="periodico">📰 Periódico</button>
 <button data-action="sub" data-tab="archivo" data-sub="calendario">📅 Calendario</button>
@@ -1103,6 +1120,60 @@ footer .foot-links a:hover{color:var(--gold)}
 <div class="wiki-term"><h4>Blacklist</h4><p>Lista negra de usuarios bloqueados de usar un script o entrar a un server. Romazdev la usó tras el leak de su hub.</p></div>
 <div class="wiki-term"><h4>RQ</h4><p>Rejoin/Quit: rendirse abandonando el server. El enemigo hizo RQ tras la Batalla Final de 2024.</p></div>
 <div class="wiki-term"><h4>Alt / Multicuenta</h4><p>Cuenta secundaria usada para espionaje o infiltración. La herramienta clave de Enzo en 2025.</p></div>
+</div>
+</div>
+</section>
+</div>
+
+<div class="subpanel" data-sub="tq">
+<section class="special">
+<div class="special-inner">
+<h2 class="sec-title">CRÓNICA DEL CLAN <em>TQ</em></h2>
+<p class="sec-sub">Puros dossiers: la historia de cada miembro, contada desde el testimonio de Enzo · tocá cualquier retrato para su expediente</p>
+<div class="dos-grid">
+<div class="dos-card"><div class="dos-head"><img data-ava="exotic" loading="lazy" onerror="avaFail(this)" alt="Exotic"><div><h4>Tq_EX0T1C</h4><div class="role ally">Líder fundacional</div></div></div>
+<div class="dos-meta"><span>👑 Fundador de TQ</span><span>📅 2024-2025</span></div>
+<p>El arquitecto del clan TQ. Cuando Enzo decidió frenar a MG de una vez, Exotic le abrió la puerta sin dudar y le pasó el link del Discord. Lideró al clan durante la Segunda Guerra Mundial de TCO y lo condujo a la victoria total.</p>
+<ul class="dos-hitos"><li>🚪 Aceptó a Enzo y le dio casa en TQ</li><li>🏆 Líder en la victoria contra MG</li><li>🤝 2025: perdonó a Facundo en el reencuentro del Discord</li></ul></div>
+<div class="dos-card"><div class="dos-head"><img data-ava="enzo" loading="lazy" onerror="avaFail(this)" alt="Enzo"><div><h4>Enzo (Diego)</h4><div class="role ally">El espía · Co-Líder IJC/ZK</div></div></div>
+<div class="dos-meta"><span>🕵️ enzors19209</span><span>📅 2024-2026</span></div>
+<p>Llegó a TQ con una misión: frenar a MG desde adentro. Sus alts y multicuentas de Discord fueron el arma silenciosa de la Guardia Nocturna. Facundo lo subió de rango como Co-Líder junto a Zea y Elías. Hoy es Co-Líder del Clan ZK y la fuente primaria de esta crónica.</p>
+<ul class="dos-hitos"><li>🌙 Operación Guardia Nocturna (1:00–4:00 AM)</li><li>📼 Evidencias contra Napoleón y Damián</li><li>⬆️ Promovido por el Co-Líder Facundo</li><li>🏴 Co-Líder del IJC → ZK</li></ul></div>
+<div class="dos-card"><div class="dos-head"><img data-ava="facu" loading="lazy" onerror="avaFail(this)" alt="Facundo"><div><h4>Tq_Facu (Facundo)</h4><div class="role ally">Memes, IDs y la luna → Co-Líder</div></div></div>
+<div class="dos-meta"><span>🎭 Memero oficial</span><span>📅 2025-2026</span></div>
+<p>En la alianza TQ+MG creaba memes de Enzo, que había venido a frenar el conflicto. Cuando la alianza se rompió, se volvió maquinaria de guerra: convertía las evidencias en IDs de Roblox, usaba alts para raidear admins corruptos y volver servers normales, XL o VC en territorio TQ, y acompañó a Enzo en las infiltraciones nocturnas.</p>
+<p>Tras los temas con Tq_Littlel tomó el control como Co-Líder ("grave error más adelante") y subió a Enzo, Zea y Elías. Post-victoria convirtió TQ en comunidad de Dead Rails... hasta que su primo tomó sus cosas y desmadró el server viejo haciéndose pasar por él. En 2025, en un Discord armado por Enzo con Exotic, fue perdonado y volvió a ser amigo del líder. Hoy está en el Clan ZK, cambiado y maduro.</p>
+<ul class="dos-hitos"><li>🌙 La captura icónica: Enzo y Facundo en la luna</li><li>🧾 IDs de evidencias para la defensa de TQ</li><li>⬆️ Co-Líder de TQ y promotor de rangos</li><li>💀 Raids con alts a admins corruptos</li><li>🤝 2025: el perdón de Exotic</li></ul></div>
+<div class="dos-card"><div class="dos-head"><img data-ava="elias" loading="lazy" onerror="avaFail(this)" alt="Elías"><div><h4>Elías</h4><div class="role ally">El espía que MG olvidó banear</div></div></div>
+<div class="dos-meta"><span>🎮 @jocarloza79</span><span>💬 @eleliasxd</span><span>📅 2025-2026</span></div>
+<p>Al principio parecía un random, "solo un amigo de Tq_Pan". Era un ayudante del clan TQ. Cuando la paz con MG terminó, MG cometió el error fatal: <strong>olvidó banearlo</strong>. Desde adentro sacó las evidencias más peligrosas de la guerra: los chats donde Napoleón y Damián amenazaban al clan TQ con doxearlos.</p>
+<p>Cuando MG convirtió su viejo Discord en un Museo, descubrieron al espía y lo banearon. Se creó una alt para el Discord nuevo y también lo descubrieron, igual que a las alts de Enzo. En la era Dead Rails jugaba con Enzo, Daniel y Pan. Hoy es miembro del Clan ZK: humilde, con su flaca, y cae bien.</p>
+<ul class="dos-hitos"><li>🕵️ Espía interno de TQ dentro de MG</li><li>📼 Evidencias de las amenazas de doxeo</li><li>🏛️ Baneado cuando MG volvió su Discord "Museo"</li><li>🏴 Hoy: Clan ZK</li></ul></div>
+<div class="dos-card"><div class="dos-head"><img data-ava="fonsi" loading="lazy" onerror="avaFail(this)" alt="Fonsi"><div><h4>Fonsi</h4><div class="role neutral">Del puente infinito a la inteligencia militar</div></div></div>
+<div class="dos-meta"><span>🌉 @elchiquitin38 (alt)</span><span>📅 2024-2025</span></div>
+<p>Apareció raideando a Damián por abusar de su admin y torturar al server latino con un puente extremadamente enorme. Meses después de la guerra TQ vs MG, le escribió a Enzo por Roblox: Napoleón le había dicho cosas que llegaron a afectarlo... pero lo superó.</p>
+<p>De esas charlas nació un dúo improbable: jugaban Roblox y molestaban personas en Brookhaven. Y lo que Fonsi contaba, Enzo lo usó como información extra contra MG: para decirle la verdad a cada servidor y defender a TQ durante las consecuencias.</p>
+<ul class="dos-hitos"><li>🌉 El raid del puente absurdo</li><li>💬 Informante post-guerra contra MG</li><li>😄 Compañero de travesuras en Brookhaven</li></ul></div>
+<div class="dos-card"><div class="dos-head"><img data-ava="pan" loading="lazy" onerror="avaFail(this)" alt="Pan"><div><h4>Tq_Pan</h4><div class="role ally">La luz del 18 de enero</div></div></div>
+<div class="dos-meta"><span>🤝 Conocida el 18/01/2025</span><span>🎮 Dead Rails squad</span></div>
+<p>En medio de la tormenta, Enzo la conoció y le confió lo que nadie más sabía: las evidencias contra el clan MG. Se volvió amiga cercana y parte de la squad de Dead Rails con Daniel, Elías y Facundo cuando TQ cambió las trincheras por los rieles.</p>
+<ul class="dos-hitos"><li>🔐 Confidente de las evidencias anti-MG</li><li>🎮 Squad Dead Rails de TQ</li></ul></div>
+<div class="dos-card"><div class="dos-head"><img data-ava="zea" loading="lazy" onerror="avaFail(this)" alt="Zea"><div><h4>Zea</h4><div class="role ally">Promovida en la era del Co-Líder</div></div></div>
+<div class="dos-meta"><span>⬆️ Rango por Facundo</span><span>📅 2025</span></div>
+<p>Miembro constante del clan TQ. Cuando Facundo asumió como Co-Líder tras los temas con Tq_Littlel, Zea fue subida de rango junto a Enzo y Elías: el trío de confianza de la nueva comandancia.</p>
+<ul class="dos-hitos"><li>⬆️ Ascenso en la era del Co-Líder Facundo</li></ul></div>
+<div class="dos-card"><div class="dos-head"><img data-ava="gonza" loading="lazy" onerror="avaFail(this)" alt="Gonza"><div><h4>Gonza</h4><div class="role neutral">El herido por la palabra "traidor"</div></div></div>
+<div class="dos-meta"><span>⚠️ Ex miembro TQ</span><span>📅 2025</span></div>
+<p>Hallow lo llamó "traidor" y la palabra pegó como una cicatriz: Gonza se distanció del clan odiándolo. Llegó a apoyar a MG un tiempo, y por eso parte de la comunidad lo miró de reojo. Enzo, que estaba bien con ambos, explicaba con evidencias en cada server hasta que el odio fue desapareciendo.</p>
+<ul class="dos-hitos"><li>💔 El insulto de Hallow que partió al clan</li><li>🕊️ Su nombre fue limpiado con evidencias</li></ul></div>
+<div class="dos-card"><div class="dos-head"><img data-ava="littlel" loading="lazy" onerror="avaFail(this)" alt="Littlel"><div><h4>Tq_Littlel</h4><div class="role neutral">El conflicto que cambió el mando</div></div></div>
+<div class="dos-meta"><span>🌀 "Los temas con Littlel"</span><span>📅 2025</span></div>
+<p>Alrededor de Littlel se desató el conflicto interno que dejó un vacío de poder en TQ. Fue ese vacío el que Facundo llenó al tomar el control como Co-Líder... la decisión que él mismo chiama "grave error más adelante".</p>
+<ul class="dos-hitos"><li>🌀 Detonante del ascenso de Facundo al mando</li></ul></div>
+<div class="dos-card"><div class="dos-head"><img data-ava="dropbox" loading="lazy" onerror="avaFail(this)" alt="DropBox_Man"><div><h4>DropBox_Man</h4><div class="role ally">El apoyo silencioso</div></div></div>
+<div class="dos-meta"><span>🫂 Amigo IRL de Facundo</span><span>🌙 Guardia Nocturna</span></div>
+<p>Viejo amigo del círculo y amigo de Facundo en la vida real. Cuando las infiltraciones nocturnas se complicaban —amigos de Napoleón dentro de MG que grifeaban y delataban—, DropBox_Man aparecía como refuerzo silencioso para sostener la operación.</p>
+<ul class="dos-hitos"><li>🛟 Rescate en las noches de infiltración</li></ul></div>
 </div>
 </div>
 </section>
@@ -1245,6 +1316,16 @@ footer .foot-links a:hover{color:var(--gold)}
 <div class="special-inner" style="max-width:860px">
 <h2 class="sec-title">NOVEDADES DEL <em>ARCHIVO</em></h2>
 <p class="sec-sub">Changelog público: cada era de esta página</p>
+<div class="cl-entry">
+<div class="cl-ver">v2.3.1 · "HOTFIX + CRÓNICA TQ"</div><div class="cl-date">15 de septiembre de 2026</div>
+<ul>
+<li>🐛 Fix crítico: <code>limit</code> de Firebase no estaba importado → panel admin y confesiones crasheaban.</li>
+<li>🐛 Fix: los modales apilados quedaban uno detrás del otro → ahora el que abre pasa al frente y ESC cierra solo el de arriba.</li>
+<li>🐞 Sistema de Feedback: formulario de bugs/ideas + reporte técnico AUTOMÁTICO cuando algo crashea, con notificación al líder.</li>
+<li>🛡️ Crónica del Clan TQ: 10 dossiers completos (Exotic, Enzo, Facundo, Elías, Fonsi, Pan, Zea, Gonza, Littlel, DropBox_Man).</li>
+<li>👥 Códice expandido a 24 personajes: entran Elías, DropBox_Man, Zea, Tq_Littlel, Rayan y tucky.</li>
+</ul>
+</div>
 <div class="cl-entry">
 <div class="cl-ver">v2.3 · "LA ERA DE LOS TESOROS"</div><div class="cl-date">15 de septiembre de 2026</div>
 <ul>
@@ -1436,6 +1517,8 @@ footer .foot-links a:hover{color:var(--gold)}
 <div id="admComments"><div class="no-stories">Cargando...</div></div>
 <div class="adm-h">🕯️ Últimas confesiones</div>
 <div id="admConfs"><div class="no-stories">Cargando...</div></div>
+<div class="adm-h">🐞 Feedback recibido</div>
+<div id="admFeedback"><div class="no-stories">Cargando...</div></div>
 <div class="adm-h">📖 Últimas historias</div>
 <div id="admStories"><div class="no-stories">Cargando...</div></div>
 </div>
@@ -1494,6 +1577,27 @@ footer .foot-links a:hover{color:var(--gold)}
 </div>
 </div>
 
+<!-- FEEDBACK MODAL -->
+<div class="modal" id="feedbackModal">
+<div class="modal-c big">
+<button class="modal-x" data-action="close-modal" data-modal="feedbackModal">×</button>
+<h2>FEEDBACK Y <em>BUGS</em></h2>
+<p>¿Encontraste un error? ¿Tenés una idea? Le llega directo al líder</p>
+<div class="story-form">
+<select id="fbType" class="auth-input" style="margin-bottom:12px">
+<option value="bug">🐞 Bug / error</option>
+<option value="idea">💡 Idea / mejora</option>
+<option value="love">❤️ Amor al archivo</option>
+</select>
+<textarea id="fbText" maxlength="600" placeholder="Contame qué pasó (o qué se te ocurrió)... si es un bug, describí los pasos para reproducirlo"></textarea>
+<div class="char-count"><span id="fbCount">0</span>/600</div>
+<input type="text" class="auth-input" id="fbContact" placeholder="Contacto opcional (Discord/Roblox) para responderte" maxlength="60">
+<button class="auth-btn" data-action="submit-feedback">📨 ENVIAR AL LÍDER</button>
+<p style="font-size:.72em;color:var(--mut);margin-top:12px">PD: si la página crashea, ella misma envía un reporte técnico automático al líder. Magia negra.</p>
+</div>
+</div>
+</div>
+
 <!-- PALETA DE COMANDOS -->
 <div class="palette" id="palette">
 <div class="palette-box">
@@ -1521,6 +1625,7 @@ footer .foot-links a:hover{color:var(--gold)}
 <a class="drawer-link" data-action="sub" data-tab="archivo" data-sub="hall">Hall de la Fama<small>Medallas y logros</small></a>
 <a class="drawer-link" data-action="sub" data-tab="archivo" data-sub="mapa">Mapa de Alianzas<small>Red interactiva de relaciones</small></a>
 <a class="drawer-link" data-action="sub" data-tab="archivo" data-sub="clanes">Clanes y su historia<small>MG, SDZ, TQ, IJC, NamHUB...</small></a>
+<a class="drawer-link" data-action="sub" data-tab="archivo" data-sub="tq">Crónica del Clan TQ<small>Dossiers de cada miembro</small></a>
 <a class="drawer-link" data-action="sub" data-tab="archivo" data-sub="wiki">Wiki de Términos<small>El diccionario de TCO</small></a>
 <a class="drawer-link" data-action="sub" data-tab="archivo" data-sub="periodico">The TCO Times<small>Periódico de guerra imprimible</small></a>
 <a class="drawer-link" data-action="sub" data-tab="archivo" data-sub="calendario">Calendario de Guerra<small>Mes a mes, evento por evento</small></a>
@@ -1539,6 +1644,7 @@ footer .foot-links a:hover{color:var(--gold)}
 <a class="drawer-link" id="adminDrawerLink" style="display:none" data-action="admin-open">🛡️ Panel Admin<small>Moderación rápida</small></a>
 <div class="drawer-sec">⚙️ Página</div>
 <a class="drawer-link" data-action="modal" data-modal="settingsModal">Ajustes<small>Temas, sonidos, movimiento</small></a>
+<a class="drawer-link" data-action="modal" data-modal="feedbackModal">🐞 Feedback / Bugs<small>Avisale al líder de errores o ideas</small></a>
 <a class="drawer-link" data-action="tab" data-tab="home">Volver arriba<small>Regresar a la portada</small></a>
 </div>
 <div class="drawer-foot">User ID 607353710 · Game ID 11137575513</div>
@@ -1650,7 +1756,13 @@ adan:{file:"adan.png",name:"Adan",role:"Miembro IJC",align:"ally",years:[2026],c
 roman:{file:"roman.png",name:"Romantco",role:"Aliado del Leak",align:"ally",years:[2026],clan:"—",meta:"Filtró RomazHUB<br>🏛️ Constructor de Roma",desc:"Filtró RomazHUB en secreto a Nam. Constructor de Roma.",c1:"#3ddc84",c2:"#1c7a4a",letter:"R"},
 system:{file:"system.png",name:"System",role:"Fundador de LS",align:"ally",years:[2026],clan:"LS",meta:"@igot_KJ8<br>⚙️ Pasó el Autobuild",desc:"@igot_KJ8. Fundó Legacy Service. Le pasó Autobuild y Paint a Nam.",c1:"#3ddc84",c2:"#1c7a4a",letter:"S"},
 zeen:{file:"zeen.png",name:"Zeen",role:"Líder de SDZ",align:"enemy",years:[2026],clan:"SDZ",meta:"DARKTHEWHITE2<br>💀 Copia de MG",desc:"DARKTHEWHITE2. Líder del clan SDZ, copia del clan MG.",c1:"#e23b3b",c2:"#7a1414",letter:"Z",light:1},
-stumblero:{file:"stumblero.png",name:"Stumblero",role:"El que se fue",align:"neutral",years:[2026],clan:"—",meta:"Otro camino<br>👋 Desapareció",desc:"Amigo de Radical. Desapareció de TCO.",c1:"#f5d76e",c2:"#a8842c",letter:"S"}
+stumblero:{file:"stumblero.png",name:"Stumblero",role:"El que se fue",align:"neutral",years:[2026],clan:"—",meta:"Otro camino<br>👋 Desapareció",desc:"Amigo de Radical. Desapareció de TCO.",c1:"#f5d76e",c2:"#a8842c",letter:"S"},
+elias:{file:"elias.png",name:"Elías",role:"El espía que MG olvidó banear",align:"ally",years:[2025,2026],clan:"TQ → ZK",meta:"@jocarloza79<br>Discord @eleliasxd",desc:"Parecía un random amigo de Tq_Pan, pero era ayudante de TQ. MG olvidó banearlo y se volvió su espía: sacó las amenazas de doxeo. Hoy es del Clan ZK.",c1:"#3ddc84",c2:"#1c7a4a",letter:"E"},
+dropbox:{file:"dropbox.png",name:"DropBox_Man",role:"El apoyo silencioso",align:"ally",years:[2025],clan:"Círculo TQ",meta:"Amigo IRL de Facundo<br>🌙 Guardia Nocturna",desc:"Viejo amigo del círculo y amigo de Facundo en la vida real. Sostuvo las infiltraciones nocturnas cuando los amigos de Napoleón delataban.",c1:"#3ddc84",c2:"#1c7a4a",letter:"D"},
+zea:{file:"zea.png",name:"Zea",role:"Promovida en la era del Co-Líder",align:"ally",years:[2025],clan:"TQ",meta:"⬆️ Subida por Facundo<br>Junto a Enzo y Elías",desc:"Miembro constante de TQ, subida de rango cuando Facundo tomó el control como Co-Líder.",c1:"#3ddc84",c2:"#1c7a4a",letter:"Z"},
+littlel:{file:"littlel.png",name:"Tq_Littlel",role:"El conflicto que cambió el mando",align:"neutral",years:[2025],clan:"TQ",meta:"🌀 'Los temas con Littlel'<br>Detonante del Co-Líder",desc:"Su conflicto interno dejó el vacío de poder que Facundo llenó como Co-Líder de TQ.",c1:"#f5d76e",c2:"#a8842c",letter:"L"},
+rayan:{file:"rayan.png",name:"Rayan",role:"Griefer de MG",align:"enemy",years:[2025],clan:"MG",meta:"💀 Griefer de la guerra",desc:"Uno de los griefers del clan MG durante la Segunda Guerra Mundial de TCO.",c1:"#e23b3b",c2:"#7a1414",letter:"R",light:1},
+tucky:{file:"tucky.png",name:"tucky",role:"Griefer de MG",align:"enemy",years:[2025],clan:"MG",meta:"💀 Griefer de la guerra",desc:"Otro de los griefers del clan MG: basura, raids y caos durante la guerra.",c1:"#e23b3b",c2:"#7a1414",letter:"T",light:1}
 };
 let codexFilter='all';
 function renderCodex(){
@@ -1790,7 +1902,8 @@ function buildMap(){
     g.addEventListener('click',()=>{
       const id=g.dataset.node;
       if(CHARS[id]) charModal(id);
-      else setSub('archivo','clanes'), setTab('archivo');
+      else if(id==='clanTQ'){ setTab('archivo',true); setSub('archivo','tq'); }
+      else { setTab('archivo',true); setSub('archivo','clanes'); }
     });
   });
 }
@@ -1880,7 +1993,7 @@ function setTab(t,skipScroll){
   $$('.panel').forEach(p=>p.classList.toggle('active',p.id==='panel-'+t));
   moveTabInd();
   if(t==='historia') setSubVisual('historia',state.subs.historia);
-  if(t==='home'){ runCounters(true); }
+  if(t==='home'){ runCounters(); }
   if(t==='archivo'&&state.subs.archivo==='cronologia') setTimeout(tlReveal,60);
   updateModes();
   if(!skipScroll) window.scrollTo({top:0,behavior:'smooth'});
@@ -1917,8 +2030,8 @@ function goChapter(year){
 
 /* ---------- contadores ---------- */
 let counted=false;
-function runCounters(force){
-  if(counted&&!force) return;
+function runCounters(){
+  if(counted) return;
   if(state.tab!=='home') return;
   counted=true;
   $$('[data-count]').forEach(el=>{
@@ -1996,6 +2109,8 @@ function buildPalette(){
   [['historias','📖 Historias de la comunidad'],['ranking','🏆 Leaderboard'],['muro','🧱 Muro del Clan'],['quiz','🧩 Quiz del Lore'],['encuestas','🗳️ Encuestas del clan'],['confesiones','🕯️ Confesiones anónimas']].forEach(s=>paletteIndex.push({ic:'💬',label:s[1],group:'Comunidad',run:()=>{setTab('comunidad',true);setSub('comunidad',s[0]);}}));
   [['periodico','📰 The TCO Times'],['calendario','📅 Calendario de Guerra'],['linaje','🌳 Linaje de Clanes'],['creditos','ℹ️ Créditos del archivo']].forEach(s=>paletteIndex.push({ic:'🗄️',label:s[1],group:'Archivo',run:()=>{setTab('archivo',true);setSub('archivo',s[0]);}}));
   paletteIndex.push({ic:'🪪',label:'Ver mi credencial',group:'Acción',run:()=>openCredModal()});
+  paletteIndex.push({ic:'🛡️',label:'Crónica del Clan TQ',group:'Archivo',run:()=>{setTab('archivo',true);setSub('archivo','tq');}});
+  paletteIndex.push({ic:'🐞',label:'Enviar feedback / reportar bug',group:'Acción',run:()=>openModal('feedbackModal')});
   paletteIndex.push({ic:'📰',label:'Novedades del archivo',group:'Archivo',run:()=>{setTab('archivo',true);setSub('archivo','novedades');}});
   if(isAdminUser()) paletteIndex.push({ic:'🛡️',label:'Panel de administración',group:'Acción',run:()=>openAdminPanel()});
   Object.keys(CHARS).forEach(id=>paletteIndex.push({ic:'👤',label:'Expediente: '+CHARS[id].name,group:'Personaje',run:()=>charModal(id)}));
@@ -2033,7 +2148,8 @@ function runPaletteSel(){
 }
 
 /* ---------- modales / drawer ---------- */
-function openModal(id){ const m=$('#'+id); if(m){ m.classList.add('active'); beep(); } }
+let modalZ=2000;
+function openModal(id){ const m=$('#'+id); if(m){ m.style.zIndex=String(++modalZ); m.classList.add('active'); beep(); } }
 function closeModal(id){ const m=$('#'+id); if(m) m.classList.remove('active'); }
 function toggleMenu(){
   const d=$('#drawer'), o=$('#drawerOverlay');
@@ -2381,12 +2497,13 @@ function renderNotifications(){
     const item=document.createElement('div');
     item.className='notif-item '+n.type+(n.read?'':' unread');
     item.dataset.ni=i;
-    const typeLabel=n.type==='story'?'📖 Nueva historia':'💬 Nuevo comentario';
+    const typeLabel=n.type==='story'?'📖 Nueva historia':n.type==='feedback'?'🐞 Feedback / bug':'💬 Nuevo comentario';
     item.innerHTML='<div class="notif-type">'+typeLabel+'</div>'+
       '<div class="notif-text"><strong>'+escapeHtml(n.user)+'</strong>: '+escapeHtml(n.text)+'</div>'+
       '<div class="notif-meta">hace '+timeSince(n.time)+'</div>';
     item.addEventListener('click',()=>{
       $('#notifPanel').classList.remove('open');
+      if(n.type==='feedback'){ openAdminPanel(); return; }
       if(n.goto){
         if(n.goto.tab) setTab(n.goto.tab,true);
         if(n.goto.sub) setSub(n.goto.tab,n.goto.sub);
@@ -2410,7 +2527,7 @@ document.addEventListener('click',e=>{
     case 'goto-chapter': goChapter(el.dataset.sub); break;
     case 'char': charModal(el.dataset.char); break;
     case 'char-see-story': goChapter(el.dataset.sub||'2022'); closeModal('charModal'); break;
-    case 'clan': openClanModal(el.dataset.clan); break;
+    case 'clan': if(el.dataset.clan==='tq'){ setTab('archivo',true); setSub('archivo','tq'); window.scrollTo({top:0,behavior:'smooth'}); } else openClanModal(el.dataset.clan); break;
     case 'clan-notify': closeModal('clanModal'); toast('Te avisaremos cuando la crónica esté lista','🔔'); break;
     case 'admin-open': openAdminPanel(); break;
     case 'vote': castVote(el.dataset.poll,el.dataset.opt,el); break;
@@ -2422,6 +2539,9 @@ document.addEventListener('click',e=>{
     case 'cred-download': downloadCred(); break;
     case 'post-conf': postConfession(); break;
     case 'del-conf': deleteConfession(el.dataset.id); break;
+    case 'submit-feedback': submitFeedback(); break;
+    case 'del-fb': deleteFeedback(el.dataset.id); break;
+    case 'resolve-fb': resolveFeedback(el.dataset.id); break;
     case 'modal': openModal(el.dataset.modal); break;
     case 'close-modal': closeModal(el.dataset.modal); break;
     case 'drawer': toggleMenu(); break;
@@ -2465,9 +2585,15 @@ document.addEventListener('keydown',e=>{
     return;
   }
   if(e.key==='Escape'){
-    $$('.modal.active').forEach(m=>m.classList.remove('active'));
-    $('#notifPanel').classList.remove('open');
-    if($('#drawer').classList.contains('open')) toggleMenu();
+    const act=$$('.modal.active');
+    if(act.length){
+      let top=act[0], z=0;
+      act.forEach(m=>{ const zz=+m.style.zIndex||2000; if(zz>=z){ z=zz; top=m; } });
+      top.classList.remove('active');
+    } else {
+      $('#notifPanel').classList.remove('open');
+      if($('#drawer').classList.contains('open')) toggleMenu();
+    }
     return;
   }
   if(e.key==='Enter'&&e.target.classList&&e.target.classList.contains('comment-form')===false&&e.target.id&&e.target.id.startsWith('comment-input-')){
@@ -2547,6 +2673,18 @@ function initData(){
       if(isFirstLoad.comments) isFirstLoad.comments=false;
     });
     F.onSnapshot(F.collection(window.firebaseDb,'likes'),()=>{ loadStories(); loadLeaderboard(); });
+    if(isAdminUser()){
+      let fbFirst=true;
+      F.onSnapshot(F.collection(window.firebaseDb,'feedback'),snap=>{
+        snap.docChanges().forEach(ch=>{
+          if(ch.type==='added'&&!fbFirst){
+            const f=ch.doc.data();
+            addNotification('feedback',{ text:(f.auto?'[AUTO] ':'')+String(f.text||'').substring(0,60), user:f.userNick||'anónimo' },null);
+          }
+        });
+        fbFirst=false;
+      });
+    }
   }
 }
 
@@ -2770,6 +2908,7 @@ async function openAdminPanel(){
   if(!isAdminUser()){ toast('Solo admins del clan','🛡️'); return; }
   openModal('adminModal');
   loadAdminConfs();
+  loadAdminFeedback();
   const F=window.firebaseFunctions;
   const cw=$('#admComments'), sw=$('#admStories');
   cw.innerHTML='<div class="no-stories">Cargando...</div>'; sw.innerHTML='<div class="no-stories">Cargando...</div>';
@@ -3010,6 +3149,68 @@ async function loadAdminConfs(){
   }catch(e){ box.innerHTML='<div class="no-stories">Error al cargar</div>'; }
 }
 if($('#confInput')) $('#confInput').addEventListener('input',e=>{ const c=$('#confCount'); if(c) c.textContent=e.target.value.length; });
+
+/* ---------- feedback + reporte automático de bugs ---------- */
+async function submitFeedback(){
+  if(!me){ toast('Primero elegí tu apodo','👤'); return; }
+  const text=$('#fbText').value.trim();
+  if(!text){ toast('Contame qué pasó o qué se te ocurrió','🐞'); return; }
+  const F=window.firebaseFunctions;
+  if(!F||!window.firebaseDb){ toast('Firebase no disponible','❌'); return; }
+  try{
+    await F.addDoc(F.collection(window.firebaseDb,'feedback'),{ auto:false, type:$('#fbType').value, text:text, contact:$('#fbContact').value.trim(), userNick:me.nickname, userId:me.id, createdAt:Date.now(), status:'new' });
+    $('#fbText').value=''; $('#fbContact').value=''; const c=$('#fbCount'); if(c) c.textContent='0';
+    closeModal('feedbackModal'); toast('Feedback enviado al líder','📨'); beep(880,0.1);
+  }catch(e){ toast('Error: '+e.message,'❌'); }
+}
+async function loadAdminFeedback(){
+  const box=$('#admFeedback'); if(!box) return;
+  const F=window.firebaseFunctions;
+  if(!F||!window.firebaseDb){ box.innerHTML='<div class="no-stories">Sin conexión</div>'; return; }
+  try{
+    const snap=await F.getDocs(F.query(F.collection(window.firebaseDb,'feedback'),F.orderBy('createdAt','desc'),F.limit(12)));
+    let html='',n=0;
+    snap.forEach(d=>{ const f=d.data(); n++;
+      const ic=f.type==='idea'?'💡':f.type==='love'?'❤️':'🐞';
+      html+='<div class="adm-row" style="'+(f.status==='done'?'opacity:.5':'')+'"><span>'+(f.auto?'🤖':ic)+'</span><span class="adm-txt"><strong>'+escapeHtml(f.userNick||'anónimo')+'</strong>: '+escapeHtml(String(f.text||'').slice(0,60))+(f.line?' (línea '+f.line+')':'')+'</span>'+
+        (f.status!=='done'?'<button class="share-btn" data-action="resolve-fb" data-id="'+d.id+'">✅</button>':'')+
+        '<button class="delete-btn" data-action="del-fb" data-id="'+d.id+'">🗑️</button></div>';
+    });
+    box.innerHTML=n?html:'<div class="no-stories">Sin feedback todavía</div>';
+  }catch(e){ box.innerHTML='<div class="no-stories">Error al cargar feedback</div>'; }
+}
+async function resolveFeedback(id){
+  const F=window.firebaseFunctions; if(!F) return;
+  try{ await F.updateDoc(F.doc(window.firebaseDb,'feedback',id),{ status:'done' }); loadAdminFeedback(); toast('Feedback marcado resuelto','✅'); }
+  catch(e){ toast('Error: '+e.message,'❌'); }
+}
+async function deleteFeedback(id){
+  const F=window.firebaseFunctions; if(!F) return;
+  if(!confirm('¿Borrar este feedback?')) return;
+  try{ await F.deleteDoc(F.doc(window.firebaseDb,'feedback',id)); loadAdminFeedback(); toast('Feedback borrado','🗑️'); }
+  catch(e){ toast('Error: '+e.message,'❌'); }
+}
+/* La página se auto-delata: si algo crashea, manda reporte técnico al líder */
+const _bugSent=new Set(); let _bugCount=0;
+function autoReport(msg,src,line){
+  if(!window.firebaseReady||!window.firebaseDb) return;
+  const key=String(msg).slice(0,80);
+  if(_bugSent.has(key)||_bugCount>=5) return;
+  _bugSent.add(key); _bugCount++;
+  const F=window.firebaseFunctions; if(!F) return;
+  try{
+    F.addDoc(F.collection(window.firebaseDb,'feedback'),{
+      auto:true, type:'bug', text:'[AUTO] '+String(msg).slice(0,300),
+      src:String(src||'').slice(0,120), line:line||0,
+      ua:String(navigator.userAgent).slice(0,140), url:String(location.href).slice(0,120),
+      userNick:me?me.nickname:'anónimo', userId:me?me.id:null,
+      createdAt:Date.now(), status:'new'
+    }).catch(()=>{});
+  }catch(e){}
+}
+window.addEventListener('error',e=>{ autoReport(e.message,e.filename,e.lineno); });
+window.addEventListener('unhandledrejection',e=>{ autoReport('Promesa rechazada: '+((e.reason&&e.reason.message)?e.reason.message:e.reason),'',0); });
+if($('#fbText')) $('#fbText').addEventListener('input',e=>{ const c=$('#fbCount'); if(c) c.textContent=e.target.value.length; });
 
 </script>
 </body>

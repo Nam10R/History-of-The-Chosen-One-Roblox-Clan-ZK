@@ -123,11 +123,12 @@ nav.scrolled{padding:6px 0;box-shadow:0 10px 30px rgba(0,0,0,.5)}
 .logo{font-family:'Bebas Neue';font-size:1.5em;letter-spacing:2px;color:var(--gold);cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:8px}
 .logo svg{width:26px;height:26px;filter:drop-shadow(0 0 6px rgba(var(--gold-rgb),.6))}
 .logo span{color:var(--txt)}
-.tabbar{position:relative;display:flex;gap:2px;background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:4px}
-.tabbar button{position:relative;z-index:1;background:none;border:none;color:var(--mut);font-weight:700;font-size:.78em;letter-spacing:1px;text-transform:uppercase;padding:8px 14px;border-radius:9px;cursor:pointer;transition:color .25s;display:flex;align-items:center;gap:6px}
-.tabbar button:hover{color:var(--txt)}
-.tabbar button.active{color:#000}
-.tab-ind{position:absolute;top:4px;bottom:4px;background:linear-gradient(135deg,var(--gold),var(--gold2));border-radius:9px;transition:left .35s var(--ease),width .35s var(--ease);z-index:0;box-shadow:0 4px 14px rgba(var(--gold-rgb),.4)}
+.tabbar{position:relative;display:flex;gap:0;background:transparent;border:none;border-radius:0;padding:0;flex:1;justify-content:center;min-width:0;overflow-x:auto;scrollbar-width:none}
+.tabbar::-webkit-scrollbar{display:none}
+.tabbar button{position:relative;z-index:1;background:none;border:none;color:var(--mut);font-weight:700;font-size:.86em;letter-spacing:.3px;padding:10px 16px;border-radius:10px;cursor:pointer;transition:color .25s,background .25s;display:flex;align-items:center;gap:7px;white-space:nowrap}
+.tabbar button:hover{color:var(--txt);background:rgba(var(--gold-rgb),.06)}
+.tabbar button.active{color:var(--gold);background:rgba(var(--gold-rgb),.1)}
+.tab-ind{position:absolute;top:auto;bottom:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:3px;transition:left .35s var(--ease),width .35s var(--ease);z-index:0;box-shadow:0 2px 10px rgba(var(--gold-rgb),.55)}
 .nav-tools{display:flex;gap:8px;align-items:center}
 .icon-btn{background:var(--card);border:1px solid var(--line);color:var(--txt);width:38px;height:38px;border-radius:9px;cursor:pointer;font-size:1em;display:flex;align-items:center;justify-content:center;transition:.25s;position:relative}
 .icon-btn:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px)}
@@ -155,7 +156,7 @@ main{position:relative;z-index:1;padding-top:76px}
 .hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,12,.55),rgba(10,10,12,.86) 70%,var(--bg))}
 #particles{position:absolute;inset:0;pointer-events:none}
 .hero > *:not(.hero-bg):not(#particles){position:relative;z-index:2}
-.hero-badge{font-size:.72em;letter-spacing:5px;color:var(--gold);text-transform:uppercase;margin-bottom:22px;border:1px solid rgba(var(--gold-rgb),.6);padding:7px 18px;border-radius:30px;background:rgba(var(--gold-rgb),.06);animation:badgePulse 3s infinite}
+.hero-badge{font-size:.78em;letter-spacing:3px;color:var(--gold);margin-bottom:22px;border:1px solid rgba(var(--gold-rgb),.6);padding:7px 18px;border-radius:30px;background:rgba(var(--gold-rgb),.06);animation:badgePulse 3s infinite}
 @keyframes badgePulse{0%,100%{box-shadow:0 0 0 0 rgba(var(--gold-rgb),.35)}50%{box-shadow:0 0 0 8px rgba(var(--gold-rgb),0)}}
 .emblem{width:132px;height:132px;margin-bottom:26px;filter:drop-shadow(0 18px 40px rgba(var(--gold-rgb),.35));animation:emblemFloat 5s ease-in-out infinite;transition:.4s;object-fit:cover;border-radius:28px;background:rgba(22,22,26,.6)}
 .emblem:hover{transform:scale(1.07) rotate(-3deg)}
@@ -196,7 +197,7 @@ main{position:relative;z-index:1;padding-top:76px}
 /* ============ CAPÍTULOS ============ */
 .chapter{padding:60px 24px 70px;max-width:1000px;margin:0 auto;position:relative}
 .ch-head{text-align:center;margin-bottom:44px}
-.ch-num{font-size:.78em;letter-spacing:5px;color:var(--gold);text-transform:uppercase}
+.ch-num{font-size:.82em;letter-spacing:3px;color:var(--gold);font-weight:700}
 .ch-title{font-family:'Bebas Neue';font-size:clamp(2.6em,6vw,4.2em);letter-spacing:1px;margin:8px 0;line-height:1}
 .ch-sub{color:var(--mut);font-style:italic;font-size:1.05em}
 .card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:46px;animation:cardIn .7s var(--ease);position:relative}
@@ -275,7 +276,7 @@ main{position:relative;z-index:1;padding-top:76px}
 /* ============ HALL / MAPA / HUBS / WIKI ============ */
 .special{padding:50px 24px 70px}
 .special-inner{max-width:1100px;margin:0 auto}
-.sec-title{font-family:'Bebas Neue';font-size:clamp(2.2em,5vw,3.2em);text-align:center;letter-spacing:1px;margin-bottom:8px}
+.sec-title{font-family:'Bebas Neue';font-size:clamp(2.2em,5vw,3.2em);text-align:center;letter-spacing:.5px;margin-bottom:8px;text-transform:none}
 .sec-title em{color:var(--gold);font-style:normal}
 .sec-sub{text-align:center;color:var(--mut);margin-bottom:44px}
 .hof{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px}
@@ -474,7 +475,7 @@ main{position:relative;z-index:1;padding-top:76px}
 .drawer-head{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--line)}
 .drawer-head .modal-x{position:static}
 .drawer-body{overflow-y:auto;padding:14px 18px 28px;flex:1}
-.drawer-sec{font-size:.7em;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin:20px 0 8px}
+.drawer-sec{font-size:.78em;letter-spacing:2px;color:var(--gold);margin:20px 0 8px;font-weight:800}
 .drawer-link{display:block;color:var(--txt);padding:10px 14px;border-radius:10px;font-size:.95em;cursor:pointer;transition:.2s;border:1px solid transparent;text-decoration:none}
 .drawer-link:hover{background:rgba(var(--gold-rgb),.08);border-color:var(--line);color:var(--gold);transform:translateX(4px)}
 .drawer-link small{display:block;color:var(--mut);font-size:.76em;margin-top:2px}
@@ -668,6 +669,22 @@ footer .foot-links a:hover{color:var(--gold)}
 .dos-hitos{margin:6px 0 0 16px;font-size:.82em;color:var(--mut)}
 .dos-hitos li{margin-bottom:4px}
 .notif-item.feedback .notif-type{color:#ff9f1a}
+
+/* ============ MODO CLARO (pergamino cálido) ============ */
+html[data-theme="light"]{--bg:#f4f0e6;--bg2:#ebe5d6;--card:#fffdf6;--line:#dcd3bd;--gold:#a8842c;--gold2:#8a6d1f;--gold-rgb:168,132,44;--txt:#2b2620;--mut:#7d7460;--red:#c22f2f;--green:#1f9d5c;--blue:#2f6bc2}
+html[data-theme="light"] body::before{opacity:.45}
+html[data-theme="light"] nav{background:rgba(244,240,230,.9)}
+html[data-theme="light"] .hero-bg{filter:brightness(.82) saturate(.85)}
+html[data-theme="light"] .hero-bg::after{background:linear-gradient(180deg,rgba(244,240,230,.35),rgba(244,240,230,.9) 70%,var(--bg))}
+html[data-theme="light"] .hero h1{text-shadow:0 6px 30px rgba(255,255,255,.55)}
+html[data-theme="light"] .hero .sub{color:#5a5240}
+html[data-theme="light"] .game-chip,html[data-theme="light"] .stat{background:rgba(255,253,246,.88)}
+html[data-theme="light"] ::-webkit-scrollbar-thumb{background:#c9bfa6;border-color:var(--bg)}
+html[data-theme="light"] .card p,html[data-theme="light"] .box p,html[data-theme="light"] .comment-text,html[data-theme="light"] .story-text,html[data-theme="light"] .dos-card p{color:#4a4436}
+html[data-theme="light"] .tabbar button.active{background:rgba(var(--gold-rgb),.16)}
+html[data-theme="light"] .news-paper{box-shadow:0 20px 60px rgba(90,80,50,.28)}
+html[data-theme="light"] .medal,html[data-theme="light"] .hub,html[data-theme="light"] .wiki-term,html[data-theme="light"] .codex-card{box-shadow:0 4px 16px rgba(120,100,60,.12)}
+html[data-theme="light"] .ip img{box-shadow:0 10px 26px rgba(120,100,60,.3)}
 </style>
 </head>
 <body>
@@ -692,15 +709,11 @@ footer .foot-links a:hover{color:var(--gold)}
 <div class="onboard" id="onboardScreen">
 <div class="onboard-box">
 <img class="onboard-emblem" src="images/clanzk.png" alt="Clan ZK" onerror="emblemFail(this)">
-<h2>BIENVENIDO AL <em>ARCHIVO</em></h2>
-<p>Elegí tu identidad. El apodo es único y no se puede repetir.</p>
-<button class="auth-btn discord-btn" data-action="discord-login">🎮 INICIAR SESIÓN CON DISCORD</button>
-<div class="onboard-divider"><span>O ENTRÁ CON APODO</span></div>
+<h2>Bienvenido al <em>Archivo</em></h2>
+<p id="onboardDesc">El ingreso es únicamente con tu cuenta de Discord: preservamos la identidad real de cada miembro del clan.</p>
 <div class="auth-error" id="onboardError"></div>
-<input type="text" class="auth-input" id="onboardNick" placeholder="Tu apodo (3-20 caracteres)" maxlength="20">
-<img class="onboard-preview" id="onboardPreview" alt="" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='110' height='110'%3E%3Crect fill='%2316161a' width='110' height='110' rx='55'/%3E%3Ctext fill='%238a8a93' x='50%25' y='50%25' text-anchor='middle' dy='.3em' font-size='14'%3ETu foto%3C/text%3E%3C/svg%3E">
-<input type="file" class="onboard-file" id="onboardImg" accept="image/*">
-<button class="auth-btn" data-action="onboard">ENTRAR AL ARCHIVO</button>
+<button class="auth-btn discord-btn" data-action="discord-login">🎮 INICIAR SESIÓN CON DISCORD</button>
+<p style="font-size:.7em;color:var(--mut);margin-top:16px">Al autorizar, el archivo recibe tu ID, nombre y avatar de Discord. Nada más.</p>
 </div>
 </div>
 
@@ -733,7 +746,6 @@ footer .foot-links a:hover{color:var(--gold)}
 <span id="userNickname" data-action="profile">Usuario</span>
 <button class="logout-btn" data-action="reset-profile" title="Cambiar de perfil en este dispositivo">✕</button>
 </div>
-<button class="icon-btn" data-action="modal" data-modal="feedbackModal" title="Feedback / reportar bug">🐞</button>
 <button class="icon-btn notif-bell" id="notifBell" data-action="notif-panel" data-count="0" title="Notificaciones">🔔</button>
 <button class="icon-btn" data-action="modal" data-modal="settingsModal" title="Ajustes">⚙️</button>
 <button class="icon-btn" data-action="drawer" title="Menú">☰</button>
@@ -758,12 +770,12 @@ footer .foot-links a:hover{color:var(--gold)}
 <canvas id="particles"></canvas>
 <div class="hero-badge">Archivo Clasificado · The Chosen One</div>
 <img class="emblem" src="images/clanzk.png" alt="Clan ZK" onerror="emblemFail(this)">
-<h1>LA HISTORIA DEL <em>CLAN ZK</em></h1>
+<h1>La Historia del <em>Clan ZK</em></h1>
 <p class="sub">Anteriormente IJC. Un archivo vivo dedicado a los momentos, jugadores y leyendas que forjaron el legado de The Chosen One.</p>
 <div class="game-chip"><img src="images/tco.png" alt="The Chosen One" onerror="this.style.display='none'"><div class="gc-txt"><strong>The Chosen One</strong><small>Game ID 11137575513 · por TomazDev</small></div></div>
 <div class="hero-cta">
-<button class="cta-btn" data-action="tab" data-tab="historia">📖 LEER LA HISTORIA</button>
-<button class="cta-btn ghost" data-action="tab" data-tab="personajes">👥 EXPLORAR PERSONAJES</button>
+<button class="cta-btn" data-action="tab" data-tab="historia">📖 Leer la historia</button>
+<button class="cta-btn ghost" data-action="tab" data-tab="personajes">👥 Explorar personajes</button>
 </div>
 <div class="scroll-hint">↓ EXPLORÁ EL ARCHIVO ↓</div>
 <div class="stats">
@@ -1016,7 +1028,7 @@ footer .foot-links a:hover{color:var(--gold)}
 <!-- ============ TAB: PERSONAJES ============ -->
 <section class="panel" id="panel-personajes">
 <div class="codex-wrap">
-<h2 class="sec-title">CÓDICE DE <em>PERSONAJES</em></h2>
+<h2 class="sec-title">Códice de <em>Personajes</em></h2>
 <p class="sec-sub">Expedientes clasificados de todos los actores de la historia · tocá una tarjeta para abrir su expediente</p>
 <div class="codex-filters" id="codexFilters">
 <button class="active" data-filter="all">Todos (24)</button>
@@ -1049,7 +1061,7 @@ footer .foot-links a:hover{color:var(--gold)}
 
 <div class="subpanel active" data-sub="cronologia">
 <div class="tl-wrap">
-<h2 class="sec-title">CRONOLOGÍA <em>COMPLETA</em></h2>
+<h2 class="sec-title">Cronología <em>Completa</em></h2>
 <p class="sec-sub">Todos los eventos clave, en orden · tocá cualquiera para ir al capítulo</p>
 <div class="tl-line"></div><div class="tl-fill" id="tlFill"></div>
 <div id="timeline"></div>
@@ -1059,7 +1071,7 @@ footer .foot-links a:hover{color:var(--gold)}
 <div class="subpanel" data-sub="hall">
 <section class="special">
 <div class="special-inner">
-<h2 class="sec-title">HALL DE LA <em>FAMA</em></h2>
+<h2 class="sec-title">Hall de la <em>Fama</em></h2>
 <p class="sec-sub">Los logros que forjaron la leyenda</p>
 <div class="hof">
 <div class="medal"><div class="em">🏆</div><h4>Libertador</h4><div class="yr">2024</div><p>Liberó medio TCO Español del control de Damian.</p></div>
@@ -1076,7 +1088,7 @@ footer .foot-links a:hover{color:var(--gold)}
 <div class="subpanel" data-sub="mapa">
 <section class="special">
 <div class="special-inner">
-<h2 class="sec-title">MAPA DE <em>ALIANZAS</em></h2>
+<h2 class="sec-title">Mapa de <em>Alianzas</em></h2>
 <p class="sec-sub">Red interactiva: pasá el mouse por un nodo para ver sus conexiones · clic para abrir expediente</p>
 <div class="map-wrap"><svg id="allianceMap" viewBox="0 0 1000 620"></svg></div>
 <div class="map-legend">
@@ -1091,7 +1103,7 @@ footer .foot-links a:hover{color:var(--gold)}
 <div class="subpanel" data-sub="clanes">
 <section class="special">
 <div class="special-inner">
-<h2 class="sec-title">CLANES Y <em>SU HISTORIA</em></h2>
+<h2 class="sec-title">Clanes y <em>Su Historia</em></h2>
 <p class="sec-sub">Cada facción tendrá su propia crónica completa · tocá un clan para ver su estado</p>
 <div class="hubs">
 <div class="hub feat" data-action="clan" data-clan="admin"><div class="ic">👑</div><h4>Admin Community</h4><p>Alta tecnología en scripts manejada por Pealz y 2areyoumental. Los guardianes del orden en TCO.</p><span class="tag">GUARDIANES</span></div>
@@ -1113,7 +1125,7 @@ footer .foot-links a:hover{color:var(--gold)}
 <div class="subpanel" data-sub="wiki">
 <section class="special">
 <div class="special-inner">
-<h2 class="sec-title">WIKI DE <em>TÉRMINOS</em></h2>
+<h2 class="sec-title">Wiki de <em>Términos</em></h2>
 <p class="sec-sub">El diccionario del universo TCO</p>
 <div class="wiki-grid">
 <div class="wiki-term"><h4>;bkit others</h4><p>Script de 2023 que crasheaba a todos los jugadores cercanos. El arma definitiva de la era del caos.</p></div>
@@ -1134,7 +1146,7 @@ footer .foot-links a:hover{color:var(--gold)}
 <div class="subpanel" data-sub="tq">
 <section class="special">
 <div class="special-inner">
-<h2 class="sec-title">CRÓNICA DEL CLAN <em>TQ</em></h2>
+<h2 class="sec-title">Crónica del Clan <em>TQ</em></h2>
 <p class="sec-sub">Puros dossiers: la historia de cada miembro, contada desde el testimonio de Enzo · tocá cualquier retrato para su expediente</p>
 <div class="dos-grid">
 <div class="dos-card"><div class="dos-head"><img data-ava="exotic" loading="lazy" onerror="avaFail(this)" alt="Exotic"><div><h4>Tq_EX0T1C</h4><div class="role ally">Líder fundacional</div></div></div>
@@ -1275,7 +1287,7 @@ footer .foot-links a:hover{color:var(--gold)}
 <div class="subpanel" data-sub="calendario">
 <section class="special">
 <div class="special-inner">
-<h2 class="sec-title">CALENDARIO DE <em>GUERRA</em></h2>
+<h2 class="sec-title">Calendario de <em>Guerra</em></h2>
 <p class="sec-sub">Mes a mes, los eventos que movieron la historia · tocá un evento para viajar al capítulo</p>
 <div class="cal-years" id="calYears"></div>
 <div class="cal-strip" id="calStrip" style="display:none"></div>
@@ -1287,7 +1299,7 @@ footer .foot-links a:hover{color:var(--gold)}
 <div class="subpanel" data-sub="linaje">
 <section class="special">
 <div class="special-inner">
-<h2 class="sec-title">LINAJE DE <em>CLANES</em></h2>
+<h2 class="sec-title">Linaje de <em>Clanes</em></h2>
 <p class="sec-sub">El árbol de sangre de TCO: quién nació de quién, quién traicionó a quién y quién migró a dónde</p>
 <div class="lin-wrap"><svg id="linTree" viewBox="0 0 900 520"></svg></div>
 <div class="map-legend">
@@ -1303,7 +1315,7 @@ footer .foot-links a:hover{color:var(--gold)}
 <div class="subpanel" data-sub="creditos">
 <section class="special">
 <div class="special-inner">
-<h2 class="sec-title">CRÉDITOS DEL <em>ARCHIVO</em></h2>
+<h2 class="sec-title">Créditos del <em>Archivo</em></h2>
 <p class="sec-sub">Quién hizo posible que esta leyenda quede escrita para siempre</p>
 <div class="credit-grid">
 <div class="credit-card"><span class="cic">📜</span><h4>Fuentes primarias</h4><p>Nam y Enzo, protagonistas y narradores de cada crónica. Sin su memoria, este archivo no existiría.</p></div>
@@ -1320,8 +1332,20 @@ footer .foot-links a:hover{color:var(--gold)}
 <div class="subpanel" data-sub="novedades">
 <section class="special">
 <div class="special-inner" style="max-width:860px">
-<h2 class="sec-title">NOVEDADES DEL <em>ARCHIVO</em></h2>
+<h2 class="sec-title">Novedades del <em>Archivo</em></h2>
 <p class="sec-sub">Changelog público: cada era de esta página</p>
+<div class="cl-entry">
+<div class="cl-ver">v2.5 · "IDENTIDAD OBLIGATORIA"</div><div class="cl-date">16 de septiembre de 2026</div>
+<ul>
+<li>🎮 Discord como única forma de ingreso: se retira el registro por apodo y los perfiles locales se vinculan.</li>
+<li>☀️ Modo claro cálido (pergamino, no blanco) como quinto tema.</li>
+<li>📖 Tope de 3 historias por miembro, con cupo visible al crear.</li>
+<li>🛡️ Filtro de insultos v2: anti-leet, anti-repetidas, anti-puntos intercalados y por palabra completa.</li>
+<li>🧼 Sanitizado de caracteres invisibles y de control en todos los inputs.</li>
+<li>🎨 Menú rediseñado: tabs con subrayado deslizante y herramientas depuradas.</li>
+<li>🔤 Títulos y menú en Title Case: Historia, Personajes, Archivo...</li>
+</ul>
+</div>
 <div class="cl-entry">
 <div class="cl-ver">v2.4 · "IDENTIDAD REAL"</div><div class="cl-date">15 de septiembre de 2026</div>
 <ul>
@@ -1407,7 +1431,7 @@ footer .foot-links a:hover{color:var(--gold)}
 <div class="subpanel" data-sub="ranking">
 <section class="special">
 <div class="special-inner">
-<h2 class="sec-title">🏆 <em>LEADERBOARD</em></h2>
+<h2 class="sec-title">🏆 <em>Leaderboard</em></h2>
 <p class="sec-sub">Los miembros más activos del archivo · 10 pts por historia, 2 pts por like recibido</p>
 <div class="leaderboard" id="leaderboardList"><div class="no-stories">Cargando ranking...</div></div>
 </div>
@@ -1416,7 +1440,7 @@ footer .foot-links a:hover{color:var(--gold)}
 
 <div class="subpanel" data-sub="muro">
 <div class="muro-wrap">
-<h2 class="sec-title">MURO DEL <em>CLAN</em></h2>
+<h2 class="sec-title">Muro del <em>Clan</em></h2>
 <p class="sec-sub">El tablón público del archivo: saludos, teorías, datos perdidos, homenajes</p>
 <div id="comments-muro"></div>
 <div class="comment-form"><input type="text" id="comment-input-muro" placeholder="Escribí en el muro..." maxlength="500"><button data-action="post-comment" data-context="muro" data-input="comment-input-muro">Publicar</button></div>
@@ -1426,7 +1450,7 @@ footer .foot-links a:hover{color:var(--gold)}
 <div class="subpanel" data-sub="quiz">
 <section class="special">
 <div class="special-inner">
-<h2 class="sec-title">QUIZ DEL <em>LORE</em></h2>
+<h2 class="sec-title">Quiz del <em>Lore</em></h2>
 <p class="sec-sub">12 preguntas sobre la saga · sin piedad · tu mejor puntaje queda en este dispositivo</p>
 <div class="quiz-box" id="quizBox"></div>
 </div>
@@ -1436,7 +1460,7 @@ footer .foot-links a:hover{color:var(--gold)}
 <div class="subpanel" data-sub="encuestas">
 <section class="special">
 <div class="special-inner" style="max-width:760px">
-<h2 class="sec-title">ENCUESTAS DEL <em>CLAN</em></h2>
+<h2 class="sec-title">Encuestas del <em>Clan</em></h2>
 <p class="sec-sub">Un voto por miembro y encuesta · resultados en vivo</p>
 <div id="pollsBox"><div class="no-stories">Cargando encuestas...</div></div>
 </div>
@@ -1446,7 +1470,7 @@ footer .foot-links a:hover{color:var(--gold)}
 <div class="subpanel" data-sub="confesiones">
 <section class="special">
 <div class="special-inner">
-<h2 class="sec-title">CONFESIONES <em>ANÓNIMAS</em></h2>
+<h2 class="sec-title">Confesiones <em>Anónimas</em></h2>
 <p class="sec-sub">El lado humano del archivo: sin apodos, sin juzgamientos · solo la verdad y una vela</p>
 <div class="conf-form">
 <textarea id="confInput" maxlength="400" placeholder="Escribí tu confesión anónima... (un secreto, un arrepentimiento, un homenaje)"></textarea>
@@ -1480,7 +1504,7 @@ footer .foot-links a:hover{color:var(--gold)}
 <div class="modal" id="settingsModal">
 <div class="modal-c">
 <button class="modal-x" data-action="close-modal" data-modal="settingsModal">×</button>
-<h2>AJUSTES</h2>
+<h2>Ajustes</h2>
 <p>Personalizá tu experiencia en el archivo</p>
 <div class="setting"><div><h4>🔊 Sonidos</h4><p>Clicks sutiles y música ambiental por capítulo</p></div><div class="tog on" id="togSound" data-action="toggle" data-setting="sound"><i></i></div></div>
 <div class="setting"><div><h4>🐢 Movimiento reducido</h4><p>Desactiva animaciones y partículas</p></div><div class="tog" id="togMotion" data-action="toggle" data-setting="motion"><i></i></div></div>
@@ -1490,6 +1514,7 @@ footer .foot-links a:hover{color:var(--gold)}
 <div class="theme-dot" data-action="theme" data-theme="venom" style="background:linear-gradient(135deg,#3ddc84,#9ff5c6)" title="Veneno"></div>
 <div class="theme-dot" data-action="theme" data-theme="phantom" style="background:linear-gradient(135deg,#a78bfa,#ddd0ff)" title="Fantasma"></div>
 <div class="theme-dot" data-action="theme" data-theme="ember" style="background:linear-gradient(135deg,#ff7a45,#ffc09e)" title="Brasa"></div>
+<div class="theme-dot" data-action="theme" data-theme="light" style="background:linear-gradient(135deg,#f4f0e6,#c9bfa6)" title="Claro"></div>
 </div></div>
 <div class="setting"><div><h4>👤 Sesión</h4><p>Cambiar de perfil en este dispositivo</p></div><button class="share-btn" data-action="reset-profile">Cerrar perfil</button></div>
 </div>
@@ -1525,7 +1550,7 @@ footer .foot-links a:hover{color:var(--gold)}
 <div class="modal" id="adminModal">
 <div class="modal-c">
 <button class="modal-x" data-action="close-modal" data-modal="adminModal">×</button>
-<h2>PANEL <em>ADMIN</em></h2>
+<h2>Panel <em>Admin</em></h2>
 <p>Moderación rápida del archivo · exclusivo de Nam y Enzo</p>
 <div class="adm-h">💬 Últimos comentarios</div>
 <div id="admComments"><div class="no-stories">Cargando...</div></div>
@@ -1542,7 +1567,7 @@ footer .foot-links a:hover{color:var(--gold)}
 <div class="modal" id="credModal">
 <div class="modal-c big">
 <button class="modal-x" data-action="close-modal" data-modal="credModal">×</button>
-<h2>TU <em>CREDENCIAL</em></h2>
+<h2>Tu <em>Credencial</em></h2>
 <p>Carnet oficial de miembro del archivo · descargala y presumila en Discord</p>
 <canvas id="credCanvas" width="1360" height="840"></canvas>
 <div class="cred-actions">
@@ -1556,7 +1581,7 @@ footer .foot-links a:hover{color:var(--gold)}
 <div class="modal" id="profileModal">
 <div class="modal-c big">
 <button class="modal-x" data-action="close-modal" data-modal="profileModal">×</button>
-<h2>MI <em>PERFIL</em></h2>
+<h2>Mi <em>Perfil</em></h2>
 <p>Tu identidad en el archivo</p>
 <div class="auth-error" id="profileError"></div>
 <img class="onboard-preview" id="profilePreview" alt="">
@@ -1568,7 +1593,7 @@ footer .foot-links a:hover{color:var(--gold)}
 <h4 style="font-family:'Bebas Neue';letter-spacing:.5px;color:var(--gold);font-size:1.15em">🏅 MIS LOGROS <span id="achCount" style="color:var(--mut);font-size:.65em"></span></h4>
 <div class="ach-grid" id="achGrid"></div>
 </div>
-<button class="auth-btn" data-action="save-profile">GUARDAR CAMBIOS</button>
+<button class="auth-btn" data-action="save-profile">Guardar cambios</button>
 <button class="cta-btn ghost" data-action="cred-open" style="margin-top:12px">🪪 Ver mi credencial</button>
 <button class="share-btn" id="adminProfileBtn" style="display:none;margin-top:12px" data-action="admin-open">🛡️ Abrir panel admin</button>
 </div>
@@ -1578,8 +1603,9 @@ footer .foot-links a:hover{color:var(--gold)}
 <div class="modal" id="storyModal">
 <div class="modal-c">
 <button class="modal-x" data-action="close-modal" data-modal="storyModal">×</button>
-<h2>CREÁ TU <em>HISTORIA</em></h2>
+<h2>Creá tu <em>Historia</em></h2>
 <p>Contanos tu experiencia en The Chosen One</p>
+<div id="storyLimitInfo" style="display:inline-block;background:rgba(var(--gold-rgb),.1);border:1px solid rgba(var(--gold-rgb),.4);color:var(--gold);border-radius:20px;padding:4px 14px;font-size:.78em;font-weight:700;margin-bottom:16px">Historias publicadas: … de 3</div>
 <div class="story-form">
 <input type="text" class="auth-input" id="storyName" placeholder="Tu nombre de usuario en Roblox" maxlength="30">
 <textarea id="storyBio" placeholder="Biografía corta (ej: 'Jugador desde 2023, líder del clan X')" maxlength="150"></textarea>
@@ -1587,7 +1613,7 @@ footer .foot-links a:hover{color:var(--gold)}
 <textarea id="storyText" placeholder="Tu historia en TCO... (contanos tus batallas, amigos, traiciones, logros)" style="min-height:200px" maxlength="3000"></textarea>
 <div class="char-count"><span id="textCount">0</span>/3000</div>
 <input type="file" id="storyImage" accept="image/*">
-<button class="auth-btn" data-action="submit-story">PUBLICAR HISTORIA</button>
+<button class="auth-btn" data-action="submit-story">Publicar historia</button>
 </div>
 </div>
 </div>
@@ -1596,7 +1622,7 @@ footer .foot-links a:hover{color:var(--gold)}
 <div class="modal" id="feedbackModal">
 <div class="modal-c big">
 <button class="modal-x" data-action="close-modal" data-modal="feedbackModal">×</button>
-<h2>FEEDBACK Y <em>BUGS</em></h2>
+<h2>Feedback y <em>Bugs</em></h2>
 <p>¿Encontraste un error? ¿Tenés una idea? Le llega directo al líder</p>
 <div class="story-form">
 <select id="fbType" class="auth-input" style="margin-bottom:12px">
@@ -1607,7 +1633,7 @@ footer .foot-links a:hover{color:var(--gold)}
 <textarea id="fbText" maxlength="600" placeholder="Contame qué pasó (o qué se te ocurrió)... si es un bug, describí los pasos para reproducirlo"></textarea>
 <div class="char-count"><span id="fbCount">0</span>/600</div>
 <input type="text" class="auth-input" id="fbContact" placeholder="Contacto opcional (Discord/Roblox) para responderte" maxlength="60">
-<button class="auth-btn" data-action="submit-feedback">📨 ENVIAR AL LÍDER</button>
+<button class="auth-btn" data-action="submit-feedback">📨 Enviar al líder</button>
 <p style="font-size:.72em;color:var(--mut);margin-top:12px">PD: si la página crashea, ella misma envía un reporte técnico automático al líder. Magia negra.</p>
 </div>
 </div>
@@ -1694,8 +1720,24 @@ function timeSince(ms){
   i=s/60; if(i>1)return Math.floor(i)+' minutos';
   return 'recién';
 }
-const BAD_WORDS=['puta','puto','perra','mierda','carajo','concha','boludo','pelotudo','forro','hijo de puta','hdp','zorra','gil','mogolico','negro de mierda','sudaca','trolo','trava','maricon','maricón','pajero','pija','culiao','weon','conchetumadre','ctm'];
-function containsBadWords(t){ const l=String(t).toLowerCase(); return BAD_WORDS.some(w=>l.includes(w)); }
+function cleanText(t){
+  return String(t==null?'':t).replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f\u200b-\u200f\u202a-\u202e\ufeff]/g,'').trim();
+}
+function normTxt(t){
+  let s=String(t).toLowerCase();
+  s=s.normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+  s=s.replace(/[0@]/g,'o').replace(/1/g,'i').replace(/3/g,'e').replace(/4/g,'a').replace(/5/g,'s').replace(/7/g,'t').replace(/\$/g,'s');
+  s=s.replace(/(.)\1{2,}/g,'$1$1');
+  return s;
+}
+const BAD_HARD=['hijo de puta','hdp','negro de mierda','sudaca','maricon','trolo','trava','conchetumadre','ctm','kys','groomer','pedofilo','violador','nazi','hijueputa','malparido','chupapija'];
+const BAD_SOFT=['puta','puto','perra','mierda','carajo','concha','boludo','pelotudo','forro','zorra','gil','mogolico','pajero','pija','culiao','weon','idiota','imbecil','estupido','tarado','cagon','ortiva','huevon','peneco','rufian','garcha'];
+function buildBadRx(w){
+  const core=w.split('').map(c=>c+'{1,3}').join('[\\s.\\-_*,;:!¡?¿0-9@]*');
+  return new RegExp('(^|[^a-zñ])'+core+'([^a-zñ]|$)');
+}
+const BAD_RX=BAD_HARD.concat(BAD_SOFT).map(w=>buildBadRx(normTxt(w)));
+function containsBadWords(t){ const s=normTxt(t); return BAD_RX.some(rx=>rx.test(s)); }
 function fileToDataUrl(file,size){
   return new Promise((res,rej)=>{
     const img=new Image(); const url=URL.createObjectURL(file);
@@ -2132,7 +2174,7 @@ function buildPalette(){
   Object.keys(CHARS).forEach(id=>paletteIndex.push({ic:'👤',label:'Expediente: '+CHARS[id].name,group:'Personaje',run:()=>charModal(id)}));
   paletteIndex.push({ic:'✍️',label:'Crear mi historia',group:'Acción',run:()=>openStoryCreator()});
   paletteIndex.push({ic:'⚙️',label:'Abrir ajustes',group:'Acción',run:()=>openModal('settingsModal')});
-  paletteIndex.push({ic:'🎨',label:'Cambiar tema de color',group:'Acción',run:()=>{ const t=['gold','venom','phantom','ember']; settings.theme=t[(t.indexOf(settings.theme)+1)%t.length]; saveSettings(); applySettings(); toast('Tema: '+settings.theme,'🎨'); }});
+  paletteIndex.push({ic:'🎨',label:'Cambiar tema de color',group:'Acción',run:()=>{ const t=['gold','venom','phantom','ember','light']; settings.theme=t[(t.indexOf(settings.theme)+1)%t.length]; saveSettings(); applySettings(); toast('Tema: '+settings.theme,'🎨'); }});
   paletteIndex.push({ic:'🎉',label:'Lanzar confeti',group:'Acción',run:()=>fireConfetti()});
   paletteIndex.push({ic:'🔗',label:'Copiar link del archivo',group:'Acción',run:()=>{ try{ navigator.clipboard.writeText(location.href); toast('Link copiado','🔗'); }catch(e){ toast('No se pudo copiar','⚠️'); } }});
 }
@@ -2198,32 +2240,6 @@ function applyMe(){
   const adl=$('#adminDrawerLink'); if(adl) adl.style.display=isAdminUser()?'block':'none';
   const apb=$('#adminProfileBtn'); if(apb) apb.style.display=isAdminUser()?'inline-block':'none';
 }
-async function completeOnboarding(){
-  const err=$('#onboardError'); err.classList.remove('show');
-  const nick=$('#onboardNick').value.trim();
-  const showE=m=>{ err.textContent=m; err.classList.add('show'); };
-  if(nick.length<3||nick.length>20){ showE('El apodo debe tener entre 3 y 20 caracteres'); return; }
-  if(containsBadWords(nick)){ showE('⚠️ El apodo contiene palabras inapropiadas. Elegí otro.'); return; }
-  const lower=nick.toLowerCase();
-  if(await nicknameTaken(lower,null)){ showE('❌ Ese apodo ya está usado por otro miembro. Elegí otro.'); return; }
-  let avatar='';
-  const f=$('#onboardImg').files[0];
-  if(f){ try{ avatar=await fileToDataUrl(f,128); }catch(e){} }
-  const profile={ id:'u_'+Date.now().toString(36)+Math.random().toString(36).slice(2,7), nickname:nick, nicknameLower:lower, avatar:avatar, bio:'', createdAt:Date.now(), nicknameChangedAt:0, docId:null };
-  const F=window.firebaseFunctions;
-  if(F&&window.firebaseDb){
-    try{ const ref=await F.addDoc(F.collection(window.firebaseDb,'users'),{ userId:profile.id, nickname:nick, nicknameLower:lower, avatar:avatar, bio:'', createdAt:Date.now(), nicknameChangedAt:0 }); profile.docId=ref.id; }
-    catch(e){ console.warn('No se pudo registrar el apodo online:',e); }
-  }
-  saveLocalProfile(profile);
-  me=profile; applyMe();
-  $('#onboardScreen').classList.add('hidden');
-  document.body.style.overflow='';
-  initData();
-  toast('Bienvenido al archivo, '+nick,'👋');
-  unlockAch('paso');
-  beep(880,0.12);
-}
 function resetDeviceProfile(){
   if(!confirm('¿Cambiar de perfil en este dispositivo? Se borrará tu apodo guardado acá (tu historia y comentarios quedan online).')) return;
   localStorage.removeItem(LS_KEY);
@@ -2253,7 +2269,7 @@ async function saveProfile(){
   if(!me) return;
   const err=$('#profileError'); err.classList.remove('show');
   const showE=m=>{ err.textContent=m; err.classList.add('show'); };
-  const newNick=$('#profileNick').value.trim();
+  const newNick=cleanText($('#profileNick').value);
   const newLower=newNick.toLowerCase();
   let newAvatar=me.avatar;
   const f=$('#profileImg').files[0];
@@ -2280,15 +2296,32 @@ async function saveProfile(){
 /* ---------- firebase: historias / likes / comentarios / ranking ---------- */
 const STORY_MAP={}, COMMENT_MAP={};
 function openStoryCreator(){
-  if(!me){ toast('Primero elegí tu apodo para publicar','👤'); return; }
+  if(!me){ toast('Primero iniciá sesión con Discord','🎮'); return; }
   if(me.nickname) $('#storyName').value=me.nickname;
+  const li=$('#storyLimitInfo');
+  if(li){
+    li.textContent='Historias publicadas: … de 3';
+    (async()=>{
+      let n=null; const F=window.firebaseFunctions;
+      if(F&&window.firebaseDb){ try{ const s=await F.getDocs(F.query(F.collection(window.firebaseDb,'stories'),F.where('userId','==',me.id))); n=s.size; }catch(e){} }
+      li.textContent=(n===null)?'Cupo no disponible offline':'Historias publicadas: '+n+' de 3';
+      if(n!==null&&n>=3) li.textContent+=' · cupo completo';
+    })();
+  }
   openModal('storyModal');
 }
 async function submitStory(){
-  if(!me){ toast('Primero elegí tu apodo','👤'); return; }
+  if(!me){ toast('Primero iniciá sesión con Discord','🎮'); return; }
   if(!window.firebaseReady){ toast('Firebase todavía está cargando, esperá 2s','⏳'); return; }
   const F=window.firebaseFunctions;
-  const name=$('#storyName').value.trim(), bio=$('#storyBio').value.trim(), text=$('#storyText').value.trim();
+  if(F&&window.firebaseDb){
+    try{
+      const qq=F.query(F.collection(window.firebaseDb,'stories'),F.where('userId','==',me.id));
+      const ss=await F.getDocs(qq);
+      if(ss.size>=3){ toast('Llegaste al máximo de 3 historias en el archivo','📖'); beep(220,0.12,'sawtooth',0.05); return; }
+    }catch(e){ console.warn(e); }
+  }
+  const name=cleanText($('#storyName').value), bio=cleanText($('#storyBio').value), text=cleanText($('#storyText').value);
   const imgFile=$('#storyImage').files[0];
   if(!name||!bio||!text){ toast('Completá todos los campos','⚠️'); return; }
   if(containsBadWords(name)||containsBadWords(bio)||containsBadWords(text)){ toast('Tu historia contiene palabras inapropiadas','⚠️'); return; }
@@ -2345,7 +2378,7 @@ async function loadStories(){
   }catch(e){ grid.innerHTML='<div class="no-stories">Error al cargar historias: '+escapeHtml(e.message)+'</div>'; }
 }
 async function toggleLike(storyId,emoji,btn){
-  if(!me){ toast('Primero elegí tu apodo','👤'); return; }
+  if(!me){ toast('Primero iniciá sesión con Discord','🎮'); return; }
   const F=window.firebaseFunctions; if(!F||!window.firebaseDb) return;
   try{
     const q=F.query(F.collection(window.firebaseDb,'likes'),F.where('storyId','==',storyId),F.where('userId','==',me.id),F.where('emoji','==',emoji));
@@ -2420,12 +2453,12 @@ function loadComments(context){
   },(err)=>{ console.error(err); box.innerHTML='<p style="color:var(--red);font-size:.85em">Error al cargar comentarios</p>'; });
 }
 async function postComment(context,inputId){
-  if(!me){ toast('Primero elegí tu apodo','👤'); return; }
+  if(!me){ toast('Primero iniciá sesión con Discord','🎮'); return; }
   if(!window.firebaseReady){ toast('Firebase todavía cargando, esperá 2s','⏳'); return; }
   const F=window.firebaseFunctions;
   if(!F||!window.firebaseDb){ toast('Firebase no disponible','❌'); return; }
   const input=$('#'+inputId); if(!input) return;
-  const text=input.value.trim();
+  const text=cleanText(input.value);
   if(!text){ toast('Escribí algo','✍️'); return; }
   if(text.length>500){ toast('Máximo 500 caracteres','⚠️'); return; }
   if(containsBadWords(text)){ toast('Tu comentario contiene palabras inapropiadas','⚠️'); return; }
@@ -2571,7 +2604,6 @@ document.addEventListener('click',e=>{
     case 'profile': openProfileModal(); break;
     case 'reset-profile': resetDeviceProfile(); break;
     case 'discord-login': discordLogin(); break;
-    case 'onboard': completeOnboarding(); break;
     case 'save-profile': saveProfile(); break;
     case 'new-story': openStoryCreator(); break;
     case 'submit-story': submitStory(); break;
@@ -2637,7 +2669,6 @@ $('#palette').addEventListener('click',e=>{ if(e.target.id==='palette') closePal
 $$('.modal').forEach(m=>m.addEventListener('click',e=>{ if(e.target===m) m.classList.remove('active'); }));
 $('#storyBio').addEventListener('input',e=>$('#bioCount').textContent=e.target.value.length);
 $('#storyText').addEventListener('input',e=>$('#textCount').textContent=e.target.value.length);
-$('#onboardImg').addEventListener('change',async e=>{ const f=e.target.files[0]; if(f) $('#onboardPreview').src=await fileToDataUrl(f,110); });
 $('#profileImg').addEventListener('change',async e=>{ const f=e.target.files[0]; if(f) $('#profilePreview').src=await fileToDataUrl(f,110); });
 $('#codexFilters').addEventListener('click',e=>{
   const b=e.target.closest('button'); if(!b) return;
@@ -2724,6 +2755,21 @@ function boot(){
   if(booted) return; booted=true;
   bootAsync();
 }
+function enterArchive(){
+  applyMe();
+  $('#onboardScreen').classList.add('hidden');
+  document.body.style.overflow='';
+  initData();
+  unlockAch('paso');
+}
+function showOnboard(mode){
+  const ob=$('#onboardScreen'); if(ob) ob.classList.remove('hidden');
+  document.body.style.overflow='hidden';
+  const d=$('#onboardDesc');
+  if(d) d.textContent=(mode==='link')
+    ? 'Tu perfil local "'+(me?me.nickname:'')+'" necesita vincularse a Discord para continuar. Es la única forma de ingreso al archivo.'
+    : 'El ingreso es únicamente con tu cuenta de Discord: preservamos la identidad real de cada miembro del clan.';
+}
 async function bootAsync(){
   hideLoader();
   loadSettings(); applySettings();
@@ -2742,14 +2788,9 @@ async function bootAsync(){
     catch(e){ console.warn(e); }
   }
   me=loadLocalProfile();
-  if(me){
-    applyMe();
-    $('#onboardScreen').classList.add('hidden');
-    document.body.style.overflow='';
-    initData();
-  }else{
-    document.body.style.overflow='hidden';
-  }
+  if(me&&me.discordId){ enterArchive(); }
+  else if(me){ showOnboard('link'); }
+  else showOnboard('new');
   if(document.fonts&&document.fonts.ready) document.fonts.ready.then(moveTabInd);
   setTimeout(moveTabInd,300);
 }
@@ -2847,7 +2888,7 @@ function renderQuiz(){
     box.innerHTML='<div class="quiz-card"><div class="quiz-score">'+s+'/'+t+'</div>'+
       '<p style="font-size:1.2em;font-weight:800;color:var(--gold);margin:6px 0">'+rank+'</p>'+
       '<p style="color:var(--mut);font-size:.9em">Mejor puntaje en este dispositivo: '+Math.max(best,s)+'/'+t+'</p>'+
-      '<div style="margin-top:18px;display:flex;gap:10px;justify-content:center"><button class="cta-btn" data-action="quiz-retry">🔄 REINTENTAR</button></div></div>';
+      '<div style="margin-top:18px;display:flex;gap:10px;justify-content:center"><button class="cta-btn" data-action="quiz-retry">🔄 Reintentar</button></div></div>';
     return;
   }
   const qz=QUIZ[quizState.i];
@@ -2920,7 +2961,7 @@ function drawPolls(){
   requestAnimationFrame(()=>{ box.querySelectorAll('.poll-bar i').forEach(i=>{ const w=i.style.width; i.style.width='0'; requestAnimationFrame(()=>{ i.style.width=w; }); }); });
 }
 async function castVote(pollId,opt){
-  if(!me){ toast('Primero elegí tu apodo','👤'); return; }
+  if(!me){ toast('Primero iniciá sesión con Discord','🎮'); return; }
   const p=POLLS.find(x=>x.id===pollId); if(!p) return;
   if(pollCache.mine&&pollCache.mine[pollId]!==undefined){ toast('Ya votaste en esta encuesta','🗳️'); return; }
   opt=+opt;
@@ -2987,7 +3028,7 @@ function rankInfo(){
   return pts>=18?{r:'LEYENDA',c:'#f5d76e'}:pts>=13?{r:'ÉLITE',c:'#a78bfa'}:pts>=9?{r:'VETERANO',c:'#3ddc84'}:pts>=5?{r:'SOLDADO',c:'#508cff'}:{r:'RECLUTA',c:'#8a8a93'};
 }
 function openCredModal(){
-  if(!me){ toast('Primero elegí tu apodo','👤'); return; }
+  if(!me){ toast('Primero iniciá sesión con Discord','🎮'); return; }
   openModal('credModal');
   drawCred();
 }
@@ -3148,7 +3189,7 @@ async function loadConfessions(){
 async function postConfession(){
   if(!me){ toast('Primero elegí tu apodo (aunque la confesión sea anónima)','👤'); return; }
   const inp=$('#confInput'); if(!inp) return;
-  const text=inp.value.trim();
+  const text=cleanText(inp.value);
   if(!text){ toast('Escribí algo primero','🕯️'); return; }
   if(text.length>400){ toast('Máximo 400 caracteres','⚠️'); return; }
   if(containsBadWords(text)){ toast('El muro es anónimo, no un basurero','⚠️'); return; }
@@ -3183,8 +3224,8 @@ if($('#confInput')) $('#confInput').addEventListener('input',e=>{ const c=$('#co
 
 /* ---------- feedback + reporte automático de bugs ---------- */
 async function submitFeedback(){
-  if(!me){ toast('Primero elegí tu apodo','👤'); return; }
-  const text=$('#fbText').value.trim();
+  if(!me){ toast('Primero iniciá sesión con Discord','🎮'); return; }
+  const text=cleanText($('#fbText').value);
   if(!text){ toast('Contame qué pasó o qué se te ocurrió','🐞'); return; }
   const F=window.firebaseFunctions;
   if(!F||!window.firebaseDb){ toast('Firebase no disponible','❌'); return; }

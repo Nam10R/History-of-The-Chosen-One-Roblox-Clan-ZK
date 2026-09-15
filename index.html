@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="es" data-theme="gold">
+<html lang="es" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -123,12 +123,26 @@ nav.scrolled{padding:6px 0;box-shadow:0 10px 30px rgba(0,0,0,.5)}
 .logo{font-family:'Bebas Neue';font-size:1.5em;letter-spacing:2px;color:var(--gold);cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:8px}
 .logo svg{width:26px;height:26px;filter:drop-shadow(0 0 6px rgba(var(--gold-rgb),.6))}
 .logo span{color:var(--txt)}
-.tabbar{position:relative;display:flex;gap:0;background:transparent;border:none;border-radius:0;padding:0;flex:1;justify-content:center;min-width:0;overflow-x:auto;scrollbar-width:none}
-.tabbar::-webkit-scrollbar{display:none}
-.tabbar button{position:relative;z-index:1;background:none;border:none;color:var(--mut);font-weight:700;font-size:.86em;letter-spacing:.3px;padding:10px 16px;border-radius:10px;cursor:pointer;transition:color .25s,background .25s;display:flex;align-items:center;gap:7px;white-space:nowrap}
-.tabbar button:hover{color:var(--txt);background:rgba(var(--gold-rgb),.06)}
-.tabbar button.active{color:var(--gold);background:rgba(var(--gold-rgb),.1)}
-.tab-ind{position:absolute;top:auto;bottom:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:3px;transition:left .35s var(--ease),width .35s var(--ease);z-index:0;box-shadow:0 2px 10px rgba(var(--gold-rgb),.55)}
+.dock{position:fixed;left:16px;top:50%;transform:translateY(-50%);z-index:950;display:flex;flex-direction:column;gap:4px;background:rgba(22,22,26,.78);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:20px;padding:8px 6px;box-shadow:0 18px 50px rgba(0,0,0,.45)}
+html[data-theme="light"] .dock{background:rgba(255,253,246,.86)}
+.dock button{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:none;color:var(--mut);cursor:pointer;padding:9px 8px;border-radius:14px;transition:color .25s;width:58px}
+.dock button .dk-ic{font-size:1.25em;line-height:1;transition:transform .25s}
+.dock button .dk-lb{font-size:.6em;font-weight:800;letter-spacing:.4px}
+.dock button:hover{color:var(--txt)}
+.dock button:hover .dk-ic{transform:scale(1.18)}
+.dock button.active{color:var(--gold)}
+.dock .tab-ind{position:absolute;z-index:0;border-radius:14px;background:rgba(var(--gold-rgb),.14);border:1px solid rgba(var(--gold-rgb),.4);transition:top .35s var(--ease),height .35s var(--ease),left .35s var(--ease),width .35s var(--ease)}
+@media(max-width:1099px){
+  .dock{left:50%;top:auto;bottom:14px;transform:translateX(-50%);flex-direction:row;gap:2px;padding:6px 10px;border-radius:24px}
+  .dock button{width:auto;padding:7px 13px}
+  body{padding-bottom:84px}
+  .top-btn{bottom:92px}
+  .music-indicator{bottom:92px;left:16px}
+  .toasts{bottom:104px}
+}
+/* scroll-reveal de las crónicas */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .75s var(--ease),transform .75s var(--ease)}
+.rv.on{opacity:1;transform:none}
 .nav-tools{display:flex;gap:8px;align-items:center}
 .icon-btn{background:var(--card);border:1px solid var(--line);color:var(--txt);width:38px;height:38px;border-radius:9px;cursor:pointer;font-size:1em;display:flex;align-items:center;justify-content:center;transition:.25s;position:relative}
 .icon-btn:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px)}
@@ -501,7 +515,6 @@ footer .foot-links a:hover{color:var(--gold)}
 
 @media(max-width:900px){
   .nav-inner{justify-content:center}
-  .tabbar{order:3;width:100%;overflow-x:auto;justify-content:flex-start}
   .search-trigger{min-width:44px}
   .search-trigger .st-txt,.search-trigger kbd{display:none}
   .card{padding:32px 22px}
@@ -731,14 +744,7 @@ html[data-theme="light"] .ip img{box-shadow:0 10px 26px rgba(120,100,60,.3)}
 <nav id="mainNav">
 <div class="nav-inner">
 <div class="logo" data-action="tab" data-tab="home"><img class="logo-img" src="images/clanzk.png" alt="" onerror="emblemFail(this)">CLAN <span>ZK</span></div>
-<div class="tabbar" id="tabbar">
-<div class="tab-ind" id="tabInd"></div>
-<button data-action="tab" data-tab="home" class="active">🏠 Inicio</button>
-<button data-action="tab" data-tab="historia">📖 Historia</button>
-<button data-action="tab" data-tab="personajes">👥 Personajes</button>
-<button data-action="tab" data-tab="archivo">🗄️ Archivo</button>
-<button data-action="tab" data-tab="comunidad">💬 Comunidad</button>
-</div>
+
 <div class="nav-tools">
 <button class="search-trigger" data-action="palette" title="Buscar (Ctrl+K)">🔍 <span class="st-txt">Buscar...</span> <kbd>Ctrl K</kbd></button>
 <div class="user-info" id="userInfo">
@@ -752,6 +758,16 @@ html[data-theme="light"] .ip img{box-shadow:0 10px 26px rgba(120,100,60,.3)}
 </div>
 </div>
 </nav>
+
+<!-- DOCK DE NAVEGACIÓN -->
+<div class="dock" id="tabbar" role="navigation" aria-label="Secciones del archivo">
+<div class="tab-ind" id="tabInd"></div>
+<button data-action="tab" data-tab="home" class="active"><span class="dk-ic">🏠</span><span class="dk-lb">Inicio</span></button>
+<button data-action="tab" data-tab="historia"><span class="dk-ic">📖</span><span class="dk-lb">Historia</span></button>
+<button data-action="tab" data-tab="personajes"><span class="dk-ic">👥</span><span class="dk-lb">Personajes</span></button>
+<button data-action="tab" data-tab="archivo"><span class="dk-ic">🗄️</span><span class="dk-lb">Archivo</span></button>
+<button data-action="tab" data-tab="comunidad"><span class="dk-ic">💬</span><span class="dk-lb">Comunidad</span></button>
+</div>
 
 <!-- PANEL NOTIFICACIONES -->
 <div class="notif-panel" id="notifPanel">
@@ -1334,6 +1350,14 @@ html[data-theme="light"] .ip img{box-shadow:0 10px 26px rgba(120,100,60,.3)}
 <div class="special-inner" style="max-width:860px">
 <h2 class="sec-title">Novedades del <em>Archivo</em></h2>
 <p class="sec-sub">Changelog público: cada era de esta página</p>
+<div class="cl-entry">
+<div class="cl-ver">v2.6 · "DOCK Y SCROLL VIVO"</div><div class="cl-date">16 de septiembre de 2026</div>
+<ul>
+<li>🧭 Adiós tabs: dock flotante de navegación (rail vertical en desktop, dock inferior en mobile) con indicador deslizante.</li>
+<li>✨ Scroll-reveal en las crónicas: cada párrafo, caja y batalla aparece al bajar, con easing suave.</li>
+<li>☀️ El tema predeterminado ahora es el crema cálido (modo claro).</li>
+</ul>
+</div>
 <div class="cl-entry">
 <div class="cl-ver">v2.5 · "IDENTIDAD OBLIGATORIA"</div><div class="cl-date">16 de septiembre de 2026</div>
 <ul>
@@ -1966,7 +1990,7 @@ function buildMap(){
 }
 
 /* ---------- ajustes ---------- */
-let settings={sound:true,motion:false,theme:'gold'};
+let settings={sound:true,motion:false,theme:'light'};
 function loadSettings(){ try{ Object.assign(settings, JSON.parse(localStorage.getItem(LS_SET)||'{}')); }catch(e){} }
 function saveSettings(){ localStorage.setItem(LS_SET, JSON.stringify(settings)); }
 function applySettings(){
@@ -2041,7 +2065,14 @@ const state={tab:'home',subs:{historia:'2022',archivo:'cronologia',comunidad:'hi
 function moveTabInd(){
   const bar=$('#tabbar'), ind=$('#tabInd'); if(!bar||!ind) return;
   const btn=bar.querySelector('button.active'); if(!btn) return;
-  ind.style.left=btn.offsetLeft+'px'; ind.style.width=btn.offsetWidth+'px';
+  const vertical=(typeof window.matchMedia==='function')?window.matchMedia('(min-width:1100px)').matches:(window.innerWidth||1200)>=1100;
+  if(vertical){
+    ind.style.top=btn.offsetTop+'px'; ind.style.height=btn.offsetHeight+'px';
+    ind.style.left='6px'; ind.style.width=Math.max(0,bar.clientWidth-12)+'px';
+  } else {
+    ind.style.left=btn.offsetLeft+'px'; ind.style.width=btn.offsetWidth+'px';
+    ind.style.top='6px'; ind.style.height=Math.max(0,bar.clientHeight-12)+'px';
+  }
 }
 function setTab(t,skipScroll){
   if(!$('#panel-'+t)) return;
@@ -2773,7 +2804,7 @@ function showOnboard(mode){
 async function bootAsync(){
   hideLoader();
   loadSettings(); applySettings();
-  paintAvatars(); renderCodex(); renderTimeline(); buildMap(); buildPalette(); initParticles();
+  paintAvatars(); renderCodex(); renderTimeline(); buildMap(); buildPalette(); initParticles(); initScrollReveal();
   try{
     const saved=JSON.parse(localStorage.getItem(LS_TAB)||'null');
     if(saved&&saved.tab&&$('#panel-'+saved.tab)){ state.tab=saved.tab; Object.assign(state.subs,saved.subs||{}); }
@@ -3167,6 +3198,16 @@ function buildLinaje(){
   svg.innerHTML=html;
 }
 
+/* ---------- scroll-reveal de las crónicas ---------- */
+let revealIO=null;
+function initScrollReveal(){
+  if(revealIO||!('IntersectionObserver' in window)) return;
+  revealIO=new IntersectionObserver(es=>{
+    es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('on'); revealIO.unobserve(e.target); } });
+  },{threshold:0.12,rootMargin:'0px 0px -6% 0px'});
+  $$('#panel-historia .card > *').forEach(el=>{ el.classList.add('rv'); revealIO.observe(el); });
+}
+
 /* ---------- confesiones anónimas ---------- */
 async function loadConfessions(){
   const grid=$('#confGrid'); if(!grid) return;
@@ -3362,4 +3403,3 @@ async function linkDiscordProfile(du){
 </script>
 </body>
 </html>
-

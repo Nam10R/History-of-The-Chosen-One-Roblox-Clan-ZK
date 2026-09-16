@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="es" data-theme="light">
+<html lang="es" data-theme="gold">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,7 +17,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
 
 <!-- FIREBASE -->
 <script type="module">
@@ -54,7 +54,7 @@ html[data-theme="phantom"]{ --gold:#a78bfa; --gold2:#ddd0ff; --gold-rgb:167,139,
 html[data-theme="ember"]{ --gold:#ff7a45; --gold2:#ffc09e; --gold-rgb:255,122,69; }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--txt);font-family:'Inter',system-ui,sans-serif;line-height:1.7;overflow-x:hidden}
+body{background:var(--bg);color:var(--txt);font-family:'Manrope',system-ui,sans-serif;line-height:1.7;overflow-x:hidden}
 body::before{content:'';position:fixed;inset:0;background:
   radial-gradient(1000px 500px at 80% -10%, rgba(var(--gold-rgb),.06), transparent 60%),
   radial-gradient(800px 400px at 10% 110%, rgba(var(--gold-rgb),.04), transparent 60%);
@@ -501,9 +501,9 @@ main{position:relative;z-index:1;padding-top:76px}
 .rainbow-name{background:linear-gradient(90deg,#ff3b3b,#ff9f1a,#fff700,#00ff88,#00cfff,#7b5cff,#ff00d4,#ff3b3b);background-size:400% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:rainbowFlow 4s linear infinite, rainbowGlow 3s ease-in-out infinite;font-weight:800;letter-spacing:.5px}
 .rainbow-ring{border:2px solid transparent !important;background:linear-gradient(var(--bg2),var(--bg2)) padding-box,linear-gradient(90deg,#ff3b3b,#ff9f1a,#fff700,#00ff88,#00cfff,#7b5cff,#ff00d4,#ff3b3b) border-box !important;background-size:100% 100%,400% 100%;animation:rainbowFlow 4s linear infinite;box-shadow:0 0 12px rgba(255,59,59,.3),0 0 20px rgba(123,92,255,.2)}
 .edited-tag{color:var(--mut);font-size:.75em;font-style:italic;margin-left:6px;opacity:.8}
-body.spy-mode .subpanel[data-sub="2025"] .card{border-color:rgba(61,220,132,.35);background:linear-gradient(180deg,#101511,var(--card));position:relative}
-body.spy-mode .subpanel[data-sub="2025"] .card::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(61,220,132,.03) 2px,rgba(61,220,132,.03) 4px);pointer-events:none;border-radius:22px}
-body.spy-mode .subpanel[data-sub="2025"] .hl{color:#3ddc84;border-bottom-color:#3ddc84}
+body.spy-mode #cap-2025 .card{border-color:rgba(61,220,132,.35);background:linear-gradient(180deg,#101511,var(--card));position:relative}
+body.spy-mode #cap-2025 .card::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(61,220,132,.03) 2px,rgba(61,220,132,.03) 4px);pointer-events:none;border-radius:22px}
+body.spy-mode #cap-2025 .hl{color:#3ddc84;border-bottom-color:#3ddc84}
 body.party{animation:partyHue 2s linear infinite}
 @keyframes partyHue{to{filter:hue-rotate(360deg)}}
 
@@ -686,7 +686,6 @@ footer .foot-links a:hover{color:var(--gold)}
 /* ============ MODO CLARO (pergamino cálido) ============ */
 html[data-theme="light"]{--bg:#f4f0e6;--bg2:#ebe5d6;--card:#fffdf6;--line:#dcd3bd;--gold:#a8842c;--gold2:#8a6d1f;--gold-rgb:168,132,44;--txt:#2b2620;--mut:#7d7460;--red:#c22f2f;--green:#1f9d5c;--blue:#2f6bc2}
 html[data-theme="light"] body::before{opacity:.45}
-html[data-theme="light"] nav{background:rgba(244,240,230,.9)}
 html[data-theme="light"] .hero-bg{filter:brightness(.82) saturate(.85)}
 html[data-theme="light"] .hero-bg::after{background:linear-gradient(180deg,rgba(244,240,230,.35),rgba(244,240,230,.9) 70%,var(--bg))}
 html[data-theme="light"] .hero h1{text-shadow:0 6px 30px rgba(255,255,255,.55)}
@@ -698,6 +697,25 @@ html[data-theme="light"] .tabbar button.active{background:rgba(var(--gold-rgb),.
 html[data-theme="light"] .news-paper{box-shadow:0 20px 60px rgba(90,80,50,.28)}
 html[data-theme="light"] .medal,html[data-theme="light"] .hub,html[data-theme="light"] .wiki-term,html[data-theme="light"] .codex-card{box-shadow:0 4px 16px rgba(120,100,60,.12)}
 html[data-theme="light"] .ip img{box-shadow:0 10px 26px rgba(120,100,60,.3)}
+
+/* narrativa en serif de libro */
+.card p,.box p,.dos-card p,.story-text,.conf-card,.tl-desc{font-family:'Lora',Georgia,serif}
+/* nav con degradé, no cortado */
+nav{background:linear-gradient(180deg,rgba(10,10,12,.95),rgba(10,10,12,.72) 60%,rgba(10,10,12,0)) !important;border-bottom:none}
+nav::after{content:'';position:absolute;left:0;right:0;bottom:0;height:1px;background:linear-gradient(90deg,transparent,rgba(var(--gold-rgb),.45),transparent)}
+nav.scrolled{background:rgba(10,10,12,.94) !important;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+html[data-theme="light"] nav{background:linear-gradient(180deg,rgba(244,240,230,.97),rgba(244,240,230,.78) 60%,rgba(244,240,230,0)) !important}
+html[data-theme="light"] nav.scrolled{background:rgba(244,240,230,.96) !important}
+/* año fantasma */
+.year-ghost{position:fixed;right:22px;top:50%;transform:translateY(-50%);font-family:'Bebas Neue',sans-serif;font-size:clamp(4em,9vw,8.5em);color:rgba(var(--gold-rgb),.08);z-index:0;pointer-events:none;letter-spacing:8px;opacity:0;transition:opacity .6s;user-select:none}
+@media(max-width:1099px){.year-ghost{display:none}}
+/* botón unirse al clan */
+.join-btn{display:flex;align-items:center;justify-content:center;gap:10px;background:#5865F2;color:#fff;border:none;border-radius:14px;padding:13px 16px;font-weight:800;font-size:.92em;cursor:pointer;width:100%;transition:.25s;letter-spacing:.4px;font-family:inherit}
+.join-btn:hover{background:#4752c4;transform:translateY(-2px);box-shadow:0 12px 30px rgba(88,101,242,.4)}
+.join-btn svg{width:22px;height:17px;fill:#fff;flex-shrink:0}
+/* avatares clickeables */
+.comment-avatar,.story-ava,.lb-avatar{cursor:pointer;transition:.2s}
+.comment-avatar:hover,.story-ava:hover,.lb-avatar:hover{transform:scale(1.08);box-shadow:0 0 0 3px rgba(var(--gold-rgb),.35)}
 </style>
 </head>
 <body>
@@ -769,6 +787,8 @@ html[data-theme="light"] .ip img{box-shadow:0 10px 26px rgba(120,100,60,.3)}
 <button data-action="tab" data-tab="comunidad"><span class="dk-ic">💬</span><span class="dk-lb">Comunidad</span></button>
 </div>
 
+<div class="year-ghost" id="yearGhost">2022</div>
+
 <!-- PANEL NOTIFICACIONES -->
 <div class="notif-panel" id="notifPanel">
 <div class="notif-head">
@@ -814,16 +834,7 @@ html[data-theme="light"] .ip img{box-shadow:0 10px 26px rgba(120,100,60,.3)}
 
 <!-- ============ TAB: HISTORIA ============ -->
 <section class="panel" id="panel-historia">
-<div class="subtabs" data-tabbar="historia">
-<button data-action="sub" data-tab="historia" data-sub="2022" class="active">I · 2022</button>
-<button data-action="sub" data-tab="historia" data-sub="2023">II · 2023</button>
-<button data-action="sub" data-tab="historia" data-sub="2024">III · 2024</button>
-<button data-action="sub" data-tab="historia" data-sub="2025">IV · 2025</button>
-<button data-action="sub" data-tab="historia" data-sub="2026">V · 2026</button>
-</div>
-
-<!-- 2022 -->
-<div class="subpanel active" data-sub="2022">
+<div class="cap-block" id="cap-2022">
 <section class="chapter">
 <div class="ch-head"><div class="ch-num">Capítulo I · El Comienzo</div><h2 class="ch-title">Los Orígenes</h2><p class="ch-sub">Donde un solo clic encendió una llama que nadie podría apagar</p></div>
 <div class="card">
@@ -846,7 +857,7 @@ html[data-theme="light"] .ip img{box-shadow:0 10px 26px rgba(120,100,60,.3)}
 </div>
 
 <!-- 2023 -->
-<div class="subpanel" data-sub="2023">
+<div class="cap-block" id="cap-2023">
 <section class="chapter">
 <div class="ch-head"><div class="ch-num">Capítulo II · El Caos</div><h2 class="ch-title">La Expansión</h2><p class="ch-sub">El año en que el juego se volvió un campo de batalla y nadie estaba a salvo</p></div>
 <div class="card">
@@ -870,7 +881,7 @@ html[data-theme="light"] .ip img{box-shadow:0 10px 26px rgba(120,100,60,.3)}
 </div>
 
 <!-- 2024 -->
-<div class="subpanel" data-sub="2024">
+<div class="cap-block" id="cap-2024">
 <section class="chapter">
 <div class="ch-head"><div class="ch-num">Capítulo III · La Gran Guerra</div><h2 class="ch-title">2024</h2><p class="ch-sub">Amistad, traición y una batalla que liberó medio TCO Español</p></div>
 <div class="card">
@@ -920,7 +931,7 @@ html[data-theme="light"] .ip img{box-shadow:0 10px 26px rgba(120,100,60,.3)}
 </div>
 
 <!-- 2025 -->
-<div class="subpanel" data-sub="2025">
+<div class="cap-block" id="cap-2025">
 <section class="chapter">
 <div class="ch-head"><div class="ch-num">Capítulo IV · La Segunda Guerra</div><h2 class="ch-title">2025</h2><p class="ch-sub">Espías, bots y guerra total: el año que se jugó en las sombras</p></div>
 <div class="card">
@@ -978,7 +989,7 @@ html[data-theme="light"] .ip img{box-shadow:0 10px 26px rgba(120,100,60,.3)}
 </div>
 
 <!-- 2026 -->
-<div class="subpanel" data-sub="2026">
+<div class="cap-block" id="cap-2026">
 <section class="chapter">
 <div class="ch-head"><div class="ch-num">Capítulo V · El Regreso</div><h2 class="ch-title">2026</h2><p class="ch-sub">Ruinas, raids y el nacimiento de un clan que se negó a morir</p></div>
 <div class="card">
@@ -1351,6 +1362,21 @@ html[data-theme="light"] .ip img{box-shadow:0 10px 26px rgba(120,100,60,.3)}
 <h2 class="sec-title">Novedades del <em>Archivo</em></h2>
 <p class="sec-sub">Changelog público: cada era de esta página</p>
 <div class="cl-entry">
+<div class="cl-ver">v2.7 · "LA ERA DORADA"</div><div class="cl-date">16 de septiembre de 2026</div>
+<ul>
+<li>📖 Historia Principal en un solo scroll épico: los 5 capítulos continuos, con año fantasma de fondo y modo espía automático.</li>
+<li>🌑 Tema predeterminado negro y oro, con narrativa en serif de libro (Lora) y UI en Manrope.</li>
+<li>🧭 Nav con degradé dorado en vez de corte seco.</li>
+<li>🚫 Anti-spam real: cooldowns por acción, bloqueo de links y anti-duplicados en comentarios, historias, confesiones y feedback.</li>
+<li>🎮 "¡Unite al Clan ZK!" con logo de Discord al fondo del menú y en el footer.</li>
+<li>👤 Perfiles públicos de miembros: clic en cualquier avatar abre su ficha con stats reales.</li>
+<li>📜 Logs de admins en Ajustes: cada borrado o resolución queda registrado con nombre y fecha.</li>
+<li>🧩 Quiz con progreso persistente y mejor puntaje visible; trofeos de capítulos arreglados.</li>
+<li>👑 Enzo es admin oficialmente (enzors19209).</li>
+<li>🏵️ Easter egg: tocá el emblema del hero 7 veces seguidas...</li>
+</ul>
+</div>
+<div class="cl-entry">
 <div class="cl-ver">v2.6 · "DOCK Y SCROLL VIVO"</div><div class="cl-date">16 de septiembre de 2026</div>
 <ul>
 <li>🧭 Adiós tabs: dock flotante de navegación (rail vertical en desktop, dock inferior en mobile) con indicador deslizante.</li>
@@ -1519,6 +1545,7 @@ html[data-theme="light"] .ip img{box-shadow:0 10px 26px rgba(120,100,60,.3)}
 <a data-action="sub" data-tab="comunidad" data-sub="muro">Muro</a>
 <a data-action="sub" data-tab="archivo" data-sub="novedades">Novedades</a>
 <a data-action="modal" data-modal="settingsModal">Ajustes</a>
+<a data-action="join-discord" style="color:#5865F2;font-weight:700">🎮 Unite al Clan ZK!</a>
 </div>
 <p style="margin-top:16px;font-size:.8em">The Chosen One © TomazDev · User ID 607353710 · Game ID 11137575513</p>
 <p style="margin-top:6px;font-size:.72em;opacity:.7">v2.1 · La Era Dorada · reconstruido con ❤️ y oro fundido</p>
@@ -1540,6 +1567,7 @@ html[data-theme="light"] .ip img{box-shadow:0 10px 26px rgba(120,100,60,.3)}
 <div class="theme-dot" data-action="theme" data-theme="ember" style="background:linear-gradient(135deg,#ff7a45,#ffc09e)" title="Brasa"></div>
 <div class="theme-dot" data-action="theme" data-theme="light" style="background:linear-gradient(135deg,#f4f0e6,#c9bfa6)" title="Claro"></div>
 </div></div>
+<div class="setting" id="setLogsRow" style="display:none"><div><h4>📜 Logs de Admins</h4><p>Todo lo que hizo cada admin, con fecha</p></div><button class="share-btn" data-action="logs-open">Ver logs</button></div>
 <div class="setting"><div><h4>👤 Sesión</h4><p>Cambiar de perfil en este dispositivo</p></div><button class="share-btn" data-action="reset-profile">Cerrar perfil</button></div>
 </div>
 </div>
@@ -1663,6 +1691,32 @@ html[data-theme="light"] .ip img{box-shadow:0 10px 26px rgba(120,100,60,.3)}
 </div>
 </div>
 
+<!-- LOGS MODAL -->
+<div class="modal" id="logsModal">
+<div class="modal-c">
+<button class="modal-x" data-action="close-modal" data-modal="logsModal">×</button>
+<h2>Logs de <em>Admins</em></h2>
+<p>El registro histórico de la moderación: quién hizo qué y cuándo</p>
+<div id="logsList"><div class="no-stories">Cargando...</div></div>
+</div>
+</div>
+
+<!-- MEMBER MODAL -->
+<div class="modal" id="memberModal">
+<div class="modal-c big">
+<button class="modal-x" data-action="close-modal" data-modal="memberModal">×</button>
+<img class="char-modal-img" id="mpImg" src="" alt="">
+<div class="char-modal-name" id="mpName"></div>
+<div class="char-modal-role" id="mpRole"></div>
+<div class="char-modal-meta" id="mpMeta"></div>
+<div class="stats" style="margin:18px 0 0;padding:0;grid-template-columns:repeat(3,1fr)">
+<div class="stat"><div class="num" id="mpStories">0</div><div class="lbl">Historias</div></div>
+<div class="stat"><div class="num" id="mpLikes">0</div><div class="lbl">Likes recibidos</div></div>
+<div class="stat"><div class="num" id="mpComments">0</div><div class="lbl">Comentarios</div></div>
+</div>
+</div>
+</div>
+
 <!-- PALETA DE COMANDOS -->
 <div class="palette" id="palette">
 <div class="palette-box">
@@ -1712,6 +1766,9 @@ html[data-theme="light"] .ip img{box-shadow:0 10px 26px rgba(120,100,60,.3)}
 <a class="drawer-link" data-action="modal" data-modal="feedbackModal">🐞 Feedback / Bugs<small>Avisale al líder de errores o ideas</small></a>
 <a class="drawer-link" data-action="tab" data-tab="home">Volver arriba<small>Regresar a la portada</small></a>
 </div>
+<div style="padding:0 18px 14px">
+<button class="join-btn" data-action="join-discord"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>¡Unite al Clan ZK!</button>
+</div>
 <div class="drawer-foot">User ID 607353710 · Game ID 11137575513</div>
 </div>
 
@@ -1727,7 +1784,7 @@ html[data-theme="light"] .ip img{box-shadow:0 10px 26px rgba(120,100,60,.3)}
    CLAN ZK · ARCHIVO v2.0 — motor completo
    ================================================================ */
 const LS_KEY='zk_profile', LS_SET='zk_settings', LS_TAB='zk_lasttab';
-const ADMIN_NICKS=['nam','enzo'];
+const ADMIN_NICKS=['nam','enzo','enzors19209'];
 let me=null, booted=false;
 const $=s=>document.querySelector(s);
 const $$=s=>Array.from(document.querySelectorAll(s));
@@ -1990,7 +2047,7 @@ function buildMap(){
 }
 
 /* ---------- ajustes ---------- */
-let settings={sound:true,motion:false,theme:'light'};
+let settings={sound:true,motion:false,theme:'gold'};
 function loadSettings(){ try{ Object.assign(settings, JSON.parse(localStorage.getItem(LS_SET)||'{}')); }catch(e){} }
 function saveSettings(){ localStorage.setItem(LS_SET, JSON.stringify(settings)); }
 function applySettings(){
@@ -2080,8 +2137,9 @@ function setTab(t,skipScroll){
   $$('#tabbar button').forEach(b=>b.classList.toggle('active',b.dataset.tab===t));
   $$('.panel').forEach(p=>p.classList.toggle('active',p.id==='panel-'+t));
   moveTabInd();
-  if(t==='historia') setSubVisual('historia',state.subs.historia);
   if(t==='home'){ runCounters(); }
+  if(t==='historia'){ const g=$('#yearGhost'); if(g) g.style.opacity='1'; }
+  else { const g=$('#yearGhost'); if(g) g.style.opacity='0'; document.body.classList.remove('spy-mode'); updateChapterMusic(null); }
   if(t==='archivo'&&state.subs.archivo==='cronologia') setTimeout(tlReveal,60);
   updateModes();
   if(!skipScroll) window.scrollTo({top:0,behavior:'smooth'});
@@ -2102,18 +2160,15 @@ function setSub(tab,sub){
   if(tab==='comunidad'&&sub==='confesiones') loadConfessions();
   if(tab==='archivo'&&sub==='calendario') renderCalendar();
   if(tab==='archivo'&&sub==='linaje') buildLinaje();
-  if(tab==='historia') visitChapter(sub);
   try{ localStorage.setItem(LS_TAB, JSON.stringify(state)); }catch(e){}
   beep(600,0.04);
 }
-function updateModes(){
-  const h=(state.tab==='historia')?state.subs.historia:null;
-  document.body.classList.toggle('spy-mode',h==='2025');
-  updateChapterMusic(h);
-}
+function updateModes(){ return; }
+function safeScroll(el,opts){ if(el&&typeof el.scrollIntoView==='function'){ try{ el.scrollIntoView(opts||{behavior:'smooth',block:'start'}); }catch(e){} } }
 function goChapter(year){
-  setTab('historia',true); setSub('historia',String(year)); setSubVisual('historia',String(year));
-  window.scrollTo({top:0,behavior:'smooth'});
+  setTab('historia',true);
+  const el=$('#cap-'+year); if(el) safeScroll(el);
+  beep(560,0.05);
 }
 
 /* ---------- contadores ---------- */
@@ -2270,6 +2325,7 @@ function applyMe(){
   else { av.style.backgroundImage=''; av.textContent=me.nickname[0].toUpperCase(); }
   const adl=$('#adminDrawerLink'); if(adl) adl.style.display=isAdminUser()?'block':'none';
   const apb=$('#adminProfileBtn'); if(apb) apb.style.display=isAdminUser()?'inline-block':'none';
+  const lr=$('#setLogsRow'); if(lr) lr.style.display=isAdminUser()?'flex':'none';
 }
 function resetDeviceProfile(){
   if(!confirm('¿Cambiar de perfil en este dispositivo? Se borrará tu apodo guardado acá (tu historia y comentarios quedan online).')) return;
@@ -2356,6 +2412,8 @@ async function submitStory(){
   const imgFile=$('#storyImage').files[0];
   if(!name||!bio||!text){ toast('Completá todos los campos','⚠️'); return; }
   if(containsBadWords(name)||containsBadWords(bio)||containsBadWords(text)){ toast('Tu historia contiene palabras inapropiadas','⚠️'); return; }
+  if(hasLink(name)||hasLink(bio)||hasLink(text)){ toast('No se permiten links en las historias','🔗'); return; }
+  if(!coolCheck('story',60000)) return;
   if(!F||!window.firebaseDb){ toast('Firebase no disponible','❌'); return; }
   try{
     let imgUrl=me.avatar||'';
@@ -2389,7 +2447,7 @@ async function loadStories(){
       const card=document.createElement('div'); card.className='story-card-custom';
       const likeBtn=e=>'<button class="like-btn'+(mine[e]?' active':'')+'" data-action="like" data-id="'+sid+'" data-emoji="'+e+'">'+({fire:'🔥',heart:'❤️',laugh:'😂',skull:'💀'}[e])+' <span class="like-count">'+counts[e]+'</span></button>';
       card.innerHTML=
-        (s.userAvatar?'<img class="story-ava" src="'+escAttr(s.userAvatar)+'" alt="">':'<div class="story-ava-ph">'+escapeHtml((s.userNick||'?')[0].toUpperCase())+'</div>')+
+        (s.userAvatar?'<img class="story-ava" data-action="member" data-uid="'+escAttr(s.userId||'')+'" src="'+escAttr(s.userAvatar)+'" alt="">':'<div class="story-ava-ph" data-action="member" data-uid="'+escAttr(s.userId||'')+'">'+escapeHtml((s.userNick||'?')[0].toUpperCase())+'</div>')+
         '<h4>'+escapeHtml(s.name)+' <span style="font-size:.6em;color:var(--mut)">por '+escapeHtml(s.userNick||'anónimo')+'</span></h4>'+
         '<div class="bio">'+escapeHtml(s.bio)+'</div>'+
         (s.imageUrl&&s.imageUrl!==s.userAvatar?'<img src="'+escAttr(s.imageUrl)+'" alt="" style="width:100%;border-radius:12px;margin-bottom:14px">':'')+
@@ -2429,18 +2487,19 @@ async function shareStory(sid){
 async function deleteMyStory(docId){
   const F=window.firebaseFunctions; if(!F) return;
   if(!confirm('¿Seguro que querés borrar esta historia? No se puede deshacer.')) return;
-  try{ await F.deleteDoc(F.doc(window.firebaseDb,'stories',docId)); loadStories(); loadLeaderboard(); beep(440,0.08); toast('Historia borrada','🗑️'); }
+  try{ await F.deleteDoc(F.doc(window.firebaseDb,'stories',docId)); if(isAdminUser()) writeLog('Borró una historia',docId); loadStories(); loadLeaderboard(); beep(440,0.08); toast('Historia borrada','🗑️'); }
   catch(e){ toast('Error: '+e.message,'❌'); }
 }
 async function editMyStory(docId){
   const s=STORY_MAP[docId]; if(!s) return;
-  const newText=prompt('Editá tu historia:',s.text);
+  let newText=cleanText(prompt('Editá tu historia:',s.text));
   if(newText===null) return;
   if(!newText.trim()){ toast('No podés dejarla vacía','⚠️'); return; }
   if(newText.length>3000){ toast('Máximo 3000 caracteres','⚠️'); return; }
   if(containsBadWords(newText)){ toast('Contiene palabras inapropiadas','⚠️'); return; }
-  const newBio=prompt('Editá tu biografía corta:',s.bio);
+  let newBio=cleanText(prompt('Editá tu biografía corta:',s.bio));
   if(newBio===null) return;
+  if(hasLink(newText)||hasLink(newBio)){ toast('No se permiten links','🔗'); return; }
   const F=window.firebaseFunctions; if(!F||!window.firebaseDb) return;
   try{
     await F.updateDoc(F.doc(window.firebaseDb,'stories',docId),{ text:newText.trim(), bio:newBio.trim(), editedAt:Date.now() });
@@ -2470,7 +2529,7 @@ function loadComments(context){
       const div=document.createElement('div'); div.className='comment';
       const timeAgo=typeof c.createdAt==='number'?timeSince(c.createdAt):'recién';
       div.innerHTML=
-        '<div class="comment-avatar'+(admin?' rainbow-ring':'')+'" '+(c.userAvatar?'style="background-image:url('+escAttr(c.userAvatar)+')"':'')+'>'+escapeHtml((c.userNick||'?')[0].toUpperCase())+'</div>'+
+        '<div class="comment-avatar'+(admin?' rainbow-ring':'')+'" data-action="member" data-uid="'+escAttr(c.userId||'')+'" '+(c.userAvatar?'style="background-image:url('+escAttr(c.userAvatar)+')"':'')+'>'+escapeHtml((c.userNick||'?')[0].toUpperCase())+'</div>'+
         '<div class="comment-body"><div class="comment-header">'+
         '<span class="comment-user">'+(admin?'<span class="rainbow-name">'+escapeHtml(c.userNick)+'</span>':escapeHtml(c.userNick))+(admin?'<span class="admin-badge">ADMIN</span>':'')+'</span>'+
         '<span class="comment-time">'+timeAgo+'</span></div>'+
@@ -2493,19 +2552,24 @@ async function postComment(context,inputId){
   if(!text){ toast('Escribí algo','✍️'); return; }
   if(text.length>500){ toast('Máximo 500 caracteres','⚠️'); return; }
   if(containsBadWords(text)){ toast('Tu comentario contiene palabras inapropiadas','⚠️'); return; }
+  if(hasLink(text)){ toast('No se permiten links en el archivo','🔗'); return; }
+  try{ const lt=localStorage.getItem('zk_last_'+context); if(lt&&lt===text){ toast('No repitas el mismo mensaje','🦜'); return; } }catch(e){}
+  if(!coolCheck('com',10000)) return;
   try{
     await F.addDoc(F.collection(window.firebaseDb,'comments'),{ context:context, userId:me.id, userNick:me.nickname, userAvatar:me.avatar, text:text, createdAt:Date.now() });
     input.value=''; loadComments(context); beep(720,0.05);
+    try{ localStorage.setItem('zk_last_'+context,text); }catch(e){}
     unlockAch(context==='muro'?'muro':'voz');
-  }catch(e){ toast('Error: '+e.message,'❌'); }
+  }catch(e){ coolRefund('com'); toast('Error: '+e.message,'❌'); }
 }
 async function editMyComment(id){
   const c=COMMENT_MAP[id]; if(!c) return;
-  const newText=prompt('Editá tu comentario:',c.text);
+  let newText=cleanText(prompt('Editá tu comentario:',c.text));
   if(newText===null) return;
   if(!newText.trim()){ toast('No podés dejarlo vacío','⚠️'); return; }
   if(newText.length>500){ toast('Máximo 500 caracteres','⚠️'); return; }
   if(containsBadWords(newText)){ toast('Contiene palabras inapropiadas','⚠️'); return; }
+  if(hasLink(newText)){ toast('No se permiten links','🔗'); return; }
   const F=window.firebaseFunctions; if(!F||!window.firebaseDb) return;
   try{ await F.updateDoc(F.doc(window.firebaseDb,'comments',id),{ text:newText.trim(), editedAt:Date.now() }); beep(720,0.05); toast('Comentario editado','✏️'); }
   catch(e){ toast('Error: '+e.message,'❌'); }
@@ -2513,7 +2577,7 @@ async function editMyComment(id){
 async function deleteComment(id){
   const F=window.firebaseFunctions; if(!F) return;
   if(!confirm('¿Borrar este comentario?')) return;
-  try{ await F.deleteDoc(F.doc(window.firebaseDb,'comments',id)); beep(440,0.05); toast('Comentario borrado','🗑️'); }
+  try{ await F.deleteDoc(F.doc(window.firebaseDb,'comments',id)); if(isAdminUser()) writeLog('Borró un comentario',id); beep(440,0.05); toast('Comentario borrado','🗑️'); }
   catch(e){ toast('Error: '+e.message,'❌'); }
 }
 async function loadLeaderboard(){
@@ -2529,13 +2593,13 @@ async function loadLeaderboard(){
     if(me&&!scores[me.id]) scores[me.id]={ nickname:me.nickname, avatar:me.avatar, stories:0, likes:0, score:0 };
     const owners={}; storiesSnap.forEach(d=>{ owners[d.id]=d.data().userId; if(scores[owners[d.id]]){ scores[owners[d.id]].stories++; scores[owners[d.id]].score+=10; } });
     likesSnap.forEach(d=>{ const o=owners[d.data().storyId]; if(o&&scores[o]){ scores[o].likes++; scores[o].score+=2; } });
-    const sorted=Object.values(scores).sort((a,b)=>b.score-a.score).slice(0,10);
+    const sorted=Object.entries(scores).map(([uid,u])=>Object.assign({uid:uid},u)).sort((a,b)=>b.score-a.score).slice(0,10);
     if(!sorted.length){ list.innerHTML='<div class="no-stories">Aún no hay actividad en el ranking</div>'; return; }
     list.innerHTML='';
     sorted.forEach((u,i)=>{
       const r=i+1; const cls=r===1?'top1':r===2?'top2':r===3?'top3':'';
       const medal=r===1?'🥇':r===2?'🥈':r===3?'🥉':r;
-      const e=document.createElement('div'); e.className='lb-entry '+cls; e.style.animationDelay=(i*0.06)+'s';
+      const e=document.createElement('div'); e.className='lb-entry '+cls; e.style.animationDelay=(i*0.06)+'s'; e.dataset.action='member'; e.dataset.uid=u.uid;
       e.innerHTML='<div class="lb-rank">'+medal+'</div>'+
         '<div class="lb-avatar" '+(u.avatar?'style="background-image:url('+escAttr(u.avatar)+')"':'')+'>'+escapeHtml((u.nickname||'?')[0].toUpperCase())+'</div>'+
         '<div class="lb-info"><div class="lb-name'+(ADMIN_NICKS.includes((u.nickname||'').toLowerCase())?' rainbow-name':'')+'">'+escapeHtml(u.nickname)+'</div><div class="lb-stats">'+u.stories+' historia'+(u.stories!==1?'s':'')+' · '+u.likes+' like'+(u.likes!==1?'s':'')+'</div></div>'+
@@ -2593,7 +2657,7 @@ function renderNotifications(){
       if(n.goto){
         if(n.goto.tab) setTab(n.goto.tab,true);
         if(n.goto.sub) setSub(n.goto.tab,n.goto.sub);
-        setTimeout(()=>{ const el=n.goto.sel?$(n.goto.sel):null; if(el) el.scrollIntoView({behavior:'smooth',block:'center'}); },250);
+        setTimeout(()=>{ const el=n.goto.sel?$(n.goto.sel):null; safeScroll(el,{behavior:'smooth',block:'center'}); },250);
       }
     });
     list.appendChild(item);
@@ -2618,7 +2682,7 @@ document.addEventListener('click',e=>{
     case 'admin-open': openAdminPanel(); break;
     case 'vote': castVote(el.dataset.poll,el.dataset.opt,el); break;
     case 'quiz-opt': quizAnswer(+el.dataset.opt,el); break;
-    case 'quiz-retry': quizState={i:0,score:0,done:false,lock:false}; renderQuiz(); beep(600,0.05); break;
+    case 'quiz-retry': quizState={i:0,score:0,done:false,lock:false}; quizSave(); renderQuiz(); beep(600,0.05); break;
     case 'news-ed': setNewsEdition(el.dataset.ed); break;
     case 'cal-year': calYear=+el.dataset.y; renderCalendar(); beep(560,0.04); break;
     case 'cred-open': openCredModal(); break;
@@ -2635,6 +2699,9 @@ document.addEventListener('click',e=>{
     case 'profile': openProfileModal(); break;
     case 'reset-profile': resetDeviceProfile(); break;
     case 'discord-login': discordLogin(); break;
+    case 'join-discord': window.open('https://discord.gg/Rdsv5XQwr','_blank'); beep(700,0.06); toast('¡Nos vemos en el Discord del clan!','🎮'); break;
+    case 'member': openMemberProfile(el.dataset.uid); break;
+    case 'logs-open': openLogsModal(); break;
     case 'save-profile': saveProfile(); break;
     case 'new-story': openStoryCreator(); break;
     case 'submit-story': submitStory(); break;
@@ -2748,7 +2815,7 @@ function initData(){
           if(!me||c.userId!==me.id){
             const ctx=c.context||'';
             let goto={tab:'comunidad',sub:'muro'};
-            if(ctx.startsWith('chapter-')) goto={tab:'historia',sub:ctx.replace('chapter-',''),sel:'#comments-'+ctx};
+            if(ctx.startsWith('chapter-')) goto={tab:'historia',sel:'#comments-'+ctx};
             else if(ctx.startsWith('story-')) goto={tab:'comunidad',sub:'historias',sel:'#comments-'+ctx};
             else if(ctx==='muro') goto={tab:'comunidad',sub:'muro',sel:'#comments-muro'};
             addNotification('comment',{ text:c.text.substring(0,80), user:c.userNick||'Usuario' },goto);
@@ -2804,13 +2871,12 @@ function showOnboard(mode){
 async function bootAsync(){
   hideLoader();
   loadSettings(); applySettings();
-  paintAvatars(); renderCodex(); renderTimeline(); buildMap(); buildPalette(); initParticles(); initScrollReveal();
+  paintAvatars(); renderCodex(); renderTimeline(); buildMap(); buildPalette(); initParticles(); initScrollReveal(); initChapterIO();
   try{
     const saved=JSON.parse(localStorage.getItem(LS_TAB)||'null');
     if(saved&&saved.tab&&$('#panel-'+saved.tab)){ state.tab=saved.tab; Object.assign(state.subs,saved.subs||{}); }
   }catch(e){}
   setTab(state.tab,true);
-  if(state.tab==='historia') setSubVisual('historia',state.subs.historia);
   if(state.tab==='archivo') setSubVisual('archivo',state.subs.archivo);
   if(state.tab==='comunidad') setSubVisual('comunidad',state.subs.comunidad);
   await dcPromise;
@@ -2822,6 +2888,8 @@ async function bootAsync(){
   if(me&&me.discordId){ enterArchive(); }
   else if(me){ showOnboard('link'); }
   else showOnboard('new');
+  const em=document.querySelector('.emblem');
+  if(em){ let ek=0, et=0; em.addEventListener('click',()=>{ const n=Date.now(); ek=(n-et<2500)?ek+1:1; et=n; if(ek>=7){ ek=0; fireConfetti(); toast('Encontraste el sello dorado del clan','🏵️'); beep(990,0.1); setTimeout(()=>beep(1320,0.12),110); } }); }
   if(document.fonts&&document.fonts.ready) document.fonts.ready.then(moveTabInd);
   setTimeout(moveTabInd,300);
 }
@@ -2833,6 +2901,19 @@ setTimeout(boot,5000);
 /* ================================================================
    v2.1 · LOGROS / CLANES / QUIZ / ENCUESTAS / ADMIN / PWA
    ================================================================ */
+/* ---------- anti-spam v2.7 ---------- */
+const LINK_RX=/(https?:\/\/|www\.|discord\.gg\/|[\w-]{2,}\.(com|net|org|gg|dev|io|xyz|me|tk|ml|ga|cf|club|info|link|page)(\/|\b))/i;
+function hasLink(t){ return LINK_RX.test(String(t)); }
+function coolCheck(key,ms){
+  try{
+    const last=+localStorage.getItem('zk_cd_'+key)||0; const now=Date.now();
+    if(now-last<ms){ toast('Esperá '+Math.ceil((ms-(now-last))/1000)+'s antes de publicar de nuevo','⏳'); return false; }
+    localStorage.setItem('zk_cd_'+key,String(now));
+    return true;
+  }catch(e){ return true; }
+}
+function coolRefund(key){ try{ localStorage.removeItem('zk_cd_'+key); }catch(e){} }
+
 /* ---------- logros ---------- */
 const ACH=[
 {id:'paso',ic:'🌱',n:'Primer Paso',d:'Entrar al archivo'},
@@ -2910,8 +2991,18 @@ const QUIZ=[
 {q:'¿El clan SDZ resultó ser copia de...?',o:['Clan MG','Clan TQ','Admin Community','Clan LS'],a:0}
 ];
 let quizState={i:0,score:0,done:false,lock:false};
+let quizLoaded=false;
+function quizSave(){ try{ localStorage.setItem('zk_quiz',JSON.stringify({i:quizState.i,score:quizState.score,done:quizState.done})); }catch(e){} }
+function quizLoad(){
+  if(quizLoaded) return; quizLoaded=true;
+  try{
+    const s=JSON.parse(localStorage.getItem('zk_quiz')||'null');
+    if(s&&typeof s.i==='number'&&s.i>=0&&s.i<QUIZ.length){ quizState.i=s.i; quizState.score=s.score||0; quizState.done=!!s.done; }
+  }catch(e){}
+}
 function renderQuiz(){
   const box=$('#quizBox'); if(!box) return;
+  quizLoad();
   let best=0; try{ best=+localStorage.getItem('zk_quiz_best')||0; }catch(e){}
   if(quizState.done){
     const s=quizState.score, t=QUIZ.length;
@@ -2924,7 +3015,7 @@ function renderQuiz(){
   }
   const qz=QUIZ[quizState.i];
   box.innerHTML='<div class="quiz-card">'+
-    '<div style="font-size:.78em;color:var(--mut);letter-spacing:2px">PREGUNTA '+(quizState.i+1)+' / '+QUIZ.length+' · PUNTOS: '+quizState.score+'</div>'+
+    '<div style="font-size:.78em;color:var(--mut);letter-spacing:2px">PREGUNTA '+(quizState.i+1)+' / '+QUIZ.length+' · PUNTOS: '+quizState.score+' · MEJOR: '+best+'/'+QUIZ.length+'</div>'+
     '<div class="quiz-prog"><i style="width:'+(quizState.i/QUIZ.length*100)+'%"></i></div>'+
     '<div class="quiz-q">'+escapeHtml(qz.q)+'</div>'+
     '<div class="quiz-opts">'+qz.o.map((o,i)=>'<button data-action="quiz-opt" data-opt="'+i+'">'+escapeHtml(o)+'</button>').join('')+'</div></div>';
@@ -2945,7 +3036,7 @@ function quizAnswer(i,btn){
       if(quizState.score===QUIZ.length){ unlockAch('leyenda'); fireConfetti(); }
       else if(quizState.score>=9) fireConfetti();
     }
-    renderQuiz();
+    quizSave(); renderQuiz();
   },900);
 }
 
@@ -3004,6 +3095,69 @@ async function castVote(pollId,opt){
   pollCache.mine=pollCache.mine||{}; pollCache.mine[pollId]=opt;
   if(pollCache.results){ pollCache.results[pollId][opt]=(pollCache.results[pollId][opt]||0)+1; }
   unlockAch('ciudadano'); beep(760,0.06); drawPolls(); toast('Voto registrado','🗳️');
+}
+
+/* ---------- logs de admins ---------- */
+function writeLog(action,target){
+  if(!isAdminUser()) return;
+  const F=window.firebaseFunctions; if(!F||!window.firebaseDb) return;
+  try{ F.addDoc(F.collection(window.firebaseDb,'adminlogs'),{ admin:me.nickname, action:action, target:String(target||'').slice(0,140), createdAt:Date.now() }).catch(()=>{}); }catch(e){}
+}
+async function loadLogs(){
+  const box=$('#logsList'); if(!box) return;
+  const F=window.firebaseFunctions;
+  if(!F||!window.firebaseDb){ box.innerHTML='<div class="no-stories">Sin conexión</div>'; return; }
+  try{
+    const snap=await F.getDocs(F.query(F.collection(window.firebaseDb,'adminlogs'),F.orderBy('createdAt','desc'),F.limit(40)));
+    let html='',n=0;
+    snap.forEach(d=>{ const l=d.data(); n++;
+      html+='<div class="adm-row"><span>📜</span><span class="adm-txt"><strong>'+escapeHtml(l.admin||'?')+'</strong> · '+escapeHtml(l.action||'')+' · <em>'+escapeHtml(l.target||'')+'</em> · hace '+timeSince(typeof l.createdAt==='number'?l.createdAt:Date.now())+'</span></div>';
+    });
+    box.innerHTML=n?html:'<div class="no-stories">Todavía no hay movimientos de admins</div>';
+  }catch(e){ box.innerHTML='<div class="no-stories">Error al cargar logs</div>'; }
+}
+function openLogsModal(){
+  if(!isAdminUser()){ toast('Solo admins del clan','🛡️'); return; }
+  openModal('logsModal'); loadLogs();
+}
+
+/* ---------- perfiles públicos de miembros ---------- */
+function phAva(letter,size){
+  const svg="<svg xmlns='http://www.w3.org/2000/svg' width='"+size+"' height='"+size+"' viewBox='0 0 96 96'><rect width='96' height='96' rx='48' fill='#d4af37'/><text x='48' y='48' dy='.36em' font-family='Arial Black,Arial' font-weight='900' font-size='42' fill='#0b0b0d' text-anchor='middle'>"+escapeHtml(letter||'?')+"</text></svg>";
+  return 'data:image/svg+xml,'+encodeURIComponent(svg);
+}
+async function openMemberProfile(uid){
+  if(!uid){ return; }
+  const base={nickname:'Miembro',avatar:'',createdAt:null,discordTag:''};
+  const F=window.firebaseFunctions;
+  if(F&&window.firebaseDb){
+    try{
+      const u=await F.getDocs(F.query(F.collection(window.firebaseDb,'users'),F.where('userId','==',uid)));
+      if(!u.empty){ const d=u.docs[0].data(); base.nickname=d.nickname||base.nickname; base.avatar=d.avatar||''; base.createdAt=d.createdAt||null; base.discordTag=d.discordTag||''; }
+    }catch(e){}
+  }
+  let st=0,lk=0,cm=0;
+  if(F&&window.firebaseDb){
+    try{
+      const s=await F.getDocs(F.query(F.collection(window.firebaseDb,'stories'),F.where('userId','==',uid)));
+      st=s.size;
+      for(const d of s.docs){ const l=await F.getDocs(F.query(F.collection(window.firebaseDb,'likes'),F.where('storyId','==',d.id))); lk+=l.size; }
+      const c=await F.getDocs(F.query(F.collection(window.firebaseDb,'comments'),F.where('userId','==',uid))); cm=c.size;
+    }catch(e){}
+  }
+  $('#mpImg').src=base.avatar||phAva(base.nickname[0],150);
+  const nm=$('#mpName'); nm.textContent=base.nickname;
+  nm.className='char-modal-name'+(ADMIN_NICKS.includes(String(base.nickname).toLowerCase())?' rainbow-name':'');
+  const rl=$('#mpRole');
+  if(ADMIN_NICKS.includes(String(base.nickname).toLowerCase())){ rl.textContent='👑 Admin del Clan'; rl.style.color='var(--gold)'; }
+  else { rl.textContent='Miembro del archivo'; rl.style.color='var(--mut)'; }
+  let meta='';
+  if(base.createdAt) meta+='<span>📅 Desde '+new Date(base.createdAt).toLocaleDateString('es-AR',{month:'long',year:'numeric'})+'</span>';
+  if(base.discordTag) meta+='<span>🎮 '+escapeHtml(base.discordTag)+'</span>';
+  meta+='<span>🆔 '+escapeHtml(String(uid).slice(0,10))+'…</span>';
+  $('#mpMeta').innerHTML=meta;
+  $('#mpStories').textContent=st; $('#mpLikes').textContent=lk; $('#mpComments').textContent=cm;
+  openModal('memberModal'); beep(680,0.05);
 }
 
 /* ---------- panel admin ---------- */
@@ -3198,6 +3352,23 @@ function buildLinaje(){
   svg.innerHTML=html;
 }
 
+/* ---------- capítulos vivos: año fantasma, música, spy, visitas ---------- */
+let chapIO=null;
+function initChapterIO(){
+  if(chapIO||!('IntersectionObserver' in window)) return;
+  chapIO=new IntersectionObserver(es=>{
+    es.forEach(e=>{
+      if(!e.isIntersecting) return;
+      const y=e.target.id.replace('cap-','');
+      document.body.classList.toggle('spy-mode',y==='2025');
+      updateChapterMusic(y);
+      const g=$('#yearGhost'); if(g){ g.textContent=y; g.style.opacity='1'; }
+      visitChapter(y);
+    });
+  },{rootMargin:'-45% 0px -45% 0px',threshold:0});
+  $$('#panel-historia .cap-block').forEach(b=>chapIO.observe(b));
+}
+
 /* ---------- scroll-reveal de las crónicas ---------- */
 let revealIO=null;
 function initScrollReveal(){
@@ -3234,6 +3405,8 @@ async function postConfession(){
   if(!text){ toast('Escribí algo primero','🕯️'); return; }
   if(text.length>400){ toast('Máximo 400 caracteres','⚠️'); return; }
   if(containsBadWords(text)){ toast('El muro es anónimo, no un basurero','⚠️'); return; }
+  if(hasLink(text)){ toast('No se permiten links en las confesiones','🔗'); return; }
+  if(!coolCheck('conf',30000)) return;
   const F=window.firebaseFunctions;
   if(!F||!window.firebaseDb){ toast('Firebase no disponible','❌'); return; }
   try{
@@ -3245,7 +3418,7 @@ async function postConfession(){
 async function deleteConfession(id){
   const F=window.firebaseFunctions; if(!F) return;
   if(!confirm('¿Borrar esta confesión anónima?')) return;
-  try{ await F.deleteDoc(F.doc(window.firebaseDb,'confessions',id)); loadConfessions(); loadAdminConfs(); toast('Confesión borrada','🗑️'); }
+  try{ await F.deleteDoc(F.doc(window.firebaseDb,'confessions',id)); if(isAdminUser()) writeLog('Borró una confesión',id); loadConfessions(); loadAdminConfs(); toast('Confesión borrada','🗑️'); }
   catch(e){ toast('Error: '+e.message,'❌'); }
 }
 async function loadAdminConfs(){
@@ -3268,6 +3441,8 @@ async function submitFeedback(){
   if(!me){ toast('Primero iniciá sesión con Discord','🎮'); return; }
   const text=cleanText($('#fbText').value);
   if(!text){ toast('Contame qué pasó o qué se te ocurrió','🐞'); return; }
+  if(hasLink(text)){ toast('Sin links en el feedback, gracias','🔗'); return; }
+  if(!coolCheck('fb',20000)) return;
   const F=window.firebaseFunctions;
   if(!F||!window.firebaseDb){ toast('Firebase no disponible','❌'); return; }
   try{
@@ -3294,13 +3469,13 @@ async function loadAdminFeedback(){
 }
 async function resolveFeedback(id){
   const F=window.firebaseFunctions; if(!F) return;
-  try{ await F.updateDoc(F.doc(window.firebaseDb,'feedback',id),{ status:'done' }); loadAdminFeedback(); toast('Feedback marcado resuelto','✅'); }
+  try{ await F.updateDoc(F.doc(window.firebaseDb,'feedback',id),{ status:'done' }); writeLog('Resolvió un feedback',id); loadAdminFeedback(); toast('Feedback marcado resuelto','✅'); }
   catch(e){ toast('Error: '+e.message,'❌'); }
 }
 async function deleteFeedback(id){
   const F=window.firebaseFunctions; if(!F) return;
   if(!confirm('¿Borrar este feedback?')) return;
-  try{ await F.deleteDoc(F.doc(window.firebaseDb,'feedback',id)); loadAdminFeedback(); toast('Feedback borrado','🗑️'); }
+  try{ await F.deleteDoc(F.doc(window.firebaseDb,'feedback',id)); writeLog('Borró un feedback',id); loadAdminFeedback(); toast('Feedback borrado','🗑️'); }
   catch(e){ toast('Error: '+e.message,'❌'); }
 }
 /* La página se auto-delata: si algo crashea, manda reporte técnico al líder */

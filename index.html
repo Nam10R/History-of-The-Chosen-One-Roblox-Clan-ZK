@@ -2635,22 +2635,26 @@ async function submitStory(){
     $('#storyName').value='';$('#storyBio').value='';$('#storyText').value='';$('#storyImage').value='';
     const bc=$('#bioCount');if(bc) bc.textContent='0';
     const tc=$('#textCount');if(tc) tc.textContent='0';
-    loadStories();loadLeaderboard();
+    // El onSnapshot de 'stories' se encarga de recargar la lista solo
     toast('¡Historia publicada!','📖');
     unlockAch('cronista');
     fireConfetti();
   }catch(e){toast('Error: '+e.message,'❌');console.error(e);}
 }
+let _storiesGen=0;
 async function loadStories(){
   const F=window.firebaseFunctions;
   const grid=$('#storiesGrid');if(!grid) return;
   if(!F||!window.firebaseDb){grid.innerHTML='<div class="no-stories">No se pudo conectar</div>';return;}
+  const myGen=++_storiesGen;
   try{
     const q=F.query(F.collection(window.firebaseDb,'stories'),F.orderBy('createdAt','desc'));
     const snap=await F.getDocs(q);
+    if(myGen!==_storiesGen) return; // otra carga más nueva ya empezó, abortamos
     if(snap.empty){grid.innerHTML='<div class="no-stories">Aún no hay historias.</div>';return;}
     grid.innerHTML='';
     for(const d of snap.docs){
+      if(myGen!==_storiesGen) return; // abortar si llegó una carga más nueva
       const s=d.data();const sid=d.id;STORY_MAP[sid]=s;
       const lq=F.query(F.collection(window.firebaseDb,'likes'),F.where('storyId','==',sid));
       const ls=await F.getDocs(lq);
@@ -2832,14 +2836,17 @@ async function deleteComment(id){
   try{await F.deleteDoc(F.doc(window.firebaseDb,'comments',id));if(isAdminUser()) writeLog('Borró un comentario',id);beep(440,0.05);toast('Comentario borrado','🗑️');}
   catch(e){toast('Error: '+e.message,'❌');}
 }
+let _lbGen=0;
 async function loadLeaderboard(){
   const F=window.firebaseFunctions;
   const list=$('#leaderboardList');if(!list) return;
   if(!F||!window.firebaseDb){list.innerHTML='<div class="no-stories">Sin conexión</div>';return;}
+  const myGen=++_lbGen;
   try{
     const usersSnap=await F.getDocs(F.collection(window.firebaseDb,'users'));
     const storiesSnap=await F.getDocs(F.collection(window.firebaseDb,'stories'));
     const likesSnap=await F.getDocs(F.collection(window.firebaseDb,'likes'));
+    if(myGen!==_lbGen) return; // abortar si llegó una carga más nueva
     const scores={};
     usersSnap.forEach(d=>{const u=d.data();scores[u.userId]={nickname:u.nickname,avatar:u.avatar,stories:0,likes:0,score:0};});
     if(me&&!scores[me.id]) scores[me.id]={nickname:me.nickname,avatar:me.avatar,stories:0,likes:0,score:0};
